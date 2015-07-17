@@ -6,7 +6,7 @@ from sqlalchemy import (
     Text,
     UnicodeText,
     DateTime,
-    
+
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,6 +14,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import (
     scoped_session,
     sessionmaker,
+    relationship,
+    backref,
     )
 
 import transaction
@@ -78,7 +80,7 @@ class CreationMixin():
                 DBSession.add(thing)
                 transaction.commit()
         return thing
-        
+
     @classmethod
     def reqkeys(cls):
         keys = []
@@ -100,7 +102,7 @@ class UserTypes(Base, CreationMixin):
     description = ReqColumn(UnicodeText)
     value = ReqColumn(Integer)
     creation_datetime = Column(DateTime)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -113,7 +115,7 @@ class UserTypes(Base, CreationMixin):
 class Users(Base, CreationMixin):
 
     __tablename__ = 'users'
-    
+
     id = Column(Integer, primary_key=True)
     unique = Column(Text)
     first = ReqColumn(UnicodeText)
@@ -122,11 +124,11 @@ class Users(Base, CreationMixin):
     twitter = ReqColumn(UnicodeText)
     creation_datetime = Column(UnicodeText)
     last_longin_datetime = Column(UnicodeText)
-    
+
     user_type_id = ReqColumn(ForeignKey('user_types.id'))
-    
+
     organization_id = Column(ForeignKey('organizations.id'), nullable=True)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -137,26 +139,26 @@ class Users(Base, CreationMixin):
             organization_id = self.organization_id,
         )
         return resp
-        
+
 class Comments(Base, CreationMixin):
 
     __tablename__ = 'comments'
-    
+
     id = Column(Integer, primary_key=True)
     subject = ReqColumn(UnicodeText)
     contents = ReqColumn(UnicodeText)
     creation_datetime = Column(DateTime)
-    
+
     parent_comment_id = ReqColumn(Integer, ForeignKey('comments.id'))
-    
+
     author_id = ReqColumn(Integer, ForeignKey('users.id'))
-    
+
     organization_id = Column(ForeignKey('organizations.id'), nullable=True)
     people_id = Column(ForeignKey('people.id'), nullable=True)
     recording_id = Column(ForeignKey('recordings.id'), nullable=True)
     howto_id = Column(ForeignKey('howtos.id'), nullable=True)
     blog_id = Column(ForeignKey('blogs.id'), nullable=True)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -167,7 +169,7 @@ class Comments(Base, CreationMixin):
             author_id = self.author_id,
         )
         return resp
-        
+
     @classmethod
     def get_by_organization_id(cls, id):
         with transaction.manager:
@@ -177,7 +179,7 @@ class Comments(Base, CreationMixin):
                 Comments.organization_id == id,
             ).all()
         return comments
-        
+
     @classmethod
     def get_by_people_id(cls, id):
         with transaction.manager:
@@ -207,7 +209,7 @@ class Comments(Base, CreationMixin):
                 Comments.howto_id == id,
             ).all()
         return comments
-        
+
     @classmethod
     def get_by_blog_id(cls, id):
         with transaction.manager:
@@ -217,30 +219,30 @@ class Comments(Base, CreationMixin):
                 Comments.blog_id == id,
             ).all()
         return comments
-        
+
 class Organizations(Base, CreationMixin):
 
     __tablename__ = 'organizations'
-    
+
     id = Column(Integer, primary_key=True)
     short_name = ReqColumn(UnicodeText)
     long_name = ReqColumn(UnicodeText)
     short_description = ReqColumn(UnicodeText)
     long_description = ReqColumn(UnicodeText)
-    
+
     address_0 = ReqColumn(UnicodeText)
     address_1 = ReqColumn(UnicodeText)
     city = ReqColumn(UnicodeText)
     state = ReqColumn(UnicodeText)
     zipcode = ReqColumn(UnicodeText)
-    
+
     phone = ReqColumn(UnicodeText)
     fax = ReqColumn(UnicodeText)
     primary_website = ReqColumn(UnicodeText)
     secondary_website = ReqColumn(UnicodeText)
-    
+
     creation_datetime = Column(DateTime)
-  
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -259,8 +261,43 @@ class Organizations(Base, CreationMixin):
             secondary_website = self.secondary_website,
             creation_datetime = str(self.creation_datetime),
         )
-        return resp    
-    
+        return resp
+
+class PlaylistAssignments(Base, CreationMixin):
+    __tablename__ = 'playlist_assignments'
+    id = Column(Integer, primary_key=True)
+    playlist_id = Column(Integer, ForeignKey('playlists.id'))
+    recording_id = Column(Integer, ForeignKey('recordings.id'))
+
+    @classmethod
+    def get_by_playlist_id_and_recording_id(cls, pid, rid):
+        with transaction.manager:
+            playlists = DBSession.query(
+                PlaylistAssignments,
+            ).filter(
+                PlaylistAssignments.playlist_id == pid,
+                PlaylistAssignment.recording_id == rid,
+            ).all()
+        return assignments[0] # combination should be unique
+
+class Playlists(Base, CreationMixin):
+
+    __tablename__ = 'playlists'
+    id = Column(Integer, primary_key=True)
+    author_id = Column(Integer, ForeignKey('people.id'))
+    title = ReqColumn(UnicodeText)
+    items = relationship("Recordings", secondary=PlaylistAssignments.__table__, backref="playlists")
+
+    @classmethod
+    def get_by_user_id(cls, id):
+        with transaction.manager:
+            playlists = DBSession.query(
+                Playlists,
+            ).filter(
+                Playlists.author_id == id,
+            ).all()
+        return playlists
+
 class People(Base, CreationMixin):
 
     __tablename__= 'people'
@@ -278,18 +315,18 @@ class People(Base, CreationMixin):
     primary_website = ReqColumn(UnicodeText)
     secondary_website = ReqColumn(UnicodeText)
     creation_datetime = Column(DateTime)
-    
+
     # these should probably be brough out into a seperate table as
     # many to one so we don't have to keep adding colyumns ...
     twitter = ReqColumn(UnicodeText)
     facebook = ReqColumn(UnicodeText)
     instagram = ReqColumn(UnicodeText)
     parascope = ReqColumn(UnicodeText)
-    
+
     user_id = ReqColumn(ForeignKey('users.id'), nullable=True)
-    
+
     organization_id = Column(ForeignKey('organizations.id'), nullable=True)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -304,13 +341,13 @@ class People(Base, CreationMixin):
             primary_website = self.primary_website,
             secondary_website = self.secondary_website,
             creation_datetime = str(self.creation_datetime),
-            
+
             # see note on definitions
             twitter = self.twitter,
             facebook = self.facebook,
             instagram = self.instagram,
             parascope = self.parascope,
-            
+
             user_id = self.user_id,
             organization_id = self.organization_id,
         )
@@ -335,7 +372,7 @@ class Recordings(Base, CreationMixin):
     url = ReqColumn(UnicodeText)
     recorded_datetime = ReqColumn(DateTime)
     creation_datetime = Column(DateTime)
-    
+
     organization_id = Column(Integer, ForeignKey('organizations.id'))
 
     def to_dict(self):
@@ -371,7 +408,7 @@ class RecordingCategories(Base, CreationMixin):
     short_description = ReqColumn(UnicodeText)
     long_description = ReqColumn(UnicodeText)
     creation_datetime = Column(DateTime)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -410,7 +447,7 @@ class Howtos(Base, CreationMixin):
     creation_datetime = Column(DateTime)
     edit_datetime = Column(DateTime)
     tags = ReqColumn(UnicodeText)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -421,17 +458,17 @@ class Howtos(Base, CreationMixin):
             tags = self.tags,
         )
         return resp
-    
+
 class HowtoCategories(Base, CreationMixin):
 
     __tablename__ = 'howto_categories'
-    
+
     id = Column(Integer, primary_key=True)
     name = ReqColumn(UnicodeText)
     short_description = ReqColumn(UnicodeText)
     long_description = ReqColumn(UnicodeText)
     creation_datetime = Column(DateTime)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -445,12 +482,12 @@ class HowtoCategories(Base, CreationMixin):
 class HowtoCategoryAssignments(Base, CreationMixin):
 
     __tablename__ = 'howto_category_assignments'
-    
+
     id = Column(Integer, primary_key=True)
     howto_category_id = ReqColumn(Integer, ForeignKey('howto_categories.id'))
     howto_id = ReqColumn(Integer, ForeignKey('howtos.id'))
     creation_datetime = Column(DateTime)
-    
+
     def to_dict(self):
         resp = dict(
             id = self.id,
@@ -459,18 +496,18 @@ class HowtoCategoryAssignments(Base, CreationMixin):
             creation_datetime = str(self.creation_datetime),
         )
         return resp
-        
+
 class Blogs(Base, CreationMixin):
 
     __tablename__ = 'blogs'
-    
+
     id = Column(Integer, primary_key=True)
     title = ReqColumn(UnicodeText)
     contents = ReqColumn(UnicodeText)
     creation_datetime = Column(DateTime)
     edit_datetime = Column(DateTime)
     tags = ReqColumn(UnicodeText)
-    
+
     author_id = Column(ForeignKey('users.id'))
 
     def to_dict(self):

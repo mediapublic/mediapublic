@@ -14,6 +14,8 @@ from .models import (
     Recordings,
     Howtos,
     Blogs,
+    Playlists,
+    PlaylistAssignments,
     )
 
 import datetime
@@ -80,7 +82,7 @@ def do_get_single(request, id, cls):
         resp = thing.to_dict()
         status = 200
     return resp, status
-    
+
 def do_put(request, id, cls):
 
     resp = {'error': 'Not Found'}
@@ -115,7 +117,7 @@ METHODS = {
 #def view_indecx(request):
 #
 #    return {}
-    
+
 ########### INDEX
 #@view_config(route_name='index', '/', )
 
@@ -209,7 +211,7 @@ def recording_categories(request):
         resp = {'error': 'Method Not Allowed'}
         request.response.status = 405
     return resp
-    
+
 # [GET,       PUT, DELETE] /recording_categories/:{id}
 @view_config(route_name='recording_category_by_id', renderer='json')
 def recording_category_by_id(request):
@@ -532,8 +534,8 @@ def howtos_comment_by_id(request):
         resp, status = METHODS[request.method](request, id, cls)
     request.response.status = status
     return resp
-    
-    
+
+
 
 ########### BLOGS
 
@@ -599,3 +601,94 @@ def blogs_comment_by_id(request):
         resp, status = METHODS[request.method](request, id, cls)
     request.response.status = status
     return resp
+
+########### PLAYLISTS
+# [GET]
+@view_config(route_name='playlists', renderer='json')
+def station_playlists(request):
+    cls = Playlists
+    resp = []
+    if request.method == "GET":
+        resp = [i.to_dict() for i in cls.get_all()]
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
+
+# [GET, POST]
+@view_config(route_name='user_playlists', renderer='json')
+def user_playlists(request):
+    cls = Playlists
+    person_id = request.matchdict['uid']
+    resp = []
+    if request.method == "GET":
+        resp = [i.to_dict() for i in cls.get_by_user_id(person_id)]
+    elif request.method == "POST":
+        keys = {
+            'playlist_id': request.matchdict['pid'],
+            'recording_id': request.matchdict['rid'],
+        }
+        do_post(request, keys, cls)
+        request.route_url('edit_user_playlist', uid=person_id, pid=playlist.id)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        status = 405
+    return resp
+
+# [GET]
+@view_config(route_name='edit_user_playlist', renderer='json')
+def edit_user_playlist(request):
+    cls = Playlists
+    playlist_id = request.matchdict['pid']
+    playlist = Playlists.get_by_id(playlist_id)
+    # is do_get_single even woth it here?
+    chosen_recordings = playlist.recordings
+    chosen_ids = [rec.id for rec in chosen_recordings]
+
+    unchosen_recordings = DBSession.query(
+        Recordings,
+    ).filter(
+        Recordings.id not in chosen_ids
+    )
+    # recordings user has in playlist vs recordings that can be added to it
+    # might want to limit unchosen, maybe take random 10
+    
+    resp = {
+        'chosen_recordings': chosen_recordings,
+        'unchosen_recordings': unchosen_recordings
+    }
+
+
+# [GET]
+@view_config(route_name='new_user_playlist', renderer='json')
+def new_user_playlist(request):
+    # This should just return a form for title of new playlist.
+    pass
+
+# [POST]
+@view_config(route_name='assign_to_playlist')
+def assign_to_playlist(request):
+    cls = PlaylistAssignments
+    keys = {
+        'playlist_id': request.matchdict['pid'],
+        'recording_id': request.matchdict['rid'],
+    }
+    do_post(request, keys, cls)
+
+# [POST]
+@view_config(route_name='remove_from_playlist')
+def remove_from_playlist(request):
+    cls = PlaylistAssignments
+    pa_id =
+        PlaylistAssignments.get_by_playlist_id_and_recording_id(
+            cls, request.matchdict['pid'], request.matchdict['rid']
+        ).id
+    do_delete(request, pa_id, cls)
+
+
+
+# [GET]
+@view_config(route_name='user_playlist_listening', renderer='json')
+def user_playlist_listening(request):
+    cls = Playlists
+    return METHODS['GET'](request, request.matchdict['pid'], cls)
