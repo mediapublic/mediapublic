@@ -284,7 +284,7 @@ class People(Base, CreationMixin):
     twitter = ReqColumn(UnicodeText)
     facebook = ReqColumn(UnicodeText)
     instagram = ReqColumn(UnicodeText)
-    parascope = ReqColumn(UnicodeText)
+    periscope = ReqColumn(UnicodeText)
     
     user_id = ReqColumn(ForeignKey('users.id'), nullable=True)
     
@@ -309,7 +309,7 @@ class People(Base, CreationMixin):
             twitter = self.twitter,
             facebook = self.facebook,
             instagram = self.instagram,
-            parascope = self.parascope,
+            periscope = self.periscope,
             
             user_id = self.user_id,
             organization_id = self.organization_id,
