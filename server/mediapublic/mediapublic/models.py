@@ -280,13 +280,21 @@ class PlaylistAssignments(Base, CreationMixin):
             ).all()
         return assignments[0] # combination should be unique
 
+    def to_dict(self):
+        resp = dict(
+            id = self.id,
+            playlist_id = self.playlist_id,
+            recording_id = self.recording_id,
+        )
+        return resp
+
 class Playlists(Base, CreationMixin):
 
     __tablename__ = 'playlists'
     id = Column(Integer, primary_key=True)
-    author_id = Column(Integer, ForeignKey('people.id'))
+    author_id = ReqColumn(Integer, ForeignKey('people.id'))
     title = ReqColumn(UnicodeText)
-    items = relationship("Recordings", secondary=PlaylistAssignments.__table__, backref="playlists")
+    recordings = relationship("Recordings", secondary=PlaylistAssignments.__table__, backref="playlists")
 
     @classmethod
     def get_by_user_id(cls, id):
@@ -297,6 +305,14 @@ class Playlists(Base, CreationMixin):
                 Playlists.author_id == id,
             ).all()
         return playlists
+
+    def to_dict(self):
+        resp = dict(
+            id = self.id,
+            author_id = self.author_id,
+            title = self.title,
+        )
+        return resp
 
 class People(Base, CreationMixin):
 

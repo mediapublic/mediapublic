@@ -59,10 +59,10 @@ def main(global_config, **settings):
     config.add_route('playlists', '/playlists')
     config.add_route('user_playlists', '/users/:{uid}/playlists')
     config.add_route('new_user_playlist', '/users/:{uid}/playlists/new')
-    config.add_route('user_playlist_listening', '/users/:{uid}/playlists/:{pid}')
-    config.add_route('edit_user_playlist', '/users/:{uid}/playlists/:{pid}/edit')
-    config.add_route('assign_to_playlist', 'users/:{uid}/playlists/:{pid}/assign')
-    config.add_route('remove_from_playlist', 'users/:{uid}/playlists/:{pid}/remove')
+    config.add_route('user_playlist', '/users/:{uid}/playlists/:{id}')
+    config.add_route('edit_user_playlist', '/users/:{uid}/playlists/:{id}/edit')
+    config.add_route('assign_to_playlist', 'users/:{uid}/playlists/:{id}/assign')
+    config.add_route('remove_from_playlist', 'users/:{uid}/playlists/:{id}/remove')
 
     # HOWTOS
     config.add_route('howtos', '/howtos')

@@ -596,9 +596,9 @@ def blogs_comment_by_id(request):
     id = request.matchdict['id']
     if not request.method in METHODS:
         resp = {'error': 'Method Not Allowed'}
+        resp, status = METHODS[request.method](request, id, cls)
         status = 405
     else:
-        resp, status = METHODS[request.method](request, id, cls)
     request.response.status = status
     return resp
 
@@ -619,76 +619,115 @@ def station_playlists(request):
 @view_config(route_name='user_playlists', renderer='json')
 def user_playlists(request):
     cls = Playlists
-    person_id = request.matchdict['uid']
     resp = []
     if request.method == "GET":
         resp = [i.to_dict() for i in cls.get_by_user_id(person_id)]
     elif request.method == "POST":
-        keys = {
-            'playlist_id': request.matchdict['pid'],
-            'recording_id': request.matchdict['rid'],
-        }
-        do_post(request, keys, cls)
-        request.route_url('edit_user_playlist', uid=person_id, pid=playlist.id)
+        person_id = request.matchdict['uid']
+        keys = {}
+        playlist, status = do_post(request, keys, cls)
+        request.response.status = status
+        request.response.status = 303
+        # Which one should be used here? Maybe only redirect if == 200?
+        request.route_url('edit_user_playlist', uid=person_id, pid=playlist['id'])
     else:
         resp = {'error': 'Method Not Allowed'}
-        status = 405
+        request.response.status = 405
     return resp
 
 # [GET]
 @view_config(route_name='edit_user_playlist', renderer='json')
 def edit_user_playlist(request):
     cls = Playlists
-    playlist_id = request.matchdict['pid']
-    playlist = Playlists.get_by_id(playlist_id)
-    # is do_get_single even woth it here?
-    chosen_recordings = playlist.recordings
-    chosen_ids = [rec.id for rec in chosen_recordings]
+    if request.method == "GET":
+        playlist_id = request.matchdict['id']
+        playlist = Playlists.get_by_id(playlist_id)
+        # Not using do_get_single because using sqlalchemy relationships from actual object, not dict
+        chosen_recordings = playlist.recordings
+        chosen_ids = [rec.id for rec in chosen_recordings]
 
-    unchosen_recordings = DBSession.query(
-        Recordings,
-    ).filter(
-        Recordings.id not in chosen_ids
-    )
-    # recordings user has in playlist vs recordings that can be added to it
-    # might want to limit unchosen, maybe take random 10
-    
-    resp = {
-        'chosen_recordings': chosen_recordings,
-        'unchosen_recordings': unchosen_recordings
-    }
+        unchosen_recordings = DBSession.query(
+            Recordings,
+        ).filter(
+            Recordings.id not in chosen_ids
+        )
+        # recordings user has in playlist vs recordings that can be added to it
+        # might want to limit unchosen, maybe take random 10
+
+        resp = {
+            'chosen_recordings': chosen_recordings,
+            'unchosen_recordings': unchosen_recordings
+        }
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
 
 
 # [GET]
 @view_config(route_name='new_user_playlist', renderer='json')
 def new_user_playlist(request):
     # This should just return a form for title of new playlist.
-    pass
+    resp = {}
+    if request.method == "GET":
+        resp = {'author_id': request.matchdict['uid']}
+        # pass through form
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
 
-# [POST]
+# [           PUT        ]
 @view_config(route_name='assign_to_playlist')
 def assign_to_playlist(request):
     cls = PlaylistAssignments
-    keys = {
-        'playlist_id': request.matchdict['pid'],
-        'recording_id': request.matchdict['rid'],
-    }
-    do_post(request, keys, cls)
+    resp = {}
+    status = 500
+    if request.method == "PUT":
+        keys = {
+            'playlist_id': request.matchdict['id'],
+            'recording_id': request.body['recording_id'],
+            # allowed to use request.body? check_payload wouldn't work for this
+        }
+        resp, status = do_post(request, keys, cls)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        status = 405
+    request.response.status = status
+    return resp
 
-# [POST]
+# [           PUT        ]
 @view_config(route_name='remove_from_playlist')
 def remove_from_playlist(request):
     cls = PlaylistAssignments
-    pa_id =
-        PlaylistAssignments.get_by_playlist_id_and_recording_id(
-            cls, request.matchdict['pid'], request.matchdict['rid']
-        ).id
-    do_delete(request, pa_id, cls)
+    resp = {}
+    status = 500
+    if request.method == "PUT":
+        pa_id =
+            PlaylistAssignments.get_by_playlist_id_and_recording_id(
+                cls, request.matchdict['id'], request.body['recording_id']
+            ).id
+        # reverse search isn't a part of do_delete
+
+        resp, status = do_delete(request, pa_id, cls)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        status = 405
+    request.response.status = status
+    return resp
 
 
 
-# [GET]
-@view_config(route_name='user_playlist_listening', renderer='json')
-def user_playlist_listening(request):
+# [GET,       PUT, DELETE]
+@view_config(route_name='user_playlist', renderer='json')
+def user_playlist(request):
     cls = Playlists
-    return METHODS['GET'](request, request.matchdict['pid'], cls)
+    resp = {}
+    status = 500
+    if request.method in METHODS:
+        resp, status = METHODS[request.method](request, request.matchdict['id'], cls)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        status = 405
+    request.response.status = status
+    return resp
