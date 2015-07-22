@@ -58,9 +58,7 @@ def main(global_config, **settings):
     # PLAYLISTS
     config.add_route('playlists', '/playlists')
     config.add_route('user_playlists', '/users/:{uid}/playlists')
-    config.add_route('new_user_playlist', '/users/:{uid}/playlists/new')
-    config.add_route('user_playlist', '/users/:{uid}/playlists/:{id}')
-    config.add_route('edit_user_playlist', '/users/:{uid}/playlists/:{id}/edit')
+    config.add_route('user_playlists_by_id', '/users/:{uid}/playlists/:{id}')
     config.add_route('assign_to_playlist', 'users/:{uid}/playlists/:{id}/assign')
     config.add_route('remove_from_playlist', 'users/:{uid}/playlists/:{id}/remove')
 

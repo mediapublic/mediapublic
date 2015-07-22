@@ -267,7 +267,7 @@ class PlaylistAssignments(Base, CreationMixin):
     __tablename__ = 'playlist_assignments'
     id = Column(Integer, primary_key=True)
     playlist_id = Column(Integer, ForeignKey('playlists.id'))
-    recording_id = Column(Integer, ForeignKey('recordings.id'))
+    recording_id = ReqColumn(Integer, ForeignKey('recordings.id'))
 
     @classmethod
     def get_by_playlist_id_and_recording_id(cls, pid, rid):
@@ -292,8 +292,9 @@ class Playlists(Base, CreationMixin):
 
     __tablename__ = 'playlists'
     id = Column(Integer, primary_key=True)
-    author_id = ReqColumn(Integer, ForeignKey('people.id'))
+    author_id = Column(Integer, ForeignKey('people.id'))
     title = ReqColumn(UnicodeText)
+    description = ReqColumn(UnicodeText)
     recordings = relationship("Recordings", secondary=PlaylistAssignments.__table__, backref="playlists")
 
     @classmethod
@@ -306,11 +307,31 @@ class Playlists(Base, CreationMixin):
             ).all()
         return playlists
 
+    @classmethod
+    def delete_by_playlist_id and_recording_id(cls, pid, rid)
+        with transaction.manager:
+            thing = DBSession.query(
+                PlaylistAssignments,
+            ).filter(
+                PlaylistAssignments.playlist_id == pid,
+                PlaylistAssignments.recording_id == rid,
+            ).first()
+            DBSession.delete(thing)
+
+    def categories(self):
+        unique = []
+        categories = [r.category for r in self.recordings]
+        for c in categories:
+            if c not in unique:
+                unique.append(c)
+        return unique
+
     def to_dict(self):
         resp = dict(
             id = self.id,
             author_id = self.author_id,
             title = self.title,
+            items = [r.to_dict() for r in self.recordings]
         )
         return resp
 
