@@ -21,7 +21,7 @@ from .models import (
 import datetime
 import json
 
-def check_payload(body, cls):
+def check_payload(body, cls, keys=[]):
 
     dt_objs = [
         'creation_datetime',
@@ -39,10 +39,11 @@ def check_payload(body, cls):
             resp = {'error': 'JSON not dictionary.'}
             #code = 400
         else:
-            keys = cls.reqkeys()
-            if not ( len(keys) == len(payload) and all(k in payload for k in keys) ):
+            reqkeys = cls.reqkeys()
+            if not ( (len(reqkeys) + len(keys)) == len(payload) and \
+                    all(k in payload for k in reqkeys) and all(k in payload for k in keys) ):
                 payload = {}
-                resp = {'error': 'Missing Key.  Required Keys: %s' % cls.reqkeys()}
+                resp = {'error': 'Missing Key.  Required Keys: %s, %s' % (cls.reqkeys(), keys) }
                 #code = 400
             else:
                 for k in payload:
@@ -280,7 +281,7 @@ def organizations_comments(request):
         request.response.status = 405
     return resp
 
-# [GET,       PUT, DELETE] organization/:{oid}/comments/:{cid}
+# [GET,       PUT, DELETE] organization/:{oid}/comments/:{id}
 @view_config(route_name='organizations_comment_by_id', renderer='json')
 def organizations_comment_by_id(request):
     cls = Comments
@@ -599,11 +600,12 @@ def blogs_comment_by_id(request):
         resp, status = METHODS[request.method](request, id, cls)
         status = 405
     else:
+        resp, status = METHODS[request.method](request, id, cls)
     request.response.status = status
     return resp
 
 ########### PLAYLISTS
-# [GET]
+# [GET,                  ] /playlists
 @view_config(route_name='playlists', renderer='json')
 def station_playlists(request):
     cls = Playlists
@@ -616,29 +618,27 @@ def station_playlists(request):
         request.response.status = 405
     return resp
 
-# [GET, POST]
+# [GET, POST,            ] /users/:{uid}/playlists
 @view_config(route_name='user_playlists', renderer='json')
 def user_playlists(request):
     cls = Playlists
     resp = []
-    person_id = request.matchdict['uid']
-    if request.method == "GET":
-        items = cls.get_by_user_id(person_id)
+    uid = request.matchdict['uid']
+    if request.method == 'GET':
+        items = cls.get_by_owner_id(uid)
         resp = [i.to_dict() for i in items]
-        status = 200 # ???
-    elif request.method == "POST":
+    elif request.method == 'POST':
         keys = {
-            'author_id': request.matchdct['uid']
+            'author_id': uid,
         }
-        playlist, status = do_post(request, keys, cls)
-        resp = {'playlist': playlist}
+        resp, status = do_post(request, keys, cls)
     else:
         resp = {'error': 'Method Not Allowed'}
-    request.response.status = status
+        request.response.status = 405
     return resp
 
-# [           PUT        ]
-@view_config(route_name='assign_to_playlist')
+# [           PUT,       ] /users/:{uid}/playlists/:{id}/assign
+@view_config(route_name='user_playlists_assign', renderer='json')
 def assign_to_playlist(request):
     cls = PlaylistAssignments
     resp = {}
@@ -653,23 +653,25 @@ def assign_to_playlist(request):
     request.response.status = status
     return resp
 
-# [           PUT        ]
-@view_config(route_name='remove_from_playlist')
+# [           PUT,       ] /users/:{uid}/playlists/:{id}/remove
+@view_config(route_name='user_playlists_remove', renderer='json')
 def remove_from_playlist(request):
     cls = PlaylistAssignments
     resp = {}
     id = request.matchdict['id']
-    rid = check_payload(request.body, cls)['recording_id']
     if request.method == "PUT":
-        Playlists.delete_by_playlist_id and_recording_id(id, rid)
+        keys = [
+            'recoding_id',
+        ]
+        payload, resp = check_payload(request.body, cls, keys)
+        recording_id = paylist['recording_id']
+        Playlists.remove_by_recording_id(id, recording_id)
     else:
         resp = {'error': 'Method Not Allowed'}
         request.response.status = 405
     return resp
 
-
-
-# [GET,       PUT, DELETE]
+# [GET,       PUT, DELETE] /users/:{uid}/playlists/{:id}
 @view_config(route_name='user_playlists_by_id', renderer='json')
 def user_playlists_by_id(request):
     cls = Playlists

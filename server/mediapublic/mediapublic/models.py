@@ -264,21 +264,30 @@ class Organizations(Base, CreationMixin):
         return resp
 
 class PlaylistAssignments(Base, CreationMixin):
+
     __tablename__ = 'playlist_assignments'
+
     id = Column(Integer, primary_key=True)
     playlist_id = Column(Integer, ForeignKey('playlists.id'))
     recording_id = ReqColumn(Integer, ForeignKey('recordings.id'))
 
+    creation_datetime = Column(DateTime)
+
     @classmethod
-    def get_by_playlist_id_and_recording_id(cls, pid, rid):
+    def delete_by_playlist_id_and_recording_id(cls, pid, rid):
+        success = False
         with transaction.manager:
-            playlists = DBSession.query(
+            playlist = DBSession.query(
                 PlaylistAssignments,
             ).filter(
                 PlaylistAssignments.playlist_id == pid,
                 PlaylistAssignment.recording_id == rid,
-            ).all()
-        return assignments[0] # combination should be unique
+            ).first()
+            if not playlist is None:
+                DBSession.remove(playlist)
+                transaction.commit()
+                success = True
+        return success
 
     def to_dict(self):
         resp = dict(
@@ -291,14 +300,21 @@ class PlaylistAssignments(Base, CreationMixin):
 class Playlists(Base, CreationMixin):
 
     __tablename__ = 'playlists'
+
     id = Column(Integer, primary_key=True)
     author_id = Column(Integer, ForeignKey('people.id'))
     title = ReqColumn(UnicodeText)
     description = ReqColumn(UnicodeText)
-    recordings = relationship("Recordings", secondary=PlaylistAssignments.__table__, backref="playlists")
+    creation_datetime = Column(DateTime)
+
+    recordings = relationship(
+        "Recordings",
+        secondary=PlaylistAssignments.__table__,
+        backref="playlists",
+    )
 
     @classmethod
-    def get_by_user_id(cls, id):
+    def get_by_owner_id(cls, id):
         with transaction.manager:
             playlists = DBSession.query(
                 Playlists,
@@ -308,30 +324,40 @@ class Playlists(Base, CreationMixin):
         return playlists
 
     @classmethod
-    def delete_by_playlist_id and_recording_id(cls, pid, rid)
+    def remove_recording_ny_id(cls, pid, rid):
         with transaction.manager:
-            thing = DBSession.query(
+            assignment = DBSession.query(
                 PlaylistAssignments,
             ).filter(
                 PlaylistAssignments.playlist_id == pid,
                 PlaylistAssignments.recording_id == rid,
             ).first()
-            DBSession.delete(thing)
+            DBSession.delete(assignment)
 
-    def categories(self):
-        unique = []
-        categories = [r.category for r in self.recordings]
-        for c in categories:
-            if c not in unique:
-                unique.append(c)
-        return unique
+    @classmethod
+    def get_recordings_by_playlist_id(self, id):
+        with transaction.manager:
+            recordings = DBSession.query(
+                Recordings,
+            ).filter(
+                Recordings.id == id,
+            ).first()
+            if recordings is None:
+                recordings = []
+            if not isinstance(recordings, list):
+                recordings = [recordings]
+        return recordings
 
     def to_dict(self):
         resp = dict(
             id = self.id,
             author_id = self.author_id,
             title = self.title,
-            items = [r.to_dict() for r in self.recordings]
+            # This should cause a LEFT JOIN against the many-to-many
+            # recording_assignments table, and get the recordings
+            # that are associated with the playlist
+            #recordings = [r.to_dict() for r in self.recordings]
+            recordings = [r.to_dict() for r in Playlists.get_recordings_by_playlist_id(self.id)],
         )
         return resp
 
