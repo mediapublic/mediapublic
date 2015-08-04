@@ -1,2 +1,2 @@
-# mediapublic-server
-MediaPublic Website Platform 
+# mediapublic
+The MediaPublic.io website.

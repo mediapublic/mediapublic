@@ -8,7 +8,7 @@ Make sure you have the following dependencies installed:
 
 To get the development workflow up and running follow these steps:
 1. `git clone` the repository
-2. `cd mediapublic-server/client`
+2. `cd mediapublic/client`
 3. Run `npm install`. This will install all of the dependencies.
 4. Run `gulp watch`. This will start listening for changes to the javascript and sass files, dynamically recompiling them as necessary.
 5. `http-server`. This will start a server on port 8080 that is serving the files in the `public` folder. You can now see the running client by visiting `localhost:8080`.
