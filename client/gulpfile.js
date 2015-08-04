@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
 var jshint = require('gulp-jshint');
-var compass = require('gulp-compass');
+var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 var browserify = require('browserify');
@@ -40,14 +40,9 @@ gulp.task('watch', ['bundlejs'], function() {
 gulp.task('styles', function() {
   gulp.src(APP + 'main.scss')
     .pipe(plumber())
-    .pipe(compass({
-      /* jshint -W106 */
-      import_path: ['node_modules/'],
-      sass: APP,
-      css: DEST + 'css/',
-      image: DEST + 'images/',
-      font: DEST + 'fonts/'
-    }))
+    .pipe(sass({
+      includePaths: ['node_modules/']
+    }).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(gulp.dest(DEST + 'css/'))
     .on('error', notify.onError('Styles error: <%= error.message %>'));
