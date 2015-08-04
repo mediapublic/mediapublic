@@ -14,12 +14,14 @@ from .models import (
     Recordings,
     Howtos,
     Blogs,
+    Playlists,
+    PlaylistAssignments,
     )
 
 import datetime
 import json
 
-def check_payload(body, cls):
+def check_payload(body, cls, keys=[]):
 
     dt_objs = [
         'creation_datetime',
@@ -37,10 +39,11 @@ def check_payload(body, cls):
             resp = {'error': 'JSON not dictionary.'}
             #code = 400
         else:
-            keys = cls.reqkeys()
-            if not ( len(keys) == len(payload) and all(k in payload for k in keys) ):
+            reqkeys = cls.reqkeys()
+            if not ( (len(reqkeys) + len(keys)) == len(payload) and \
+                    all(k in payload for k in reqkeys) and all(k in payload for k in keys) ):
                 payload = {}
-                resp = {'error': 'Missing Key.  Required Keys: %s' % cls.reqkeys()}
+                resp = {'error': 'Missing Key.  Required Keys: %s, %s' % (cls.reqkeys(), keys) }
                 #code = 400
             else:
                 for k in payload:
@@ -80,7 +83,7 @@ def do_get_single(request, id, cls):
         resp = thing.to_dict()
         status = 200
     return resp, status
-    
+
 def do_put(request, id, cls):
 
     resp = {'error': 'Not Found'}
@@ -115,7 +118,7 @@ METHODS = {
 #def view_indecx(request):
 #
 #    return {}
-    
+
 ########### INDEX
 #@view_config(route_name='index', '/', )
 
@@ -209,7 +212,7 @@ def recording_categories(request):
         resp = {'error': 'Method Not Allowed'}
         request.response.status = 405
     return resp
-    
+
 # [GET,       PUT, DELETE] /recording_categories/:{id}
 @view_config(route_name='recording_category_by_id', renderer='json')
 def recording_category_by_id(request):
@@ -278,7 +281,7 @@ def organizations_comments(request):
         request.response.status = 405
     return resp
 
-# [GET,       PUT, DELETE] organization/:{oid}/comments/:{cid}
+# [GET,       PUT, DELETE] organization/:{oid}/comments/:{id}
 @view_config(route_name='organizations_comment_by_id', renderer='json')
 def organizations_comment_by_id(request):
     cls = Comments
@@ -532,8 +535,8 @@ def howtos_comment_by_id(request):
         resp, status = METHODS[request.method](request, id, cls)
     request.response.status = status
     return resp
-    
-    
+
+
 
 ########### BLOGS
 
@@ -590,6 +593,88 @@ def blogs_comments(request):
 @view_config(route_name='blogs_comment_by_id', renderer='json')
 def blogs_comment_by_id(request):
     cls = Comments
+    resp = {}
+    id = request.matchdict['id']
+    if not request.method in METHODS:
+        resp = {'error': 'Method Not Allowed'}
+        resp, status = METHODS[request.method](request, id, cls)
+        status = 405
+    else:
+        resp, status = METHODS[request.method](request, id, cls)
+    request.response.status = status
+    return resp
+
+########### PLAYLISTS
+# [GET,                  ] /playlists
+@view_config(route_name='playlists', renderer='json')
+def station_playlists(request):
+    cls = Playlists
+    resp = []
+    if request.method == "GET":
+        items = cls.get_all()
+        resp = [i.to_dict() for i in items]
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
+
+# [GET, POST,            ] /users/:{uid}/playlists
+@view_config(route_name='user_playlists', renderer='json')
+def user_playlists(request):
+    cls = Playlists
+    resp = []
+    uid = request.matchdict['uid']
+    if request.method == 'GET':
+        items = cls.get_by_owner_id(uid)
+        resp = [i.to_dict() for i in items]
+    elif request.method == 'POST':
+        keys = {
+            'author_id': uid,
+        }
+        resp, status = do_post(request, keys, cls)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
+
+# [           PUT,       ] /users/:{uid}/playlists/:{id}/assign
+@view_config(route_name='user_playlists_assign', renderer='json')
+def assign_to_playlist(request):
+    cls = PlaylistAssignments
+    resp = {}
+    if request.method == "PUT":
+        keys = {
+            'playlist_id': request.matchdict['id'],
+        }
+        resp, status = do_post(request, keys, cls)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        status = 405
+    request.response.status = status
+    return resp
+
+# [           PUT,       ] /users/:{uid}/playlists/:{id}/remove
+@view_config(route_name='user_playlists_remove', renderer='json')
+def remove_from_playlist(request):
+    cls = PlaylistAssignments
+    resp = {}
+    id = request.matchdict['id']
+    if request.method == "PUT":
+        keys = [
+            'recoding_id',
+        ]
+        payload, resp = check_payload(request.body, cls, keys)
+        recording_id = paylist['recording_id']
+        Playlists.remove_by_recording_id(id, recording_id)
+    else:
+        resp = {'error': 'Method Not Allowed'}
+        request.response.status = 405
+    return resp
+
+# [GET,       PUT, DELETE] /users/:{uid}/playlists/{:id}
+@view_config(route_name='user_playlists_by_id', renderer='json')
+def user_playlists_by_id(request):
+    cls = Playlists
     resp = {}
     id = request.matchdict['id']
     if not request.method in METHODS:
