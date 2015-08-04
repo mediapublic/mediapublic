@@ -339,9 +339,11 @@ class Playlists(Base, CreationMixin):
         with transaction.manager:
             recordings = DBSession.query(
                 Recordings,
+            ).join(
+                PlaylistAssignments,
             ).filter(
-                Recordings.id == id,
-            ).first()
+                PlaylistAssignments.playlist_id == id,
+            ).all()
             if recordings is None:
                 recordings = []
             if not isinstance(recordings, list):
