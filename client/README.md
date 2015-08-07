@@ -4,7 +4,8 @@ This is the html/css/javascript that powers the mediapublic.io UI.
 ## Contributing
 Make sure you have the following dependencies installed:
 1. [Node](https://nodejs.org) (I recommend version 0.10.x, `node -v` to check what you have installed). You will also need NPM, which comes with Node.
-2. [http-server](https://www.npmjs.com/package/http-server) or similar tool for serving static files. `npm install -g http-server`.
+2. [Gulp](http://gulpjs.com/) - `npm install -g gulp`
+3. [http-server](https://www.npmjs.com/package/http-server) or similar tool for serving static files. `npm install -g http-server`.
 
 To get the development workflow up and running follow these steps:
 1. `git clone` the repository

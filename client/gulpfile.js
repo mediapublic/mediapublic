@@ -8,6 +8,7 @@ var browserify = require('browserify');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
+var gulpUtil = require('gulp-util');
 
 var DEST = 'public/';
 var APP = 'app/';
@@ -21,7 +22,10 @@ gulp.task('bundlejs', function() {
     return bundler.bundle()
       .on('error', notify.onError('JS error: <%= error.message %>'))
       .pipe(source('build.js'))
-      .pipe(gulp.dest(DEST + '/javascript/'));
+      .pipe(gulp.dest(DEST + '/javascript/'))
+      .on('end', function() {
+        gulpUtil.log('build.js rebuilt');
+      });
   }
 
 
