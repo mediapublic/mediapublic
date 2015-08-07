@@ -68,8 +68,6 @@ class CreationMixin():
 
     @classmethod
     def update_by_id(cls, id, **kwargs):
-        print '\nupdate_by_id(), args:'
-        #print args
         with transaction.manager:
             keys = set(cls.__dict__)
             thing = cls.get_by_id(id)
@@ -387,7 +385,7 @@ class People(Base, CreationMixin):
     facebook = ReqColumn(UnicodeText)
     instagram = ReqColumn(UnicodeText)
     periscope = ReqColumn(UnicodeText)
-    
+
     user_id = ReqColumn(ForeignKey('users.id'), nullable=True)
 
     organization_id = Column(ForeignKey('organizations.id'), nullable=True)
