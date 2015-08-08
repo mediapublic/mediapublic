@@ -1,8 +1,10 @@
+from uuid import uuid4
+
+from sqlalchemy_utils import UUIDType
 from sqlalchemy import (
     Column,
     ForeignKey,
     Integer,
-    Text,
     UnicodeText,
     DateTime,
 )
@@ -10,14 +12,13 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy.orm import (
+    relationship,
     scoped_session,
     sessionmaker,
-    relationship,
 )
 
-import transaction
-
 from zope.sqlalchemy import ZopeTransactionExtension
+import transaction
 
 DBSession = scoped_session(sessionmaker(
     extension=ZopeTransactionExtension(),
@@ -30,6 +31,8 @@ class CreationMixin():
     def add(cls, **kwargs):
         with transaction.manager:
             thing = cls(**kwargs)
+            if thing.id is None:
+                thing.id = uuid4()
             DBSession.add(thing)
             transaction.commit()
         return thing
