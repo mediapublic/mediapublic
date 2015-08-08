@@ -1,13 +1,11 @@
 from sqlalchemy import (
     Column,
-    Index,
     ForeignKey,
     Integer,
     Text,
     UnicodeText,
     DateTime,
-
-    )
+)
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -15,18 +13,19 @@ from sqlalchemy.orm import (
     scoped_session,
     sessionmaker,
     relationship,
-    backref,
-    )
+)
 
 import transaction
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension(), expire_on_commit=False))
+DBSession = scoped_session(sessionmaker(
+    extension=ZopeTransactionExtension(),
+    expire_on_commit=False))
 Base = declarative_base()
 
-class CreationMixin():
 
+class CreationMixin():
     @classmethod
     def add(cls, **kwargs):
         with transaction.manager:
@@ -41,10 +40,6 @@ class CreationMixin():
             things = DBSession.query(
                 cls,
             ).all()
-            #retThings = []
-            #for t in things:
-            #    retThings.append(t.to_dict())
-        #return retThings
         return things
 
     @classmethod
@@ -61,7 +56,7 @@ class CreationMixin():
     def delete_by_id(cls, id):
         with transaction.manager:
             thing = cls.get_by_id(id)
-            if not thing is None:
+            if thing is not None:
                 DBSession.delete(thing)
             transaction.commit()
         return thing
@@ -71,7 +66,7 @@ class CreationMixin():
         with transaction.manager:
             keys = set(cls.__dict__)
             thing = cls.get_by_id(id)
-            if not thing is None:
+            if thing is not None:
                 for k in kwargs:
                     if k in keys:
                         setattr(thing, k, kwargs[k])
@@ -87,12 +82,12 @@ class CreationMixin():
                 keys.append(str(key).split('.')[1])
         return keys
 
-class ReqColumn(Column):
 
+class ReqColumn(Column):
     __required__ = True
 
-class UserTypes(Base, CreationMixin):
 
+class UserTypes(Base, CreationMixin):
     __tablename__ = 'user_types'
 
     id = Column(Integer, primary_key=True)
@@ -103,15 +98,15 @@ class UserTypes(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            name = self.name,
-            description = self.description,
-            value = self.value,
+            id=self.id,
+            name=self.name,
+            description=self.description,
+            value=self.value,
         )
         return resp
 
-class Users(Base, CreationMixin):
 
+class Users(Base, CreationMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -129,17 +124,17 @@ class Users(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            first = self.first,
-            last = self.last,
-            email = self.email,
-            user_type = self.user_type_id,
-            organization_id = self.organization_id,
+            id=self.id,
+            first=self.first,
+            last=self.last,
+            email=self.email,
+            user_type=self.user_type_id,
+            organization_id=self.organization_id,
         )
         return resp
 
-class Comments(Base, CreationMixin):
 
+class Comments(Base, CreationMixin):
     __tablename__ = 'comments'
 
     id = Column(Integer, primary_key=True)
@@ -159,12 +154,12 @@ class Comments(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            subject = self.subject,
-            contents = self.contents,
-            creation_datetime = str(self.creation_datetime),
-            parent_comment_id = self.parent_comment_id,
-            author_id = self.author_id,
+            id=self.id,
+            subject=self.subject,
+            contents=self.contents,
+            creation_datetime=str(self.creation_datetime),
+            parent_comment_id=self.parent_comment_id,
+            author_id=self.author_id,
         )
         return resp
 
@@ -218,8 +213,8 @@ class Comments(Base, CreationMixin):
             ).all()
         return comments
 
-class Organizations(Base, CreationMixin):
 
+class Organizations(Base, CreationMixin):
     __tablename__ = 'organizations'
 
     id = Column(Integer, primary_key=True)
@@ -243,26 +238,26 @@ class Organizations(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            short_name = self.short_name,
-            long_name = self.long_name,
-            short_description = self.short_description,
-            long_description = self.long_description,
-            address_0 = self.address_0,
-            address_1 = self.address_1,
-            city = self.city,
-            state = self.state,
-            zipcode = self.zipcode,
-            phone = self.phone,
-            fax = self.fax,
-            primary_website = self.primary_website,
-            secondary_website = self.secondary_website,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            short_name=self.short_name,
+            long_name=self.long_name,
+            short_description=self.short_description,
+            long_description=self.long_description,
+            address_0=self.address_0,
+            address_1=self.address_1,
+            city=self.city,
+            state=self.state,
+            zipcode=self.zipcode,
+            phone=self.phone,
+            fax=self.fax,
+            primary_website=self.primary_website,
+            secondary_website=self.secondary_website,
+            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
-class PlaylistAssignments(Base, CreationMixin):
 
+class PlaylistAssignments(Base, CreationMixin):
     __tablename__ = 'playlist_assignments'
 
     id = Column(Integer, primary_key=True)
@@ -279,9 +274,9 @@ class PlaylistAssignments(Base, CreationMixin):
                 PlaylistAssignments,
             ).filter(
                 PlaylistAssignments.playlist_id == pid,
-                PlaylistAssignment.recording_id == rid,
+                PlaylistAssignments.recording_id == rid,
             ).first()
-            if not playlist is None:
+            if playlist is not None:
                 DBSession.remove(playlist)
                 transaction.commit()
                 success = True
@@ -289,14 +284,14 @@ class PlaylistAssignments(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            playlist_id = self.playlist_id,
-            recording_id = self.recording_id,
+            id=self.id,
+            playlist_id=self.playlist_id,
+            recording_id=self.recording_id,
         )
         return resp
 
-class Playlists(Base, CreationMixin):
 
+class Playlists(Base, CreationMixin):
     __tablename__ = 'playlists'
 
     id = Column(Integer, primary_key=True)
@@ -350,20 +345,21 @@ class Playlists(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            author_id = self.author_id,
-            title = self.title,
+            id=self.id,
+            author_id=self.author_id,
+            title=self.title,
             # This should cause a LEFT JOIN against the many-to-many
             # recording_assignments table, and get the recordings
             # that are associated with the playlist
-            #recordings = [r.to_dict() for r in self.recordings]
-            recordings = [r.to_dict() for r in Playlists.get_recordings_by_playlist_id(self.id)],
+            # recordings = [r.to_dict() for r in self.recordings]
+            recordings=[r.to_dict() for r in
+                        Playlists.get_recordings_by_playlist_id(self.id)],
         )
         return resp
 
-class People(Base, CreationMixin):
 
-    __tablename__= 'people'
+class People(Base, CreationMixin):
+    __tablename__ = 'people'
 
     id = Column(Integer, primary_key=True)
     first = ReqColumn(UnicodeText)
@@ -392,26 +388,26 @@ class People(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            first = self.first,
-            address_0 = self.address_0,
-            address_1 = self.address_1,
-            city = self.city,
-            state = self.state,
-            zipcode = self.zipcode,
-            phone = self.phone,
-            fax = self.fax,
-            primary_website = self.primary_website,
-            secondary_website = self.secondary_website,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            first=self.first,
+            address_0=self.address_0,
+            address_1=self.address_1,
+            city=self.city,
+            state=self.state,
+            zipcode=self.zipcode,
+            phone=self.phone,
+            fax=self.fax,
+            primary_website=self.primary_website,
+            secondary_website=self.secondary_website,
+            creation_datetime=str(self.creation_datetime),
 
             # see note on definitions
-            twitter = self.twitter,
-            facebook = self.facebook,
-            instagram = self.instagram,
-            periscope = self.periscope,
-            user_id = self.user_id,
-            organization_id = self.organization_id,
+            twitter=self.twitter,
+            facebook=self.facebook,
+            instagram=self.instagram,
+            periscope=self.periscope,
+            user_id=self.user_id,
+            organization_id=self.organization_id,
         )
         return resp
 
@@ -425,9 +421,9 @@ class People(Base, CreationMixin):
             ).all()
         return people
 
-class Recordings(Base, CreationMixin):
 
-    __tablename__= 'recordings'
+class Recordings(Base, CreationMixin):
+    __tablename__ = 'recordings'
 
     id = Column(Integer, primary_key=True)
     title = ReqColumn(UnicodeText)
@@ -439,12 +435,12 @@ class Recordings(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            title = self.title,
-            url = self.url,
-            recorded_datetime = str(self.recorded_datetime),
-            creation_datetime = str(self.creation_datetime),
-            organization_id = self.organization_id,
+            id=self.id,
+            title=self.title,
+            url=self.url,
+            recorded_datetime=str(self.recorded_datetime),
+            creation_datetime=str(self.creation_datetime),
+            organization_id=self.organization_id,
         )
         return resp
 
@@ -453,13 +449,11 @@ class Recordings(Base, CreationMixin):
         with transaction.manager:
             recordings = DBSession.query(
                 Recordings,
-            #    RecordingCategories,
             ).filter(
                 Recordings.organization_id == id,
-            #).join(
-            #    RecordingCategoryAssignments,
             ).all()
         return recordings
+
 
 class RecordingCategories(Base, CreationMixin):
 
@@ -473,34 +467,35 @@ class RecordingCategories(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            name = self.name,
-            short_description = self.short_description,
-            long_description = self.long_description,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            name=self.name,
+            short_description=self.short_description,
+            long_description=self.long_description,
+            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
-class RecordingCategoryAssignments(Base, CreationMixin):
 
+class RecordingCategoryAssignments(Base, CreationMixin):
     __tablename__ = 'recording_category_assignments'
 
     id = Column(Integer, primary_key=True)
-    recording_category_id = ReqColumn(Integer, ForeignKey('recording_categories.id'))
+    recording_category_id = ReqColumn(
+        Integer, ForeignKey('recording_categories.id'))
     recording_id = ReqColumn(Integer, ForeignKey('recordings.id'))
     creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            recording_category_id = self.recording_category_id,
-            recording_id = self.recording_id,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            recording_category_id=self.recording_category_id,
+            recording_id=self.recording_id,
+            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
-class Howtos(Base, CreationMixin):
 
+class Howtos(Base, CreationMixin):
     __tablename__ = 'howtos'
 
     id = Column(Integer, primary_key=True)
@@ -512,17 +507,17 @@ class Howtos(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            title = self.title,
-            contents = self.contents,
-            creation_datetime = str(self.creation_datetime),
-            edit_datetime = self.edit_datetime,
-            tags = self.tags,
+            id=self.id,
+            title=self.title,
+            contents=self.contents,
+            creation_datetime=str(self.creation_datetime),
+            edit_datetime=self.edit_datetime,
+            tags=self.tags,
         )
         return resp
 
-class HowtoCategories(Base, CreationMixin):
 
+class HowtoCategories(Base, CreationMixin):
     __tablename__ = 'howto_categories'
 
     id = Column(Integer, primary_key=True)
@@ -533,16 +528,16 @@ class HowtoCategories(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            name = self.name,
-            short_description = self.short_description,
-            long_description = self.long_description,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            name=self.name,
+            short_description=self.short_description,
+            long_description=self.long_description,
+            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
-class HowtoCategoryAssignments(Base, CreationMixin):
 
+class HowtoCategoryAssignments(Base, CreationMixin):
     __tablename__ = 'howto_category_assignments'
 
     id = Column(Integer, primary_key=True)
@@ -552,15 +547,15 @@ class HowtoCategoryAssignments(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            howto_category_id = self.howto_category_id,
-            howto_id = self.howto_id,
-            creation_datetime = str(self.creation_datetime),
+            id=self.id,
+            howto_category_id=self.howto_category_id,
+            howto_id=self.howto_id,
+            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
-class Blogs(Base, CreationMixin):
 
+class Blogs(Base, CreationMixin):
     __tablename__ = 'blogs'
 
     id = Column(Integer, primary_key=True)
@@ -574,12 +569,12 @@ class Blogs(Base, CreationMixin):
 
     def to_dict(self):
         resp = dict(
-            id = self.id,
-            title = self.title,
-            contents = self.contents,
-            creation_datetime = str(self.creation_datetime),
-            edit_datetime = self.edit_datetime,
-            tags = self.tags,
-            author_id = self.author_id,
+            id=self.id,
+            title=self.title,
+            contents=self.contents,
+            creation_datetime=str(self.creation_datetime),
+            edit_datetime=self.edit_datetime,
+            tags=self.tags,
+            author_id=self.author_id,
         )
         return resp
