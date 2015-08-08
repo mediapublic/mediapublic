@@ -1,4 +1,5 @@
 import logging
+import json
 import datetime
 
 from colander import MappingSchema
@@ -20,6 +21,8 @@ from .models import (
     PlaylistAssignments,
     )
 
+from .validators import validator_from_model
+
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
 
@@ -34,17 +37,51 @@ class ResourceMixin(object):
         return self.cls.__name__.lower()
 
     def validate_req(self, request):
-        pass
+        v = validator_from_model(self.cls)
 
     def collection_get(self):
+        log.debug("collection_get on {}".format(self.rsrc))
         return {
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }
 
+    @property
+    def schema(self):
+        return validator_from_model(self.cls)
+
+    @view(content_type="application/json")
     def collection_post(self):
+        log.debug("collection_post on {} with {}".format(
+            self.rsrc, json.dumps(self.request.validated)))
         self.request.validated['creation_datetime'] = datetime.datetime.now()
         item = self.cls.add(**self.request.validated)
         self.request.response.status = 201
+        return item.to_dict()
+
+    def get(self):
+        item = self.cls.get_by_id(self.request.matchdict['id'])
+        if item is None:
+            self.request.response.status = 404
+            return {'error': 'Not found'}
+        return item.to_dict()
+
+    def put(self):
+        item = cls.update_by_id(
+            self.request.matchdict['id'],
+            **self.request.validated)
+
+        if item is None:
+            self.request.response.status = 404
+            return {'error': 'Not found'}
+
+        self.request.response.status = 201
+        return thing.to_dict()
+
+    def delete(self):
+        item = self.cls.delete_by_id(self.request.matchdict['id'])
+        if item is None:
+            self.request.response.status = 404
+            return {'error': 'Not found'}
         return item.to_dict()
 
 # --------- STATUS CHECK
