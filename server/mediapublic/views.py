@@ -1,6 +1,7 @@
 import logging
 import datetime
 
+from colander import MappingSchema
 from cornice import Service
 from cornice.resource import resource, view
 
@@ -31,6 +32,9 @@ class ResourceMixin(object):
     @property
     def rsrc(self):
         return self.cls.__name__.lower()
+
+    def validate_req(self, request):
+        pass
 
     def collection_get(self):
         return {
