@@ -19,8 +19,10 @@ from .models import (
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
-########### STATUS CHECK
+# --------- STATUS CHECK
 status = Service(name='status', path='/status', description="Check app state")
+
+
 @status.get()
 def get_status(request):
     log.debug("Status check")
@@ -35,47 +37,47 @@ def get_status(request):
         log.warn("Uhoh, status check failed {}".format(repr(status)))
     return status
 
-########### USERS
+# --------- USERS
 users = Service(name='users', path='/users')
 
 # [GET, POST             ] /users
 user = Service(name='user', path='/users/:{id}')
 # [GET,       PUT, DELETE] /users/:{id}
 
-########### USER TYPES
+# --------- USER TYPES
 # [GET, POST             ] /user_types
 # [GET,       PUT, DELETE] user_types/:id
-########### RECORDING CATEGORIES
+# --------- RECORDING CATEGORIES
 # [GET, POST             ] /recording_categories
 # [GET,       PUT, DELETE] /recording_categories/:{id}
-########### ORGANIZATIONS
+# --------- ORGANIZATIONS
 # [GET, POST             ] /organizations
 # [GET,       PUT, DELETE] /organizations/:{id}
 # [GET, POST             ] /organization/:{oid}/comments
 # [GET,       PUT, DELETE] /organization/:{oid}/comments/:{id}
-########### PEOPLE                                                                                                                                     [14/42]
+# --------- PEOPLE
 # [GET,                  ] /people
 # [GET, POST             ] /organization/:{id}/people
 # [GET,       PUT, DELETE] organization/:{oid}/people/:{pid}
 # [GET, POST             ] organization/:{oid}/people/:{pid}/comments
 # [GET,       PUT, DELETE] organization/:{oid}/people/:{pid}/comments/:{cid}
-########### RECORDINGS
+# --------- RECORDINGS
 # [GET,                  ] /recordings
 # [GET, POST             ] /organization/:{id}/recordings
 # [GET,       PUT, DELETE] organization/:{oid}/recordings/:{id}
 # [GET, POST             ] organization/:{oid}/recordings/:{rid}/comments
 # [GET,       PUT, DELETE] organization/:{oid}/recordings/:{pid}/comments/:{id}
-########### HOWTOS
+# --------- HOWTOS
 # [GET, POST             ] /howtos
 # [GET,       PUT, DELETE] /howtos/:{id}
 # [GET, POST             ] /howtos/:{hid}/comments
 # [GET,       PUT, DELETE] /howtos/:{hid}/comments/:{id}
-########### BLOGS
+# --------- BLOGS
 # [GET, POST             ] /blogs
 # [GET,       PUT, DELETE] /blogs/:{id}
 # [GET, POST             ] /blogs/:{bid}/comments
 # [GET,       PUT, DELETE] /blogs/:{bid}/comments/:{id}
-########### PLAYLISTS
+# --------- PLAYLISTS
 # [GET,                  ] /playlists
 # [GET, POST,            ] /users/:{uid}/playlists
 # [           PUT,       ] /users/:{uid}/playlists/:{id}/assign
