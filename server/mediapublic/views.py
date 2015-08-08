@@ -2,7 +2,6 @@ import logging
 import json
 import datetime
 
-from colander import MappingSchema
 from cornice import Service
 from cornice.resource import resource, view
 
@@ -102,24 +101,43 @@ def get_status(request):
         log.warn("Uhoh, status check failed {}".format(repr(status)))
     return status
 
-# --------- USERS
-# [GET, POST             ] /users
-# [GET,       PUT, DELETE] /users/:{id}
-
 
 @resource(collection_path='/users', path='/users/{id}')
-class UserResource(ResourceMixin):
+class UsersResource(ResourceMixin):
+    """
+    [GET, POST             ] /users
+    [GET,       PUT, DELETE] /users/:{id}
+    """
     cls = Users
 
-# --------- USER TYPES
-# [GET, POST             ] /user_types
-# [GET,       PUT, DELETE] user_types/:id
-# --------- RECORDING CATEGORIES
-# [GET, POST             ] /recording_categories
-# [GET,       PUT, DELETE] /recording_categories/:{id}
-# --------- ORGANIZATIONS
-# [GET, POST             ] /organizations
-# [GET,       PUT, DELETE] /organizations/:{id}
+
+@resource(collection_path='/user_types', path='/user_types/{id}')
+class UserTypesResource(ResourceMixin):
+    """
+    [GET, POST             ] /user_types
+    [GET,       PUT, DELETE] /user_types/:id
+    """
+    cls = UserTypes
+
+
+@resource(collection_path='/recording_categories',
+          path='/recording_categories/{id}')
+class RecordingCategoriesResource(ResourceMixin):
+    """
+    [GET, POST             ] /recording_categories
+    [GET,       PUT, DELETE] /recording_categories/:{id}
+    """
+    cls = RecordingCategories
+
+
+@resource(collection_path='/organizations', path='/organizations/{id}')
+class OrganizationsResource(ResourceMixin):
+    """
+    [GET, POST             ] /organizations
+    [GET,       PUT, DELETE] /organizations/:{id}
+    """
+    cls = Organizations
+
 # [GET, POST             ] /organization/:{oid}/comments
 # [GET,       PUT, DELETE] /organization/:{oid}/comments/:{id}
 # --------- PEOPLE
@@ -139,9 +157,17 @@ class UserResource(ResourceMixin):
 # [GET,       PUT, DELETE] /howtos/:{id}
 # [GET, POST             ] /howtos/:{hid}/comments
 # [GET,       PUT, DELETE] /howtos/:{hid}/comments/:{id}
-# --------- BLOGS
-# [GET, POST             ] /blogs
-# [GET,       PUT, DELETE] /blogs/:{id}
+
+
+@resource(collection_path='/blogs', path='/blogs/{id}')
+class BlogsResource(ResourceMixin):
+    """
+    [GET, POST             ] /blogs
+    [GET,       PUT, DELETE] /blogs/:{id}
+    """
+    cls = Blogs
+
+
 # [GET, POST             ] /blogs/:{bid}/comments
 # [GET,       PUT, DELETE] /blogs/:{bid}/comments/:{id}
 # --------- PLAYLISTS
