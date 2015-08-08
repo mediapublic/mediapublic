@@ -1,6 +1,8 @@
 import logging
+import datetime
 
 from cornice import Service
+from cornice.resource import resource, view
 
 from .models import (
     DBSession,
@@ -18,6 +20,28 @@ from .models import (
     )
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
+
+
+class ResourceMixin(object):
+    cls = None
+
+    def __init__(self, request):
+        self.request = request
+
+    @property
+    def rsrc(self):
+        return self.cls.__name__.lower()
+
+    def collection_get(self):
+        return {
+            self.rsrc: [i.to_dict() for i in self.cls.get_all()]
+        }
+
+    def collection_post(self):
+        self.request.validated['creation_datetime'] = datetime.datetime.now()
+        item = self.cls.add(**self.request.validated)
+        self.request.response.status = 201
+        return item.to_dict()
 
 # --------- STATUS CHECK
 status = Service(name='status', path='/status', description="Check app state")
@@ -38,11 +62,13 @@ def get_status(request):
     return status
 
 # --------- USERS
-users = Service(name='users', path='/users')
-
 # [GET, POST             ] /users
-user = Service(name='user', path='/users/:{id}')
 # [GET,       PUT, DELETE] /users/:{id}
+
+
+@resource(collection_path='/users', path='/users/{id}')
+class UserResource(ResourceMixin):
+    cls = Users
 
 # --------- USER TYPES
 # [GET, POST             ] /user_types
