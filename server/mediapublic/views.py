@@ -136,25 +136,15 @@ class OrganizationsResource(ResourceMixin):
     """
     cls = Organizations
 
-# [GET, POST             ] /organization/:{oid}/comments
-# [GET,       PUT, DELETE] /organization/:{oid}/comments/:{id}
 # --------- PEOPLE
-# [GET,                  ] /people
-# [GET, POST             ] /organization/:{id}/people
-# [GET,       PUT, DELETE] /organization/:{oid}/people/:{pid}
-# [GET, POST             ] /organization/:{oid}/people/:{pid}/comments
-# [GET,       PUT, DELETE] /organization/:{oid}/people/:{pid}/comments/:{cid}
+# [GET, POST             ] /people
+# [GET,       PUT, DELETE] /people/:{id}
 # --------- RECORDINGS
-# [GET,                  ] /recordings
-# [GET, POST             ] /organization/:{id}/recordings
-# [GET,       PUT, DELETE] /organization/:{oid}/recordings/:{id}
-# [GET, POST             ] /organization/:{oid}/recordings/:{rid}/comments
-# [GET,       PUT, DELETE] /organization/:{oid}/recordings/:{pid}/comments/:{id}
+# [GET, POST             ] /recordings
+# [GET,       PUT, DELETE] /recordings/:{id}
 # --------- HOWTOS
 # [GET, POST             ] /howtos
 # [GET,       PUT, DELETE] /howtos/:{id}
-# [GET, POST             ] /howtos/:{hid}/comments
-# [GET,       PUT, DELETE] /howtos/:{hid}/comments/:{id}
 
 
 @resource(collection_path='/blogs', path='/blogs/{id}')
@@ -166,11 +156,8 @@ class BlogsResource(ResourceMixin):
     cls = Blogs
 
 
-# [GET, POST             ] /blogs/:{bid}/comments
-# [GET,       PUT, DELETE] /blogs/:{bid}/comments/:{id}
 # --------- PLAYLISTS
-# [GET,                  ] /playlists
-# [GET, POST,            ] /users/:{uid}/playlists
-# [           PUT,       ] /users/:{uid}/playlists/:{id}/assign
-# [           PUT,       ] /users/:{uid}/playlists/:{id}/remove
-# [GET,       PUT, DELETE] /users/:{uid}/playlists/{:id}
+# [GET, POST             ] /playlists
+# [GET,       PUT, DELETE] /playlists/:{id}
+# [           PUT,       ] /playlists/:{id}/assign
+# [           PUT,       ] /playlists/:{id}/remove
