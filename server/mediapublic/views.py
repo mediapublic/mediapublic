@@ -36,8 +36,9 @@ class ResourceMixin(object):
         return self.cls.__name__.lower()
 
     def validate_req(self, request):
-        v = validator_from_model(self.cls)
+        return validator_from_model(self.cls)
 
+    @view(content_type="application/json")
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
@@ -57,6 +58,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
+    @view(content_type="application/json")
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
@@ -64,8 +66,9 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
         return item.to_dict()
 
+    @view(content_type="application/json")
     def put(self):
-        item = cls.update_by_id(
+        item = self.cls.update_by_id(
             self.request.matchdict['id'],
             **self.request.validated)
 
@@ -74,8 +77,9 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
 
         self.request.response.status = 201
-        return thing.to_dict()
+        return item.to_dict()
 
+    @view(content_type="application/json")
     def delete(self):
         item = self.cls.delete_by_id(self.request.matchdict['id'])
         if item is None:
@@ -143,15 +147,15 @@ class OrganizationsResource(ResourceMixin):
 # --------- PEOPLE
 # [GET,                  ] /people
 # [GET, POST             ] /organization/:{id}/people
-# [GET,       PUT, DELETE] organization/:{oid}/people/:{pid}
-# [GET, POST             ] organization/:{oid}/people/:{pid}/comments
-# [GET,       PUT, DELETE] organization/:{oid}/people/:{pid}/comments/:{cid}
+# [GET,       PUT, DELETE] /organization/:{oid}/people/:{pid}
+# [GET, POST             ] /organization/:{oid}/people/:{pid}/comments
+# [GET,       PUT, DELETE] /organization/:{oid}/people/:{pid}/comments/:{cid}
 # --------- RECORDINGS
 # [GET,                  ] /recordings
 # [GET, POST             ] /organization/:{id}/recordings
-# [GET,       PUT, DELETE] organization/:{oid}/recordings/:{id}
-# [GET, POST             ] organization/:{oid}/recordings/:{rid}/comments
-# [GET,       PUT, DELETE] organization/:{oid}/recordings/:{pid}/comments/:{id}
+# [GET,       PUT, DELETE] /organization/:{oid}/recordings/:{id}
+# [GET, POST             ] /organization/:{oid}/recordings/:{rid}/comments
+# [GET,       PUT, DELETE] /organization/:{oid}/recordings/:{pid}/comments/:{id}
 # --------- HOWTOS
 # [GET, POST             ] /howtos
 # [GET,       PUT, DELETE] /howtos/:{id}
