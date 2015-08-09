@@ -1,0 +1,34 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Users
+    url: /users
+    response_json_paths:
+      $.users: []
+
+  - name: Create a user incorrectly
+    status: 400
+    method: POST
+    url: /users
+    data:
+      first: Joe
+      last: Test
+
+  - name: Create a user correctly
+    status: 201
+    method: POST
+    url: /users
+    data:
+      first: Joe
+      last: Test
+      twitter: '@birds'
+      email: 'test@foo.test'
+
+  - name: Get Users
+    url: /users
+    response_json_paths:
+      $.users.`len`: 1

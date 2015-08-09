@@ -3,7 +3,7 @@ from colander import Mapping, SchemaNode, Schema
 from cornice.schemas import CorniceSchema
 
 
-_excludes = ('id', )
+_excludes = ('id', 'creation_datetime', 'modified_datetime')
 
 
 def validator_from_model(model):

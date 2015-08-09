@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType
 from sqlalchemy import (
     Column,
@@ -24,6 +25,11 @@ DBSession = scoped_session(sessionmaker(
     extension=ZopeTransactionExtension(),
     expire_on_commit=False))
 Base = declarative_base()
+
+
+class TimeStampMixin(object):
+    creation_datetime = Column(DateTime, server_default=func.now())
+    modified_datetime = Column(DateTime, server_default=func.now())
 
 
 class CreationMixin():
@@ -87,18 +93,18 @@ class CreationMixin():
 
     def to_dict(self):
         return {
-            'id': str(self.id)
+            'id': str(self.id),
+            'creation_datetime': str(self.creation_datetime),
         }
 
 
-class UserTypes(Base, CreationMixin):
+class UserTypes(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'user_types'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     name = Column(UnicodeText, nullable=False)
     description = Column(UnicodeText, nullable=False)
     value = Column(Integer, nullable=False)
-    creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = super(UserTypes, self).to_dict()
@@ -110,7 +116,7 @@ class UserTypes(Base, CreationMixin):
         return resp
 
 
-class Users(Base, CreationMixin):
+class Users(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
@@ -118,12 +124,10 @@ class Users(Base, CreationMixin):
     last = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
     twitter = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
     last_longin_datetime = Column(DateTime)
 
-    user_type_id = Column(ForeignKey('user_types.id'), nullable=False)
-
-    organization_id = Column(ForeignKey('organizations.id'), nullable=True)
+    user_type_id = Column(ForeignKey('user_types.id'))
+    organization_id = Column(ForeignKey('organizations.id'))
 
     def to_dict(self):
         resp = super(Users, self).to_dict()
@@ -137,13 +141,12 @@ class Users(Base, CreationMixin):
         return resp
 
 
-class Comments(Base, CreationMixin):
+class Comments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'comments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     subject = Column(UnicodeText, nullable=False)
     contents = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
 
     parent_comment_id = Column(ForeignKey('comments.id'), nullable=False)
 
@@ -160,7 +163,6 @@ class Comments(Base, CreationMixin):
         resp.update(
             subject=self.subject,
             contents=self.contents,
-            creation_datetime=str(self.creation_datetime),
             parent_comment_id=self.parent_comment_id,
             author_id=self.author_id,
         )
@@ -217,7 +219,7 @@ class Comments(Base, CreationMixin):
         return comments
 
 
-class Organizations(Base, CreationMixin):
+class Organizations(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'organizations'
 
     id = Column(UUIDType(binary=False), primary_key=True)
@@ -237,8 +239,6 @@ class Organizations(Base, CreationMixin):
     primary_website = Column(UnicodeText, nullable=False)
     secondary_website = Column(UnicodeText, nullable=False)
 
-    creation_datetime = Column(DateTime)
-
     def to_dict(self):
         resp = super(Organizations, self).to_dict()
         resp.update(
@@ -255,19 +255,16 @@ class Organizations(Base, CreationMixin):
             fax=self.fax,
             primary_website=self.primary_website,
             secondary_website=self.secondary_website,
-            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
 
-class PlaylistAssignments(Base, CreationMixin):
+class PlaylistAssignments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'playlist_assignments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     playlist_id = Column(ForeignKey('playlists.id'))
     recording_id = Column(ForeignKey('recordings.id'), nullable=False)
-
-    creation_datetime = Column(DateTime)
 
     @classmethod
     def delete_by_playlist_id_and_recording_id(cls, pid, rid):
@@ -294,14 +291,13 @@ class PlaylistAssignments(Base, CreationMixin):
         return resp
 
 
-class Playlists(Base, CreationMixin):
+class Playlists(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'playlists'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     author_id = Column(ForeignKey('people.id'))
     title = Column(UnicodeText, nullable=False)
     description = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
 
     recordings = relationship(
         "Recordings",
@@ -361,7 +357,7 @@ class Playlists(Base, CreationMixin):
         return resp
 
 
-class People(Base, CreationMixin):
+class People(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'people'
 
     id = Column(UUIDType(binary=False), primary_key=True)
@@ -376,7 +372,6 @@ class People(Base, CreationMixin):
     fax = Column(UnicodeText, nullable=False)
     primary_website = Column(UnicodeText, nullable=False)
     secondary_website = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
 
     # these should probably be brough out into a seperate table as
     # many to one so we don't have to keep adding colyumns ...
@@ -402,7 +397,6 @@ class People(Base, CreationMixin):
             fax=self.fax,
             primary_website=self.primary_website,
             secondary_website=self.secondary_website,
-            creation_datetime=str(self.creation_datetime),
 
             # see note on definitions
             twitter=self.twitter,
@@ -425,14 +419,13 @@ class People(Base, CreationMixin):
         return people
 
 
-class Recordings(Base, CreationMixin):
+class Recordings(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'recordings'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     title = Column(UnicodeText, nullable=False)
     url = Column(UnicodeText, nullable=False)
     recorded_datetime = Column(DateTime, nullable=False)
-    creation_datetime = Column(DateTime)
 
     organization_id = Column(ForeignKey('organizations.id'))
 
@@ -442,7 +435,6 @@ class Recordings(Base, CreationMixin):
             title=self.title,
             url=self.url,
             recorded_datetime=str(self.recorded_datetime),
-            creation_datetime=str(self.creation_datetime),
             organization_id=self.organization_id,
         )
         return resp
@@ -458,7 +450,7 @@ class Recordings(Base, CreationMixin):
         return recordings
 
 
-class RecordingCategories(Base, CreationMixin):
+class RecordingCategories(Base, CreationMixin, TimeStampMixin):
 
     __tablename__ = 'recording_categories'
 
@@ -466,7 +458,6 @@ class RecordingCategories(Base, CreationMixin):
     name = Column(UnicodeText, nullable=False)
     short_description = Column(UnicodeText, nullable=False)
     long_description = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = super(RecordingCategories, self).to_dict()
@@ -474,37 +465,33 @@ class RecordingCategories(Base, CreationMixin):
             name=self.name,
             short_description=self.short_description,
             long_description=self.long_description,
-            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
 
-class RecordingCategoryAssignments(Base, CreationMixin):
+class RecordingCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'recording_category_assignments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     recording_category_id = Column(ForeignKey('recording_categories.id'),
                                    nullable=False)
     recording_id = Column(ForeignKey('recordings.id'), nullable=False)
-    creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = super(RecordingCategoryAssignments, self).to_dict()
         resp.update(
             recording_category_id=self.recording_category_id,
             recording_id=self.recording_id,
-            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
 
-class Howtos(Base, CreationMixin):
+class Howtos(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'howtos'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     title = Column(UnicodeText, nullable=False)
     contents = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
     edit_datetime = Column(DateTime)
     tags = Column(UnicodeText, nullable=False)
 
@@ -513,21 +500,19 @@ class Howtos(Base, CreationMixin):
         resp.update(
             title=self.title,
             contents=self.contents,
-            creation_datetime=str(self.creation_datetime),
             edit_datetime=self.edit_datetime,
             tags=self.tags,
         )
         return resp
 
 
-class HowtoCategories(Base, CreationMixin):
+class HowtoCategories(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'howto_categories'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     name = Column(UnicodeText, nullable=False)
     short_description = Column(UnicodeText, nullable=False)
     long_description = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = super(HowtoCategories, self).to_dict()
@@ -535,37 +520,33 @@ class HowtoCategories(Base, CreationMixin):
             name=self.name,
             short_description=self.short_description,
             long_description=self.long_description,
-            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
 
-class HowtoCategoryAssignments(Base, CreationMixin):
+class HowtoCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'howto_category_assignments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     howto_category_id = Column(ForeignKey('howto_categories.id'),
                                nullable=False)
     howto_id = Column(ForeignKey('howtos.id'), nullable=False)
-    creation_datetime = Column(DateTime)
 
     def to_dict(self):
         resp = super(HowtoCategoryAssignments, self).to_dict()
         resp.update(
             howto_category_id=self.howto_category_id,
             howto_id=self.howto_id,
-            creation_datetime=str(self.creation_datetime),
         )
         return resp
 
 
-class Blogs(Base, CreationMixin):
+class Blogs(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'blogs'
 
     id = Column(UUIDType(binary=False), primary_key=True)
     title = Column(UnicodeText, nullable=False)
     contents = Column(UnicodeText, nullable=False)
-    creation_datetime = Column(DateTime)
     edit_datetime = Column(DateTime)
     tags = Column(UnicodeText, nullable=False)
 
@@ -576,7 +557,6 @@ class Blogs(Base, CreationMixin):
         resp.update(
             title=self.title,
             contents=self.contents,
-            creation_datetime=str(self.creation_datetime),
             edit_datetime=self.edit_datetime,
             tags=self.tags,
             author_id=self.author_id,

@@ -2,21 +2,36 @@
 
 # For pathname munging
 import os
+import functools
 
 # The module that build_tests comes from.
 from gabbi import driver
 
-# We need access to the WSGI application that hosts our service
-import functools
-from pyramid.paster import get_app
+# pyramid configs
+from pyramid.paster import get_app, get_appsettings
+from sqlalchemy import engine_from_config
+
+# models to start DB
+from mediapublic.models import DBSession, Base
 
 # This is weird, and I'm sorry, but you need to curry in the INI file to
 # configure the service
-load_app = functools.partial(
-    get_app,
-    os.path.join(os.path.dirname(__file__), '..', '..', 'development.ini'),
-    name='main'
-)
+config_path = os.path.join(os.path.dirname(__file__), 'gabbi.ini'),
+
+try:
+    # delete the old DB to start fresh
+    os.remove(os.path.join(os.path.dirname(__file__), 'mediapublic.sqlite'))
+except:
+    # it may not exist, whatever
+    pass
+
+settings = get_appsettings(config_path)
+engine = engine_from_config(settings, 'sqlalchemy.')
+DBSession.configure(bind=engine)
+Base.metadata.create_all(engine)
+
+
+load_app = functools.partial(get_app, config_path, name='main')
 
 # By convention the YAML files are put in a directory named
 # "gabbits" that is in the same directory as the Python test file.
