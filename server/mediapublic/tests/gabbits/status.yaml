@@ -1,0 +1,24 @@
+
+# There is an included fixture named "SkipAllFixture" which can be
+# used to declare that all the tests in the given file are to be
+# skipped.
+
+# Each test file can specify a set of defaults that will be used for
+# every request. This is useful for always specifying a particular
+# header or always requiring SSL. These values will be used on every
+# test in the file unless overriden. Lists and dicts are merged one
+# level deep, except for "data" which is copied verbatim whether it
+# is a string, list or dict (it can be all three).
+
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Does anything work?
+    url: /status
+    response_json_paths:
+      $.web: true
+      $.database: true
