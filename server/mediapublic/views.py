@@ -3,6 +3,7 @@ import json
 import datetime
 
 from cornice import Service
+from cornice.schemas import validate_colander_schema
 from cornice.resource import resource, view
 
 from .models import (
@@ -36,20 +37,15 @@ class ResourceMixin(object):
         return self.cls.__name__.lower()
 
     def validate_req(self, request):
-        return validator_from_model(self.cls)
+        validate_colander_schema(validator_from_model(self.cls), request)
 
-    @view(content_type="application/json")
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }
 
-    @property
-    def schema(self):
-        return validator_from_model(self.cls)
-
-    @view(content_type="application/json")
+    @view(content_type="application/json", validators=('validate_req', ))
     def collection_post(self):
         log.debug("collection_post on {} with {}".format(
             self.rsrc, json.dumps(self.request.validated)))
@@ -58,7 +54,6 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view(content_type="application/json")
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
@@ -66,7 +61,7 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
         return item.to_dict()
 
-    @view(content_type="application/json")
+    @view(content_type="application/json", validators=('validate_req', ))
     def put(self):
         item = self.cls.update_by_id(
             self.request.matchdict['id'],
@@ -79,7 +74,6 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view(content_type="application/json")
     def delete(self):
         item = self.cls.delete_by_id(self.request.matchdict['id'])
         if item is None:
