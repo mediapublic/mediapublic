@@ -1,4 +1,4 @@
 language: python
 install: pip install tox
-script: tox
+script: 'cd server && tox'
 sudo: false
