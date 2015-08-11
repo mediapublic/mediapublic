@@ -7,12 +7,22 @@ Requirements
 The mediapublic pyramid server is built for Python 3.3 and above. It provides
 the REST API and storage to the JS frontend application.
 
+Pre-Getting Started
+
+- Install pyenv ( here: https://github.com/yyuu/pyenv )
+
+- Install python 3.4+
+
+- Install virtualenv and virtualenv-wrapper ( http://docs.python-guide.org/en/latest/dev/virtualenvs/ )
+
+- Create virtual env with python3 ( `mkvirtualenv -p $(which python3) mediapublic` )
+
 Getting Started
 ---------------
 
 - cd <directory containing this file>
 
-- Activate an appropriate virtualenv
+- Activate your virtualenv ( `workon mediapublic` )
 
 - `pip install -e . # this installs mediapublic and its dependencies`
 
