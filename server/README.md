@@ -9,13 +9,9 @@ the REST API and storage to the JS frontend application.
 
 Pre-Getting Started
 
-- Install pyenv ( here: https://github.com/yyuu/pyenv )
-
-- Install python 3.4+
-
 - Install virtualenv and virtualenv-wrapper ( http://docs.python-guide.org/en/latest/dev/virtualenvs/ )
 
-- Create virtual env with python3 ( `mkvirtualenv -p $(which python3) mediapublic` )
+- Create virtual env with python3 ( `mkvirtualenv --python $(which python3) mediapublic` )
 
 Getting Started
 ---------------
@@ -37,10 +33,13 @@ Currently, the only tests are API tests (using [gabbi][gabbi]) and PEP8 checks.
 These can be run using [tox][tox].
 
 ```
-# API tests
+# run all tests
+tox
+
+# run just the API tests
 tox -egabbi
 
-# PEP8 checks
+# run just the PEP8 checks
 tox -epep8
 ```
 
