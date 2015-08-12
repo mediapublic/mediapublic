@@ -1,5 +1,5 @@
 import {Router} from 'backbone-routing';
-import IndexRoute from './index/route';
+import IndexRoute from './route';
 
 export default Router.extend({
   initialize(options = {}) {

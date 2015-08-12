@@ -6014,18 +6014,34 @@ button.close {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  padding-top: 60px; }
+  padding-top: 50px; }
 
-.app-header {
+.header-item {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  padding: 0 10px; }
+
+.header-menu {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 60px;
-  width: 100%;
-  border-bottom: 1px solid #999; }
+  right: 0; }
+
+.logo {
+  font-size: 1.5em; }
+
+.header-menu-item {
+  font-size: 1.3em;
+  border-left: 1px solid #e7e7e7;
+  -webkit-transition: background-color 0.2s ease-out;
+          transition: background-color 0.2s ease-out; }
+  .header-menu-item:hover {
+    background-color: #e6e6e6; }
 
 html,
 body {
   position: relative;
   width: 100%;
   height: 100%; }
+
+.inline-block {
+  display: inline-block; }
