@@ -1,6 +1,6 @@
 import {Route} from 'backbone-routing';
 import View from '../show/view';
-import Station from '../model';
+import Organization from '../model';
 
 export default Route.extend({
   initialize(options = {}) {
@@ -9,7 +9,7 @@ export default Route.extend({
 
   render() {
     this.view = new View({
-      model: new Station()
+      model: new Organization()
     });
     this.container.show(this.view);
   }

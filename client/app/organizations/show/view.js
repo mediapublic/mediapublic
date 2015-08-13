@@ -3,5 +3,5 @@ import template from './template.jade';
 
 export default ItemView.extend({
   template,
-  className: 'station'
+  className: 'organization'
 });

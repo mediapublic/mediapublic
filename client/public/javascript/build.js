@@ -356,7 +356,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("this is the station index");;return buf.join("");
+buf.push("this is the organization index");;return buf.join("");
 };
 },{"jade/runtime":32}],15:[function(require,module,exports){
 'use strict';
@@ -527,7 +527,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("this is the station page");;return buf.join("");
+buf.push("this is the organization page");;return buf.join("");
 };
 },{"jade/runtime":32}],21:[function(require,module,exports){
 'use strict';
@@ -546,7 +546,7 @@ var _templateJade2 = _interopRequireDefault(_templateJade);
 
 exports['default'] = _backboneMarionette.ItemView.extend({
   template: _templateJade2['default'],
-  className: 'station'
+  className: 'organization'
 });
 module.exports = exports['default'];
 
