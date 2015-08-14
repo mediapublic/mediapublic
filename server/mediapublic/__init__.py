@@ -30,12 +30,14 @@ def main(global_config, **settings):
 
     return config.make_wsgi_app()
 
+
 def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
         response.headers.update({
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT,OPTIONS',
-            'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
+            'Access-Control-Allow-Headers':
+            'Origin, Content-Type, Accept, Authorization',
             'Access-Control-Allow-Credentials': 'true',
             'Access-Control-Max-Age': '1728000',
         })
