@@ -104,7 +104,7 @@ def get_status(request):
 class UsersResource(ResourceMixin):
     """
     [GET, POST             ] /users
-    [GET,       PUT, DELETE] /users/:{id}
+    [GET,       PUT, DELETE] /users/{id}
     """
     cls = Users
 
@@ -123,7 +123,7 @@ class UserTypesResource(ResourceMixin):
 class RecordingCategoriesResource(ResourceMixin):
     """
     [GET, POST             ] /recording_categories
-    [GET,       PUT, DELETE] /recording_categories/:{id}
+    [GET,       PUT, DELETE] /recording_categories/{id}
     """
     cls = RecordingCategories
 
@@ -132,32 +132,32 @@ class RecordingCategoriesResource(ResourceMixin):
 class OrganizationsResource(ResourceMixin):
     """
     [GET, POST             ] /organizations
-    [GET,       PUT, DELETE] /organizations/:{id}
+    [GET,       PUT, DELETE] /organizations/{id}
     """
     cls = Organizations
 
 # --------- PEOPLE
 # [GET, POST             ] /people
-# [GET,       PUT, DELETE] /people/:{id}
+# [GET,       PUT, DELETE] /people/{id}
 # --------- RECORDINGS
 # [GET, POST             ] /recordings
-# [GET,       PUT, DELETE] /recordings/:{id}
+# [GET,       PUT, DELETE] /recordings/{id}
 # --------- HOWTOS
 # [GET, POST             ] /howtos
-# [GET,       PUT, DELETE] /howtos/:{id}
+# [GET,       PUT, DELETE] /howtos/{id}
 
 
 @resource(collection_path='/blogs', path='/blogs/{id}')
 class BlogsResource(ResourceMixin):
     """
     [GET, POST             ] /blogs
-    [GET,       PUT, DELETE] /blogs/:{id}
+    [GET,       PUT, DELETE] /blogs/{id}
     """
     cls = Blogs
 
 
 # --------- PLAYLISTS
 # [GET, POST             ] /playlists
-# [GET,       PUT, DELETE] /playlists/:{id}
-# [           PUT,       ] /playlists/:{id}/assign
-# [           PUT,       ] /playlists/:{id}/remove
+# [GET,       PUT, DELETE] /playlists/{id}
+# [           PUT,       ] /playlists/{id}/assign
+# [           PUT,       ] /playlists/{id}/remove
