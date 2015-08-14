@@ -1,10 +1,11 @@
 import logging
 import json
 import datetime
+import functools
 
 from cornice import Service
 from cornice.schemas import validate_colander_schema
-from cornice.resource import resource, view
+from cornice.resource import resource
 
 from .models import (
     DBSession,
@@ -20,8 +21,23 @@ from .models import (
     Playlists,
     PlaylistAssignments,
     )
-
 from .validators import validator_from_model
+
+from cornice.resource import view as raw_view
+
+cors_policies = dict(
+    cors_enabled=True,
+    cors_origins=('*', ),
+    cors_max_age=1728000,
+    cors_expose_all_headers=True,
+    cors_credentials=True,
+)
+
+view = functools.partial(
+    raw_view,
+    content_type="application/json",
+    **cors_policies
+)
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
@@ -45,7 +61,7 @@ class ResourceMixin(object):
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }
 
-    @view(content_type="application/json", validators=('validate_req', ))
+    @view(validators=('validate_req', ))
     def collection_post(self):
         log.debug("collection_post on {} with {}".format(
             self.rsrc, json.dumps(self.request.validated)))
@@ -54,6 +70,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
+    @view()
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
@@ -61,7 +78,7 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
         return item.to_dict()
 
-    @view(content_type="application/json", validators=('validate_req', ))
+    @view(validators=('validate_req', ))
     def put(self):
         item = self.cls.update_by_id(
             self.request.matchdict['id'],
@@ -74,6 +91,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
+    @view()
     def delete(self):
         item = self.cls.delete_by_id(self.request.matchdict['id'])
         if item is None:
@@ -85,7 +103,7 @@ class ResourceMixin(object):
 status = Service(name='status', path='/status', description="Check app state")
 
 
-@status.get()
+@status.get(content_type='application/json', **cors_policies)
 def get_status(request):
     log.debug("Status check")
     status = {'web': True}
