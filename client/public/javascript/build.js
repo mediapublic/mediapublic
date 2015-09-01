@@ -501,6 +501,10 @@ var _view = require('./view');
 
 var _view2 = _interopRequireDefault(_view);
 
+var _storage = require('../storage');
+
+var _storage2 = _interopRequireDefault(_storage);
+
 exports['default'] = _backboneRouting.Route.extend({
   initialize: function initialize() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -508,26 +512,73 @@ exports['default'] = _backboneRouting.Route.extend({
     this.container = options.container;
   },
 
-  fetch: function fetch() {
-    // Make sure the models are loaded
+  fetch: function fetch(id) {
+    var _this = this;
+
+    return _storage2['default'].find(id).then(function (model) {
+      _this.model = model;
+    });
   },
 
   render: function render() {
-    this.view = new _view2['default']();
+    this.view = new _view2['default']({
+      model: this.model
+    });
     this.container.show(this.view);
   }
 });
 module.exports = exports['default'];
 
-},{"./view":21,"backbone-routing":23}],20:[function(require,module,exports){
+},{"../storage":22,"./view":21,"backbone-routing":23}],20:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-
-buf.push("this is the organization page");;return buf.join("");
+;var locals_for_with = (locals || {});(function (address_0, address_1, city, long_description, phone, primary_website, short_name, state, zipcode) {
+buf.push("<!-- TODO: replace this with an absolute path, need to specify 'basedir'-->");
+jade_mixins["address"] = jade_interp = function(line_1, line_2, city, state, zip){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+buf.push("<div class=\"address-container\"><div class=\"address-line-1\">" + (jade.escape(null == (jade_interp = line_1) ? "" : jade_interp)) + "</div>");
+if ( line_2)
+{
+buf.push("<div class=\"address-line-2\">" + (jade.escape(null == (jade_interp = line_2) ? "" : jade_interp)) + "</div>");
+}
+buf.push("<span class=\"address-city\">" + (jade.escape(null == (jade_interp = city) ? "" : jade_interp)) + "</span>,&nbsp;<span class=\"address-state\">" + (jade.escape(null == (jade_interp = state) ? "" : jade_interp)) + "</span>&nbsp;<span class=\"address-zip\">" + (jade.escape(null == (jade_interp = zip) ? "" : jade_interp)) + "</span></div>");
+};
+jade_mixins["detailsRow"] = jade_interp = function(title){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+buf.push("<tr class=\"organization-details-row\"><td class=\"organization-details-field-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</td><td class=\"organization-details-field-value\">");
+block && block();
+buf.push("</td></tr>");
+};
+buf.push("<div class=\"organization-container\"><h1 class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</h1><aside class=\"organization-aside\"><table class=\"organization-details table\">");
+if ( primary_website)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+buf.push("<a" + (jade.attr("href", primary_website, true, false)) + ">" + (jade.escape(null == (jade_interp = primary_website) ? "" : jade_interp)) + "</a>");
+}
+}, 'Website');
+}
+if ( address_0 && city)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+jade_mixins["address"](address_0, address_1, city, state, zipcode);
+}
+}, 'Location');
+}
+if ( phone)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+buf.push(jade.escape(null == (jade_interp = phone) ? "" : jade_interp));
+}
+}, 'Phone');
+}
+buf.push("</table></aside><p class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p></div>");}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
 };
 },{"jade/runtime":32}],21:[function(require,module,exports){
 'use strict';
