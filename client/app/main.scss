@@ -1,6 +1,12 @@
 @import "bootstrap-custom";
+@import "shared/components";
 @import "application/style";
 @import "header/style";
+@import "organizations/style";
+
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
