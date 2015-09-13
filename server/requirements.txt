@@ -7,3 +7,4 @@ sqlalchemy_utils
 transaction
 waitress
 zope.sqlalchemy
+velruse

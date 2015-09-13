@@ -23,4 +23,6 @@ def main(global_config, **settings):
     config.include('cornice')
     config.scan('mediapublic.views')
 
+    config.include('velruse.providers.twitter')
+
     return config.make_wsgi_app()
