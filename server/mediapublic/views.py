@@ -3,6 +3,8 @@ import json
 import datetime
 import functools
 
+import requests
+
 from cornice import Service
 from cornice.schemas import validate_colander_schema
 from cornice.resource import resource
@@ -125,6 +127,31 @@ class UsersResource(ResourceMixin):
     [GET,       PUT, DELETE] /users/{id}
     """
     cls = Users
+
+
+# --------- Auth and login
+login = Service(name='login', path='/login', description="Auth and such")
+
+
+@login.get(renderer="mediapublic:templates/login.jinja2", **cors_policies)
+def login_form(request):
+    print(request.params)
+    return {"foo": "bar"}
+
+
+@login.post(renderer="mediapublic:templates/logged_in.jinja2", **cors_policies)
+def logged_in(request):
+    log.debug("Received auth, token ID %s" % request.params['token'])
+    # Future feature: when using providers other than twitter, check
+    # auth_info['provider_name'] to see where the account is from
+    resp = requests.get(request.host_url + '/auth/auth_info', params={
+        'format': 'json',
+        'token': request.params['token'],
+    })
+    twitter_handle = resp.json()['profile']['preferredUsername']
+    log.debug("Succesfully authenticated @%s with twitter" % twitter_handle)
+
+    return {'handle': twitter_handle}
 
 
 @resource(collection_path='/user_types', path='/user_types/{id}')

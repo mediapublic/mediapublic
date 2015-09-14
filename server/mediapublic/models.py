@@ -123,8 +123,13 @@ class Users(Base, CreationMixin, TimeStampMixin):
     first = Column(UnicodeText, nullable=False)
     last = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
-    twitter = Column(UnicodeText, nullable=False)
     last_longin_datetime = Column(DateTime)
+
+    signup_date = Column(DateTime, nullable=False, server_default=func.now())
+
+    twitter_id = Column(UnicodeText, unique=True)
+    twitter_auth_token = Column(UnicodeText, unique=True)
+    twitter_auth_secret = Column(UnicodeText, unique=True)
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))

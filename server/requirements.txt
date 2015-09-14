@@ -8,3 +8,4 @@ transaction
 waitress
 zope.sqlalchemy
 velruse
+pyramid_jinja2
