@@ -142,14 +142,20 @@ def login_form(request):
 @login.post(renderer="mediapublic:templates/logged_in.jinja2", **cors_policies)
 def logged_in(request):
     log.debug("Received auth, token ID %s" % request.params['token'])
-    # Future feature: when using providers other than twitter, check
-    # auth_info['provider_name'] to see where the account is from
     resp = requests.get(request.host_url + '/auth/auth_info', params={
         'format': 'json',
         'token': request.params['token'],
     })
-    twitter_handle = resp.json()['profile']['preferredUsername']
-    log.debug("Succesfully authenticated @%s with twitter" % twitter_handle)
+    # Future feature: when using providers other than twitter, check
+    # auth_info['provider_name'] to see where the account is from
+    auth_info = resp.json()
+    twitter_handle = auth_info["profile"]["accounts"][0]['username']
+    log.debug("Login for @%s" % twitter_handle)
+
+    log.debug("Auth data: %s" % json.dumps(auth_info, indent=4))
+    user = Users.update_social_login(twitter_handle, auth_info)
+
+    log.debug("Succesfully authenticated @%s with twitter" % user.twitter_handle)
 
     return {'handle': twitter_handle}
 

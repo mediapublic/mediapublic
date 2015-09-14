@@ -120,19 +120,53 @@ class Users(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    first = Column(UnicodeText, nullable=False)
-    last = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
-    last_longin_datetime = Column(DateTime)
+    last_longin_datetime = Column(DateTime, server_default=func.now())
 
     signup_date = Column(DateTime, nullable=False, server_default=func.now())
 
-    twitter_id = Column(UnicodeText, unique=True)
+    twitter_handle = Column(UnicodeText, unique=True)
+    twitter_user_id = Column(UnicodeText, unique=True)
     twitter_auth_token = Column(UnicodeText, unique=True)
     twitter_auth_secret = Column(UnicodeText, unique=True)
+    profile_photo_url = Column(UnicodeText)
+    display_name = Column(UnicodeText)
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))
+
+    @classmethod
+    def update_social_login(cls, social_uname, auth_info, provider='twitter'):
+        with transaction.manager:
+            user = DBSession.query(
+                cls,
+            ).filter(
+                cls.twitter_handle == str(social_uname),
+            ).first()
+            if user is not None:
+                log.debug("Updating user %s" % user)
+                user.display_name=auth_info["profile"]["name"]["formatted"],
+                user.profile_photo_url=auth_info["profile"]["photos"][0]["value"],
+                user.twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
+                user.twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
+                user.twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+                DBSession.add(user)
+            else:
+                Users.add(
+                    email="%s@%s.social.auth" % (social_uname, provider),
+                    display_name=auth_info["profile"]["name"]["formatted"],
+                    profile_photo_url=auth_info["profile"]["photos"][0]["value"],
+                    twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
+                    twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
+                    twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+                )
+
+        return DBSession.query(
+            cls,
+        ).filter(
+            cls.twitter_handle == str(social_uname),
+        ).first()
+
 
     def to_dict(self):
         resp = super(Users, self).to_dict()
