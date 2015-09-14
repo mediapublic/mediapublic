@@ -153,11 +153,12 @@ def logged_in(request):
     log.debug("Login for @%s" % twitter_handle)
 
     log.debug("Auth data: %s" % json.dumps(auth_info, indent=4))
-    user = Users.update_social_login(twitter_handle, auth_info)
+    already_exists = Users.update_social_login(twitter_handle, auth_info)
 
-    log.debug("Succesfully authenticated @%s with twitter" % user.twitter_handle)
+    log.debug("Succesfully authenticated @%s with twitter, exists:%s" %
+              (twitter_handle, already_exists))
 
-    return {'handle': twitter_handle}
+    return {'exists': already_exists, 'handle': twitter_handle}
 
 
 @resource(collection_path='/user_types', path='/user_types/{id}')

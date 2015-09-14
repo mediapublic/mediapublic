@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType
 from sqlalchemy import (
@@ -127,8 +128,8 @@ class Users(Base, CreationMixin, TimeStampMixin):
 
     twitter_handle = Column(UnicodeText, unique=True)
     twitter_user_id = Column(UnicodeText, unique=True)
-    twitter_auth_token = Column(UnicodeText, unique=True)
-    twitter_auth_secret = Column(UnicodeText, unique=True)
+    twitter_auth_token = Column(UnicodeText)
+    twitter_auth_secret = Column(UnicodeText)
     profile_photo_url = Column(UnicodeText)
     display_name = Column(UnicodeText)
 
@@ -137,35 +138,31 @@ class Users(Base, CreationMixin, TimeStampMixin):
 
     @classmethod
     def update_social_login(cls, social_uname, auth_info, provider='twitter'):
-        with transaction.manager:
-            user = DBSession.query(
-                cls,
-            ).filter(
-                cls.twitter_handle == str(social_uname),
-            ).first()
-            if user is not None:
-                log.debug("Updating user %s" % user)
-                user.display_name=auth_info["profile"]["name"]["formatted"],
-                user.profile_photo_url=auth_info["profile"]["photos"][0]["value"],
-                user.twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
-                user.twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
-                user.twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
-                DBSession.add(user)
-            else:
-                Users.add(
-                    email="%s@%s.social.auth" % (social_uname, provider),
-                    display_name=auth_info["profile"]["name"]["formatted"],
-                    profile_photo_url=auth_info["profile"]["photos"][0]["value"],
-                    twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
-                    twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
-                    twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+        try:
+            Users.add(
+                email="%s@%s.social.auth" % (social_uname, provider),
+                display_name=auth_info["profile"]["name"]["formatted"],
+                profile_photo_url=auth_info["profile"]["photos"][0]["value"],
+                twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
+                twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
+                twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+            )
+        except IntegrityError:
+            with transaction.manager:
+                DBSession.query(cls).filter(
+                    cls.twitter_handle == str(social_uname),
+                ).update(
+                    values=dict(
+                        display_name=auth_info["profile"]["name"]["formatted"],
+                        profile_photo_url=auth_info["profile"]["photos"][0]["value"],
+                        twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
+                        twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
+                        twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+                    )
                 )
+            return True
 
-        return DBSession.query(
-            cls,
-        ).filter(
-            cls.twitter_handle == str(social_uname),
-        ).first()
+        return False
 
 
     def to_dict(self):
