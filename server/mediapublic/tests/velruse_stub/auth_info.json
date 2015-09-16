@@ -1,0 +1,37 @@
+{
+    "profile": {
+        "displayName": "Twitter User",
+        "name": {
+            "formatted": "Twitter User"
+        },
+        "addresses": [
+            {
+                "formatted": "Somewhere, USA"
+            }
+        ],
+        "preferredUsername": "twitteruser",
+        "urls": [
+            {
+                "value": "http://example.com/"
+            }
+        ],
+        "accounts": [
+            {
+                "userid": "123456789",
+                "username": "twitteruser",
+                "domain": "twitter.com"
+            }
+        ],
+        "photos": [
+            {
+                "value": "http://example.com/images/image.jpg"
+            }
+        ]
+    },
+    "credentials": {
+        "oauthAccessToken": "241840562-dgDsuqWlFzNYPbH2tMmPyH9fg2Zs823c83sfBbD8",
+        "oauthAccessTokenSecret": "1Oecu94o9F3q3rCDMthGBLvv2jDO0e3lY0khhLjlsTfCo"
+    },
+    "provider_type": "twitter",
+    "provider_name": "twitter"
+}
