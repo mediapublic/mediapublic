@@ -8,21 +8,24 @@ import requests
 from cornice import Service
 from cornice.schemas import validate_colander_schema
 from cornice.resource import resource
+from pyramid import security
 
+from .auth import login
+from .constants import cors_policies
 from .models import (
-    DBSession,
-    Users,
-    UserTypes,
-    RecordingCategories,
+    Blogs,
     Comments,
+    DBSession,
+    Howtos,
     Organizations,
     People,
-    Recordings,
-    Howtos,
-    Blogs,
-    Playlists,
     PlaylistAssignments,
-    )
+    Playlists,
+    RecordingCategories,
+    Recordings,
+    UserTypes,
+    Users,
+)
 from .validators import validator_from_model
 
 from cornice.resource import view as raw_view
