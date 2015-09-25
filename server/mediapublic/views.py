@@ -3,14 +3,13 @@ import json
 import datetime
 import functools
 
-import requests
 
 from cornice import Service
 from cornice.schemas import validate_colander_schema
 from cornice.resource import resource
-from pyramid import security
+import pyramid.security
 
-from .auth import login
+from .auth import resource_acl
 from .constants import cors_policies
 from .models import (
     Blogs,
@@ -30,14 +29,6 @@ from .validators import validator_from_model
 
 from cornice.resource import view as raw_view
 
-cors_policies = dict(
-    cors_enabled=True,
-    cors_origins=('*', ),
-    cors_max_age=1728000,
-    cors_headers=('Origin' 'Content-Type', 'Accept', 'Authorization'),
-    cors_credentials=True,
-)
-
 view = functools.partial(
     raw_view,
     content_type="application/json",
@@ -53,6 +44,8 @@ class ResourceMixin(object):
     def __init__(self, request):
         self.request = request
 
+    __acl__ = resource_acl
+
     @property
     def rsrc(self):
         return self.cls.__name__.lower()
@@ -60,13 +53,16 @@ class ResourceMixin(object):
     def validate_req(self, request):
         validate_colander_schema(validator_from_model(self.cls), request)
 
+    @view(permission=pyramid.security.NO_PERMISSION_REQUIRED)
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
+        print(self._services.get('collection_usersresource'))
+        print(self.request.__dict__['matched_route'])
         return {
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }
 
-    @view(validators=('validate_req', ))
+    @view(validators=('validate_req', ), permission='create')
     def collection_post(self):
         log.debug("collection_post on {} with {}".format(
             self.rsrc, json.dumps(self.request.validated)))
@@ -75,7 +71,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view()
+    @view(permission=pyramid.security.NO_PERMISSION_REQUIRED)
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
