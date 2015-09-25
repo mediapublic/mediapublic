@@ -139,9 +139,10 @@ class Users(Base, CreationMixin, TimeStampMixin):
     @classmethod
     def update_social_login(cls, social_uname, auth_info, provider='twitter'):
         try:
-            Users.add(
+            user = Users.add(
                 email="%s@%s.social.auth" % (social_uname, provider),
                 display_name=auth_info["profile"]["name"]["formatted"],
+                twitter_handle=str(social_uname),
                 profile_photo_url=auth_info["profile"]["photos"][0]["value"],
                 twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
                 twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
