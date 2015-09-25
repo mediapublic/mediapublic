@@ -29,8 +29,8 @@ Getting Started
 Running Tests
 -------------
 
-Currently, the only tests are API tests (using [gabbi][gabbi]) and PEP8 checks.
-These can be run using [tox][tox].
+Currently, the only tests are API tests (using [gabbi](http://gabbi.readthedocs.org/en/latest/)) and PEP8 checks.
+These can be run using [tox](https://tox.readthedocs.org/en/latest/) (`pip install tox`).
 
 ```
 # run all tests
