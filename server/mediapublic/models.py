@@ -154,23 +154,24 @@ class Users(Base, CreationMixin, TimeStampMixin):
                     cls.twitter_handle == str(social_uname),
                 ).update(
                     values=dict(
-                        display_name=auth_info["profile"]["name"]["formatted"],
-                        profile_photo_url=auth_info["profile"]["photos"][0]["value"],
                         twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
                         twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
                         twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
                     )
                 )
-            return True
+                user = DBSession.query(cls).filter(
+                    cls.twitter_handle == str(social_uname)
+                ).first()
+            return True, user.id
 
-        return False
+        return False, user.id
 
 
     def to_dict(self):
         resp = super(Users, self).to_dict()
         resp.update(
-            first=self.first,
-            last=self.last,
+            display_name=self.display_name,
+            twitter_handle=self.twitter_handle,
             email=self.email,
             user_type=self.user_type_id,
             organization_id=self.organization_id,
