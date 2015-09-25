@@ -16,7 +16,16 @@ def main(global_config, **settings):
     config = Configurator(
         settings=settings,
     )
+
+    config.set_authentication_policy('mediapublic.auth.authn_policy')
+    config.set_authorization_policy('mediapublic.auth.authz_policy')
+    config.add_permission('get')
+    config.add_permission('create')
+    config.add_permission('update')
+    config.add_permission('delete')
+
     config.include('cornice')
+    config.scan('mediapublic.auth')
     config.scan('mediapublic.views')
 
     config.include('velruse.providers.twitter')
