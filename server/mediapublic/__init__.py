@@ -21,7 +21,6 @@ def main(global_config, **settings):
 
     config.set_authentication_policy(
         authentication.AuthTktAuthenticationPolicy(
-            # TODO(ryansb): load this from config
             config.get_settings().get('mediapublic.authentication_secret',
                                       'changeme'),
             callback=associate_groups,
