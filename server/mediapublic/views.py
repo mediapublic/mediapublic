@@ -1,7 +1,6 @@
 import logging
 import json
 import datetime
-import functools
 
 from cornice import Service
 from cornice.schemas import validate_colander_schema
@@ -23,7 +22,7 @@ from .models import (
     )
 from .validators import validator_from_model
 
-from cornice.resource import view as raw_view
+from cornice.resource import view
 
 cors_policy = dict(
     enabled=True,
@@ -33,10 +32,6 @@ cors_policy = dict(
     credentials=True,
 )
 
-view = functools.partial(
-    raw_view,
-    content_type="application/json",
-)
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
