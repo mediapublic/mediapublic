@@ -100,7 +100,8 @@ class ResourceMixin(object):
 status = Service(name='status', path='/status', description="Check app state")
 
 
-@status.get(permission=pyramid.security.NO_PERMISSION_REQUIRED, **cors_policies)
+@status.get(permission=pyramid.security.NO_PERMISSION_REQUIRED,
+            **cors_policies)
 def get_status(request):
     log.debug("Status check")
     status = {'web': True}

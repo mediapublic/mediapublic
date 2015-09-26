@@ -29,7 +29,6 @@ default_acl = [
 
 
 class Context(object):
-    __acl__ = None
     def __init__(self, acl):
         """`acl` is a list of triples (result, principal, permission)"""
         self.__acl__ = acl[:]

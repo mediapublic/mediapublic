@@ -121,17 +121,17 @@ class Users(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
+    display_name = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
     last_longin_datetime = Column(DateTime, server_default=func.now())
 
-    signup_date = Column(DateTime, nullable=False, server_default=func.now())
+    signup_date = Column(DateTime, server_default=func.now())
 
     twitter_handle = Column(UnicodeText, unique=True)
     twitter_user_id = Column(UnicodeText, unique=True)
     twitter_auth_token = Column(UnicodeText)
     twitter_auth_secret = Column(UnicodeText)
     profile_photo_url = Column(UnicodeText)
-    display_name = Column(UnicodeText)
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))
@@ -144,8 +144,10 @@ class Users(Base, CreationMixin, TimeStampMixin):
                 display_name=auth_info["profile"]["name"]["formatted"],
                 twitter_handle=str(social_uname),
                 profile_photo_url=auth_info["profile"]["photos"][0]["value"],
-                twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
-                twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
+                twitter_auth_secret=auth_info[
+                    "credentials"]["oauthAccessTokenSecret"],
+                twitter_auth_token=auth_info[
+                    "credentials"]["oauthAccessToken"],
                 twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
             )
         except IntegrityError:
@@ -154,9 +156,12 @@ class Users(Base, CreationMixin, TimeStampMixin):
                     cls.twitter_handle == str(social_uname),
                 ).update(
                     values=dict(
-                        twitter_auth_secret=auth_info["credentials"]["oauthAccessTokenSecret"],
-                        twitter_auth_token=auth_info["credentials"]["oauthAccessToken"],
-                        twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+                        twitter_auth_secret=auth_info[
+                            "credentials"]["oauthAccessTokenSecret"],
+                        twitter_auth_token=auth_info[
+                            "credentials"]["oauthAccessToken"],
+                        twitter_user_id=auth_info[
+                            "profile"]["accounts"][0]['userid'],
                     )
                 )
                 user = DBSession.query(cls).filter(
@@ -165,7 +170,6 @@ class Users(Base, CreationMixin, TimeStampMixin):
             return True, user.id
 
         return False, user.id
-
 
     def to_dict(self):
         resp = super(Users, self).to_dict()
