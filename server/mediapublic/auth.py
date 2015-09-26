@@ -37,9 +37,17 @@ class Context(object):
 
 def choose_context(request):
     # request.matched_route.name
+    if request.registry.settings.get(
+            'mediapublic.ignore_authentication'):
+        return Context([
+            (security.Allow, security.Everyone, 'get'),
+            (security.Allow, security.Everyone, 'create'),
+            (security.Allow, security.Everyone, 'update'),
+            (security.Allow, security.Everyone, 'delete'),
+        ])
     acl = default_acl[:]
-    if ('usersresource' in request.matched_route.name
-            and request.authenticated_userid):
+    if ('usersresource' in request.matched_route.name and
+            request.authenticated_userid):
         acl.append(
             (security.Allow, request.authenticated_userid, 'update')
         )

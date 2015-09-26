@@ -54,8 +54,6 @@ class ResourceMixin(object):
     @view(permission='get')
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
-        print(self._services.get('collection_usersresource'))
-        print(self.request.__dict__['matched_route'])
         return {
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }

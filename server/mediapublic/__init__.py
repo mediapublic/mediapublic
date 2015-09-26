@@ -1,12 +1,13 @@
 from pyramid import authentication
 from pyramid.config import Configurator
+from pyramid import security
 from sqlalchemy import engine_from_config
 
-from .auth import associate_groups
+from mediapublic import auth
 from .models import (
     DBSession,
     Base,
-    )
+)
 
 
 def main(global_config, **settings):
@@ -23,7 +24,7 @@ def main(global_config, **settings):
         authentication.AuthTktAuthenticationPolicy(
             config.get_settings().get('mediapublic.authentication_secret',
                                       'changeme'),
-            callback=associate_groups,
+            callback=auth.associate_groups,
             hashalg='sha512',
         )
     )
