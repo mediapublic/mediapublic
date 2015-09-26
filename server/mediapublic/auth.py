@@ -10,7 +10,7 @@ from pyramid import (
 
 import requests
 
-from .constants import cors_policies
+from .constants import cors_policy
 from .models import Users
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
@@ -76,16 +76,18 @@ authz_policy = authorization.ACLAuthorizationPolicy()
 
 
 # --------- Auth and login
-login = Service(name='login', path='/login', description="Auth and such")
+login = Service(name='login', path='/login',
+                description="Auth and such",
+                cors_policy=cors_policy)
 
 
-@login.get(renderer="mediapublic:templates/login.jinja2", **cors_policies)
+@login.get(renderer="mediapublic:templates/login.jinja2")
 def login_form(request):
     print(request.params)
     return {"foo": "bar"}
 
 
-@login.post(renderer="mediapublic:templates/logged_in.jinja2", **cors_policies)
+@login.post(renderer="mediapublic:templates/logged_in.jinja2")
 def logged_in(request):
     log.debug("Received auth, token ID %s" % request.params['token'])
     resp = requests.get(request.host_url + '/auth/auth_info', params={
@@ -112,7 +114,7 @@ def logged_in(request):
     return {'exists': already_exists, 'handle': twitter_handle}
 
 
-@login.delete(**cors_policies)
+@login.delete()
 def logout(request):
     principals = security.forget(request)
     request.response.headerlist.extend(principals)
