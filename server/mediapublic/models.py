@@ -374,7 +374,7 @@ class People(Base, CreationMixin, TimeStampMixin):
     secondary_website = Column(UnicodeText, nullable=False)
 
     # these should probably be brough out into a seperate table as
-    # many to one so we don't have to keep adding colyumns ...
+    # many to one so we don't have to keep adding columns ...
     twitter = Column(UnicodeText, nullable=False)
     facebook = Column(UnicodeText, nullable=False)
     instagram = Column(UnicodeText, nullable=False)

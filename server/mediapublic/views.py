@@ -25,18 +25,18 @@ from .validators import validator_from_model
 
 from cornice.resource import view as raw_view
 
-cors_policies = dict(
-    cors_enabled=True,
-    cors_origins=('*', ),
-    cors_max_age=1728000,
-    cors_headers=('Origin' 'Content-Type', 'Accept', 'Authorization'),
-    cors_credentials=True,
+cors_policy = dict(
+    enabled=True,
+    origins=('*', ),
+    max_age=1728000,
+    expose_all_headers=True,
+    headers=('Origin', 'Content-Type', 'Accept', 'Authorization'),
+    credentials=True,
 )
 
 view = functools.partial(
     raw_view,
     content_type="application/json",
-    **cors_policies
 )
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
@@ -55,6 +55,7 @@ class ResourceMixin(object):
     def validate_req(self, request):
         validate_colander_schema(validator_from_model(self.cls), request)
 
+    @view()
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
@@ -100,10 +101,11 @@ class ResourceMixin(object):
         return item.to_dict()
 
 # --------- STATUS CHECK
-status = Service(name='status', path='/status', description="Check app state")
+status = Service(name='status', path='/status', description="Check app state",
+                 cors_policy=cors_policy)
 
 
-@status.get(content_type='application/json', **cors_policies)
+@status.get(content_type='application/json')
 def get_status(request):
     log.debug("Status check")
     status = {'web': True}
@@ -118,7 +120,7 @@ def get_status(request):
     return status
 
 
-@resource(collection_path='/users', path='/users/{id}')
+@resource(collection_path='/users', path='/users/{id}', cors_policy=cors_policy)
 class UsersResource(ResourceMixin):
     """
     [GET, POST             ] /users
@@ -127,7 +129,8 @@ class UsersResource(ResourceMixin):
     cls = Users
 
 
-@resource(collection_path='/user_types', path='/user_types/{id}')
+@resource(collection_path='/user_types', path='/user_types/{id}',
+          cors_policy=cors_policy)
 class UserTypesResource(ResourceMixin):
     """
     [GET, POST             ] /user_types
@@ -137,7 +140,7 @@ class UserTypesResource(ResourceMixin):
 
 
 @resource(collection_path='/recording_categories',
-          path='/recording_categories/{id}')
+          path='/recording_categories/{id}', cors_policy=cors_policy)
 class RecordingCategoriesResource(ResourceMixin):
     """
     [GET, POST             ] /recording_categories
@@ -146,7 +149,8 @@ class RecordingCategoriesResource(ResourceMixin):
     cls = RecordingCategories
 
 
-@resource(collection_path='/organizations', path='/organizations/{id}')
+@resource(collection_path='/organizations', path='/organizations/{id}',
+          cors_policy=cors_policy)
 class OrganizationsResource(ResourceMixin):
     """
     [GET, POST             ] /organizations
@@ -165,7 +169,7 @@ class OrganizationsResource(ResourceMixin):
 # [GET,       PUT, DELETE] /howtos/{id}
 
 
-@resource(collection_path='/blogs', path='/blogs/{id}')
+@resource(collection_path='/blogs', path='/blogs/{id}', cors_policy=cors_policy)
 class BlogsResource(ResourceMixin):
     """
     [GET, POST             ] /blogs
