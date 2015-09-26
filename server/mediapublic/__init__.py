@@ -1,6 +1,8 @@
+from pyramid import authentication
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
+from .auth import associate_groups
 from .models import (
     DBSession,
     Base,
@@ -17,7 +19,15 @@ def main(global_config, **settings):
         settings=settings,
     )
 
-    config.set_authentication_policy('mediapublic.auth.authn_policy')
+    config.set_authentication_policy(
+        authentication.AuthTktAuthenticationPolicy(
+            # TODO(ryansb): load this from config
+            config.get_settings().get('mediapublic.authentication_secret',
+                                      'changeme'),
+            callback=associate_groups,
+            hashalg='sha512',
+        )
+    )
     config.set_authorization_policy('mediapublic.auth.authz_policy')
     config.add_permission('get')
     config.add_permission('create')

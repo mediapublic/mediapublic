@@ -16,16 +16,34 @@ from .models import Users
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
 
-resource_acl = [
+default_acl = [
     (security.Allow, security.Everyone, 'get'),
-    (security.Allow, 'group:writers', 'create'),
-    (security.Allow, 'group:writers', 'update'),
+    (security.Allow, 'group:admins', 'create'),
+    (security.Allow, 'group:staff', 'create'),
+    (security.Allow, security.Authenticated, 'create'),
     (security.Allow, 'group:admins', 'delete'),
+    (security.Allow, 'group:admins', 'update'),
+    (security.Allow, 'group:staff', 'delete'),
+    (security.Allow, 'group:staff', 'update'),
 ]
 
 
-def default_acl(request):
-    pass
+class Context(object):
+    __acl__ = None
+    def __init__(self, acl):
+        """`acl` is a list of triples (result, principal, permission)"""
+        self.__acl__ = acl[:]
+
+
+def choose_context(request):
+    # request.matched_route.name
+    acl = default_acl[:]
+    if ('usersresource' in request.matched_route.name
+            and request.authenticated_userid):
+        acl.append(
+            (security.Allow, request.authenticated_userid, 'update')
+        )
+    return Context(acl)
 
 
 def users_acl(request):
