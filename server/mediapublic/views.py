@@ -9,7 +9,7 @@ from cornice.schemas import validate_colander_schema
 from cornice.resource import resource
 import pyramid.security
 
-from .auth import resource_acl
+from .auth import choose_context
 from .constants import cors_policies
 from .models import (
     Blogs,
@@ -40,10 +40,9 @@ log = logging.getLogger(name="mediapublic.{}".format(__name__))
 class ResourceMixin(object):
     cls = None
 
-    def __init__(self, request):
+    def __init__(self, request, context):
         self.request = request
-
-    __acl__ = resource_acl
+        self.context = context
 
     @property
     def rsrc(self):
@@ -52,7 +51,7 @@ class ResourceMixin(object):
     def validate_req(self, request):
         validate_colander_schema(validator_from_model(self.cls), request)
 
-    @view(permission=pyramid.security.NO_PERMISSION_REQUIRED)
+    @view(permission='get')
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         print(self._services.get('collection_usersresource'))
@@ -70,7 +69,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view(permission=pyramid.security.NO_PERMISSION_REQUIRED)
+    @view(permission='get')
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
@@ -78,7 +77,7 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
         return item.to_dict()
 
-    @view(validators=('validate_req', ))
+    @view(permission='update', validators=('validate_req', ))
     def put(self):
         item = self.cls.update_by_id(
             self.request.matchdict['id'],
@@ -91,7 +90,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view()
+    @view(permission='delete')
     def delete(self):
         item = self.cls.delete_by_id(self.request.matchdict['id'])
         if item is None:
@@ -118,7 +117,8 @@ def get_status(request):
     return status
 
 
-@resource(collection_path='/users', path='/users/{id}')
+@resource(collection_path='/users', path='/users/{id}',
+          factory=choose_context)
 class UsersResource(ResourceMixin):
     """
     [GET, POST             ] /users
@@ -127,7 +127,8 @@ class UsersResource(ResourceMixin):
     cls = Users
 
 
-@resource(collection_path='/user_types', path='/user_types/{id}')
+@resource(collection_path='/user_types', path='/user_types/{id}',
+          factory=choose_context)
 class UserTypesResource(ResourceMixin):
     """
     [GET, POST             ] /user_types
@@ -137,7 +138,8 @@ class UserTypesResource(ResourceMixin):
 
 
 @resource(collection_path='/recording_categories',
-          path='/recording_categories/{id}')
+          path='/recording_categories/{id}',
+          factory=choose_context)
 class RecordingCategoriesResource(ResourceMixin):
     """
     [GET, POST             ] /recording_categories
@@ -146,7 +148,9 @@ class RecordingCategoriesResource(ResourceMixin):
     cls = RecordingCategories
 
 
-@resource(collection_path='/organizations', path='/organizations/{id}')
+@resource(collection_path='/organizations',
+          path='/organizations/{id}',
+          factory=choose_context)
 class OrganizationsResource(ResourceMixin):
     """
     [GET, POST             ] /organizations
@@ -165,7 +169,8 @@ class OrganizationsResource(ResourceMixin):
 # [GET,       PUT, DELETE] /howtos/{id}
 
 
-@resource(collection_path='/blogs', path='/blogs/{id}')
+@resource(collection_path='/blogs', path='/blogs/{id}',
+          factory=choose_context)
 class BlogsResource(ResourceMixin):
     """
     [GET, POST             ] /blogs

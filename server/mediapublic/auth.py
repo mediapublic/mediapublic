@@ -52,8 +52,9 @@ def users_acl(request):
 
 
 def associate_groups(user_id, request):
-    # TODO(ryansb): maybe we need more than one group type.
-    return 'user',
+    # TODO(ryansb): actually associate users/groups using the
+    # UserTypes model
+    return 'user', 'admin'
 
 
 authn_policy = authentication.AuthTktAuthenticationPolicy(
