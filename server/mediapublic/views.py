@@ -119,7 +119,8 @@ def get_status(request):
     return status
 
 
-@resource(collection_path='/users', path='/users/{id}', cors_policy=cors_policy)
+@resource(collection_path='/users', path='/users/{id}',
+          cors_policy=cors_policy)
 class UsersResource(ResourceMixin):
     """
     [GET, POST             ] /users
@@ -168,7 +169,8 @@ class OrganizationsResource(ResourceMixin):
 # [GET,       PUT, DELETE] /howtos/{id}
 
 
-@resource(collection_path='/blogs', path='/blogs/{id}', cors_policy=cors_policy)
+@resource(collection_path='/blogs', path='/blogs/{id}',
+          cors_policy=cors_policy)
 class BlogsResource(ResourceMixin):
     """
     [GET, POST             ] /blogs
