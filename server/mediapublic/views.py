@@ -31,7 +31,6 @@ from cornice.resource import view as raw_view
 
 view = functools.partial(
     raw_view,
-    content_type="application/json",
     **cors_policies
 )
 
@@ -104,7 +103,7 @@ class ResourceMixin(object):
 status = Service(name='status', path='/status', description="Check app state")
 
 
-@status.get(content_type='application/json', **cors_policies)
+@status.get(permission=pyramid.security.NO_PERMISSION_REQUIRED, **cors_policies)
 def get_status(request):
     log.debug("Status check")
     status = {'web': True}
