@@ -29,7 +29,6 @@ cors_policy = dict(
     enabled=True,
     origins=('*', ),
     max_age=1728000,
-    expose_all_headers=True,
     headers=('Origin', 'Content-Type', 'Accept', 'Authorization'),
     credentials=True,
 )
