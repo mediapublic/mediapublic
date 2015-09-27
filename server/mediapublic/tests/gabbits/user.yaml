@@ -23,8 +23,7 @@ tests:
     method: POST
     url: /users
     data:
-      first: Joe
-      last: Test
+      display_name: Joe Test
       twitter: '@birds'
       email: 'test@foo.test'
 

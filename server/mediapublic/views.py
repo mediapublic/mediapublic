@@ -1,43 +1,32 @@
 import logging
 import json
 import datetime
-import functools
+
 
 from cornice import Service
 from cornice.schemas import validate_colander_schema
 from cornice.resource import resource
+from cornice.resource import view
+import pyramid.security
 
+from .auth import choose_context
+from .constants import cors_policy
 from .models import (
-    DBSession,
-    Users,
-    UserTypes,
-    RecordingCategories,
+    Blogs,
     Comments,
+    DBSession,
+    Howtos,
     Organizations,
     People,
-    Recordings,
-    Howtos,
-    Blogs,
-    Playlists,
     PlaylistAssignments,
-    )
+    Playlists,
+    RecordingCategories,
+    Recordings,
+    UserTypes,
+    Users,
+)
 from .validators import validator_from_model
 
-from cornice.resource import view as raw_view
-
-cors_policies = dict(
-    cors_enabled=True,
-    cors_origins=('*', ),
-    cors_max_age=1728000,
-    cors_headers=('Origin' 'Content-Type', 'Accept', 'Authorization'),
-    cors_credentials=True,
-)
-
-view = functools.partial(
-    raw_view,
-    content_type="application/json",
-    **cors_policies
-)
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
@@ -45,8 +34,9 @@ log = logging.getLogger(name="mediapublic.{}".format(__name__))
 class ResourceMixin(object):
     cls = None
 
-    def __init__(self, request):
+    def __init__(self, request, context):
         self.request = request
+        self.context = context
 
     @property
     def rsrc(self):
@@ -55,13 +45,14 @@ class ResourceMixin(object):
     def validate_req(self, request):
         validate_colander_schema(validator_from_model(self.cls), request)
 
+    @view(permission='get')
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
             self.rsrc: [i.to_dict() for i in self.cls.get_all()]
         }
 
-    @view(validators=('validate_req', ))
+    @view(validators=('validate_req', ), permission='create')
     def collection_post(self):
         log.debug("collection_post on {} with {}".format(
             self.rsrc, json.dumps(self.request.validated)))
@@ -70,7 +61,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view()
+    @view(permission='get')
     def get(self):
         item = self.cls.get_by_id(self.request.matchdict['id'])
         if item is None:
@@ -78,7 +69,7 @@ class ResourceMixin(object):
             return {'error': 'Not found'}
         return item.to_dict()
 
-    @view(validators=('validate_req', ))
+    @view(permission='update', validators=('validate_req', ))
     def put(self):
         item = self.cls.update_by_id(
             self.request.matchdict['id'],
@@ -91,7 +82,7 @@ class ResourceMixin(object):
         self.request.response.status = 201
         return item.to_dict()
 
-    @view()
+    @view(permission='delete')
     def delete(self):
         item = self.cls.delete_by_id(self.request.matchdict['id'])
         if item is None:
@@ -100,10 +91,11 @@ class ResourceMixin(object):
         return item.to_dict()
 
 # --------- STATUS CHECK
-status = Service(name='status', path='/status', description="Check app state")
+status = Service(name='status', path='/status', description="Check app state",
+                 cors_policy=cors_policy)
 
 
-@status.get(content_type='application/json', **cors_policies)
+@status.get(permission=pyramid.security.NO_PERMISSION_REQUIRED)
 def get_status(request):
     log.debug("Status check")
     status = {'web': True}
@@ -118,7 +110,8 @@ def get_status(request):
     return status
 
 
-@resource(collection_path='/users', path='/users/{id}')
+@resource(collection_path='/users', path='/users/{id}',
+          factory=choose_context, cors_policy=cors_policy)
 class UsersResource(ResourceMixin):
     """
     [GET, POST             ] /users
@@ -127,7 +120,8 @@ class UsersResource(ResourceMixin):
     cls = Users
 
 
-@resource(collection_path='/user_types', path='/user_types/{id}')
+@resource(collection_path='/user_types', path='/user_types/{id}',
+          factory=choose_context, cors_policy=cors_policy)
 class UserTypesResource(ResourceMixin):
     """
     [GET, POST             ] /user_types
@@ -137,7 +131,9 @@ class UserTypesResource(ResourceMixin):
 
 
 @resource(collection_path='/recording_categories',
-          path='/recording_categories/{id}')
+          path='/recording_categories/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
 class RecordingCategoriesResource(ResourceMixin):
     """
     [GET, POST             ] /recording_categories
@@ -146,7 +142,10 @@ class RecordingCategoriesResource(ResourceMixin):
     cls = RecordingCategories
 
 
-@resource(collection_path='/organizations', path='/organizations/{id}')
+@resource(collection_path='/organizations',
+          path='/organizations/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
 class OrganizationsResource(ResourceMixin):
     """
     [GET, POST             ] /organizations
@@ -165,7 +164,8 @@ class OrganizationsResource(ResourceMixin):
 # [GET,       PUT, DELETE] /howtos/{id}
 
 
-@resource(collection_path='/blogs', path='/blogs/{id}')
+@resource(collection_path='/blogs', path='/blogs/{id}',
+          factory=choose_context, cors_policy=cors_policy)
 class BlogsResource(ResourceMixin):
     """
     [GET, POST             ] /blogs

@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType
 from sqlalchemy import (
@@ -120,20 +121,61 @@ class Users(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    first = Column(UnicodeText, nullable=False)
-    last = Column(UnicodeText, nullable=False)
+    display_name = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
-    twitter = Column(UnicodeText, nullable=False)
-    last_longin_datetime = Column(DateTime)
+    last_longin_datetime = Column(DateTime, server_default=func.now())
+
+    signup_date = Column(DateTime, server_default=func.now())
+
+    twitter_handle = Column(UnicodeText, unique=True)
+    twitter_user_id = Column(UnicodeText, unique=True)
+    twitter_auth_token = Column(UnicodeText)
+    twitter_auth_secret = Column(UnicodeText)
+    profile_photo_url = Column(UnicodeText)
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))
 
+    @classmethod
+    def update_social_login(cls, social_uname, auth_info, provider='twitter'):
+        try:
+            user = Users.add(
+                email="%s@%s.social.auth" % (social_uname, provider),
+                display_name=auth_info["profile"]["name"]["formatted"],
+                twitter_handle=str(social_uname),
+                profile_photo_url=auth_info["profile"]["photos"][0]["value"],
+                twitter_auth_secret=auth_info[
+                    "credentials"]["oauthAccessTokenSecret"],
+                twitter_auth_token=auth_info[
+                    "credentials"]["oauthAccessToken"],
+                twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
+            )
+        except IntegrityError:
+            with transaction.manager:
+                DBSession.query(cls).filter(
+                    cls.twitter_handle == str(social_uname),
+                ).update(
+                    values=dict(
+                        twitter_auth_secret=auth_info[
+                            "credentials"]["oauthAccessTokenSecret"],
+                        twitter_auth_token=auth_info[
+                            "credentials"]["oauthAccessToken"],
+                        twitter_user_id=auth_info[
+                            "profile"]["accounts"][0]['userid'],
+                    )
+                )
+                user = DBSession.query(cls).filter(
+                    cls.twitter_handle == str(social_uname)
+                ).first()
+            return True, user.id
+
+        return False, user.id
+
     def to_dict(self):
         resp = super(Users, self).to_dict()
         resp.update(
-            first=self.first,
-            last=self.last,
+            display_name=self.display_name,
+            twitter_handle=self.twitter_handle,
             email=self.email,
             user_type=self.user_type_id,
             organization_id=self.organization_id,
@@ -374,7 +416,7 @@ class People(Base, CreationMixin, TimeStampMixin):
     secondary_website = Column(UnicodeText, nullable=False)
 
     # these should probably be brough out into a seperate table as
-    # many to one so we don't have to keep adding colyumns ...
+    # many to one so we don't have to keep adding columns ...
     twitter = Column(UnicodeText, nullable=False)
     facebook = Column(UnicodeText, nullable=False)
     instagram = Column(UnicodeText, nullable=False)
