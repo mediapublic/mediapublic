@@ -6009,23 +6009,75 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/**
+ *  Component to be used to display extra (often tabular) information alongside
+ *  something else. At mobile widths it will be inline and full-width.
+ *  Containing element must be positioned.
+ */
+aside {
+  width: 100%;
+  margin: 20px 0; }
+
+aside > .table {
+  margin-bottom: 0; }
+
+@media (min-width: 768px) {
+  aside {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f8f8f8; }
+  aside > .table > tbody > tr:first-child > td {
+    border-top: none; } }
+
+@media (min-width: 992px) {
+  aside {
+    margin: 0;
+    position: absolute;
+    right: -320px; } }
+
 .application {
   position: relative;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  padding-top: 60px; }
+  padding: 20px;
+  padding-top: 70px; }
 
-.app-header {
+.header-item {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  padding: 0 10px; }
+
+.header-menu {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 60px;
-  width: 100%;
-  border-bottom: 1px solid #999; }
+  right: 0; }
+
+.logo {
+  font-size: 1.5em; }
+
+.header-menu-item {
+  font-size: 1.3em;
+  border-left: 1px solid #e7e7e7;
+  -webkit-transition: background-color 0.2s ease-out;
+          transition: background-color 0.2s ease-out; }
+  .header-menu-item:hover {
+    background-color: #e6e6e6; }
+
+.organization-container {
+  position: relative;
+  max-width: 600px;
+  width: 100%; }
+
+* {
+  box-sizing: border-box; }
 
 html,
 body {
   position: relative;
   width: 100%;
   height: 100%; }
+
+.inline-block {
+  display: inline-block; }
