@@ -1,0 +1,37 @@
+/**
+ *  Component to be used to display extra (often tabular) information alongside
+ *  something else. At mobile widths it will be inline and full-width.
+ *  Containing element must be positioned.
+ */
+
+$aside-width: 300px;
+
+aside {
+  width: 100%;
+  margin: 20px 0;
+}
+
+aside > .table {
+  margin-bottom: 0;
+}
+
+@media (min-width: $screen-sm-min) {
+  aside {
+    max-width: $aside-width;
+    border: 1px solid $table-border-color;
+    border-radius: 3px;
+    background-color: $navbar-default-bg;
+  }
+
+  aside > .table > tbody > tr:first-child > td {
+    border-top: none;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  aside {
+    margin: 0;
+    position: absolute;
+    right: -$aside-width - 20px;
+  }
+}
