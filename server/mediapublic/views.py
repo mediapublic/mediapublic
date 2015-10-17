@@ -63,11 +63,20 @@ class ResourceMixin(object):
 
     @view(permission='get')
     def get(self):
-        item = self.cls.get_by_id(self.request.matchdict['id'])
-        if item is None:
-            self.request.response.status = 404
-            return {'error': 'Not found'}
-        return item.to_dict()
+        oid = self.request.matchdict['id']
+        try:
+            item = self.cls.get_by_id(oid)
+            if item is None:
+                self.request.response.status = 404
+                return {'error': 'Not found'}
+            return item.to_dict()
+        except ValueError as e:
+            log.warn("Invalid UUID {} passed.".format(oid))
+            self.request.response.status = 400
+            return {'error': 'Invalid UUID "{}" passed,'.format(oid) +
+                    ' please fix it and try again'}
+        else:
+            return {}
 
     @view(permission='update', validators=('validate_req', ))
     def put(self):
