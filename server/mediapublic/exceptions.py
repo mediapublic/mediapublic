@@ -7,6 +7,7 @@ from boltons import tbutils
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
 
+
 def handle_exceptions(exc, request):
     # At this stage, the checks done by the validators had been removed because
     # a new response started (the exception), so we need to do that again.

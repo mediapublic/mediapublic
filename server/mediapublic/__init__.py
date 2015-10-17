@@ -45,9 +45,11 @@ def main(global_config, **settings):
 
     config.add_view(mp_exc.handle_exceptions, context=Exception,
                     permission=security.NO_PERMISSION_REQUIRED)
-    config.add_view(hooks.handle_exceptions, context=httpexceptions.HTTPNotFound,
+    config.add_view(hooks.handle_exceptions,
+                    context=httpexceptions.HTTPNotFound,
                     permission=security.NO_PERMISSION_REQUIRED)
-    config.add_view(hooks.handle_exceptions, context=httpexceptions.HTTPForbidden,
+    config.add_view(hooks.handle_exceptions,
+                    context=httpexceptions.HTTPForbidden,
                     permission=security.NO_PERMISSION_REQUIRED)
 
     return config.make_wsgi_app()
