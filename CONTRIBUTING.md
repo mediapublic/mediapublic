@@ -55,6 +55,22 @@ sprint.
 At the beginning of each sprint, we tag issues we plan to work on and
 self-assign tasks. If you'd like to join us, let us know!
 
+## Contributing Ideas
+
+Do you have an idea for a feature, or a direction the project needs to go? We
+want to hear from you! Write a spec and put it on the wiki. Here's an
+[example](https://github.com/mediapublic/mediapublic/wiki/Example-Spec) that
+you can copy over to a new page. When filling it out, make sure you include
+enough information for developers and other users to understand what you want
+and why it's important.
+
+You don't need to write the whole spec at once, feel free to post a draft then
+reach out to the team on [gitter.im](https://gitter.im) for feedback.
+
+The mediapublic team is available on [gitter.im](https://gitter.im) if you have
+any questions on how to write a spec. You can always post a draft to get
+earlier feedback on your idea.
+
 ## Issue Tags
 
 We have a few tags to help us navigate the issues page:

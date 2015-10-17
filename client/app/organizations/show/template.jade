@@ -1,0 +1,23 @@
+// TODO: replace this with an absolute path, need to specify 'basedir'
+include ../../shared/address.jade
+
+mixin detailsRow(title)
+  tr.organization-details-row
+    td.organization-details-field-title= title
+    td.organization-details-field-value
+      yield block
+
+.organization-container
+  h1.organization-title= short_name
+  aside.organization-aside
+    table.organization-details.table
+      if primary_website
+        +detailsRow('Website')
+          a(href=primary_website)= primary_website
+      if address_0 && city
+        +detailsRow('Location')
+          +address(address_0, address_1, city, state, zipcode)
+      if phone
+        +detailsRow('Phone')
+          = phone
+  p.organization-description= long_description

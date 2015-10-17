@@ -1,0 +1,24 @@
+.header-item {
+  height: $navbar-height;
+  line-height: $navbar-height;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.header-menu {
+  position: absolute;
+  right: 0;
+}
+
+.logo {
+  font-size: 1.5em;
+}
+
+.header-menu-item {
+  font-size: 1.3em;
+  border-left: 1px solid $navbar-default-border;
+  transition: background-color 0.2s ease-out;
+  &:hover {
+    background-color: darken($navbar-default-bg, 7%);
+  }
+}
