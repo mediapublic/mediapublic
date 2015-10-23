@@ -4,6 +4,11 @@ Mediapublic is an Open Source project, and feedback, code, documentation, and
 other contributions are all welcome. These are guidelines for new (and
 existing) contributors who want to help.
 
+We abide by the guidelines in `CODE_OF_CONDUCT.md` when working on this
+project, so please read it before contributing. The short version is "respect
+everyone all the time, let one of the project maintainers know if there's a
+problem."
+
 ## Contributing code
 
 We work on the "develop" branch, and update master to the latest stable
