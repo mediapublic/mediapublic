@@ -162,15 +162,55 @@ class OrganizationsResource(ResourceMixin):
     """
     cls = Organizations
 
-# --------- PEOPLE
-# [GET, POST             ] /people
-# [GET,       PUT, DELETE] /people/{id}
-# --------- RECORDINGS
-# [GET, POST             ] /recordings
-# [GET,       PUT, DELETE] /recordings/{id}
-# --------- HOWTOS
-# [GET, POST             ] /howtos
-# [GET,       PUT, DELETE] /howtos/{id}
+
+@resource(collection_path='/people',
+          path='/people/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class PeopleResource(ResourceMixin):
+    """
+    [GET, POST             ] /people
+    [GET,       PUT, DELETE] /people/{id}
+    """
+    cls = People
+
+
+'''
+@resource(collection_path='/podcasts',
+          path='/podcasts/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class PodcastsResource(ResourceMixin):
+    """
+    [GET, POST             ] /podcasts
+    [GET,       PUT, DELETE] /podcasts/{id}
+    """
+    cls = Podcasts
+'''
+
+
+@resource(collection_path='/recordings',
+          path='/recordings/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class RecordingsResource(ResourceMixin):
+    """
+    [GET, POST             ] /recordings
+    [GET,       PUT, DELETE] /recordings/{id}
+    """
+    cls = Recordings
+
+
+@resource(collection_path='/howtos',
+          path='/howtos/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class HowtosResource(ResourceMixin):
+    """
+    [GET, POST             ] /howtos
+    [GET,       PUT, DELETE] /howtos/{id}
+    """
+    cls = Howtos
 
 
 @resource(collection_path='/blogs', path='/blogs/{id}',

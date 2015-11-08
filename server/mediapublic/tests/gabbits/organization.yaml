@@ -1,0 +1,42 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Organizations
+    url: /organizations
+    response_json_paths:
+      $.organizations: []
+
+  - name: Create a organization incorrectly
+    status: 400
+    method: POST
+    url: /organizations
+    data:
+      dummy: bad data
+
+  - name: Create a organization correctly
+    status: 201
+    method: POST
+    url: /organizations
+    data:
+      short_name: 'WXXI'
+      long_name: 'WXXI Public Broadcasting Council'
+      short_description: 'XXI is the essential, life-long educational public media resource that engages, inspires and strengthens our community.'
+      long_description: 'Since 1958, WXXI has provided the Greater Rochester area with the finest radio and television programming available. In the last several years, WXXI has bloomed from broadcasting one television channel and two radio stations to three television channels and six radio stations. WXXI has added interactive services such as live streaming of radio and podcasts of many programs. '
+      address_0: 280 State St.
+      address_1: ' '
+      city: '280 State St.'
+      state: 'NY'
+      zipcode: '14614'
+      phone: '585-258-0200'
+      fax: ' '
+      primary_website: 'http://www.wxxi.org/'
+      secondary_website: ' '
+
+  - name: Get Organizations
+    url: /organizations
+    response_json_paths:
+      $.organizations.`len`: 1
