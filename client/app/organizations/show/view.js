@@ -1,7 +1,12 @@
-import {ItemView} from 'backbone.marionette';
+import ItemView from 'shared/itemview';
 import template from './template.jade';
 
 export default ItemView.extend({
   template,
-  className: 'organization'
+  className: 'organization',
+
+  events: {
+    'click .edit': 'renderEditor',
+    'click .save': 'saveChanges'
+  },
 });
