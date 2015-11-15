@@ -107,7 +107,10 @@ class CreationMixin():
         return keys
 
     def to_dict(self):
-        return {'id': str(self.id)}
+        return {
+            'id': str(self.id),
+            'creation_datetime': str(self.creation_datetime),
+        }
 
 
 class UserTypes(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
