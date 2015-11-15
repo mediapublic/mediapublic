@@ -4,7 +4,7 @@ from uuid import uuid4
 
 import sqlalchemy.exc as sql_exc
 from sqlalchemy.sql import func
-from sqlalchemy_utils import UUIDType
+from sqlalchemy_utils import UUIDType, JSONType
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -33,6 +33,13 @@ Base = declarative_base()
 class TimeStampMixin(object):
     creation_datetime = Column(DateTime, server_default=func.now())
     modified_datetime = Column(DateTime, server_default=func.now())
+
+
+class ExtraFieldMixin(object):
+    extra = Column(JSONType, nullable=True)
+
+    def to_dict(self):
+        return dict(extra=self.extra)
 
 
 class CreationMixin():
