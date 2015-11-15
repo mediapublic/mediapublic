@@ -107,13 +107,10 @@ class CreationMixin():
         return keys
 
     def to_dict(self):
-        return {
-            'id': str(self.id),
-            'creation_datetime': str(self.creation_datetime),
-        }
+        return {'id': str(self.id)}
 
 
-class UserTypes(Base, CreationMixin, TimeStampMixin):
+class UserTypes(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'user_types'
 
     id = Column(UUIDType(binary=False), primary_key=True)
@@ -121,17 +118,22 @@ class UserTypes(Base, CreationMixin, TimeStampMixin):
     description = Column(UnicodeText, nullable=False)
     value = Column(Integer, nullable=False)
 
-    def to_dict(self):
-        resp = super(UserTypes, self).to_dict()
-        resp.update(
+    def _to_dict(self):
+        return dict(
             name=self.name,
             description=self.description,
             value=self.value,
         )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
+        resp.update(self._to_dict())
         return resp
 
 
-class Users(Base, CreationMixin, TimeStampMixin):
+class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
@@ -185,15 +187,23 @@ class Users(Base, CreationMixin, TimeStampMixin):
 
         return False, user.id
 
-    def to_dict(self):
-        resp = super(Users, self).to_dict()
-        resp.update(
+    def _to_dict(self):
+        return dict(
             display_name=self.display_name,
             twitter_handle=self.twitter_handle,
             email=self.email,
             user_type=self.user_type_id,
             organization_id=self.organization_id,
         )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
+        resp.update(self._to_dict())
         return resp
 
 
@@ -214,14 +224,19 @@ class Comments(Base, CreationMixin, TimeStampMixin):
     howto_id = Column(ForeignKey('howtos.id'), nullable=True)
     blog_id = Column(ForeignKey('blogs.id'), nullable=True)
 
-    def to_dict(self):
-        resp = super(Comments, self).to_dict()
-        resp.update(
+    def _to_dict(self):
+        return dict(
             subject=self.subject,
             contents=self.contents,
             parent_comment_id=self.parent_comment_id,
             author_id=self.author_id,
         )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
+        resp.update(self._to_dict())
         return resp
 
     @classmethod
@@ -295,9 +310,8 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
     primary_website = Column(UnicodeText, nullable=False)
     secondary_website = Column(UnicodeText, nullable=False)
 
-    def to_dict(self):
-        resp = super(Organizations, self).to_dict()
-        resp.update(
+    def _to_dict(self):
+        return dict(
             short_name=self.short_name,
             long_name=self.long_name,
             short_description=self.short_description,
@@ -312,6 +326,12 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
             primary_website=self.primary_website,
             secondary_website=self.secondary_website,
         )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
+        resp.update(self._to_dict())
         return resp
 
 
@@ -339,7 +359,9 @@ class PlaylistAssignments(Base, CreationMixin, TimeStampMixin):
         return success
 
     def to_dict(self):
-        resp = super(PlaylistAssignments, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             playlist_id=self.playlist_id,
             recording_id=self.recording_id,
@@ -399,7 +421,9 @@ class Playlists(Base, CreationMixin, TimeStampMixin):
         return recordings
 
     def to_dict(self):
-        resp = super(Playlists, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             author_id=self.author_id,
             title=self.title,
@@ -440,9 +464,8 @@ class People(Base, CreationMixin, TimeStampMixin):
 
     organization_id = Column(ForeignKey('organizations.id'), nullable=True)
 
-    def to_dict(self):
-        resp = super(People, self).to_dict()
-        resp.update(
+    def _to_dict(self):
+        return dict(
             first=self.first,
             address_0=self.address_0,
             address_1=self.address_1,
@@ -462,6 +485,12 @@ class People(Base, CreationMixin, TimeStampMixin):
             user_id=self.user_id,
             organization_id=self.organization_id,
         )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
+        resp.update(self._to_dict())
         return resp
 
     @classmethod
@@ -486,7 +515,9 @@ class Recordings(Base, CreationMixin, TimeStampMixin):
     organization_id = Column(ForeignKey('organizations.id'))
 
     def to_dict(self):
-        resp = super(Recordings, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             title=self.title,
             url=self.url,
@@ -516,7 +547,9 @@ class RecordingCategories(Base, CreationMixin, TimeStampMixin):
     long_description = Column(UnicodeText, nullable=False)
 
     def to_dict(self):
-        resp = super(RecordingCategories, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             name=self.name,
             short_description=self.short_description,
@@ -534,7 +567,9 @@ class RecordingCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     recording_id = Column(ForeignKey('recordings.id'), nullable=False)
 
     def to_dict(self):
-        resp = super(RecordingCategoryAssignments, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             recording_category_id=self.recording_category_id,
             recording_id=self.recording_id,
@@ -552,7 +587,9 @@ class Howtos(Base, CreationMixin, TimeStampMixin):
     tags = Column(UnicodeText, nullable=False)
 
     def to_dict(self):
-        resp = super(Howtos, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             title=self.title,
             contents=self.contents,
@@ -571,7 +608,9 @@ class HowtoCategories(Base, CreationMixin, TimeStampMixin):
     long_description = Column(UnicodeText, nullable=False)
 
     def to_dict(self):
-        resp = super(HowtoCategories, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             name=self.name,
             short_description=self.short_description,
@@ -589,7 +628,9 @@ class HowtoCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     howto_id = Column(ForeignKey('howtos.id'), nullable=False)
 
     def to_dict(self):
-        resp = super(HowtoCategoryAssignments, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             howto_category_id=self.howto_category_id,
             howto_id=self.howto_id,
@@ -609,7 +650,9 @@ class Blogs(Base, CreationMixin, TimeStampMixin):
     author_id = Column(ForeignKey('users.id'))
 
     def to_dict(self):
-        resp = super(Blogs, self).to_dict()
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            resp.update(klass.to_dict())
         resp.update(
             title=self.title,
             contents=self.contents,
