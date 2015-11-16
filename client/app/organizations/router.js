@@ -10,8 +10,8 @@ export default Router.extend({
 
   routes: {
     'organizations': 'index',
+    'organizations/new': 'new',
     'organizations/:id': 'show',
-    'organizations/new': 'new'
   },
 
   index() {

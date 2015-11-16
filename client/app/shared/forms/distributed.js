@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import BackboneForm from 'backbone-forms/distribution/backbone-forms.js';
+import BackboneForm from './form';
 import util from '../utilities.js';
 import _ from 'underscore';
 

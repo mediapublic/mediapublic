@@ -48,16 +48,19 @@ export default ItemView.extend({
 
   render: function() {
     ItemView.prototype.render.apply(this, arguments);
+    var self = this;
 
     if (this.state.get('editing')) {
-      this.editor = new Form({
-        model: this.model,
-        modelCid: this.model.cid,
-        el: this.el
-      });
+      _.defer(function() {
+        self.editor = new Form({
+          model: self.model,
+          modelCid: self.model.cid,
+          el: self.el
+        });
 
-      this.editor.render();
-      this.trigger('editing');
+        self.editor.render();
+        self.trigger('editing');
+      });
     }
     return this;
   },
