@@ -131,7 +131,10 @@ class UserTypes(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(self._to_dict())
         return resp
 
@@ -195,8 +198,8 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
             display_name=self.display_name,
             twitter_handle=self.twitter_handle,
             email=self.email,
-            user_type=self.user_type_id,
-            organization_id=self.organization_id,
+            user_type=six.text_type(self.user_type_id),
+            organization_id=six.text_type(self.organization_id),
         )
 
     def to_dict(self):
@@ -238,7 +241,10 @@ class Comments(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(self._to_dict())
         return resp
 
@@ -333,7 +339,10 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(self._to_dict())
         return resp
 
@@ -364,7 +373,10 @@ class PlaylistAssignments(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             playlist_id=self.playlist_id,
             recording_id=self.recording_id,
@@ -426,7 +438,10 @@ class Playlists(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             author_id=self.author_id,
             title=self.title,
@@ -492,7 +507,10 @@ class People(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(self._to_dict())
         return resp
 
@@ -520,12 +538,15 @@ class Recordings(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             title=self.title,
             url=self.url,
             recorded_datetime=six.text_type(self.recorded_datetime),
-            organization_id=self.organization_id,
+            organization_id=six.text_type(self.organization_id),
         )
         return resp
 
@@ -552,7 +573,10 @@ class RecordingCategories(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             name=self.name,
             short_description=self.short_description,
@@ -572,7 +596,10 @@ class RecordingCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             recording_category_id=self.recording_category_id,
             recording_id=self.recording_id,
@@ -592,7 +619,10 @@ class Howtos(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             title=self.title,
             contents=self.contents,
@@ -613,7 +643,10 @@ class HowtoCategories(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             name=self.name,
             short_description=self.short_description,
@@ -633,7 +666,10 @@ class HowtoCategoryAssignments(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             howto_category_id=self.howto_category_id,
             howto_id=self.howto_id,
@@ -655,7 +691,10 @@ class Blogs(Base, CreationMixin, TimeStampMixin):
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
-            resp.update(klass.to_dict())
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
         resp.update(
             title=self.title,
             contents=self.contents,
