@@ -1,7 +1,8 @@
-import {ItemView} from 'backbone.marionette';
+import {CollectionView} from 'backbone.marionette';
 import template from './template.jade';
+import CardView from './cardview';
 
-export default ItemView.extend({
-  template,
-  className: 'index'
+export default CollectionView.extend({
+  className: 'index',
+  childView: CardView
 });

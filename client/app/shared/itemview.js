@@ -83,5 +83,10 @@ export default ItemView.extend({
     } else {
       console.log(errors);
     }
+  },
+
+
+  cancelEditing: function() {
+    this.state.set('editing', false);
   }
 });

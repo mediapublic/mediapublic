@@ -23,5 +23,6 @@ mixin detailsRow(field, title)
   p.organization-description(model=cid, data-fields='long_description')= long_description
   if viewState.editing
     .btn.btn-primary.save Save
+    .btn.btn-default.cancel Cancel
   else
     .btn.btn-default.edit Edit

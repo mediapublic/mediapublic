@@ -7,6 +7,7 @@ export default ItemView.extend({
 
   events: {
     'click .edit': 'renderEditor',
-    'click .save': 'saveChanges'
+    'click .save': 'saveChanges',
+    'click .cancel': 'cancelEditing'
   },
 });
