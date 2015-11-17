@@ -1,0 +1,47 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Peoples
+    url: /people
+    response_json_paths:
+      $.people: []
+
+  - name: Create a person incorrectly
+    status: 400
+    method: POST
+    url: /people
+    data:
+      dummy: bad data
+
+  - name: Create a person correctly
+    status: 201
+    method: POST
+    url: /people
+    data:
+      first: Joe
+      last: Smith
+      address_0: 47 Something St.
+      address_1: Apt. 9
+      city: Rochester
+      state: NY
+      zipcode: '14623'
+      phone: '585-123-4567'
+      fax: '585-098-7654'
+      primary_website: http://www.joesmithissupercool.io/
+      secondary_website: ' '
+      twitter: '@joesmithandstuff'
+      facebook: ' '
+      instagram: ' '
+      periscope: ' '
+      # note: bogus user id
+      user_id: f0ce73e8-46ac-4fa8-a9dd-93cbe95989ab
+      organization_id: 0
+
+  - name: Get People
+    url: /people
+    response_json_paths:
+      $.people.`len`: 1
