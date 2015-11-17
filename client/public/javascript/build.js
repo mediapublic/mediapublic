@@ -23,7 +23,7 @@ exports['default'] = _backboneMarionette.Application.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout-view":2,"backbone.marionette":25}],2:[function(require,module,exports){
+},{"./layout-view":2,"backbone.marionette":31}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52,7 +52,7 @@ exports['default'] = _backboneMarionette.LayoutView.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout.jade":3,"backbone.marionette":25}],3:[function(require,module,exports){
+},{"./layout.jade":3,"backbone.marionette":31}],3:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -62,7 +62,7 @@ var jade_interp;
 
 buf.push("<div class=\"app-header\"></div><div class=\"app-notifications\"></div><div class=\"app-content\"></div><div class=\"app-overlay\"></div><div class=\"app-footer\"></div>");;return buf.join("");
 };
-},{"jade/runtime":32}],4:[function(require,module,exports){
+},{"jade/runtime":37}],4:[function(require,module,exports){
 module.exports={
   apiUrl: "http://0.0.0.0:6543"
 }
@@ -100,7 +100,7 @@ buf.push("<a" + (jade.attr("href", url, true, false)) + " class=\"header-item he
 
 buf.push("</span>");}.call(this,"menuItems" in locals_for_with?locals_for_with.menuItems:typeof menuItems!=="undefined"?menuItems:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 };
-},{"jade/runtime":32}],6:[function(require,module,exports){
+},{"jade/runtime":37}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -136,7 +136,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":5,"backbone.marionette":25}],7:[function(require,module,exports){
+},{"./template.jade":5,"backbone.marionette":31}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -169,7 +169,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"./view":10,"backbone-routing":23}],8:[function(require,module,exports){
+},{"./view":10,"backbone-routing":30}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -203,7 +203,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./route":7,"backbone-routing":23}],9:[function(require,module,exports){
+},{"./route":7,"backbone-routing":30}],9:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -213,7 +213,7 @@ var jade_interp;
 
 buf.push("this is the home page");;return buf.join("");
 };
-},{"jade/runtime":32}],10:[function(require,module,exports){
+},{"jade/runtime":37}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -234,7 +234,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":9,"backbone.marionette":25}],11:[function(require,module,exports){
+},{"./template.jade":9,"backbone.marionette":31}],11:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -282,7 +282,7 @@ app.layout.header.show(new _headerView2['default']());
 // Navigate to the current url
 _backbone2['default'].history.start();
 
-},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":18,"backbone":30}],12:[function(require,module,exports){
+},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":18,"backbone":35}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -305,7 +305,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./model":16,"backbone":30}],13:[function(require,module,exports){
+},{"./model":16,"backbone":35}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -348,7 +348,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":22,"./view":15,"backbone-routing":23}],14:[function(require,module,exports){
+},{"../storage":22,"./view":15,"backbone-routing":30}],14:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -358,7 +358,7 @@ var jade_interp;
 
 buf.push("this is the organization index");;return buf.join("");
 };
-},{"jade/runtime":32}],15:[function(require,module,exports){
+},{"jade/runtime":37}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -379,7 +379,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":14,"backbone.marionette":25}],16:[function(require,module,exports){
+},{"./template.jade":14,"backbone.marionette":31}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -389,13 +389,56 @@ Object.defineProperty(exports, '__esModule', {
 var _backbone = require('backbone');
 
 exports['default'] = _backbone.Model.extend({
+  schema: {
+    short_name: {
+      type: 'Text',
+      title: 'Short Name',
+      validators: ['required']
+    },
+    phone: {
+      type: 'Text',
+      validators: ['phone']
+    },
+    primary_website: {
+      type: 'Text',
+      validators: ['url'],
+      title: 'Website'
+    },
+    long_description: {
+      type: 'TextArea',
+      title: 'Long Description',
+      validators: ['required']
+    },
+    address_0: {
+      type: 'Text',
+      validators: ['required'],
+      title: 'Address line 1'
+    },
+    address_1: {
+      type: 'Text',
+      title: 'Address line 2'
+    },
+    city: {
+      type: 'Text',
+      validators: ['required']
+    },
+    zipcode: {
+      type: 'Text',
+      validators: ['required', 'zip']
+    },
+    state: {
+      type: 'Text',
+      validators: ['required', 'state']
+    }
+  },
+
   urlRoot: function urlRoot() {
     return app.config.apiUrl + '/organizations';
   }
 });
 module.exports = exports['default'];
 
-},{"backbone":30}],17:[function(require,module,exports){
+},{"backbone":35}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -423,14 +466,15 @@ exports['default'] = _backboneRouting.Route.extend({
 
   render: function render() {
     this.view = new _showView2['default']({
-      model: new _model2['default']()
+      model: new _model2['default'](),
+      editing: true
     });
     this.container.show(this.view);
   }
 });
 module.exports = exports['default'];
 
-},{"../model":16,"../show/view":21,"backbone-routing":23}],18:[function(require,module,exports){
+},{"../model":16,"../show/view":21,"backbone-routing":30}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -462,8 +506,8 @@ exports['default'] = _backboneRouting.Router.extend({
 
   routes: {
     'organizations': 'index',
-    'organizations/:id': 'show',
-    'organizations/new': 'new'
+    'organizations/new': 'new',
+    'organizations/:id': 'show'
   },
 
   index: function index() {
@@ -486,7 +530,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./index/route":13,"./new/route":17,"./show/route":19,"backbone-routing":23}],19:[function(require,module,exports){
+},{"./index/route":13,"./new/route":17,"./show/route":19,"backbone-routing":30}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -529,14 +573,14 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":22,"./view":21,"backbone-routing":23}],20:[function(require,module,exports){
+},{"../storage":22,"./view":21,"backbone-routing":30}],20:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (address_0, address_1, city, long_description, phone, primary_website, short_name, state, zipcode) {
+;var locals_for_with = (locals || {});(function (address_0, address_1, cid, city, long_description, phone, primary_website, short_name, state, viewState, zipcode) {
 buf.push("<!-- TODO: replace this with an absolute path, need to specify 'basedir'-->");
 jade_mixins["address"] = jade_interp = function(line_1, line_2, city, state, zip){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -547,40 +591,49 @@ buf.push("<div class=\"address-line-2\">" + (jade.escape(null == (jade_interp = 
 }
 buf.push("<span class=\"address-city\">" + (jade.escape(null == (jade_interp = city) ? "" : jade_interp)) + "</span>,&nbsp;<span class=\"address-state\">" + (jade.escape(null == (jade_interp = state) ? "" : jade_interp)) + "</span>&nbsp;<span class=\"address-zip\">" + (jade.escape(null == (jade_interp = zip) ? "" : jade_interp)) + "</span></div>");
 };
-jade_mixins["detailsRow"] = jade_interp = function(title){
+jade_mixins["detailsRow"] = jade_interp = function(field, title){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-buf.push("<tr class=\"organization-details-row\"><td class=\"organization-details-field-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</td><td class=\"organization-details-field-value\">");
+buf.push("<tr class=\"organization-details-row\"><td class=\"organization-details-field-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</td><td" + (jade.attr("model", cid, true, false)) + (jade.attr("data-fields", field, true, false)) + " class=\"organization-details-field-value\">");
 block && block();
 buf.push("</td></tr>");
 };
-buf.push("<div class=\"organization-container\"><h1 class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</h1><aside class=\"organization-aside\"><table class=\"organization-details table\">");
-if ( primary_website)
+buf.push("<div class=\"organization-container\"><h1" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</h1><aside class=\"organization-aside\"><table class=\"organization-details table\">");
+if ( primary_website || viewState.editing)
 {
 jade_mixins["detailsRow"].call({
 block: function(){
 buf.push("<a" + (jade.attr("href", primary_website, true, false)) + ">" + (jade.escape(null == (jade_interp = primary_website) ? "" : jade_interp)) + "</a>");
 }
-}, 'Website');
+}, 'primary_website', 'Website');
 }
-if ( address_0 && city)
+if ( (address_0 && city) || viewState.editing)
 {
 jade_mixins["detailsRow"].call({
 block: function(){
 jade_mixins["address"](address_0, address_1, city, state, zipcode);
 }
-}, 'Location');
+}, 'address_0,address_1,city,state,zipcode', 'Location');
 }
-if ( phone)
+if ( phone || viewState.editing)
 {
 jade_mixins["detailsRow"].call({
 block: function(){
 buf.push(jade.escape(null == (jade_interp = phone) ? "" : jade_interp));
 }
-}, 'Phone');
+}, 'phone', 'Phone');
 }
-buf.push("</table></aside><p class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p></div>");}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
+buf.push("</table></aside><p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p>");
+if ( viewState.editing)
+{
+buf.push("<div class=\"btn btn-primary save\">Save</div>");
+}
+else
+{
+buf.push("<div class=\"btn btn-default edit\">Edit</div>");
+}
+buf.push("</div>");}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
 };
-},{"jade/runtime":32}],21:[function(require,module,exports){
+},{"jade/runtime":37}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -589,19 +642,26 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _backboneMarionette = require('backbone.marionette');
+var _sharedItemview = require('shared/itemview');
+
+var _sharedItemview2 = _interopRequireDefault(_sharedItemview);
 
 var _templateJade = require('./template.jade');
 
 var _templateJade2 = _interopRequireDefault(_templateJade);
 
-exports['default'] = _backboneMarionette.ItemView.extend({
+exports['default'] = _sharedItemview2['default'].extend({
   template: _templateJade2['default'],
-  className: 'organization'
+  className: 'organization',
+
+  events: {
+    'click .edit': 'renderEditor',
+    'click .save': 'saveChanges'
+  }
 });
 module.exports = exports['default'];
 
-},{"./template.jade":20,"backbone.marionette":25}],22:[function(require,module,exports){
+},{"./template.jade":20,"shared/itemview":26}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -630,256 +690,3001 @@ var OrganizationsStorage = _backboneStorage2['default'].extend({
 exports['default'] = new OrganizationsStorage();
 module.exports = exports['default'];
 
-},{"./collection":12,"./model":16,"backbone.storage":28}],23:[function(require,module,exports){
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('backbone'), require('backbone-metal')) : typeof define === 'function' && define.amd ? define(['backbone', 'backbone-metal'], factory) : global.Backbone.Routing = factory(global.Backbone, global.Metal);
-})(this, function (Backbone, Metal) {
-  'use strict';
+},{"./collection":12,"./model":16,"backbone.storage":34}],23:[function(require,module,exports){
+'use strict';
 
-  var CancellationError = Metal.Error.extend({
-    name: 'CancellationError'
-  });
-
-  /**
-   * @public
-   * @class Route
-   */
-  var Route = Metal.Class.extend({
-
-    /**
-     * @public
-     * @method enter
-     * @returns {Promise}
-     * @param {...*} [args=[]]
-     */
-    enter: function enter() {
-      var _this = this;
-
-      var args = arguments[0] === undefined ? [] : arguments[0];
-
-      this._isEntering = true;
-      this.trigger.apply(this, ['before:enter before:fetch', this].concat(args));
-
-      return Promise.resolve().then(function () {
-        if (_this._isCancelled) {
-          return Promise.reject(new CancellationError());
-        }
-        return _this.fetch.apply(_this, args);
-      }).then(function () {
-        return _this.trigger.apply(_this, ['fetch before:render', _this].concat(args));
-      }).then(function () {
-        if (_this._isCancelled) {
-          return Promise.reject(new CancellationError());
-        }
-        return _this.render.apply(_this, args);
-      }).then(function () {
-        _this._isEntering = false;
-        _this.trigger.apply(_this, ['render enter', _this].concat(args));
-      })['catch'](function (err) {
-        _this._isEntering = false;
-        if (err instanceof CancellationError) {
-          _this.trigger('cancel', _this);
-        } else {
-          _this.trigger('error error:enter', _this, err);
-          throw err;
-        }
-      });
-    },
-
-    /**
-     * @public
-     * @method exit
-     * @returns {Promise}
-     */
-    exit: function exit() {
-      var _this2 = this;
-
-      if (this._isEntering) {
-        this.cancel();
-      }
-      this._isExiting = true;
-      this.trigger('before:exit before:destroy', this);
-
-      return Promise.resolve().then(function () {
-        return _this2.destroy();
-      }).then(function () {
-        _this2._isExiting = false;
-        _this2.trigger('destroy exit', _this2);
-        _this2.stopListening();
-      })['catch'](function (err) {
-        _this2._isExiting = false;
-        _this2.trigger('error error:exit', _this2, err);
-        _this2.stopListening();
-        throw err;
-      });
-    },
-
-    /**
-     * @public
-     * @method cancel
-     * @returns {Promise}
-     */
-    cancel: function cancel() {
-      var _this3 = this;
-
-      if (!this._isEntering) {
-        return;
-      }
-      this.trigger('before:cancel', this);
-      this._isCancelled = true;
-      return new Promise(function (resolve, reject) {
-        _this3.once('cancel', resolve);
-        _this3.once('enter error', reject);
-      });
-    },
-
-    /**
-     * @public
-     * @method isEntering
-     * @returns {Boolean}
-     */
-    isEntering: function isEntering() {
-      return !!this._isEntering;
-    },
-
-    /**
-     * @public
-     * @method isExiting
-     * @returns {Boolean}
-     */
-    isExiting: function isExiting() {
-      return !!this._isExiting;
-    },
-
-    /**
-     * @public
-     * @method isCancelled
-     * @returns {Boolean}
-     */
-    isCancelled: function isCancelled() {
-      return !!this._isCancelled;
-    },
-
-    /**
-     * @public
-     * @abstract
-     * @method fetch
-     * @param {...*} [args=[]]
-     */
-    fetch: function fetch() {},
-
-    /**
-     * @public
-     * @abstract
-     * @method render
-     * @param {...*} [args=[]]
-     */
-    render: function render() {},
-
-    /**
-     * @public
-     * @abstract
-     * @method destroy
-     */
-    destroy: function destroy() {}
-  });
-
-  /**
-   * @public
-   * @class Router
-   */
-  var Router = Metal.Class.extend(Backbone.Router.prototype, Backbone.Router).extend({
-    constructor: function constructor() {
-      this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
-      this._super.apply(this, arguments);
-    },
-
-    /**
-     * @public
-     * @method isActive
-     * @returns {Boolean}
-     */
-    isActive: function isActive() {
-      return !!this._isActive;
-    },
-
-    /**
-     * @public
-     * @method execute
-     * @param {Function} callback
-     * @param {Array} [args]
-     */
-    execute: function execute(callback, args) {
-      var _this4 = this;
-
-      var wasInactive = !this._isActive;
-      if (wasInactive) {
-        this.trigger('before:enter', this);
-      }
-
-      this.trigger('before:route', this);
-
-      return Promise.resolve().then(function () {
-        return _this4._execute(callback, args);
-      }).then(function () {
-        _this4.trigger('route', _this4);
-
-        if (wasInactive) {
-          _this4.trigger('enter', _this4);
-        }
-      })['catch'](function (err) {
-        _this4.trigger('error', _this4, err);
-        Backbone.history.trigger('error', _this4, err);
-        throw err;
-      });
-    },
-
-    /**
-     * @public
-     * @method execute
-     * @param {Function} callback
-     * @param {Array} [args]
-     * @returns {Promise}
-     */
-    _execute: function _execute(callback, args) {
-      var _this5 = this;
-
-      return Promise.resolve().then(function () {
-        if (Router._prevRoute instanceof Route) {
-          return Router._prevRoute.exit();
-        }
-      }).then(function () {
-        var route = Router._prevRoute = callback.apply(_this5, args);
-        if (route instanceof Route) {
-          route.router = _this5;
-          return route.enter(args);
-        }
-      });
-    },
-
-    /**
-     * @private
-     * @method _onHistoryRoute
-     * @param {Router} router
-     */
-    _onHistoryRoute: function _onHistoryRoute(router) {
-      this._isActive = router === this;
-    }
-  }, {
-
-    /**
-     * @private
-     * @member _prevRoute
-     */
-    _prevRoute: null
-  });
-
-  var backbone_routing = { Route: Route, Router: Router, CancellationError: CancellationError };
-
-  return backbone_routing;
+Object.defineProperty(exports, '__esModule', {
+  value: true
 });
 
-},{"backbone":30,"backbone-metal":24}],24:[function(require,module,exports){
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+var _form = require('./form');
+
+var _form2 = _interopRequireDefault(_form);
+
+var _utilitiesJs = require('../utilities.js');
+
+var _utilitiesJs2 = _interopRequireDefault(_utilitiesJs);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var DistributedForm = _form2['default'].extend({
+
+  /**
+   * Barebones wrapper around the parent implementation that just requires a
+   * uniqe identifier to be passed.
+   *
+   * @param  {string} options.modelCid A unique identifier, possibly
+   *     Backbone's client id.
+   */
+  initialize: function initialize(options) {
+    _utilitiesJs2['default'].requirePresence(options, ['modelCid']);
+    this.modelCid = options.modelCid;
+    return _form2['default'].prototype.initialize.apply(this, arguments);
+  },
+
+  /**
+   * Find all of the elements in the DOM that have been marked as belonging to
+   * the model--specified (by cid) at initialization--and replace their
+   * contents with the appropriate editor elements (editor, field, or
+   * fieldset). Any element that should be replaced must have both the
+   * 'model=uniqueid' attribute and a secondary attribute of 'data-editor',
+   * 'data-field', or 'data-fieldset' specified.
+   */
+  render: function render() {
+    var self = this,
+        fields = this.fields,
+        $ = _backbone2['default'].$,
+        editableElements = $('[model=' + this.modelCid + ']');
+
+    //Render standalone editors
+    editableElements.each(function (i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-editors');
+
+      if (_underscore2['default'].isUndefined(selection)) return;
+
+      //Work out which fields to include
+      var keys = selection == '*' ? self.selectedFields || _underscore2['default'].keys(fields) : selection.split(',');
+
+      // Clear the current contents of the container
+      $container.empty();
+
+      //Add the editors
+      _underscore2['default'].each(keys, function (key) {
+        var field = fields[key];
+
+        $container.append(field.editor.render().el);
+      });
+    });
+
+    //Render standalone fields
+    editableElements.each(function (i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-fields');
+
+      if (_underscore2['default'].isUndefined(selection)) return;
+
+      //Work out which fields to include
+      var keys = selection == '*' ? self.selectedFields || _underscore2['default'].keys(fields) : selection.split(',');
+
+      // Clear the current contents of the container
+      $container.empty();
+
+      //Add the fields
+      _underscore2['default'].each(keys, function (key) {
+        var field = fields[key];
+
+        $container.append(field.render().el);
+      });
+    });
+
+    //Render fieldsets
+    editableElements.each(function (i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-fieldsets');
+
+      if (_underscore2['default'].isUndefined(selection)) return;
+
+      _underscore2['default'].each(self.fieldsets, function (fieldset) {
+        $container.append(fieldset.render().el);
+      });
+    });
+
+    return this;
+  }
+});
+
+exports['default'] = DistributedForm;
+module.exports = exports['default'];
+
+},{"../utilities.js":27,"./form":24,"backbone":35,"underscore":39}],24:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backboneFormsDistributionBackboneFormsJs = require('backbone-forms/distribution/backbone-forms.js');
+
+var _backboneFormsDistributionBackboneFormsJs2 = _interopRequireDefault(_backboneFormsDistributionBackboneFormsJs);
+
+var _templates = require('./templates');
+
+var _templates2 = _interopRequireDefault(_templates);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+_backboneFormsDistributionBackboneFormsJs2['default'].validators.phone = function (options) {
+  options = _underscore2['default'].extend({
+    type: 'phone',
+    message: 'Invalid phone number.',
+    // Taken from http://stackoverflow.com/questions/123559/a-comprehensive-regex-for-phone-number-validation
+    regexp: /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/i
+  }, options);
+
+  return _backboneFormsDistributionBackboneFormsJs2['default'].validators.regexp(options);
+};
+
+_backboneFormsDistributionBackboneFormsJs2['default'].validators.zip = function (options) {
+  options = _underscore2['default'].extend({
+    type: 'zipcode',
+    message: 'Invalid zipcode.',
+    regexp: /^[0-9]{5}(-[0-9]{4})?$/i
+  }, options);
+
+  return _backboneFormsDistributionBackboneFormsJs2['default'].validators.regexp(options);
+};
+
+_backboneFormsDistributionBackboneFormsJs2['default'].validators.state = function (options) {
+  options = _underscore2['default'].extend({
+    type: 'state',
+    message: 'Invalid two-letter state code.',
+    // Lifted from http://regexlib.com/REDetails.aspx?regexp_id=1574
+    regexp: /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/i
+  }, options);
+
+  return _backboneFormsDistributionBackboneFormsJs2['default'].validators.regexp(options);
+};
+
+exports['default'] = _backboneFormsDistributionBackboneFormsJs2['default'];
+module.exports = exports['default'];
+
+},{"./templates":25,"backbone-forms/distribution/backbone-forms.js":28,"underscore":39}],25:[function(require,module,exports){
+/**
+ * This file is lifted almost entirely from backbone-forms, and modified to work with
+ * our module system.
+ */
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backboneFormsDistributionBackboneFormsJs = require('backbone-forms/distribution/backbone-forms.js');
+
+var _backboneFormsDistributionBackboneFormsJs2 = _interopRequireDefault(_backboneFormsDistributionBackboneFormsJs);
+
+var _underscore = require('underscore');
+
+/**
+ * Bootstrap 3 templates
+ */
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+_backboneFormsDistributionBackboneFormsJs2['default'].template = _underscore2['default'].template('\
+  <form class="form-horizontal" role="form">\
+    <div data-fieldsets></div>\
+    <% if (submitButton) { %>\
+      <button type="submit" class="btn"><%= submitButton %></button>\
+    <% } %>\
+  </form>\
+');
+
+_backboneFormsDistributionBackboneFormsJs2['default'].Fieldset.template = _underscore2['default'].template('\
+  <fieldset data-fields>\
+    <% if (legend) { %>\
+      <legend><%= legend %></legend>\
+    <% } %>\
+  </fieldset>\
+');
+
+_backboneFormsDistributionBackboneFormsJs2['default'].Field.template = _underscore2['default'].template('\
+  <div class="form-group field-<%= key %>">\
+    <label class="control-label" for="<%= editorId %>">\
+      <% if (titleHTML){ %><%= titleHTML %>\
+      <% } else { %><%- title %><% } %>\
+    </label>\
+    <div>\
+      <span data-editor></span>\
+      <p class="help-block" data-error></p>\
+      <p class="help-block"><%= help %></p>\
+    </div>\
+  </div>\
+');
+
+_backboneFormsDistributionBackboneFormsJs2['default'].NestedField.template = _underscore2['default'].template('\
+  <div class="field-<%= key %>">\
+    <div title="<% if (titleHTML){ %><%= titleHTML %><% } else { %><%- title %><% } %>" class="input-xlarge">\
+      <span data-editor></span>\
+      <div class="help-inline" data-error></div>\
+    </div>\
+    <div class="help-block"><%= help %></div>\
+  </div>\
+');
+
+_backboneFormsDistributionBackboneFormsJs2['default'].editors.Base.prototype.className = 'form-control';
+_backboneFormsDistributionBackboneFormsJs2['default'].Field.errorClassName = 'has-error';
+
+if (_backboneFormsDistributionBackboneFormsJs2['default'].editors.List) {
+
+  _backboneFormsDistributionBackboneFormsJs2['default'].editors.List.template = _underscore2['default'].template('\
+    <div class="bbf-list">\
+      <ul class="list-unstyled clearfix" data-items></ul>\
+      <button type="button" class="btn bbf-add" data-action="add">Add</button>\
+    </div>\
+  ');
+
+  _backboneFormsDistributionBackboneFormsJs2['default'].editors.List.Item.template = _underscore2['default'].template('\
+    <li class="clearfix">\
+      <div class="pull-left" data-editor></div>\
+      <button type="button" class="btn bbf-del" data-action="remove">&times;</button>\
+    </li>\
+  ');
+
+  _backboneFormsDistributionBackboneFormsJs2['default'].editors.List.Object.template = _backboneFormsDistributionBackboneFormsJs2['default'].editors.List.NestedModel.template = _underscore2['default'].template('\
+    <div class="bbf-list-modal"><%= summary %></div>\
+  ');
+}
+
+},{"backbone-forms/distribution/backbone-forms.js":28,"underscore":39}],26:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backboneMarionette = require('backbone.marionette');
+
+var _backbone = require('backbone');
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _sharedFormsDistributed = require('shared/forms/distributed');
+
+/**
+ * Standard ItemView, extended to include the model cid in all serialized data.
+ */
+
+var _sharedFormsDistributed2 = _interopRequireDefault(_sharedFormsDistributed);
+
+exports['default'] = _backboneMarionette.ItemView.extend({
+
+  initialize: function initialize(options) {
+    this.state = new _backbone.Model({
+      editing: options.editing || false
+    });
+    this.listenTo(this.state, 'change', this.render);
+    this.editor = null;
+    return _backboneMarionette.ItemView.prototype.initialize.apply(this, arguments);
+  },
+
+  serializeData: function serializeData() {
+    var data = _backboneMarionette.ItemView.prototype.serializeData.apply(this, arguments);
+    if (data.viewState) {
+      throw new Error('viewState is a reserved data keyword');
+    }
+    data.viewState = this.state.toJSON();
+    return data;
+  },
+
+  serializeCollection: function serializeCollection(collection) {
+    var args = arguments;
+    return _underscore2['default'].map(collection, function (model) {
+      return _underscore2['default'].extend({}, model.toJSON.apply(model, _underscore2['default'].rest(args)), {
+        cid: model.cid
+      });
+    });
+  },
+
+  serializeModel: function serializeModel(model) {
+    return _underscore2['default'].extend({}, this.model.toJSON.apply(model, _underscore2['default'].rest(arguments)), {
+      cid: model.cid
+    });
+  },
+
+  render: function render() {
+    _backboneMarionette.ItemView.prototype.render.apply(this, arguments);
+    var self = this;
+
+    if (this.state.get('editing')) {
+      _underscore2['default'].defer(function () {
+        self.editor = new _sharedFormsDistributed2['default']({
+          model: self.model,
+          modelCid: self.model.cid,
+          el: self.el
+        });
+
+        self.editor.render();
+        self.trigger('editing');
+      });
+    }
+    return this;
+  },
+
+  renderEditor: function renderEditor() {
+    this.state.set('editing', true);
+  },
+
+  saveChanges: function saveChanges() {
+    var self = this;
+    var errors = this.editor.commit({ validate: true });
+    if (!errors) {
+      this.trigger('saving:started', self);
+      this.model.save().done(function () {
+        self.state.set('editing', false);
+        self.trigger('saving:done', self);
+      });
+    } else {
+      console.log(errors);
+    }
+  }
+});
+module.exports = exports['default'];
+
+},{"backbone":35,"backbone.marionette":31,"shared/forms/distributed":23,"underscore":39}],27:[function(require,module,exports){
+/**
+ * Small library of useful functions.
+ */
+'use strict';
+
+var _ = require('underscore');
+
+module.exports = {
+
+  /**
+   * Ensures that requiredKeys are present in options, throwing an informative
+   * error message if not.
+   *
+   * @param  {[type]} options      An options hash.
+   * @param  {[type]} requiredKeys The keys that must be present.
+   * @return {undefined}
+   */
+  requirePresence: function requirePresence(options, requiredKeys) {
+    if (_.isUndefined(options)) {
+      throw new Error('Missing options');
+    }
+
+    if (!_.isObject(options)) {
+      throw new Error('Options is not an object');
+    }
+
+    _.each(requiredKeys, function (key) {
+      if (_.isUndefined(options[key])) {
+        throw new Error('Missing option ' + key);
+      }
+    });
+  },
+
+  /**
+   * Exactly what it sounds like.
+   *
+   * @param  {Object}  obj
+   * @return {Boolean}
+   */
+  isNullOrUndefined: function isNullOrUndefined(obj) {
+    return _.isNull(obj) || _.isUndefined(obj);
+  },
+
+  /**
+   * Takes a URL and ensures that it ends with a trailing slash.
+   *
+   * @param  {string} url
+   * @return {string}
+   */
+  ensureTrailingSlash: function ensureTrailingSlash(url) {
+    if (url.charAt(url.length - 1) != '/') {
+      url += '/';
+    }
+
+    return url;
+  }
+};
+
+},{"underscore":39}],28:[function(require,module,exports){
+(function (global){
+/**
+ * Backbone Forms v0.14.0
+ *
+ * Copyright (c) 2014 Charles Davison, Pow Media Ltd
+ *
+ * License and more information at:
+ * http://github.com/powmedia/backbone-forms
+ */
+;(function(root) {
+
+  //DEPENDENCIES
+  //CommonJS
+  if (typeof exports !== 'undefined' && typeof require !== 'undefined') {
+    var _ = root._ || require('underscore'),
+        Backbone = root.Backbone || require('backbone');
+  }
+
+  //Browser
+  else {
+    var _ = root._,
+        Backbone = root.Backbone;
+  }
+
+
+  //SOURCE
+  //==================================================================================================
+//FORM
+//==================================================================================================
+
+var Form = Backbone.View.extend({
+
+  events: {
+    'submit': function(event) {
+      this.trigger('submit', event);
+    }
+  },
+
+  /**
+   * Constructor
+   * 
+   * @param {Object} [options.schema]
+   * @param {Backbone.Model} [options.model]
+   * @param {Object} [options.data]
+   * @param {String[]|Object[]} [options.fieldsets]
+   * @param {String[]} [options.fields]
+   * @param {String} [options.idPrefix]
+   * @param {Form.Field} [options.Field]
+   * @param {Form.Fieldset} [options.Fieldset]
+   * @param {Function} [options.template]
+   * @param {Boolean|String} [options.submitButton]
+   */
+  initialize: function(options) {
+    var self = this;
+
+    //Merge default options
+    options = this.options = _.extend({
+      submitButton: false
+    }, options);
+
+    //Find the schema to use
+    var schema = this.schema = (function() {
+      //Prefer schema from options
+      if (options.schema) return _.result(options, 'schema');
+
+      //Then schema on model
+      var model = options.model;
+      if (model && model.schema) return _.result(model, 'schema');
+
+      //Then built-in schema
+      if (self.schema) return _.result(self, 'schema');
+
+      //Fallback to empty schema
+      return {};
+    })();
+
+    //Store important data
+    _.extend(this, _.pick(options, 'model', 'data', 'idPrefix', 'templateData'));
+
+    //Override defaults
+    var constructor = this.constructor;
+    this.template = options.template || this.template || constructor.template;
+    this.Fieldset = options.Fieldset || this.Fieldset || constructor.Fieldset;
+    this.Field = options.Field || this.Field || constructor.Field;
+    this.NestedField = options.NestedField || this.NestedField || constructor.NestedField;
+
+    //Check which fields will be included (defaults to all)
+    var selectedFields = this.selectedFields = options.fields || _.keys(schema);
+
+    //Create fields
+    var fields = this.fields = {};
+
+    _.each(selectedFields, function(key) {
+      var fieldSchema = schema[key];
+      fields[key] = this.createField(key, fieldSchema);
+    }, this);
+
+    //Create fieldsets
+    var fieldsetSchema = options.fieldsets || _.result(this, 'fieldsets') || _.result(this.model, 'fieldsets') || [selectedFields],
+        fieldsets = this.fieldsets = [];
+
+    _.each(fieldsetSchema, function(itemSchema) {
+      this.fieldsets.push(this.createFieldset(itemSchema));
+    }, this);
+  },
+
+  /**
+   * Creates a Fieldset instance
+   *
+   * @param {String[]|Object[]} schema       Fieldset schema
+   *
+   * @return {Form.Fieldset}
+   */
+  createFieldset: function(schema) {
+    var options = {
+      schema: schema,
+      fields: this.fields,
+      legend: schema.legend || null
+    };
+
+    return new this.Fieldset(options);
+  },
+
+  /**
+   * Creates a Field instance
+   *
+   * @param {String} key
+   * @param {Object} schema       Field schema
+   *
+   * @return {Form.Field}
+   */
+  createField: function(key, schema) {
+    var options = {
+      form: this,
+      key: key,
+      schema: schema,
+      idPrefix: this.idPrefix
+    };
+
+    if (this.model) {
+      options.model = this.model;
+    } else if (this.data) {
+      options.value = this.data[key];
+    } else {
+      options.value = null;
+    }
+
+    var field = new this.Field(options);
+
+    this.listenTo(field.editor, 'all', this.handleEditorEvent);
+
+    return field;
+  },
+
+  /**
+   * Callback for when an editor event is fired.
+   * Re-triggers events on the form as key:event and triggers additional form-level events
+   *
+   * @param {String} event
+   * @param {Editor} editor
+   */
+  handleEditorEvent: function(event, editor) {
+    //Re-trigger editor events on the form
+    var formEvent = editor.key+':'+event;
+
+    this.trigger.call(this, formEvent, this, editor, Array.prototype.slice.call(arguments, 2));
+
+    //Trigger additional events
+    switch (event) {
+      case 'change':
+        this.trigger('change', this);
+        break;
+
+      case 'focus':
+        if (!this.hasFocus) this.trigger('focus', this);
+        break;
+
+      case 'blur':
+        if (this.hasFocus) {
+          //TODO: Is the timeout etc needed?
+          var self = this;
+          setTimeout(function() {
+            var focusedField = _.find(self.fields, function(field) {
+              return field.editor.hasFocus;
+            });
+
+            if (!focusedField) self.trigger('blur', self);
+          }, 0);
+        }
+        break;
+    }
+  },
+
+  templateData: function() {
+    var options = this.options;
+
+    return {
+      submitButton: options.submitButton
+    }
+  },
+
+  render: function() {
+    var self = this,
+        fields = this.fields,
+        $ = Backbone.$;
+
+    //Render form
+    var $form = $($.trim(this.template(_.result(this, 'templateData'))));
+
+    //Render standalone editors
+    $form.find('[data-editors]').add($form).each(function(i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-editors');
+
+      if (_.isUndefined(selection)) return;
+
+      //Work out which fields to include
+      var keys = (selection == '*')
+        ? self.selectedFields || _.keys(fields)
+        : selection.split(',');
+
+      //Add them
+      _.each(keys, function(key) {
+        var field = fields[key];
+
+        $container.append(field.editor.render().el);
+      });
+    });
+
+    //Render standalone fields
+    $form.find('[data-fields]').add($form).each(function(i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-fields');
+
+      if (_.isUndefined(selection)) return;
+
+      //Work out which fields to include
+      var keys = (selection == '*')
+        ? self.selectedFields || _.keys(fields)
+        : selection.split(',');
+
+      //Add them
+      _.each(keys, function(key) {
+        var field = fields[key];
+
+        $container.append(field.render().el);
+      });
+    });
+
+    //Render fieldsets
+    $form.find('[data-fieldsets]').add($form).each(function(i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-fieldsets');
+
+      if (_.isUndefined(selection)) return;
+
+      _.each(self.fieldsets, function(fieldset) {
+        $container.append(fieldset.render().el);
+      });
+    });
+
+    //Set the main element
+    this.setElement($form);
+    
+    //Set class
+    $form.addClass(this.className);
+
+    return this;
+  },
+
+  /**
+   * Validate the data
+   *
+   * @return {Object}       Validation errors
+   */
+  validate: function(options) {
+    var self = this,
+        fields = this.fields,
+        model = this.model,
+        errors = {};
+
+    options = options || {};
+
+    //Collect errors from schema validation
+    _.each(fields, function(field) {
+      var error = field.validate();
+      if (error) {
+        errors[field.key] = error;
+      }
+    });
+
+    //Get errors from default Backbone model validator
+    if (!options.skipModelValidate && model && model.validate) {
+      var modelErrors = model.validate(this.getValue());
+
+      if (modelErrors) {
+        var isDictionary = _.isObject(modelErrors) && !_.isArray(modelErrors);
+
+        //If errors are not in object form then just store on the error object
+        if (!isDictionary) {
+          errors._others = errors._others || [];
+          errors._others.push(modelErrors);
+        }
+
+        //Merge programmatic errors (requires model.validate() to return an object e.g. { fieldKey: 'error' })
+        if (isDictionary) {
+          _.each(modelErrors, function(val, key) {
+            //Set error on field if there isn't one already
+            if (fields[key] && !errors[key]) {
+              fields[key].setError(val);
+              errors[key] = val;
+            }
+
+            else {
+              //Otherwise add to '_others' key
+              errors._others = errors._others || [];
+              var tmpErr = {};
+              tmpErr[key] = val;
+              errors._others.push(tmpErr);
+            }
+          });
+        }
+      }
+    }
+
+    return _.isEmpty(errors) ? null : errors;
+  },
+
+  /**
+   * Update the model with all latest values.
+   *
+   * @param {Object} [options]  Options to pass to Model#set (e.g. { silent: true })
+   *
+   * @return {Object}  Validation errors
+   */
+  commit: function(options) {
+    //Validate
+    options = options || {};
+
+    var validateOptions = {
+        skipModelValidate: !options.validate
+    };
+
+    var errors = this.validate(validateOptions);
+    if (errors) return errors;
+
+    //Commit
+    var modelError;
+
+    var setOptions = _.extend({
+      error: function(model, e) {
+        modelError = e;
+      }
+    }, options);
+
+    this.model.set(this.getValue(), setOptions);
+    
+    if (modelError) return modelError;
+  },
+
+  /**
+   * Get all the field values as an object.
+   * Use this method when passing data instead of objects
+   *
+   * @param {String} [key]    Specific field value to get
+   */
+  getValue: function(key) {
+    //Return only given key if specified
+    if (key) return this.fields[key].getValue();
+
+    //Otherwise return entire form
+    var values = {};
+    _.each(this.fields, function(field) {
+      values[field.key] = field.getValue();
+    });
+
+    return values;
+  },
+
+  /**
+   * Update field values, referenced by key
+   *
+   * @param {Object|String} key     New values to set, or property to set
+   * @param val                     Value to set
+   */
+  setValue: function(prop, val) {
+    var data = {};
+    if (typeof prop === 'string') {
+      data[prop] = val;
+    } else {
+      data = prop;
+    }
+
+    var key;
+    for (key in this.schema) {
+      if (data[key] !== undefined) {
+        this.fields[key].setValue(data[key]);
+      }
+    }
+  },
+
+  /**
+   * Returns the editor for a given field key
+   *
+   * @param {String} key
+   *
+   * @return {Editor}
+   */
+  getEditor: function(key) {
+    var field = this.fields[key];
+    if (!field) throw new Error('Field not found: '+key);
+
+    return field.editor;
+  },
+
+  /**
+   * Gives the first editor in the form focus
+   */
+  focus: function() {
+    if (this.hasFocus) return;
+
+    //Get the first field
+    var fieldset = this.fieldsets[0],
+        field = fieldset.getFieldAt(0);
+
+    if (!field) return;
+
+    //Set focus
+    field.editor.focus();
+  },
+
+  /**
+   * Removes focus from the currently focused editor
+   */
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    var focusedField = _.find(this.fields, function(field) {
+      return field.editor.hasFocus;
+    });
+
+    if (focusedField) focusedField.editor.blur();
+  },
+
+  /**
+   * Manages the hasFocus property
+   *
+   * @param {String} event
+   */
+  trigger: function(event) {
+    if (event === 'focus') {
+      this.hasFocus = true;
+    }
+    else if (event === 'blur') {
+      this.hasFocus = false;
+    }
+
+    return Backbone.View.prototype.trigger.apply(this, arguments);
+  },
+
+  /**
+   * Override default remove function in order to remove embedded views
+   *
+   * TODO: If editors are included directly with data-editors="x", they need to be removed
+   * May be best to use XView to manage adding/removing views
+   */
+  remove: function() {
+    _.each(this.fieldsets, function(fieldset) {
+      fieldset.remove();
+    });
+
+    _.each(this.fields, function(field) {
+      field.remove();
+    });
+
+    return Backbone.View.prototype.remove.apply(this, arguments);
+  }
+
+}, {
+
+  //STATICS
+  template: _.template('\
+    <form>\
+     <div data-fieldsets></div>\
+      <% if (submitButton) { %>\
+        <button type="submit"><%= submitButton %></button>\
+      <% } %>\
+    </form>\
+  ', null, this.templateSettings),
+
+  templateSettings: {
+    evaluate: /<%([\s\S]+?)%>/g, 
+    interpolate: /<%=([\s\S]+?)%>/g, 
+    escape: /<%-([\s\S]+?)%>/g
+  },
+
+  editors: {}
+
+});
+
+  
+//==================================================================================================
+//VALIDATORS
+//==================================================================================================
+
+Form.validators = (function() {
+
+  var validators = {};
+
+  validators.errMessages = {
+    required: 'Required',
+    regexp: 'Invalid',
+    number: 'Must be a number',
+    email: 'Invalid email address',
+    url: 'Invalid URL',
+    match: _.template('Must match field "<%= field %>"', null, Form.templateSettings)
+  };
+  
+  validators.required = function(options) {
+    options = _.extend({
+      type: 'required',
+      message: this.errMessages.required
+    }, options);
+     
+    return function required(value) {
+      options.value = value;
+      
+      var err = {
+        type: options.type,
+        message: _.isFunction(options.message) ? options.message(options) : options.message
+      };
+      
+      if (value === null || value === undefined || value === false || value === '') return err;
+    };
+  };
+  
+  validators.regexp = function(options) {
+    if (!options.regexp) throw new Error('Missing required "regexp" option for "regexp" validator');
+  
+    options = _.extend({
+      type: 'regexp',
+      match: true,
+      message: this.errMessages.regexp
+    }, options);
+    
+    return function regexp(value) {
+      options.value = value;
+      
+      var err = {
+        type: options.type,
+        message: _.isFunction(options.message) ? options.message(options) : options.message
+      };
+      
+      //Don't check empty values (add a 'required' validator for this)
+      if (value === null || value === undefined || value === '') return;
+
+      //Create RegExp from string if it's valid
+      if ('string' === typeof options.regexp) options.regexp = new RegExp(options.regexp, options.flags);
+
+      if ((options.match) ? !options.regexp.test(value) : options.regexp.test(value)) return err;
+    };
+  };
+
+  validators.number = function(options) {
+    options = _.extend({
+      type: 'number',
+      message: this.errMessages.number,
+      regexp: /^[0-9]*\.?[0-9]*?$/
+    }, options);
+    
+    return validators.regexp(options);
+  };
+  
+  validators.email = function(options) {
+    options = _.extend({
+      type: 'email',
+      message: this.errMessages.email,
+      regexp: /^[\w\-]{1,}([\w\-\+.]{1,1}[\w\-]{1,}){0,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/
+    }, options);
+    
+    return validators.regexp(options);
+  };
+  
+  validators.url = function(options) {
+    options = _.extend({
+      type: 'url',
+      message: this.errMessages.url,
+      regexp: /^(http|https):\/\/(([A-Z0-9][A-Z0-9_\-]*)(\.[A-Z0-9][A-Z0-9_\-]*)+)(:(\d+))?\/?/i
+    }, options);
+    
+    return validators.regexp(options);
+  };
+  
+  validators.match = function(options) {
+    if (!options.field) throw new Error('Missing required "field" options for "match" validator');
+    
+    options = _.extend({
+      type: 'match',
+      message: this.errMessages.match
+    }, options);
+    
+    return function match(value, attrs) {
+      options.value = value;
+      
+      var err = {
+        type: options.type,
+        message: _.isFunction(options.message) ? options.message(options) : options.message
+      };
+      
+      //Don't check empty values (add a 'required' validator for this)
+      if (value === null || value === undefined || value === '') return;
+      
+      if (value !== attrs[options.field]) return err;
+    };
+  };
+
+
+  return validators;
+
+})();
+
+
+//==================================================================================================
+//FIELDSET
+//==================================================================================================
+
+Form.Fieldset = Backbone.View.extend({
+
+  /**
+   * Constructor
+   *
+   * Valid fieldset schemas:
+   *   ['field1', 'field2']
+   *   { legend: 'Some Fieldset', fields: ['field1', 'field2'] }
+   *
+   * @param {String[]|Object[]} options.schema      Fieldset schema
+   * @param {Object} options.fields           Form fields
+   */
+  initialize: function(options) {
+    options = options || {};
+
+    //Create the full fieldset schema, merging defaults etc.
+    var schema = this.schema = this.createSchema(options.schema);
+
+    //Store the fields for this fieldset
+    this.fields = _.pick(options.fields, schema.fields);
+    
+    //Override defaults
+    this.template = options.template || schema.template || this.template || this.constructor.template;
+  },
+
+  /**
+   * Creates the full fieldset schema, normalising, merging defaults etc.
+   *
+   * @param {String[]|Object[]} schema
+   *
+   * @return {Object}
+   */
+  createSchema: function(schema) {
+    //Normalise to object
+    if (_.isArray(schema)) {
+      schema = { fields: schema };
+    }
+
+    //Add null legend to prevent template error
+    schema.legend = schema.legend || null;
+
+    return schema;
+  },
+
+  /**
+   * Returns the field for a given index
+   *
+   * @param {Number} index
+   *
+   * @return {Field}
+   */
+  getFieldAt: function(index) {
+    var key = this.schema.fields[index];
+
+    return this.fields[key];
+  },
+
+  /**
+   * Returns data to pass to template
+   *
+   * @return {Object}
+   */
+  templateData: function() {
+    return this.schema;
+  },
+
+  /**
+   * Renders the fieldset and fields
+   *
+   * @return {Fieldset} this
+   */
+  render: function() {
+    var schema = this.schema,
+        fields = this.fields,
+        $ = Backbone.$;
+
+    //Render fieldset
+    var $fieldset = $($.trim(this.template(_.result(this, 'templateData'))));
+
+    //Render fields
+    $fieldset.find('[data-fields]').add($fieldset).each(function(i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-fields');
+
+      if (_.isUndefined(selection)) return;
+
+      _.each(fields, function(field) {
+        $container.append(field.render().el);
+      });
+    });
+
+    this.setElement($fieldset);
+
+    return this;
+  },
+
+  /**
+   * Remove embedded views then self
+   */
+  remove: function() {
+    _.each(this.fields, function(field) {
+      field.remove();
+    });
+
+    Backbone.View.prototype.remove.call(this);
+  }
+  
+}, {
+  //STATICS
+
+  template: _.template('\
+    <fieldset data-fields>\
+      <% if (legend) { %>\
+        <legend><%= legend %></legend>\
+      <% } %>\
+    </fieldset>\
+  ', null, Form.templateSettings)
+
+});
+
+
+//==================================================================================================
+//FIELD
+//==================================================================================================
+
+Form.Field = Backbone.View.extend({
+
+  /**
+   * Constructor
+   *
+   * @param {Object} options.key
+   * @param {Object} options.form
+   * @param {Object} [options.schema]
+   * @param {Function} [options.schema.template]
+   * @param {Backbone.Model} [options.model]
+   * @param {Object} [options.value]
+   * @param {String} [options.idPrefix]
+   * @param {Function} [options.template]
+   * @param {Function} [options.errorClassName]
+   */
+  initialize: function(options) {
+    options = options || {};
+
+    //Store important data
+    _.extend(this, _.pick(options, 'form', 'key', 'model', 'value', 'idPrefix'));
+
+    //Create the full field schema, merging defaults etc.
+    var schema = this.schema = this.createSchema(options.schema);
+
+    //Override defaults
+    this.template = options.template || schema.template || this.template || this.constructor.template;
+    this.errorClassName = options.errorClassName || this.errorClassName || this.constructor.errorClassName;
+
+    //Create editor
+    this.editor = this.createEditor();
+  },
+
+  /**
+   * Creates the full field schema, merging defaults etc.
+   *
+   * @param {Object|String} schema
+   *
+   * @return {Object}
+   */
+  createSchema: function(schema) {
+    if (_.isString(schema)) schema = { type: schema };
+
+    //Set defaults
+    schema = _.extend({
+      type: 'Text',
+      title: this.createTitle()
+    }, schema);
+
+    //Get the real constructor function i.e. if type is a string such as 'Text'
+    schema.type = (_.isString(schema.type)) ? Form.editors[schema.type] : schema.type;
+
+    return schema;
+  },
+
+  /**
+   * Creates the editor specified in the schema; either an editor string name or
+   * a constructor function
+   *
+   * @return {View}
+   */
+  createEditor: function() {
+    var options = _.extend(
+      _.pick(this, 'schema', 'form', 'key', 'model', 'value'),
+      { id: this.createEditorId() }
+    );
+
+    var constructorFn = this.schema.type;
+
+    return new constructorFn(options);
+  },
+
+  /**
+   * Creates the ID that will be assigned to the editor
+   *
+   * @return {String}
+   */
+  createEditorId: function() {
+    var prefix = this.idPrefix,
+        id = this.key;
+
+    //Replace periods with underscores (e.g. for when using paths)
+    id = id.replace(/\./g, '_');
+
+    //If a specific ID prefix is set, use it
+    if (_.isString(prefix) || _.isNumber(prefix)) return prefix + id;
+    if (_.isNull(prefix)) return id;
+
+    //Otherwise, if there is a model use it's CID to avoid conflicts when multiple forms are on the page
+    if (this.model) return this.model.cid + '_' + id;
+
+    return id;
+  },
+
+  /**
+   * Create the default field title (label text) from the key name.
+   * (Converts 'camelCase' to 'Camel Case')
+   *
+   * @return {String}
+   */
+  createTitle: function() {
+    var str = this.key;
+
+    //Add spaces
+    str = str.replace(/([A-Z])/g, ' $1');
+
+    //Uppercase first character
+    str = str.replace(/^./, function(str) { return str.toUpperCase(); });
+
+    return str;
+  },
+
+  /**
+   * Returns the data to be passed to the template
+   *
+   * @return {Object}
+   */
+  templateData: function() {
+    var schema = this.schema;
+
+    return {
+      help: schema.help || '',
+      title: schema.title,
+      titleHTML: schema.titleHTML,
+      fieldAttrs: schema.fieldAttrs,
+      editorAttrs: schema.editorAttrs,
+      key: this.key,
+      editorId: this.editor.id
+    };
+  },
+
+  /**
+   * Render the field and editor
+   *
+   * @return {Field} self
+   */
+  render: function() {
+    var schema = this.schema,
+        editor = this.editor,
+        $ = Backbone.$;
+
+    //Only render the editor if requested
+    if (this.editor.noField === true) {
+      return this.setElement(editor.render().el);
+    }
+
+    //Render field
+    var $field = $($.trim(this.template(_.result(this, 'templateData'))));
+
+    if (schema.fieldClass) $field.addClass(schema.fieldClass);
+    if (schema.fieldAttrs) $field.attr(schema.fieldAttrs);
+
+    //Render editor
+    $field.find('[data-editor]').add($field).each(function(i, el) {
+      var $container = $(el),
+          selection = $container.attr('data-editor');
+
+      if (_.isUndefined(selection)) return;
+
+      $container.append(editor.render().el);
+    });
+
+    this.setElement($field);
+
+    return this;
+  },
+
+  /**
+   * Disable the field's editor
+   * Will call the editor's disable method if it exists
+   * Otherwise will add the disabled attribute to all inputs in the editor
+   */
+  disable: function(){
+    if ( _.isFunction(this.editor.disable) ){
+      this.editor.disable();
+    }
+    else {
+      $input = this.editor.$el;
+      $input = $input.is("input") ? $input : $input.find("input");
+      $input.attr("disabled",true);
+    }
+  },
+
+  /**
+   * Enable the field's editor
+   * Will call the editor's disable method if it exists
+   * Otherwise will remove the disabled attribute to all inputs in the editor
+   */
+  enable: function(){
+    if ( _.isFunction(this.editor.enable) ){
+      this.editor.enable();
+    }
+    else {
+      $input = this.editor.$el;
+      $input = $input.is("input") ? $input : $input.find("input");
+      $input.attr("disabled",false);
+    }
+  },
+
+  /**
+   * Check the validity of the field
+   *
+   * @return {String}
+   */
+  validate: function() {
+    var error = this.editor.validate();
+
+    if (error) {
+      this.setError(error.message);
+    } else {
+      this.clearError();
+    }
+
+    return error;
+  },
+
+  /**
+   * Set the field into an error state, adding the error class and setting the error message
+   *
+   * @param {String} msg     Error message
+   */
+  setError: function(msg) {
+    //Nested form editors (e.g. Object) set their errors internally
+    if (this.editor.hasNestedForm) return;
+
+    //Add error CSS class
+    this.$el.addClass(this.errorClassName);
+
+    //Set error message
+    this.$('[data-error]').html(msg);
+  },
+
+  /**
+   * Clear the error state and reset the help message
+   */
+  clearError: function() {
+    //Remove error CSS class
+    this.$el.removeClass(this.errorClassName);
+
+    //Clear error message
+    this.$('[data-error]').empty();
+  },
+
+  /**
+   * Update the model with the new value from the editor
+   *
+   * @return {Mixed}
+   */
+  commit: function() {
+    return this.editor.commit();
+  },
+
+  /**
+   * Get the value from the editor
+   *
+   * @return {Mixed}
+   */
+  getValue: function() {
+    return this.editor.getValue();
+  },
+
+  /**
+   * Set/change the value of the editor
+   *
+   * @param {Mixed} value
+   */
+  setValue: function(value) {
+    this.editor.setValue(value);
+  },
+
+  /**
+   * Give the editor focus
+   */
+  focus: function() {
+    this.editor.focus();
+  },
+
+  /**
+   * Remove focus from the editor
+   */
+  blur: function() {
+    this.editor.blur();
+  },
+
+  /**
+   * Remove the field and editor views
+   */
+  remove: function() {
+    this.editor.remove();
+
+    Backbone.View.prototype.remove.call(this);
+  }
+
+}, {
+  //STATICS
+
+  template: _.template('\
+    <div>\
+      <label for="<%= editorId %>">\
+        <% if (titleHTML){ %><%= titleHTML %>\
+        <% } else { %><%- title %><% } %>\
+      </label>\
+      <div>\
+        <span data-editor></span>\
+        <div data-error></div>\
+        <div><%= help %></div>\
+      </div>\
+    </div>\
+  ', null, Form.templateSettings),
+
+  /**
+   * CSS class name added to the field when there is a validation error
+   */
+  errorClassName: 'error'
+
+});
+
+
+//==================================================================================================
+//NESTEDFIELD
+//==================================================================================================
+
+Form.NestedField = Form.Field.extend({
+
+  template: _.template('\
+    <div>\
+      <label for="<%= editorId %>">\
+        <% if (titleHTML){ %><%= titleHTML %>\
+        <% } else { %><%- title %><% } %>\
+      </label>\
+      <div>\
+        <span data-editor></span>\
+        <div class="error-text" data-error></div>\
+        <div class="error-help"><%= help %></div>\
+      </div>\
+    </div>\
+  ', null, Form.templateSettings)
+
+});
+
+/**
+ * Base editor (interface). To be extended, not used directly
+ *
+ * @param {Object} options
+ * @param {String} [options.id]         Editor ID
+ * @param {Model} [options.model]       Use instead of value, and use commit()
+ * @param {String} [options.key]        The model attribute key. Required when using 'model'
+ * @param {Mixed} [options.value]       When not using a model. If neither provided, defaultValue will be used
+ * @param {Object} [options.schema]     Field schema; may be required by some editors
+ * @param {Object} [options.validators] Validators; falls back to those stored on schema
+ * @param {Object} [options.form]       The form
+ */
+Form.Editor = Form.editors.Base = Backbone.View.extend({
+
+  defaultValue: null,
+
+  hasFocus: false,
+
+  initialize: function(options) {
+    var options = options || {};
+
+    //Set initial value
+    if (options.model) {
+      if (!options.key) throw new Error("Missing option: 'key'");
+
+      this.model = options.model;
+
+      this.value = this.model.get(options.key);
+    }
+    else if (options.value !== undefined) {
+      this.value = options.value;
+    }
+
+    if (this.value === undefined) this.value = this.defaultValue;
+
+    //Store important data
+    _.extend(this, _.pick(options, 'key', 'form'));
+
+    var schema = this.schema = options.schema || {};
+
+    this.validators = options.validators || schema.validators;
+
+    //Main attributes
+    this.$el.attr('id', this.id);
+    this.$el.attr('name', this.getName());
+    if (schema.editorClass) this.$el.addClass(schema.editorClass);
+    if (schema.editorAttrs) this.$el.attr(schema.editorAttrs);
+  },
+
+  /**
+   * Get the value for the form input 'name' attribute
+   *
+   * @return {String}
+   *
+   * @api private
+   */
+  getName: function() {
+    var key = this.key || '';
+
+    //Replace periods with underscores (e.g. for when using paths)
+    return key.replace(/\./g, '_');
+  },
+
+  /**
+   * Get editor value
+   * Extend and override this method to reflect changes in the DOM
+   *
+   * @return {Mixed}
+   */
+  getValue: function() {
+    return this.value;
+  },
+
+  /**
+   * Set editor value
+   * Extend and override this method to reflect changes in the DOM
+   *
+   * @param {Mixed} value
+   */
+  setValue: function(value) {
+    this.value = value;
+  },
+
+  /**
+   * Give the editor focus
+   * Extend and override this method
+   */
+  focus: function() {
+    throw new Error('Not implemented');
+  },
+  
+  /**
+   * Remove focus from the editor
+   * Extend and override this method
+   */
+  blur: function() {
+    throw new Error('Not implemented');
+  },
+
+  /**
+   * Update the model with the current value
+   *
+   * @param {Object} [options]              Options to pass to model.set()
+   * @param {Boolean} [options.validate]    Set to true to trigger built-in model validation
+   *
+   * @return {Mixed} error
+   */
+  commit: function(options) {
+    var error = this.validate();
+    if (error) return error;
+
+    this.listenTo(this.model, 'invalid', function(model, e) {
+      error = e;
+    });
+    this.model.set(this.key, this.getValue(), options);
+
+    if (error) return error;
+  },
+
+  /**
+   * Check validity
+   *
+   * @return {Object|Undefined}
+   */
+  validate: function() {
+    var $el = this.$el,
+        error = null,
+        value = this.getValue(),
+        formValues = this.form ? this.form.getValue() : {},
+        validators = this.validators,
+        getValidator = this.getValidator;
+
+    if (validators) {
+      //Run through validators until an error is found
+      _.every(validators, function(validator) {
+        error = getValidator(validator)(value, formValues);
+
+        return error ? false : true;
+      });
+    }
+
+    return error;
+  },
+
+  /**
+   * Set this.hasFocus, or call parent trigger()
+   *
+   * @param {String} event
+   */
+  trigger: function(event) {
+    if (event === 'focus') {
+      this.hasFocus = true;
+    }
+    else if (event === 'blur') {
+      this.hasFocus = false;
+    }
+
+    return Backbone.View.prototype.trigger.apply(this, arguments);
+  },
+
+  /**
+   * Returns a validation function based on the type defined in the schema
+   *
+   * @param {RegExp|String|Function} validator
+   * @return {Function}
+   */
+  getValidator: function(validator) {
+    var validators = Form.validators;
+
+    //Convert regular expressions to validators
+    if (_.isRegExp(validator)) {
+      return validators.regexp({ regexp: validator });
+    }
+    
+    //Use a built-in validator if given a string
+    if (_.isString(validator)) {
+      if (!validators[validator]) throw new Error('Validator "'+validator+'" not found');
+      
+      return validators[validator]();
+    }
+
+    //Functions can be used directly
+    if (_.isFunction(validator)) return validator;
+
+    //Use a customised built-in validator if given an object
+    if (_.isObject(validator) && validator.type) {
+      var config = validator;
+      
+      return validators[config.type](config);
+    }
+    
+    //Unkown validator type
+    throw new Error('Invalid validator: ' + validator);
+  }
+});
+
+/**
+ * Text
+ * 
+ * Text input with focus, blur and change events
+ */
+Form.editors.Text = Form.Editor.extend({
+
+  tagName: 'input',
+
+  defaultValue: '',
+
+  previousValue: '',
+
+  events: {
+    'keyup':    'determineChange',
+    'keypress': function(event) {
+      var self = this;
+      setTimeout(function() {
+        self.determineChange();
+      }, 0);
+    },
+    'select':   function(event) {
+      this.trigger('select', this);
+    },
+    'focus':    function(event) {
+      this.trigger('focus', this);
+    },
+    'blur':     function(event) {
+      this.trigger('blur', this);
+    }
+  },
+
+  initialize: function(options) {
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    var schema = this.schema;
+
+    //Allow customising text type (email, phone etc.) for HTML5 browsers
+    var type = 'text';
+
+    if (schema && schema.editorAttrs && schema.editorAttrs.type) type = schema.editorAttrs.type;
+    if (schema && schema.dataType) type = schema.dataType;
+
+    this.$el.attr('type', type);
+  },
+
+  /**
+   * Adds the editor to the DOM
+   */
+  render: function() {
+    this.setValue(this.value);
+
+    return this;
+  },
+
+  determineChange: function(event) {
+    var currentValue = this.$el.val();
+    var changed = (currentValue !== this.previousValue);
+
+    if (changed) {
+      this.previousValue = currentValue;
+
+      this.trigger('change', this);
+    }
+  },
+
+  /**
+   * Returns the current editor value
+   * @return {String}
+   */
+  getValue: function() {
+    return this.$el.val();
+  },
+
+  /**
+   * Sets the value of the form element
+   * @param {String}
+   */
+  setValue: function(value) {
+    this.$el.val(value);
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$el.focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$el.blur();
+  },
+
+  select: function() {
+    this.$el.select();
+  }
+
+});
+
+/**
+ * TextArea editor
+ */
+Form.editors.TextArea = Form.editors.Text.extend({
+
+  tagName: 'textarea',
+
+  /**
+   * Override Text constructor so type property isn't set (issue #261)
+   */
+  initialize: function(options) {
+    Form.editors.Base.prototype.initialize.call(this, options);
+  }
+
+});
+
+/**
+ * Password editor
+ */
+Form.editors.Password = Form.editors.Text.extend({
+
+  initialize: function(options) {
+    Form.editors.Text.prototype.initialize.call(this, options);
+
+    this.$el.attr('type', 'password');
+  }
+
+});
+
+/**
+ * NUMBER
+ * 
+ * Normal text input that only allows a number. Letters etc. are not entered.
+ */
+Form.editors.Number = Form.editors.Text.extend({
+
+  defaultValue: 0,
+
+  events: _.extend({}, Form.editors.Text.prototype.events, {
+    'keypress': 'onKeyPress',
+    'change': 'onKeyPress'
+  }),
+
+  initialize: function(options) {
+    Form.editors.Text.prototype.initialize.call(this, options);
+
+    var schema = this.schema;
+
+    this.$el.attr('type', 'number');
+
+    if (!schema || !schema.editorAttrs || !schema.editorAttrs.step) {
+      // provide a default for `step` attr,
+      // but don't overwrite if already specified
+      this.$el.attr('step', 'any');
+    }
+  },
+
+  /**
+   * Check value is numeric
+   */
+  onKeyPress: function(event) {
+    var self = this,
+        delayedDetermineChange = function() {
+          setTimeout(function() {
+            self.determineChange();
+          }, 0);
+        };
+
+    //Allow backspace
+    if (event.charCode === 0) {
+      delayedDetermineChange();
+      return;
+    }
+
+    //Get the whole new value so that we can prevent things like double decimals points etc.
+    var newVal = this.$el.val()
+    if( event.charCode != undefined ) {
+      newVal = newVal + String.fromCharCode(event.charCode);
+    }
+
+    var numeric = /^[0-9]*\.?[0-9]*?$/.test(newVal);
+
+    if (numeric) {
+      delayedDetermineChange();
+    }
+    else {
+      event.preventDefault();
+    }
+  },
+
+  getValue: function() {
+    var value = this.$el.val();
+
+    return value === "" ? null : parseFloat(value, 10);
+  },
+
+  setValue: function(value) {
+    value = (function() {
+      if (_.isNumber(value)) return value;
+
+      if (_.isString(value) && value !== '') return parseFloat(value, 10);
+
+      return null;
+    })();
+
+    if (_.isNaN(value)) value = null;
+
+    Form.editors.Text.prototype.setValue.call(this, value);
+  }
+
+});
+
+/**
+ * Hidden editor
+ */
+Form.editors.Hidden = Form.editors.Text.extend({
+
+  defaultValue: '',
+
+  noField: true,
+
+  initialize: function(options) {
+    Form.editors.Text.prototype.initialize.call(this, options);
+
+    this.$el.attr('type', 'hidden');
+  },
+
+  focus: function() {
+
+  },
+
+  blur: function() {
+
+  }
+
+});
+
+/**
+ * Checkbox editor
+ *
+ * Creates a single checkbox, i.e. boolean value
+ */
+Form.editors.Checkbox = Form.editors.Base.extend({
+
+  defaultValue: false,
+
+  tagName: 'input',
+
+  events: {
+    'click':  function(event) {
+      this.trigger('change', this);
+    },
+    'focus':  function(event) {
+      this.trigger('focus', this);
+    },
+    'blur':   function(event) {
+      this.trigger('blur', this);
+    }
+  },
+
+  initialize: function(options) {
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    this.$el.attr('type', 'checkbox');
+  },
+
+  /**
+   * Adds the editor to the DOM
+   */
+  render: function() {
+    this.setValue(this.value);
+
+    return this;
+  },
+
+  getValue: function() {
+    return this.$el.prop('checked');
+  },
+
+  setValue: function(value) {
+    if (value) {
+      this.$el.prop('checked', true);
+    }else{
+      this.$el.prop('checked', false);
+    }
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$el.focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$el.blur();
+  }
+
+});
+
+/**
+ * Select editor
+ *
+ * Renders a <select> with given options
+ *
+ * Requires an 'options' value on the schema.
+ *  Can be an array of options, a function that calls back with the array of options, a string of HTML
+ *  or a Backbone collection. If a collection, the models must implement a toString() method
+ */
+Form.editors.Select = Form.editors.Base.extend({
+
+  tagName: 'select',
+
+  previousValue: '',
+
+  events: {
+    'keyup':    'determineChange',
+    'keypress': function(event) {
+      var self = this;
+      setTimeout(function() {
+        self.determineChange();
+      }, 0);
+    },
+    'change': function(event) {
+      this.trigger('change', this);
+    },
+    'focus':  function(event) {
+      this.trigger('focus', this);
+    },
+    'blur':   function(event) {
+      this.trigger('blur', this);
+    }
+  },
+
+  initialize: function(options) {
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    if (!this.schema || !this.schema.options) throw new Error("Missing required 'schema.options'");
+  },
+
+  render: function() {
+    this.setOptions(this.schema.options);
+
+    return this;
+  },
+
+  /**
+   * Sets the options that populate the <select>
+   *
+   * @param {Mixed} options
+   */
+  setOptions: function(options) {
+    var self = this;
+
+    //If a collection was passed, check if it needs fetching
+    if (options instanceof Backbone.Collection) {
+      var collection = options;
+
+      //Don't do the fetch if it's already populated
+      if (collection.length > 0) {
+        this.renderOptions(options);
+      } else {
+        collection.fetch({
+          success: function(collection) {
+            self.renderOptions(options);
+          }
+        });
+      }
+    }
+
+    //If a function was passed, run it to get the options
+    else if (_.isFunction(options)) {
+      options(function(result) {
+        self.renderOptions(result);
+      }, self);
+    }
+
+    //Otherwise, ready to go straight to renderOptions
+    else {
+      this.renderOptions(options);
+    }
+  },
+
+  /**
+   * Adds the <option> html to the DOM
+   * @param {Mixed}   Options as a simple array e.g. ['option1', 'option2']
+   *                      or as an array of objects e.g. [{val: 543, label: 'Title for object 543'}]
+   *                      or as a string of <option> HTML to insert into the <select>
+   *                      or any object
+   */
+  renderOptions: function(options) {
+    var $select = this.$el,
+        html;
+
+    html = this._getOptionsHtml(options);
+
+    //Insert options
+    $select.html(html);
+
+    //Select correct option
+    this.setValue(this.value);
+  },
+
+  _getOptionsHtml: function(options) {
+    var html;
+    //Accept string of HTML
+    if (_.isString(options)) {
+      html = options;
+    }
+
+    //Or array
+    else if (_.isArray(options)) {
+      html = this._arrayToHtml(options);
+    }
+
+    //Or Backbone collection
+    else if (options instanceof Backbone.Collection) {
+      html = this._collectionToHtml(options);
+    }
+
+    else if (_.isFunction(options)) {
+      var newOptions;
+
+      options(function(opts) {
+        newOptions = opts;
+      }, this);
+
+      html = this._getOptionsHtml(newOptions);
+    //Or any object
+    }else{
+      html = this._objectToHtml(options);
+    }
+
+    return html;
+  },
+
+  determineChange: function(event) {
+    var currentValue = this.getValue();
+    var changed = (currentValue !== this.previousValue);
+
+    if (changed) {
+      this.previousValue = currentValue;
+
+      this.trigger('change', this);
+    }
+  },
+
+  getValue: function() {
+    return this.$el.val();
+  },
+
+  setValue: function(value) {
+    this.$el.val(value);
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$el.focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$el.blur();
+  },
+
+  /**
+   * Transforms a collection into HTML ready to use in the renderOptions method
+   * @param {Backbone.Collection}
+   * @return {String}
+   */
+  _collectionToHtml: function(collection) {
+    //Convert collection to array first
+    var array = [];
+    collection.each(function(model) {
+      array.push({ val: model.id, label: model.toString() });
+    });
+
+    //Now convert to HTML
+    var html = this._arrayToHtml(array);
+
+    return html;
+  },
+  /**
+   * Transforms an object into HTML ready to use in the renderOptions method
+   * @param {Object}
+   * @return {String}
+   */
+  _objectToHtml: function(obj) {
+    //Convert object to array first
+    var array = [];
+    for(var key in obj){
+      if( obj.hasOwnProperty( key ) ) {
+        array.push({ val: key, label: obj[key] });
+      }
+    }
+
+    //Now convert to HTML
+    var html = this._arrayToHtml(array);
+
+    return html;
+  },
+
+
+
+  /**
+   * Create the <option> HTML
+   * @param {Array}   Options as a simple array e.g. ['option1', 'option2']
+   *                      or as an array of objects e.g. [{val: 543, label: 'Title for object 543'}]
+   * @return {String} HTML
+   */
+  _arrayToHtml: function(array) {
+    var html = $();
+
+    //Generate HTML
+    _.each(array, function(option) {
+      if (_.isObject(option)) {
+        if (option.group) {
+          var optgroup = $("<optgroup>")
+            .attr("label",option.group)
+            .html( this._getOptionsHtml(option.options) );
+          html = html.add(optgroup);
+        } else {
+          var val = (option.val || option.val === 0) ? option.val : '';
+          html = html.add( $('<option>').val(val).text(option.label) );
+        }
+      }
+      else {
+        html = html.add( $('<option>').text(option) );
+      }
+    }, this);
+
+    return html;
+  }
+
+});
+
+/**
+ * Radio editor
+ *
+ * Renders a <ul> with given options represented as <li> objects containing radio buttons
+ *
+ * Requires an 'options' value on the schema.
+ *  Can be an array of options, a function that calls back with the array of options, a string of HTML
+ *  or a Backbone collection. If a collection, the models must implement a toString() method
+ */
+Form.editors.Radio = Form.editors.Select.extend({
+
+  tagName: 'ul',
+
+  events: {
+    'change input[type=radio]': function() {
+      this.trigger('change', this);
+    },
+    'focus input[type=radio]': function() {
+      if (this.hasFocus) return;
+      this.trigger('focus', this);
+    },
+    'blur input[type=radio]': function() {
+      if (!this.hasFocus) return;
+      var self = this;
+      setTimeout(function() {
+        if (self.$('input[type=radio]:focus')[0]) return;
+        self.trigger('blur', self);
+      }, 0);
+    }
+  },
+
+  /**
+   * Returns the template. Override for custom templates
+   *
+   * @return {Function}       Compiled template
+   */
+  getTemplate: function() {
+    return this.schema.template || this.constructor.template;
+  },
+
+  getValue: function() {
+    return this.$('input[type=radio]:checked').val();
+  },
+
+  setValue: function(value) {
+    this.$('input[type=radio]').val([value]);
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    var checked = this.$('input[type=radio]:checked');
+    if (checked[0]) {
+      checked.focus();
+      return;
+    }
+
+    this.$('input[type=radio]').first().focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$('input[type=radio]:focus').blur();
+  },
+
+  /**
+   * Create the radio list HTML
+   * @param {Array}   Options as a simple array e.g. ['option1', 'option2']
+   *                      or as an array of objects e.g. [{val: 543, label: 'Title for object 543'}]
+   * @return {String} HTML
+   */
+  _arrayToHtml: function (array) {
+    var self = this;
+
+    var template = this.getTemplate(),
+        name = self.getName(),
+        id = self.id;
+
+    var items = _.map(array, function(option, index) {
+      var item = {
+        name: name,
+        id: id + '-' + index
+      };
+
+      if (_.isObject(option)) {
+        item.value = (option.val || option.val === 0) ? option.val : '';
+        item.label = option.label;
+        item.labelHTML = option.labelHTML;
+      } else {
+        item.value = option;
+        item.label = option;
+      }
+
+      return item;
+    });
+
+    return template({ items: items });
+  }
+
+}, {
+
+  //STATICS
+  template: _.template('\
+    <% _.each(items, function(item) { %>\
+      <li>\
+        <input type="radio" name="<%= item.name %>" value="<%- item.value %>" id="<%= item.id %>" />\
+        <label for="<%= item.id %>"><% if (item.labelHTML){ %><%= item.labelHTML %><% }else{ %><%- item.label %><% } %></label>\
+      </li>\
+    <% }); %>\
+  ', null, Form.templateSettings)
+
+});
+
+/**
+ * Checkboxes editor
+ *
+ * Renders a <ul> with given options represented as <li> objects containing checkboxes
+ *
+ * Requires an 'options' value on the schema.
+ *  Can be an array of options, a function that calls back with the array of options, a string of HTML
+ *  or a Backbone collection. If a collection, the models must implement a toString() method
+ */
+Form.editors.Checkboxes = Form.editors.Select.extend({
+
+  tagName: 'ul',
+
+  groupNumber: 0,
+
+  events: {
+    'click input[type=checkbox]': function() {
+      this.trigger('change', this);
+    },
+    'focus input[type=checkbox]': function() {
+      if (this.hasFocus) return;
+      this.trigger('focus', this);
+    },
+    'blur input[type=checkbox]':  function() {
+      if (!this.hasFocus) return;
+      var self = this;
+      setTimeout(function() {
+        if (self.$('input[type=checkbox]:focus')[0]) return;
+        self.trigger('blur', self);
+      }, 0);
+    }
+  },
+
+  getValue: function() {
+    var values = [];
+    this.$('input[type=checkbox]:checked').each(function() {
+      values.push($(this).val());
+    });
+    return values;
+  },
+
+  setValue: function(values) {
+    if (!_.isArray(values)) values = [values];
+    this.$('input[type=checkbox]').val(values);
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$('input[type=checkbox]').first().focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$('input[type=checkbox]:focus').blur();
+  },
+
+  /**
+   * Create the checkbox list HTML
+   * @param {Array}   Options as a simple array e.g. ['option1', 'option2']
+   *                      or as an array of objects e.g. [{val: 543, label: 'Title for object 543'}]
+   * @return {String} HTML
+   */
+  _arrayToHtml: function (array) {
+    var html = $();
+    var self = this;
+
+    _.each(array, function(option, index) {
+      var itemHtml = $('<li>');
+      if (_.isObject(option)) {
+        if (option.group) {
+          var originalId = self.id;
+          self.id += "-" + self.groupNumber++;
+          itemHtml = $('<fieldset class="group">').append( $('<legend>').text(option.group) );
+          itemHtml = itemHtml.append( self._arrayToHtml(option.options) );
+          self.id = originalId;
+          close = false;
+        }else{
+          var val = (option.val || option.val === 0) ? option.val : '';
+          itemHtml.append( $('<input type="checkbox" name="'+self.getName()+'" id="'+self.id+'-'+index+'" />').val(val) );
+          if (option.labelHTML){
+            itemHtml.append( $('<label for="'+self.id+'-'+index+'">').html(option.labelHTML) );
+          }
+          else {
+            itemHtml.append( $('<label for="'+self.id+'-'+index+'">').text(option.label) );
+          }
+        }
+      }
+      else {
+        itemHtml.append( $('<input type="checkbox" name="'+self.getName()+'" id="'+self.id+'-'+index+'" />').val(option) );
+        itemHtml.append( $('<label for="'+self.id+'-'+index+'">').text(option) );
+      }
+      html = html.add(itemHtml);
+    });
+
+    return html;
+  }
+
+});
+
+/**
+ * Object editor
+ *
+ * Creates a child form. For editing Javascript objects
+ *
+ * @param {Object} options
+ * @param {Form} options.form                 The form this editor belongs to; used to determine the constructor for the nested form
+ * @param {Object} options.schema             The schema for the object
+ * @param {Object} options.schema.subSchema   The schema for the nested form
+ */
+Form.editors.Object = Form.editors.Base.extend({
+  //Prevent error classes being set on the main control; they are internally on the individual fields
+  hasNestedForm: true,
+
+  initialize: function(options) {
+    //Set default value for the instance so it's not a shared object
+    this.value = {};
+
+    //Init
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    //Check required options
+    if (!this.form) throw new Error('Missing required option "form"');
+    if (!this.schema.subSchema) throw new Error("Missing required 'schema.subSchema' option for Object editor");
+  },
+
+  render: function() {
+    //Get the constructor for creating the nested form; i.e. the same constructor as used by the parent form
+    var NestedForm = this.form.constructor;
+
+    //Create the nested form
+    this.nestedForm = new NestedForm({
+      schema: this.schema.subSchema,
+      data: this.value,
+      idPrefix: this.id + '_',
+      Field: NestedForm.NestedField
+    });
+
+    this._observeFormEvents();
+
+    this.$el.html(this.nestedForm.render().el);
+
+    if (this.hasFocus) this.trigger('blur', this);
+
+    return this;
+  },
+
+  getValue: function() {
+    if (this.nestedForm) return this.nestedForm.getValue();
+
+    return this.value;
+  },
+
+  setValue: function(value) {
+    this.value = value;
+
+    this.render();
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.nestedForm.focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.nestedForm.blur();
+  },
+
+  remove: function() {
+    this.nestedForm.remove();
+
+    Backbone.View.prototype.remove.call(this);
+  },
+
+  validate: function() {
+    var errors = _.extend({}, 
+      Form.editors.Base.prototype.validate.call(this),
+      this.nestedForm.validate()
+    );
+    return _.isEmpty(errors)?false:errors;
+  },
+
+  _observeFormEvents: function() {
+    if (!this.nestedForm) return;
+    
+    this.nestedForm.on('all', function() {
+      // args = ["key:change", form, fieldEditor]
+      var args = _.toArray(arguments);
+      args[1] = this;
+      // args = ["key:change", this=objectEditor, fieldEditor]
+
+      this.trigger.apply(this, args);
+    }, this);
+  }
+
+});
+
+/**
+ * NestedModel editor
+ *
+ * Creates a child form. For editing nested Backbone models
+ *
+ * Special options:
+ *   schema.model:   Embedded model constructor
+ */
+Form.editors.NestedModel = Form.editors.Object.extend({
+  initialize: function(options) {
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    if (!this.form) throw new Error('Missing required option "form"');
+    if (!options.schema.model) throw new Error('Missing required "schema.model" option for NestedModel editor');
+  },
+
+  render: function() {
+    //Get the constructor for creating the nested form; i.e. the same constructor as used by the parent form
+    var NestedForm = this.form.constructor;
+
+    var data = this.value || {},
+        key = this.key,
+        nestedModel = this.schema.model;
+
+    //Wrap the data in a model if it isn't already a model instance
+    var modelInstance = (data.constructor === nestedModel) ? data : new nestedModel(data);
+
+    this.nestedForm = new NestedForm({
+      model: modelInstance,
+      idPrefix: this.id + '_',
+      fieldTemplate: 'nestedField'
+    });
+
+    this._observeFormEvents();
+
+    //Render form
+    this.$el.html(this.nestedForm.render().el);
+
+    if (this.hasFocus) this.trigger('blur', this);
+
+    return this;
+  },
+
+  /**
+   * Update the embedded model, checking for nested validation errors and pass them up
+   * Then update the main model if all OK
+   *
+   * @return {Error|null} Validation error or null
+   */
+  commit: function() {
+    var error = this.nestedForm.commit();
+    if (error) {
+      this.$el.addClass('error');
+      return error;
+    }
+
+    return Form.editors.Object.prototype.commit.call(this);
+  }
+
+});
+
+/**
+ * Date editor
+ *
+ * Schema options
+ * @param {Number|String} [options.schema.yearStart]  First year in list. Default: 100 years ago
+ * @param {Number|String} [options.schema.yearEnd]    Last year in list. Default: current year
+ *
+ * Config options (if not set, defaults to options stored on the main Date class)
+ * @param {Boolean} [options.showMonthNames]  Use month names instead of numbers. Default: true
+ * @param {String[]} [options.monthNames]     Month names. Default: Full English names
+ */
+Form.editors.Date = Form.editors.Base.extend({
+
+  events: {
+    'change select':  function() {
+      this.updateHidden();
+      this.trigger('change', this);
+    },
+    'focus select':   function() {
+      if (this.hasFocus) return;
+      this.trigger('focus', this);
+    },
+    'blur select':    function() {
+      if (!this.hasFocus) return;
+      var self = this;
+      setTimeout(function() {
+        if (self.$('select:focus')[0]) return;
+        self.trigger('blur', self);
+      }, 0);
+    }
+  },
+
+  initialize: function(options) {
+    options = options || {};
+
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    var Self = Form.editors.Date,
+        today = new Date();
+
+    //Option defaults
+    this.options = _.extend({
+      monthNames: Self.monthNames,
+      showMonthNames: Self.showMonthNames
+    }, options);
+
+    //Schema defaults
+    this.schema = _.extend({
+      yearStart: today.getFullYear() - 100,
+      yearEnd: today.getFullYear()
+    }, options.schema || {});
+
+    //Cast to Date
+    if (this.value && !_.isDate(this.value)) {
+      this.value = new Date(this.value);
+    }
+
+    //Set default date
+    if (!this.value) {
+      var date = new Date();
+      date.setSeconds(0);
+      date.setMilliseconds(0);
+
+      this.value = date;
+    }
+
+    //Template
+    this.template = options.template || this.constructor.template;
+  },
+
+  render: function() {
+    var options = this.options,
+        schema = this.schema,
+        $ = Backbone.$;
+
+    var datesOptions = _.map(_.range(1, 32), function(date) {
+      return '<option value="'+date+'">' + date + '</option>';
+    });
+
+    var monthsOptions = _.map(_.range(0, 12), function(month) {
+      var value = (options.showMonthNames)
+          ? options.monthNames[month]
+          : (month + 1);
+
+      return '<option value="'+month+'">' + value + '</option>';
+    });
+
+    var yearRange = (schema.yearStart < schema.yearEnd)
+      ? _.range(schema.yearStart, schema.yearEnd + 1)
+      : _.range(schema.yearStart, schema.yearEnd - 1, -1);
+
+    var yearsOptions = _.map(yearRange, function(year) {
+      return '<option value="'+year+'">' + year + '</option>';
+    });
+
+    //Render the selects
+    var $el = $($.trim(this.template({
+      dates: datesOptions.join(''),
+      months: monthsOptions.join(''),
+      years: yearsOptions.join('')
+    })));
+
+    //Store references to selects
+    this.$date = $el.find('[data-type="date"]');
+    this.$month = $el.find('[data-type="month"]');
+    this.$year = $el.find('[data-type="year"]');
+
+    //Create the hidden field to store values in case POSTed to server
+    this.$hidden = $('<input type="hidden" name="'+this.key+'" />');
+    $el.append(this.$hidden);
+
+    //Set value on this and hidden field
+    this.setValue(this.value);
+
+    //Remove the wrapper tag
+    this.setElement($el);
+    this.$el.attr('id', this.id);
+    this.$el.attr('name', this.getName());
+
+    if (this.hasFocus) this.trigger('blur', this);
+
+    return this;
+  },
+
+  /**
+   * @return {Date}   Selected date
+   */
+  getValue: function() {
+    var year = this.$year.val(),
+        month = this.$month.val(),
+        date = this.$date.val();
+
+    if (!year || !month || !date) return null;
+
+    return new Date(year, month, date);
+  },
+
+  /**
+   * @param {Date} date
+   */
+  setValue: function(date) {
+    this.$date.val(date.getDate());
+    this.$month.val(date.getMonth());
+    this.$year.val(date.getFullYear());
+
+    this.updateHidden();
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$('select').first().focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$('select:focus').blur();
+  },
+
+  /**
+   * Update the hidden input which is maintained for when submitting a form
+   * via a normal browser POST
+   */
+  updateHidden: function() {
+    var val = this.getValue();
+
+    if (_.isDate(val)) val = val.toISOString();
+
+    this.$hidden.val(val);
+  }
+
+}, {
+  //STATICS
+  template: _.template('\
+    <div>\
+      <select data-type="date"><%= dates %></select>\
+      <select data-type="month"><%= months %></select>\
+      <select data-type="year"><%= years %></select>\
+    </div>\
+  ', null, Form.templateSettings),
+
+  //Whether to show month names instead of numbers
+  showMonthNames: true,
+
+  //Month names to use if showMonthNames is true
+  //Replace for localisation, e.g. Form.editors.Date.monthNames = ['Janvier', 'Fevrier'...]
+  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+});
+
+/**
+ * DateTime editor
+ *
+ * @param {Editor} [options.DateEditor]           Date editor view to use (not definition)
+ * @param {Number} [options.schema.minsInterval]  Interval between minutes. Default: 15
+ */
+Form.editors.DateTime = Form.editors.Base.extend({
+
+  events: {
+    'change select':  function() {
+      this.updateHidden();
+      this.trigger('change', this);
+    },
+    'focus select':   function() {
+      if (this.hasFocus) return;
+      this.trigger('focus', this);
+    },
+    'blur select':    function() {
+      if (!this.hasFocus) return;
+      var self = this;
+      setTimeout(function() {
+        if (self.$('select:focus')[0]) return;
+        self.trigger('blur', self);
+      }, 0);
+    }
+  },
+
+  initialize: function(options) {
+    options = options || {};
+
+    Form.editors.Base.prototype.initialize.call(this, options);
+
+    //Option defaults
+    this.options = _.extend({
+      DateEditor: Form.editors.DateTime.DateEditor
+    }, options);
+
+    //Schema defaults
+    this.schema = _.extend({
+      minsInterval: 15
+    }, options.schema || {});
+
+    //Create embedded date editor
+    this.dateEditor = new this.options.DateEditor(options);
+
+    this.value = this.dateEditor.value;
+
+    //Template
+    this.template = options.template || this.constructor.template;
+  },
+
+  render: function() {
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
+
+    var schema = this.schema,
+        $ = Backbone.$;
+
+    //Create options
+    var hoursOptions = _.map(_.range(0, 24), function(hour) {
+      return '<option value="'+hour+'">' + pad(hour) + '</option>';
+    });
+
+    var minsOptions = _.map(_.range(0, 60, schema.minsInterval), function(min) {
+      return '<option value="'+min+'">' + pad(min) + '</option>';
+    });
+
+    //Render time selects
+    var $el = $($.trim(this.template({
+      hours: hoursOptions.join(),
+      mins: minsOptions.join()
+    })));
+
+    //Include the date editor
+    $el.find('[data-date]').append(this.dateEditor.render().el);
+
+    //Store references to selects
+    this.$hour = $el.find('select[data-type="hour"]');
+    this.$min = $el.find('select[data-type="min"]');
+
+    //Get the hidden date field to store values in case POSTed to server
+    this.$hidden = $el.find('input[type="hidden"]');
+
+    //Set time
+    this.setValue(this.value);
+
+    this.setElement($el);
+    this.$el.attr('id', this.id);
+    this.$el.attr('name', this.getName());
+
+    if (this.hasFocus) this.trigger('blur', this);
+
+    return this;
+  },
+
+  /**
+   * @return {Date}   Selected datetime
+   */
+  getValue: function() {
+    var date = this.dateEditor.getValue();
+
+    var hour = this.$hour.val(),
+        min = this.$min.val();
+
+    if (!date || !hour || !min) return null;
+
+    date.setHours(hour);
+    date.setMinutes(min);
+
+    return date;
+  },
+
+  /**
+   * @param {Date}
+   */
+  setValue: function(date) {
+    if (!_.isDate(date)) date = new Date(date);
+
+    this.dateEditor.setValue(date);
+
+    this.$hour.val(date.getHours());
+    this.$min.val(date.getMinutes());
+
+    this.updateHidden();
+  },
+
+  focus: function() {
+    if (this.hasFocus) return;
+
+    this.$('select').first().focus();
+  },
+
+  blur: function() {
+    if (!this.hasFocus) return;
+
+    this.$('select:focus').blur();
+  },
+
+  /**
+   * Update the hidden input which is maintained for when submitting a form
+   * via a normal browser POST
+   */
+  updateHidden: function() {
+    var val = this.getValue();
+    if (_.isDate(val)) val = val.toISOString();
+
+    this.$hidden.val(val);
+  },
+
+  /**
+   * Remove the Date editor before removing self
+   */
+  remove: function() {
+    this.dateEditor.remove();
+
+    Form.editors.Base.prototype.remove.call(this);
+  }
+
+}, {
+  //STATICS
+  template: _.template('\
+    <div class="bbf-datetime">\
+      <div class="bbf-date-container" data-date></div>\
+      <select data-type="hour"><%= hours %></select>\
+      :\
+      <select data-type="min"><%= mins %></select>\
+    </div>\
+  ', null, Form.templateSettings),
+
+  //The date editor to use (constructor function, not instance)
+  DateEditor: Form.editors.Date
+});
+
+
+
+  //Metadata
+  Form.VERSION = '0.14.0';
+
+
+  //Exports
+  Backbone.Form = Form;
+  if (typeof module !== 'undefined') module.exports = Form;
+
+})(window || global || this);
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"backbone":35,"underscore":39}],29:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone')) :
   typeof define === 'function' && define.amd ? define(['underscore', 'backbone'], factory) :
@@ -1370,7 +4175,256 @@ module.exports = exports['default'];
 
 }));
 
-},{"backbone":30,"underscore":34}],25:[function(require,module,exports){
+},{"backbone":35,"underscore":39}],30:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('backbone'), require('backbone-metal')) : typeof define === 'function' && define.amd ? define(['backbone', 'backbone-metal'], factory) : global.Backbone.Routing = factory(global.Backbone, global.Metal);
+})(this, function (Backbone, Metal) {
+  'use strict';
+
+  var CancellationError = Metal.Error.extend({
+    name: 'CancellationError'
+  });
+
+  /**
+   * @public
+   * @class Route
+   */
+  var Route = Metal.Class.extend({
+
+    /**
+     * @public
+     * @method enter
+     * @returns {Promise}
+     * @param {...*} [args=[]]
+     */
+    enter: function enter() {
+      var _this = this;
+
+      var args = arguments[0] === undefined ? [] : arguments[0];
+
+      this._isEntering = true;
+      this.trigger.apply(this, ['before:enter before:fetch', this].concat(args));
+
+      return Promise.resolve().then(function () {
+        if (_this._isCancelled) {
+          return Promise.reject(new CancellationError());
+        }
+        return _this.fetch.apply(_this, args);
+      }).then(function () {
+        return _this.trigger.apply(_this, ['fetch before:render', _this].concat(args));
+      }).then(function () {
+        if (_this._isCancelled) {
+          return Promise.reject(new CancellationError());
+        }
+        return _this.render.apply(_this, args);
+      }).then(function () {
+        _this._isEntering = false;
+        _this.trigger.apply(_this, ['render enter', _this].concat(args));
+      })['catch'](function (err) {
+        _this._isEntering = false;
+        if (err instanceof CancellationError) {
+          _this.trigger('cancel', _this);
+        } else {
+          _this.trigger('error error:enter', _this, err);
+          throw err;
+        }
+      });
+    },
+
+    /**
+     * @public
+     * @method exit
+     * @returns {Promise}
+     */
+    exit: function exit() {
+      var _this2 = this;
+
+      if (this._isEntering) {
+        this.cancel();
+      }
+      this._isExiting = true;
+      this.trigger('before:exit before:destroy', this);
+
+      return Promise.resolve().then(function () {
+        return _this2.destroy();
+      }).then(function () {
+        _this2._isExiting = false;
+        _this2.trigger('destroy exit', _this2);
+        _this2.stopListening();
+      })['catch'](function (err) {
+        _this2._isExiting = false;
+        _this2.trigger('error error:exit', _this2, err);
+        _this2.stopListening();
+        throw err;
+      });
+    },
+
+    /**
+     * @public
+     * @method cancel
+     * @returns {Promise}
+     */
+    cancel: function cancel() {
+      var _this3 = this;
+
+      if (!this._isEntering) {
+        return;
+      }
+      this.trigger('before:cancel', this);
+      this._isCancelled = true;
+      return new Promise(function (resolve, reject) {
+        _this3.once('cancel', resolve);
+        _this3.once('enter error', reject);
+      });
+    },
+
+    /**
+     * @public
+     * @method isEntering
+     * @returns {Boolean}
+     */
+    isEntering: function isEntering() {
+      return !!this._isEntering;
+    },
+
+    /**
+     * @public
+     * @method isExiting
+     * @returns {Boolean}
+     */
+    isExiting: function isExiting() {
+      return !!this._isExiting;
+    },
+
+    /**
+     * @public
+     * @method isCancelled
+     * @returns {Boolean}
+     */
+    isCancelled: function isCancelled() {
+      return !!this._isCancelled;
+    },
+
+    /**
+     * @public
+     * @abstract
+     * @method fetch
+     * @param {...*} [args=[]]
+     */
+    fetch: function fetch() {},
+
+    /**
+     * @public
+     * @abstract
+     * @method render
+     * @param {...*} [args=[]]
+     */
+    render: function render() {},
+
+    /**
+     * @public
+     * @abstract
+     * @method destroy
+     */
+    destroy: function destroy() {}
+  });
+
+  /**
+   * @public
+   * @class Router
+   */
+  var Router = Metal.Class.extend(Backbone.Router.prototype, Backbone.Router).extend({
+    constructor: function constructor() {
+      this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
+      this._super.apply(this, arguments);
+    },
+
+    /**
+     * @public
+     * @method isActive
+     * @returns {Boolean}
+     */
+    isActive: function isActive() {
+      return !!this._isActive;
+    },
+
+    /**
+     * @public
+     * @method execute
+     * @param {Function} callback
+     * @param {Array} [args]
+     */
+    execute: function execute(callback, args) {
+      var _this4 = this;
+
+      var wasInactive = !this._isActive;
+      if (wasInactive) {
+        this.trigger('before:enter', this);
+      }
+
+      this.trigger('before:route', this);
+
+      return Promise.resolve().then(function () {
+        return _this4._execute(callback, args);
+      }).then(function () {
+        _this4.trigger('route', _this4);
+
+        if (wasInactive) {
+          _this4.trigger('enter', _this4);
+        }
+      })['catch'](function (err) {
+        _this4.trigger('error', _this4, err);
+        Backbone.history.trigger('error', _this4, err);
+        throw err;
+      });
+    },
+
+    /**
+     * @public
+     * @method execute
+     * @param {Function} callback
+     * @param {Array} [args]
+     * @returns {Promise}
+     */
+    _execute: function _execute(callback, args) {
+      var _this5 = this;
+
+      return Promise.resolve().then(function () {
+        if (Router._prevRoute instanceof Route) {
+          return Router._prevRoute.exit();
+        }
+      }).then(function () {
+        var route = Router._prevRoute = callback.apply(_this5, args);
+        if (route instanceof Route) {
+          route.router = _this5;
+          return route.enter(args);
+        }
+      });
+    },
+
+    /**
+     * @private
+     * @method _onHistoryRoute
+     * @param {Router} router
+     */
+    _onHistoryRoute: function _onHistoryRoute(router) {
+      this._isActive = router === this;
+    }
+  }, {
+
+    /**
+     * @private
+     * @member _prevRoute
+     */
+    _prevRoute: null
+  });
+
+  var backbone_routing = { Route: Route, Router: Router, CancellationError: CancellationError };
+
+  return backbone_routing;
+});
+
+},{"backbone":35,"backbone-metal":29}],31:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.4.2
@@ -4809,7 +7863,7 @@ module.exports = exports['default'];
   return Marionette;
 }));
 
-},{"backbone":30,"backbone.babysitter":26,"backbone.wreqr":27,"underscore":34}],26:[function(require,module,exports){
+},{"backbone":35,"backbone.babysitter":32,"backbone.wreqr":33,"underscore":39}],32:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.8
@@ -5001,7 +8055,7 @@ module.exports = exports['default'];
 
 }));
 
-},{"backbone":30,"underscore":34}],27:[function(require,module,exports){
+},{"backbone":35,"underscore":39}],33:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.3
@@ -5438,7 +8492,7 @@ module.exports = exports['default'];
 
 }));
 
-},{"backbone":30,"underscore":34}],28:[function(require,module,exports){
+},{"backbone":35,"underscore":39}],34:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory(require("backbone"), require("backbone-metal")) : typeof define === "function" && define.amd ? define(["backbone", "backbone-metal"], factory) : global.Backbone.Storage = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -5579,9 +8633,7 @@ module.exports = exports['default'];
   return backbone_storage;
 });
 
-},{"backbone":30,"backbone-metal":29}],29:[function(require,module,exports){
-arguments[4][24][0].apply(exports,arguments)
-},{"backbone":30,"dup":24,"underscore":34}],30:[function(require,module,exports){
+},{"backbone":35,"backbone-metal":29}],35:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.1
 
@@ -7458,9 +10510,9 @@ arguments[4][24][0].apply(exports,arguments)
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":33,"underscore":34}],31:[function(require,module,exports){
+},{"jquery":38,"underscore":39}],36:[function(require,module,exports){
 
-},{}],32:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.jade = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
@@ -7715,7 +10767,7 @@ exports.DebugItem = function DebugItem(lineno, filename) {
 },{}]},{},[1])(1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"fs":31}],33:[function(require,module,exports){
+},{"fs":36}],38:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -16927,7 +19979,7 @@ return jQuery;
 
 }));
 
-},{}],34:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

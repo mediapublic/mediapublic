@@ -9,7 +9,8 @@ export default Route.extend({
 
   render() {
     this.view = new View({
-      model: new Organization()
+      model: new Organization(),
+      editing: true
     });
     this.container.show(this.view);
   }
