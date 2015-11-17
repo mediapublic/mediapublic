@@ -103,13 +103,13 @@ class CreationMixin():
         keys = []
         for key in cls.__table__.columns:
             if '__required__' in type(key).__dict__:
-                keys.append(str(key).split('.')[1])
+                keys.append(six.text_type(key).split('.')[1])
         return keys
 
     def to_dict(self):
         return {
-            'id': str(self.id),
-            'creation_datetime': str(self.creation_datetime),
+            'id': six.text_type(self.id),
+            'creation_datetime': six.text_type(self.creation_datetime),
         }
 
 
@@ -161,7 +161,7 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
             user = Users.add(
                 email="%s@%s.social.auth" % (social_uname, provider),
                 display_name=auth_info["profile"]["name"]["formatted"],
-                twitter_handle=str(social_uname),
+                twitter_handle=six.text_type(social_uname),
                 profile_photo_url=auth_info["profile"]["photos"][0]["value"],
                 twitter_auth_secret=auth_info[
                     "credentials"]["oauthAccessTokenSecret"],
@@ -172,7 +172,7 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
         except sql_exc.IntegrityError:
             with transaction.manager:
                 DBSession.query(cls).filter(
-                    cls.twitter_handle == str(social_uname),
+                    cls.twitter_handle == six.text_type(social_uname),
                 ).update(
                     values=dict(
                         twitter_auth_secret=auth_info[
@@ -184,7 +184,7 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
                     )
                 )
                 user = DBSession.query(cls).filter(
-                    cls.twitter_handle == str(social_uname)
+                    cls.twitter_handle == six.text_type(social_uname)
                 ).first()
             return True, user.id
 
@@ -485,8 +485,8 @@ class People(Base, CreationMixin, TimeStampMixin):
             facebook=self.facebook,
             instagram=self.instagram,
             periscope=self.periscope,
-            user_id=str(self.user_id),
-            organization_id=str(self.organization_id),
+            user_id=six.text_type(self.user_id),
+            organization_id=six.text_type(self.organization_id),
         )
 
     def to_dict(self):
@@ -524,7 +524,7 @@ class Recordings(Base, CreationMixin, TimeStampMixin):
         resp.update(
             title=self.title,
             url=self.url,
-            recorded_datetime=str(self.recorded_datetime),
+            recorded_datetime=six.text_type(self.recorded_datetime),
             organization_id=self.organization_id,
         )
         return resp

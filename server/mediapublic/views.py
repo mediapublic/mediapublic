@@ -175,20 +175,6 @@ class PeopleResource(ResourceMixin):
     cls = People
 
 
-'''
-@resource(collection_path='/podcasts',
-          path='/podcasts/{id}',
-          factory=choose_context,
-          cors_policy=cors_policy)
-class PodcastsResource(ResourceMixin):
-    """
-    [GET, POST             ] /podcasts
-    [GET,       PUT, DELETE] /podcasts/{id}
-    """
-    cls = Podcasts
-'''
-
-
 @resource(collection_path='/recordings',
           path='/recordings/{id}',
           factory=choose_context,
@@ -223,8 +209,11 @@ class BlogsResource(ResourceMixin):
     cls = Blogs
 
 
-# --------- PLAYLISTS
-# [GET, POST             ] /playlists
-# [GET,       PUT, DELETE] /playlists/{id}
-# [           PUT,       ] /playlists/{id}/assign
-# [           PUT,       ] /playlists/{id}/remove
+@resource(collection_path='/playlists', path='/playlists/{id}',
+          factory=choose_context, cors_policy=cors_policy)
+class Playlists(ResourceMixin):
+    """
+    [GET, POST             ] /playlists
+    [GET,       PUT, DELETE] /playlists/{id}
+    """
+    cls = Playlists

@@ -22,7 +22,9 @@ tests:
     method: POST
     url: /recordings
     data:
-      title: Connections With Evan Dawson - James Fallon, Neuroscientist and Psychopath
+      title: >
+        Connections With Evan Dawson - James Fallon, Neuroscientist
+        and Psychopath
       url: http://wxxinews.org/post/connections-james-fallon-neuroscientist-and-psychopath
 
   - name: Get Recordings

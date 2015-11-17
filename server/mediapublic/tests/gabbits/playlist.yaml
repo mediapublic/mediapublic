@@ -1,0 +1,32 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Playlists
+    url: /playlists
+    response_json_paths:
+      $.playlists: []
+
+  - name: Create a playlist incorrectly
+    status: 400
+    method: POST
+    url: /playlists
+    data:
+      dummy: Bad Data
+
+  - name: Create a playlist correctly
+    status: 201
+    method: POST
+    url: /playlists
+    data:
+      author_id: 0
+      title: Playlist of Awesome
+      description: My Super awesome playlist of super awesome things.
+
+  - name: Get Playlists
+    url: /playlists
+    response_json_paths:
+      $.playlists.`len`: 1
