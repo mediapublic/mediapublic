@@ -22,23 +22,23 @@ tests:
     method: POST
     url: /people
     data:
-      first: 'Joe'
-      last: 'Smith'
-      address_0: '47 Something St.'
-      address_1: 'Apt. 9'
-      city: 'Rochester'
-      state: 'NY'
+      first: Joe
+      last: Smith
+      address_0: 47 Something St.
+      address_1: Apt. 9
+      city: Rochester
+      state: NY
       zipcode: '14623'
       phone: '585-123-4567'
       fax: '585-098-7654'
-      primary_website: 'http://www.joesmithissupercool.io/'
+      primary_website: http://www.joesmithissupercool.io/
       secondary_website: ' '
       twitter: '@joesmithandstuff'
       facebook: ' '
       instagram: ' '
       periscope: ' '
       # note: bogus user id
-      user_id: 'f0ce73e8-46ac-4fa8-a9dd-93cbe95989ab'
+      user_id: f0ce73e8-46ac-4fa8-a9dd-93cbe95989ab
       organization_id: 0
 
   - name: Get People

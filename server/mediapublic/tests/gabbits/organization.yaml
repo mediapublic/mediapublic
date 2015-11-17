@@ -24,8 +24,16 @@ tests:
     data:
       short_name: 'WXXI'
       long_name: 'WXXI Public Broadcasting Council'
-      short_description: 'XXI is the essential, life-long educational public media resource that engages, inspires and strengthens our community.'
-      long_description: 'Since 1958, WXXI has provided the Greater Rochester area with the finest radio and television programming available. In the last several years, WXXI has bloomed from broadcasting one television channel and two radio stations to three television channels and six radio stations. WXXI has added interactive services such as live streaming of radio and podcasts of many programs. '
+      short_description: >
+        XXI is the essential, life-long educational public media resource
+        thatengages, inspires and strengthens our community.
+      long_description: >
+        Since 1958, WXXI has provided the Greater Rochester area with the
+        finest radio and television programming available. In the last
+        several years, WXXI has bloomed from broadcasting one television
+        channel and two radio stations to three television channels and
+        six radio stations. WXXI has added interactive services such as
+        live streaming of radio and podcasts of many programs.
       address_0: 280 State St.
       address_1: ' '
       city: '280 State St.'
