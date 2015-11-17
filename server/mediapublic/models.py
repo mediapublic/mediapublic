@@ -217,18 +217,18 @@ class Comments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'comments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    subject = Column(UnicodeText, nullable=False)
+    subject = Column(UnicodeText)
     contents = Column(UnicodeText, nullable=False)
 
-    parent_comment_id = Column(ForeignKey('comments.id'), nullable=False)
+    parent_comment_id = Column(ForeignKey('comments.id'))
 
     author_id = Column(ForeignKey('users.id'), nullable=False)
 
-    organization_id = Column(ForeignKey('organizations.id'), nullable=True)
-    people_id = Column(ForeignKey('people.id'), nullable=True)
-    recording_id = Column(ForeignKey('recordings.id'), nullable=True)
-    howto_id = Column(ForeignKey('howtos.id'), nullable=True)
-    blog_id = Column(ForeignKey('blogs.id'), nullable=True)
+    organization_id = Column(ForeignKey('organizations.id'))
+    people_id = Column(ForeignKey('people.id'))
+    recording_id = Column(ForeignKey('recordings.id'))
+    howto_id = Column(ForeignKey('howtos.id'))
+    blog_id = Column(ForeignKey('blogs.id'))
 
     def _to_dict(self):
         return dict(
@@ -304,20 +304,20 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
 
     id = Column(UUIDType(binary=False), primary_key=True)
     short_name = Column(UnicodeText, nullable=False)
-    long_name = Column(UnicodeText, nullable=False)
-    short_description = Column(UnicodeText, nullable=False)
-    long_description = Column(UnicodeText, nullable=False)
+    long_name = Column(UnicodeText)
+    short_description = Column(UnicodeText)
+    long_description = Column(UnicodeText)
 
-    address_0 = Column(UnicodeText, nullable=False)
-    address_1 = Column(UnicodeText, nullable=False)
-    city = Column(UnicodeText, nullable=False)
-    state = Column(UnicodeText, nullable=False)
-    zipcode = Column(UnicodeText, nullable=False)
+    address_0 = Column(UnicodeText)
+    address_1 = Column(UnicodeText)
+    city = Column(UnicodeText)
+    state = Column(UnicodeText)
+    zipcode = Column(UnicodeText)
 
-    phone = Column(UnicodeText, nullable=False)
-    fax = Column(UnicodeText, nullable=False)
-    primary_website = Column(UnicodeText, nullable=False)
-    secondary_website = Column(UnicodeText, nullable=False)
+    phone = Column(UnicodeText)
+    fax = Column(UnicodeText)
+    primary_website = Column(UnicodeText)
+    secondary_website = Column(UnicodeText)
 
     def _to_dict(self):
         return dict(
@@ -351,7 +351,7 @@ class PlaylistAssignments(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'playlist_assignments'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    playlist_id = Column(ForeignKey('playlists.id'))
+    playlist_id = Column(ForeignKey('playlists.id'), nullable=False)
     recording_id = Column(ForeignKey('recordings.id'), nullable=False)
 
     @classmethod
@@ -390,7 +390,7 @@ class Playlists(Base, CreationMixin, TimeStampMixin):
     id = Column(UUIDType(binary=False), primary_key=True)
     author_id = Column(ForeignKey('people.id'))
     title = Column(UnicodeText, nullable=False)
-    description = Column(UnicodeText, nullable=False)
+    description = Column(UnicodeText)
 
     recordings = relationship(
         "Recordings",
@@ -461,26 +461,26 @@ class People(Base, CreationMixin, TimeStampMixin):
     id = Column(UUIDType(binary=False), primary_key=True)
     first = Column(UnicodeText, nullable=False)
     last = Column(UnicodeText, nullable=False)
-    address_0 = Column(UnicodeText, nullable=False)
-    address_1 = Column(UnicodeText, nullable=False)
-    city = Column(UnicodeText, nullable=False)
-    state = Column(UnicodeText, nullable=False)
-    zipcode = Column(UnicodeText, nullable=False)
-    phone = Column(UnicodeText, nullable=False)
-    fax = Column(UnicodeText, nullable=False)
-    primary_website = Column(UnicodeText, nullable=False)
-    secondary_website = Column(UnicodeText, nullable=False)
+    address_0 = Column(UnicodeText)
+    address_1 = Column(UnicodeText)
+    city = Column(UnicodeText)
+    state = Column(UnicodeText)
+    zipcode = Column(UnicodeText)
+    phone = Column(UnicodeText)
+    fax = Column(UnicodeText)
+    primary_website = Column(UnicodeText)
+    secondary_website = Column(UnicodeText)
 
     # these should probably be brough out into a seperate table as
     # many to one so we don't have to keep adding columns ...
-    twitter = Column(UnicodeText, nullable=False)
-    facebook = Column(UnicodeText, nullable=False)
-    instagram = Column(UnicodeText, nullable=False)
-    periscope = Column(UnicodeText, nullable=False)
+    twitter = Column(UnicodeText)
+    facebook = Column(UnicodeText)
+    instagram = Column(UnicodeText)
+    periscope = Column(UnicodeText)
 
     user_id = Column(ForeignKey('users.id'), nullable=False)
 
-    organization_id = Column(ForeignKey('organizations.id'), nullable=True)
+    organization_id = Column(ForeignKey('organizations.id'))
 
     def _to_dict(self):
         return dict(
@@ -567,8 +567,8 @@ class RecordingCategories(Base, CreationMixin, TimeStampMixin):
 
     id = Column(UUIDType(binary=False), primary_key=True)
     name = Column(UnicodeText, nullable=False)
-    short_description = Column(UnicodeText, nullable=False)
-    long_description = Column(UnicodeText, nullable=False)
+    short_description = Column(UnicodeText)
+    long_description = Column(UnicodeText)
 
     def to_dict(self):
         resp = {}
@@ -614,7 +614,7 @@ class Howtos(Base, CreationMixin, TimeStampMixin):
     title = Column(UnicodeText, nullable=False)
     contents = Column(UnicodeText, nullable=False)
     edit_datetime = Column(DateTime)
-    tags = Column(UnicodeText, nullable=False)
+    tags = Column(UnicodeText)
 
     def to_dict(self):
         resp = {}
@@ -637,8 +637,8 @@ class HowtoCategories(Base, CreationMixin, TimeStampMixin):
 
     id = Column(UUIDType(binary=False), primary_key=True)
     name = Column(UnicodeText, nullable=False)
-    short_description = Column(UnicodeText, nullable=False)
-    long_description = Column(UnicodeText, nullable=False)
+    short_description = Column(UnicodeText)
+    long_description = Column(UnicodeText)
 
     def to_dict(self):
         resp = {}
@@ -684,7 +684,7 @@ class Blogs(Base, CreationMixin, TimeStampMixin):
     title = Column(UnicodeText, nullable=False)
     contents = Column(UnicodeText, nullable=False)
     edit_datetime = Column(DateTime)
-    tags = Column(UnicodeText, nullable=False)
+    tags = Column(UnicodeText)
 
     author_id = Column(ForeignKey('users.id'))
 
