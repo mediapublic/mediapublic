@@ -1,9 +1,12 @@
+import cornice.pyramidhook as hooks
 from pyramid import authentication
 from pyramid.config import Configurator
 from pyramid import security
 from sqlalchemy import engine_from_config
+from pyramid import httpexceptions
 
 from mediapublic import auth
+from mediapublic import exceptions as mp_exc
 from .models import (
     DBSession,
     Base,
@@ -39,5 +42,15 @@ def main(global_config, **settings):
     config.scan('mediapublic.views')
 
     config.include('velruse.providers.twitter')
+
+    config.add_view(mp_exc.handle_exceptions, context=Exception,
+                    permission=security.NO_PERMISSION_REQUIRED)
+    # TODO(ryansb): replace default 40(3|4) with JSON errors
+    config.add_view(hooks.handle_exceptions,
+                    context=httpexceptions.HTTPNotFound,
+                    permission=security.NO_PERMISSION_REQUIRED)
+    config.add_view(hooks.handle_exceptions,
+                    context=httpexceptions.HTTPForbidden,
+                    permission=security.NO_PERMISSION_REQUIRED)
 
     return config.make_wsgi_app()
