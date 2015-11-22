@@ -1,11 +1,11 @@
 .person-picture
   .person-details
-    .name.form-inline(model=cid, data-editors="first,last")
+    .name.form-inline(model=cid, data-fields="first,last")
       = first + " " + last
 
 .person-edit
   if viewState.editing
-    i.action-icon.save.fa.fa-checkmark
+    i.action-icon.save.fa.fa-check
     i.action-icon.cancel.fa.fa-times
   else
     i.action-icon.edit.fa.fa-pencil

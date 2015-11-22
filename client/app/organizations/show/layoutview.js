@@ -1,11 +1,12 @@
 import {LayoutView} from 'backbone.marionette';
 import OrganizationView from './view';
-import PeopleView from 'shared/people/collection';
-import People from 'shared/people/people';
-import Person from 'shared/people/person';
+import PeopleView from 'shared/people/collectionview';
 import template from './layouttemplate.jade';
 
 export default LayoutView.extend({
+  initialize(options) {
+    this.peopleCollection = options.people;
+  },
   template,
   regions: {
     organization: '.organization-container',
@@ -16,7 +17,6 @@ export default LayoutView.extend({
   onBeforeShow() {
     this.showChildView(
         'organization', new OrganizationView({ model: this.model }));
-    this.showChildView('people', new PeopleView({
-      collection: new People([ new Person() ], { organization: this.model })}));
+    this.showChildView('people', new PeopleView({ collection: this.peopleCollection }));
   },
 });

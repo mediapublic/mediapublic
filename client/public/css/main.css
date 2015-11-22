@@ -6037,9 +6037,16 @@ aside > .table {
     right: -320px; } }
 
 .action-icon {
-  cursor: pointer; }
+  cursor: pointer;
+  padding: 5px; }
   .action-icon:hover {
     text-shadow: 0 0 1px #fff; }
+
+.action-icon.fa-check {
+  color: #5cb85c; }
+
+.action-icon.fa-times {
+  color: #d9534f; }
 
 .application {
   position: relative;
@@ -6077,11 +6084,16 @@ aside > .table {
   max-width: 600px;
   width: 100%; }
 
+.people {
+  margin-top: 40px; }
+
 .person {
+  display: inline-block;
   border: 1px solid #999;
   width: 200px;
   position: relative;
-  height: 200px; }
+  height: 200px;
+  margin: 10px 10px 0 0; }
 
 .person-picture {
   position: absolute;
@@ -6100,7 +6112,8 @@ aside > .table {
   padding: 10px;
   background-color: rgba(35, 35, 35, 0.5);
   -webkit-transition: all 0.2s linear;
-          transition: all 0.2s linear; }
+          transition: all 0.2s linear;
+  color: #ddd; }
 
 .person:hover .person-details {
   background-color: #232323;
@@ -6108,8 +6121,8 @@ aside > .table {
 
 .person-edit {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   color: #fff; }
 
 * {

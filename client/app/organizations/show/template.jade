@@ -4,10 +4,10 @@ include ../../shared/address.jade
 mixin detailsRow(field, title)
   tr.organization-details-row
     td.organization-details-field-title= title
-    td.organization-details-field-value(model=cid, data-editors=field)
+    td.organization-details-field-value(model=cid, data-fields=field)
       yield block
 
-h1.organization-title(model=cid, data-editors='short_name')= short_name
+h1.organization-title(model=cid, data-fields='short_name')= short_name
 aside.organization-aside
   table.organization-details.table
     if primary_website || viewState.editing
@@ -19,7 +19,7 @@ aside.organization-aside
     if phone || viewState.editing
       +detailsRow('phone', 'Phone')
         = phone
-p.organization-description(model=cid, data-editors='long_description')= long_description
+p.organization-description(model=cid, data-fields='long_description')= long_description
 if viewState.editing
   .btn.btn-primary.save Save
   .btn.btn-default.cancel Cancel

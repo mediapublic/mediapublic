@@ -1,7 +1,16 @@
 .action-icon {
   cursor: pointer;
+  padding: 5px;
 
   &:hover {
     text-shadow: 0 0 1px #fff;
   }
+}
+
+.action-icon.fa-check {
+  color: $brand-success;
+}
+
+.action-icon.fa-times {
+  color: $brand-danger;
 }
