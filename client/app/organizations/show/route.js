@@ -1,5 +1,5 @@
 import {Route} from 'backbone-routing';
-import View from './view';
+import View from './layoutview';
 import storage from '../storage';
 
 export default Route.extend({

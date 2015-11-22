@@ -1,0 +1,38 @@
+.person {
+  border: 1px solid $borderGray;
+  width: 200px;
+  position: relative;
+  height: 200px;
+}
+
+.person-picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: 100%;
+  background-color: #777;
+}
+
+.person-details {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(35, 35, 35, 0.5);
+  transition: all 0.2s linear;
+}
+
+.person:hover .person-details {
+  background-color: rgba(35, 35, 35, 1);
+  color: #fff;
+}
+
+.person-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+}

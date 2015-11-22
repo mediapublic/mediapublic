@@ -6036,6 +6036,11 @@ aside > .table {
     position: absolute;
     right: -320px; } }
 
+.action-icon {
+  cursor: pointer; }
+  .action-icon:hover {
+    text-shadow: 0 0 1px #fff; }
+
 .application {
   position: relative;
   width: 100%;
@@ -6065,10 +6070,47 @@ aside > .table {
   .header-menu-item:hover {
     background-color: #e6e6e6; }
 
-.organization-container {
+.organization-container,
+.people-container,
+.recordings-container {
   position: relative;
   max-width: 600px;
   width: 100%; }
+
+.person {
+  border: 1px solid #999;
+  width: 200px;
+  position: relative;
+  height: 200px; }
+
+.person-picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: 100%;
+  background-color: #777; }
+
+.person-details {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(35, 35, 35, 0.5);
+  -webkit-transition: all 0.2s linear;
+          transition: all 0.2s linear; }
+
+.person:hover .person-details {
+  background-color: #232323;
+  color: #fff; }
+
+.person-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff; }
 
 * {
   box-sizing: border-box; }

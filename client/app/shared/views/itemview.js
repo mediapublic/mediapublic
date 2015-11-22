@@ -19,6 +19,13 @@ export default ItemView.extend({
   },
 
 
+  events: {
+    'click .edit': 'renderEditor',
+    'click .save': 'saveChanges',
+    'click .cancel': 'cancelEditing'
+  },
+
+
   serializeData: function() {
     var data = ItemView.prototype.serializeData.apply(this, arguments);
     if (data.viewState) {

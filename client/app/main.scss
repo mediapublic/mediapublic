@@ -1,8 +1,10 @@
 @import "bootstrap-custom";
+@import "shared/style/variables";
 @import "shared/components";
 @import "application/style";
 @import "header/style";
 @import "organizations/style";
+@import "shared/people/style";
 
 * {
   box-sizing: border-box;
