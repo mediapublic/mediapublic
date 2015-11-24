@@ -10,12 +10,22 @@ import Form from 'shared/forms/distributed';
 export default ItemView.extend({
 
   initialize: function(options) {
+    if (_.isUndefined(options.editing)) {
+      options.editing = options.model && options.model.isNew();
+    }
     this.state = new Model({
       editing: options.editing || false
     });
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
     return ItemView.prototype.initialize.apply(this, arguments);
+  },
+
+
+  events: {
+    'click .edit': 'renderEditor',
+    'click .save': 'saveChanges',
+    'click .cancel': 'cancelEditing'
   },
 
 
@@ -83,5 +93,10 @@ export default ItemView.extend({
     } else {
       console.log(errors);
     }
+  },
+
+
+  cancelEditing: function() {
+    this.state.set('editing', false);
   }
 });

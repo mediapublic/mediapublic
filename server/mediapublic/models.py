@@ -478,7 +478,7 @@ class People(Base, CreationMixin, TimeStampMixin):
     instagram = Column(UnicodeText)
     periscope = Column(UnicodeText)
 
-    user_id = Column(ForeignKey('users.id'), nullable=False)
+    user_id = Column(ForeignKey('users.id'))
 
     organization_id = Column(ForeignKey('organizations.id'))
 

@@ -1,6 +1,21 @@
 import BackboneForm from 'backbone-forms/distribution/backbone-forms.js';
 import templates from './templates';
 import _ from 'underscore';
+import titleize from 'underscore.string/titleize';
+
+var OriginalText = BackboneForm.editors.Text;
+BackboneForm.editors.Text = BackboneForm.editors.Text.extend({
+  // Add a placeholder attribute
+  initialize(options) {
+    options.schema = options.schema || {};
+    options.schema.editorAttrs = options.schema.editorAttrs || {};
+    options.schema.editorAttrs.placeholder =
+        options.schema.placeholder || options.schema.title || titleize(options.key);
+    options.schema.editorAttrs['aria-label'] =
+        options.schema.editorAttrs['aria-label'] || options.schema.editorAttrs.placeholder;
+    return OriginalText.prototype.initialize.apply(this, arguments);
+  }
+})
 
 BackboneForm.validators.phone = function(options) {
   options = _.extend({
