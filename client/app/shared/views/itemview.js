@@ -1,4 +1,5 @@
 import {ItemView} from 'backbone.marionette';
+import Backbone from 'backbone';
 import {Model} from 'backbone';
 import _ from 'underscore';
 import Form from 'shared/forms/distributed';
@@ -18,6 +19,11 @@ export default ItemView.extend({
     });
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
+
+    if (this.model.isNew()) {
+      this.listenToOnce(this.model, 'sync', this.navigateToModel);
+    }
+
     return ItemView.prototype.initialize.apply(this, arguments);
   },
 
@@ -98,5 +104,21 @@ export default ItemView.extend({
 
   cancelEditing: function() {
     this.state.set('editing', false);
+  },
+
+
+  navigateToModel: function(model, options) {
+    model = model || this.model;
+    if (!model) {
+      throw new Error('No model specified to navigate to.');
+    }
+
+    var fragment = _.result(model, 'permalink');
+
+    if (_.isUndefined(fragment)) {
+      throw new Error('No permalink specified on the model');
+    }
+
+    Backbone.history.navigate(fragment, options);
   }
 });

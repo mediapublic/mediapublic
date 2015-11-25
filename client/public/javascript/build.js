@@ -470,6 +470,10 @@ exports['default'] = _backbone.Model.extend({
     }
   },
 
+  permalink: function permalink() {
+    return '/organizations/' + this.get('id');
+  },
+
   urlRoot: function urlRoot() {
     return app.config.apiUrl + '/organizations';
   }
@@ -1301,6 +1305,8 @@ var _backboneMarionette = require('backbone.marionette');
 
 var _backbone = require('backbone');
 
+var _backbone2 = _interopRequireDefault(_backbone);
+
 var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
@@ -1324,6 +1330,11 @@ exports['default'] = _backboneMarionette.ItemView.extend({
     });
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
+
+    if (this.model.isNew()) {
+      this.listenToOnce(this.model, 'sync', this.navigateToModel);
+    }
+
     return _backboneMarionette.ItemView.prototype.initialize.apply(this, arguments);
   },
 
@@ -1396,6 +1407,21 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 
   cancelEditing: function cancelEditing() {
     this.state.set('editing', false);
+  },
+
+  navigateToModel: function navigateToModel(model, options) {
+    model = model || this.model;
+    if (!model) {
+      throw new Error('No model specified to navigate to.');
+    }
+
+    var fragment = _underscore2['default'].result(model, 'permalink');
+
+    if (_underscore2['default'].isUndefined(fragment)) {
+      throw new Error('No permalink specified on the model');
+    }
+
+    _backbone2['default'].history.navigate(fragment, options);
   }
 });
 module.exports = exports['default'];

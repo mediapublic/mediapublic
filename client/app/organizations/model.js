@@ -44,6 +44,10 @@ export default Model.extend({
     }
   },
 
+  permalink() {
+    return '/organizations/' + this.get('id');
+  },
+
   urlRoot() {
     return app.config.apiUrl + '/organizations';
   }
