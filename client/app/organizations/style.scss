@@ -1,9 +1,62 @@
-.organization-container,
-.people-container,
-.recordings-container {
+.region-container {
   position: relative;
-  max-width: 600px;
+  max-width: 992px;
   width: 100%;
+  margin: auto;
 }
 
+.cover-photo {
+  background-size: 100%;
+  height: 250px;
+  padding: 50px;
+  position: relative;
+}
 
+.organization-title,
+.organization-location {
+  color: #fff;
+  font-family: 'Raleway';
+}
+
+.organization-title-container {
+  position: relative;
+}
+
+.organization-social-media-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff;
+
+  .fa {
+    font-size: 1.5em;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .organization-social-media-container {
+    position: static;
+    margin-top: 10px;
+  }
+}
+
+.fa.organization-details-field-icon {
+  vertical-align: middle;
+  padding: 10px;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.organization-details-field-value {
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+.organization-details-row {
+  padding: 10px 0;
+}
+
+.organization-details-box {
+  margin: 20px 0;
+}

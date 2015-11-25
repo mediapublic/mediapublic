@@ -6009,6 +6009,30 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+* {
+  box-sizing: border-box; }
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+.inline-block {
+  display: inline-block; }
+
+.btn {
+  margin-right: 10px; }
+
+p {
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Times New Roman", serif; }
+
+a {
+  cursor: pointer; }
+
 /**
  *  Component to be used to display extra (often tabular) information alongside
  *  something else. At mobile widths it will be inline and full-width.
@@ -6054,7 +6078,7 @@ aside > .table {
   height: 100%;
   overflow-y: scroll;
   padding: 20px;
-  padding-top: 70px; }
+  padding-top: 50px; }
 
 .header-item {
   height: 50px;
@@ -6077,12 +6101,58 @@ aside > .table {
   .header-menu-item:hover {
     background-color: #e6e6e6; }
 
-.organization-container,
-.people-container,
-.recordings-container {
+.navbar {
+  margin-bottom: 0; }
+
+.region-container {
   position: relative;
-  max-width: 600px;
-  width: 100%; }
+  max-width: 992px;
+  width: 100%;
+  margin: auto; }
+
+.cover-photo {
+  background-size: 100%;
+  height: 250px;
+  padding: 50px;
+  position: relative; }
+
+.organization-title,
+.organization-location {
+  color: #fff;
+  font-family: 'Raleway'; }
+
+.organization-title-container {
+  position: relative; }
+
+.organization-social-media-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff; }
+  .organization-social-media-container .fa {
+    font-size: 1.5em;
+    padding: 5px; }
+
+@media (max-width: 768px) {
+  .organization-social-media-container {
+    position: static;
+    margin-top: 10px; } }
+
+.fa.organization-details-field-icon {
+  vertical-align: middle;
+  padding: 10px;
+  font-size: 20px;
+  margin-right: 20px; }
+
+.organization-details-field-value {
+  vertical-align: middle;
+  font-size: 18px; }
+
+.organization-details-row {
+  padding: 10px 0; }
+
+.organization-details-box {
+  margin: 20px 0; }
 
 .people {
   margin-top: 40px; }
@@ -6124,18 +6194,3 @@ aside > .table {
   top: 5px;
   right: 5px;
   color: #fff; }
-
-* {
-  box-sizing: border-box; }
-
-html,
-body {
-  position: relative;
-  width: 100%;
-  height: 100%; }
-
-.inline-block {
-  display: inline-block; }
-
-.btn {
-  margin-right: 10px; }

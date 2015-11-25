@@ -1,0 +1,32 @@
+// TODO: replace this with an absolute path, need to specify 'basedir'
+include ../../shared/address.jade
+
+mixin detailsRow(field, icon)
+  .organization-details-row
+    i.organization-details-field-icon.fa(class=icon)
+    .organization-details-field-value.inline-block(model=cid, data-fields=field)
+      yield block
+
+p.organization-short-description(model=cid, data-fields='short_description')= short_description
+if !viewState.expanded
+  a.action.read-more Read more
+if viewState.expanded
+  .organization-expanded-details
+    p.organization-description(model=cid, data-fields='long_description')= long_description
+    .organization-details-box
+      if primary_website || viewState.editing
+        +detailsRow('primary_website', 'fa-link')
+          a(href=primary_website)= primary_website
+      if (address_0 && city) || viewState.editing
+        +detailsRow('address_0,address_1,city,state,zipcode', 'fa-map-marker')
+          +address(address_0, address_1, city, state, zipcode)
+      if phone || viewState.editing
+        +detailsRow('phone', 'fa-phone')
+          = phone
+    a.action.read-less Read less
+  if viewState.editing
+    .image-field(model=cid, data-fields='image_url')
+    .btn.btn-primary.save Save
+    .btn.btn-default.cancel Cancel
+  else
+    .btn.btn-default.edit Edit

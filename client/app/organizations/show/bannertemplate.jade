@@ -1,0 +1,9 @@
+.cover-photo(style="background-image: url(#{image_url});")
+  .organization-title-container
+    .h1.organization-title(model=cid, data-fields='short_name')= short_name
+    .h4.organization-location= city + ', ' + state
+    .organization-social-media-container
+      i.fa.fa-twitter
+      i.fa.fa-facebook
+      i.fa.fa-github
+      i.fa.fa-instagram

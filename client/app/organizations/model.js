@@ -41,6 +41,10 @@ export default Model.extend({
     state: {
       type: 'Text',
       validators: ['required', 'state']
+    },
+    image_url: {
+      title: 'Cover Photo Url',
+      type: 'Text'
     }
   },
 

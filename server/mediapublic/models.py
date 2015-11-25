@@ -318,6 +318,7 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
     fax = Column(UnicodeText)
     primary_website = Column(UnicodeText)
     secondary_website = Column(UnicodeText)
+    image_url = Column(UnicodeText)
 
     def _to_dict(self):
         return dict(
@@ -334,6 +335,7 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
             fax=self.fax,
             primary_website=self.primary_website,
             secondary_website=self.secondary_website,
+            image_url=self.image_url,
         )
 
     def to_dict(self):

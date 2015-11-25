@@ -1,5 +1,6 @@
 import {LayoutView} from 'backbone.marionette';
-import OrganizationView from './view';
+import OrganizationBanner from './banner';
+import OrganizationDetails from './details';
 import PeopleView from 'shared/people/collectionview';
 import template from './layouttemplate.jade';
 
@@ -9,14 +10,19 @@ export default LayoutView.extend({
   },
   template,
   regions: {
-    organization: '.organization-container',
+    banner: '.organization-banner-container',
+    details: '.organization-details-container',
     people: '.people-container',
-    recordings: '.recordings-container'
+    recordings: '.recordings-container',
+    helprequests: '.help-requests-container'
   },
 
   onBeforeShow() {
     this.showChildView(
-        'organization', new OrganizationView({ model: this.model }));
-    this.showChildView('people', new PeopleView({ collection: this.peopleCollection }));
+        'banner', new OrganizationBanner({ model: this.model }));
+    this.showChildView(
+        'details', new OrganizationDetails({ model: this.model, expanded: true }));
+    this.showChildView(
+        'people', new PeopleView({ collection: this.peopleCollection }));
   },
 });
