@@ -1,9 +1,9 @@
 .person
-  .person-picture(style="background-image: url(#{profile_picture})")
-    .person-details
+  .tile-image(style="background-image: url(#{profile_picture})")
+    .tile-details
       .name.form-inline(model=cid, data-fields="first,last")
         = first + " " + last
-  .person-edit
+  .tile-edit
     if viewState.editing
       i.action-icon.save.fa.fa-check
       i.action-icon.cancel.fa.fa-times

@@ -6079,6 +6079,53 @@ aside > .table {
 .load-more {
   cursor: pointer; }
 
+.tile {
+  width: calc(20% - 10px);
+  margin: 5px;
+  padding-bottom: 20%;
+  position: relative;
+  border: 1px solid #999;
+  display: inline-block; }
+
+.tile-image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: cover;
+  background-color: #777; }
+
+.tile-details {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(35, 35, 35, 0.5);
+  -webkit-transition: all 0.2s linear;
+          transition: all 0.2s linear;
+  color: #ddd; }
+
+.tile:hover .tile-details {
+  background-color: #232323;
+  color: #fff; }
+
+.tile-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff; }
+
+.tile-container {
+  border-top: 1px solid #999;
+  margin-top: 10px;
+  padding-top: 10px; }
+
+.tile-list-title {
+  padding-left: 5px;
+  margin-top: 40px; }
+
 .application {
   position: relative;
   width: 100%;
@@ -6183,51 +6230,3 @@ aside > .table {
 
 .read-action-container {
   text-align: right; }
-
-.people {
-  margin-top: 40px; }
-
-.person-container {
-  width: calc(20% - 10px);
-  margin: 5px;
-  padding-bottom: 20%;
-  position: relative;
-  box-sizing: content-box;
-  display: inline-block; }
-
-.person {
-  position: absolute;
-  border: 1px solid #999;
-  width: 100%;
-  top: 0;
-  bottom: 0; }
-
-.person-picture {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-size: 100%;
-  background-color: #777; }
-
-.person-details {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 10px;
-  background-color: rgba(35, 35, 35, 0.5);
-  -webkit-transition: all 0.2s linear;
-          transition: all 0.2s linear;
-  color: #ddd; }
-
-.person:hover .person-details {
-  background-color: #232323;
-  color: #fff; }
-
-.person-edit {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  color: #fff; }

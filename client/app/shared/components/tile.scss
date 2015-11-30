@@ -1,0 +1,42 @@
+.tile {
+  width: calc(20% - 10px);
+  margin: 5px;
+  padding-bottom: 20%;
+  position: relative;
+  border: 1px solid $borderGray;
+  display: inline-block;
+}
+
+.tile-image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: cover;
+  background-color: #777;
+}
+
+.tile-details {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(35, 35, 35, 0.5);
+  transition: all 0.2s linear;
+  color: #ddd;
+}
+
+.tile:hover .tile-details {
+  background-color: rgba(35, 35, 35, 1);
+  color: #fff;
+}
+
+.tile-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff;
+}
+

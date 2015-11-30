@@ -27,9 +27,14 @@ export default {
     profile_picture: 'https://scontent-iad3-1.xx.fbcdn.net/hphotos-xfa1/t31.0-8/11203569_10153158191676187_9040442632983579616_o.jpg'
   },
 
+  fakeRecording: {
+    title: 'Amid A Violent Religious Rift, Pope Preaches Harmony In CAR',
+    url: 'http://www.npr.org/2015/11/29/457795088/amid-a-violent-religious-rift-pope-preaches-harmony-in-car'
+  },
+
   replicate(fake, times, opt_new) {
     var fakes = [];
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < times; i++) {
       if (opt_new) {
         fakes.push(fake);
       } else {
