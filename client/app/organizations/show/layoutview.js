@@ -3,12 +3,14 @@ import OrganizationBanner from './banner';
 import OrganizationDetails from './details';
 import PeopleView from 'shared/people/collectionview';
 import RecordingsView from 'shared/recordings/collectionview';
+import HelpRequestsView from 'shared/helprequests/collectionview';
 import template from './layouttemplate.jade';
 
 export default LayoutView.extend({
   initialize(options) {
     this.peopleCollection = options.people;
     this.recordingsCollection = options.recordings;
+    this.helpRequestsCollection = options.helpRequests;
   },
   template,
   regions: {
@@ -29,5 +31,8 @@ export default LayoutView.extend({
     this.showChildView(
         'recordings',
         new RecordingsView({ collection: this.recordingsCollection }));
+    this.showChildView(
+        'helprequests',
+        new HelpRequestsView({ collection: this.helpRequestsCollection}));
   },
 });

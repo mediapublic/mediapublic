@@ -5,11 +5,13 @@ import IndexRouter from './index/router';
 import OrganizationRouter from './organizations/router';
 import config from './config.json';
 import Header from './header/view';
+import templateHelpers from 'shared/utilities/templatehelpers';
 
 // Global namespace
 window.app = new Application();
 
 app.config = config;
+app.templateHelpers = templateHelpers;
 
 app.indexRouter = new IndexRouter({
   container: app.layout.content

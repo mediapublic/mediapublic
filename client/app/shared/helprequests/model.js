@@ -6,9 +6,14 @@ export default Model.extend({
       type: 'Text',
       validators: ['required'],
     },
-    url: {
+    text: {
       type: 'Text',
-      validators: ['url', 'required'],
+      validators: ['required'],
+    },
+    contact_email: {
+      type: 'Text',
+      title: 'Contact Email',
+      validators: ['email', 'required']
     }
   },
 

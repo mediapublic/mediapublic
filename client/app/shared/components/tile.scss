@@ -5,6 +5,7 @@
   position: relative;
   border: 1px solid $borderGray;
   display: inline-block;
+  overflow: hidden;
 }
 
 .tile-image {
@@ -17,7 +18,7 @@
   background-color: #777;
 }
 
-.tile-details {
+.tile-title {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -28,11 +29,6 @@
   color: #ddd;
 }
 
-.tile:hover .tile-details {
-  background-color: rgba(35, 35, 35, 1);
-  color: #fff;
-}
-
 .tile-edit {
   position: absolute;
   top: 5px;
@@ -40,3 +36,69 @@
   color: #fff;
 }
 
+.tile-more {
+  transition: all 0.2s ease-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(100%);
+  background-color: rgba(35, 35, 35, 1);
+  color: #fff;
+  padding: 10px;
+}
+
+.tile:hover .tile-more {
+  transform: translateY(0);
+}
+
+
+@media (max-width: $screen-sm-max) {
+  .tile {
+    width: 100%;
+    display: block;
+    margin: 10px 0;
+    padding-bottom: 20px;
+    border: none;
+  }
+
+  .tile-image {
+    position: static;
+    width: 30%;
+    padding-bottom: 30%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .tile-text {
+    display: inline-block;
+    width: 70%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    vertical-align: top;
+  }
+
+  .tile-title {
+    position: static;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .tile-more {
+    transition: none;
+    position: static;
+    width: 100%;
+    transform: translateY(0);
+    background-color: #fff;
+    color: #000;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .tile:hover .tile-more {
+    transform: translateY(0);
+  }
+
+}

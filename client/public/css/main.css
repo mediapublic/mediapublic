@@ -6085,7 +6085,8 @@ aside > .table {
   padding-bottom: 20%;
   position: relative;
   border: 1px solid #999;
-  display: inline-block; }
+  display: inline-block;
+  overflow: hidden; }
 
 .tile-image {
   position: absolute;
@@ -6096,7 +6097,7 @@ aside > .table {
   background-size: cover;
   background-color: #777; }
 
-.tile-details {
+.tile-title {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -6107,15 +6108,72 @@ aside > .table {
           transition: all 0.2s linear;
   color: #ddd; }
 
-.tile:hover .tile-details {
-  background-color: #232323;
-  color: #fff; }
-
 .tile-edit {
   position: absolute;
   top: 5px;
   right: 5px;
   color: #fff; }
+
+.tile-more {
+  -webkit-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+  background-color: #232323;
+  color: #fff;
+  padding: 10px; }
+
+.tile:hover .tile-more {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0); }
+
+@media (max-width: 991px) {
+  .tile {
+    width: 100%;
+    display: block;
+    margin: 10px 0;
+    padding-bottom: 20px;
+    border: none; }
+  .tile-image {
+    position: static;
+    width: 30%;
+    padding-bottom: 30%;
+    display: inline-block;
+    vertical-align: top; }
+  .tile-text {
+    display: inline-block;
+    width: 70%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    vertical-align: top; }
+  .tile-title {
+    position: static;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    padding: 0; }
+  .tile-more {
+    -webkit-transition: none;
+            transition: none;
+    position: static;
+    width: 100%;
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+    background-color: #fff;
+    color: #000;
+    padding: 0;
+    margin-top: 10px; }
+  .tile:hover .tile-more {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0); } }
 
 .tile-container {
   border-top: 1px solid #999;
@@ -6125,6 +6183,12 @@ aside > .table {
 .tile-list-title {
   padding-left: 5px;
   margin-top: 40px; }
+
+.social-media-links {
+  text-align: right;
+  margin-top: 5px; }
+  .social-media-links .fa {
+    padding: 5px; }
 
 .application {
   position: relative;

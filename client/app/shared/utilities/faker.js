@@ -24,12 +24,19 @@ export default {
     twitter: '@gabeisman',
     facebook: 'https://www.facebook.com/gabeisman',
     instagram: '@gabeisman',
-    profile_picture: 'https://scontent-iad3-1.xx.fbcdn.net/hphotos-xfa1/t31.0-8/11203569_10153158191676187_9040442632983579616_o.jpg'
+    bio: 'I tell computers to do things and sometimes they listen to me.'
   },
 
   fakeRecording: {
     title: 'Amid A Violent Religious Rift, Pope Preaches Harmony In CAR',
-    url: 'http://www.npr.org/2015/11/29/457795088/amid-a-violent-religious-rift-pope-preaches-harmony-in-car'
+    url: 'http://www.npr.org/2015/11/29/457795088/amid-a-violent-religious-rift-pope-preaches-harmony-in-car',
+    description: 'Pope Francis is calling for communal and religious harmony during a visit to the Central African Republic, the final stop of his first African tour. The country has been racked by a deadly conflict driven by Christian and Muslim militias.'
+  },
+
+  fakeHelpRequest: {
+    title: 'Help us tag audio',
+    text: 'We need help going through our audio archives and tagging content so we can surface it.',
+    contact_email: 'gabe.isman@fake.com'
   },
 
   replicate(fake, times, opt_new) {
