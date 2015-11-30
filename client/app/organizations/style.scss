@@ -1,5 +1,4 @@
 .region-container {
-  position: relative;
   max-width: 992px;
   width: 100%;
   margin: auto;
@@ -8,7 +7,6 @@
 .cover-photo {
   background-size: 100%;
   height: 250px;
-  padding: 50px;
   position: relative;
 }
 
@@ -29,15 +27,24 @@
   font-family: 'Raleway';
 }
 
+.organization-title {
+  font-size: 5em;
+}
+
+.organization-location {
+  font-size: 1.5em;
+}
+
 .organization-title-container {
   position: relative;
+  padding: 50px;
   z-index: 2;
 }
 
 .organization-social-media-container {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 5px;
+  top: 5px;
   color: #fff;
 
   .fa {
@@ -86,4 +93,12 @@
 
 .read-action-container {
   text-align: right;
+}
+
+.edit-buttons-container {
+  text-align: right;
+
+  .btn {
+    margin-top: 10px;
+  }
 }

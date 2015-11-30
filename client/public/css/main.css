@@ -6223,7 +6223,6 @@ aside > .table {
   margin-bottom: 0; }
 
 .region-container {
-  position: relative;
   max-width: 992px;
   width: 100%;
   margin: auto; }
@@ -6231,7 +6230,6 @@ aside > .table {
 .cover-photo {
   background-size: 100%;
   height: 250px;
-  padding: 50px;
   position: relative; }
 
 .cover-photo::after {
@@ -6249,14 +6247,21 @@ aside > .table {
   color: #fff;
   font-family: 'Raleway'; }
 
+.organization-title {
+  font-size: 5em; }
+
+.organization-location {
+  font-size: 1.5em; }
+
 .organization-title-container {
   position: relative;
+  padding: 50px;
   z-index: 2; }
 
 .organization-social-media-container {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 5px;
+  top: 5px;
   color: #fff; }
   .organization-social-media-container .fa {
     font-size: 1.5em;
@@ -6294,3 +6299,13 @@ aside > .table {
 
 .read-action-container {
   text-align: right; }
+
+.edit-buttons-container {
+  text-align: right; }
+  .edit-buttons-container .btn {
+    margin-top: 10px; }
+
+.person-container .social-media-links {
+  position: absolute;
+  bottom: 5px;
+  right: 5px; }

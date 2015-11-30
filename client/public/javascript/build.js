@@ -621,7 +621,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (cid, city, image_url, short_name, state) {
-buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"h1 organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div><div class=\"h4 organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div><div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
+buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div><div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div><div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
 };
 },{"jade/runtime":65}],23:[function(require,module,exports){
 'use strict';
@@ -664,14 +664,14 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./detailstemplate.jade":24,"shared/views/itemview":55,"underscore":69}],24:[function(require,module,exports){
+},{"./detailstemplate.jade":24,"shared/views/itemview":55,"underscore":70}],24:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (address_0, address_1, cid, city, long_description, phone, primary_website, short_description, state, viewState, zipcode) {
+;var locals_for_with = (locals || {});(function (address_0, address_1, app, cid, city, long_description, phone, primary_website, state, viewState, zipcode) {
 buf.push("<!-- TODO: replace this with an absolute path, need to specify 'basedir'-->");
 jade_mixins["address"] = jade_interp = function(line_1, line_2, city, state, zip){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -688,14 +688,23 @@ buf.push("<div class=\"organization-details-row\"><i" + (jade.cls(['organization
 block && block();
 buf.push("</div></div>");
 };
-buf.push("<p" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_description\" class=\"organization-short-description\">" + (jade.escape(null == (jade_interp = short_description) ? "" : jade_interp)) + "</p>");
-if ( !viewState.expanded && !viewState.editing)
+buf.push("<div class=\"edit-buttons-container\">");
+if ( viewState.editing)
 {
-buf.push("<div class=\"read-action-container\"><a class=\"action read-more\">Read more</a></div>");
+buf.push("<div class=\"btn btn-primary save\">Save</div><div class=\"btn btn-default cancel\">Cancel</div>");
 }
 else
 {
-buf.push("<div class=\"organization-expanded-details\"><p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p><div class=\"read-action-container\"><a class=\"action read-less\">Read less</a></div><div class=\"organization-details-box-container\"><div class=\"organization-details-box\">");
+buf.push("<div class=\"btn btn-default edit\">Edit</div>");
+}
+buf.push("</div>");
+if ( !viewState.expanded && !viewState.editing)
+{
+buf.push("<p class=\"organization-description\">" + (jade.escape(null == (jade_interp = app.templateHelpers.truncate(long_description, 300)) ? "" : jade_interp)) + "</p><div class=\"read-action-container\"><a class=\"action read-more\">Read more</a></div>");
+}
+else
+{
+buf.push("<p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p><div class=\"organization-details-box-container\"><div class=\"organization-details-box\">");
 if ( (address_0 && city) || viewState.editing)
 {
 jade_mixins["detailsRow"].call({
@@ -721,16 +730,12 @@ buf.push(jade.escape(null == (jade_interp = phone) ? "" : jade_interp));
 }
 }, 'phone', 'fa-phone');
 }
-buf.push("</div></div></div>");
+buf.push("</div></div><div class=\"read-action-container\"><a class=\"action read-less\">Less</a></div>");
 }
 if ( viewState.editing)
 {
-buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"twitter\" class=\"extra-field twitter-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"facebook\" class=\"extra-field facebook-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"github\" class=\"extra-field github-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"instagram\" class=\"extra-field instagram-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"image_url\" class=\"extra-field image-field\"></div><div class=\"btn btn-primary save\">Save</div><div class=\"btn btn-default cancel\">Cancel</div>");
-}
-else
-{
-buf.push("<div class=\"btn btn-default edit\">Edit</div>");
-}}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"short_description" in locals_for_with?locals_for_with.short_description:typeof short_description!=="undefined"?short_description:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
+buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"twitter\" class=\"extra-field twitter-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"facebook\" class=\"extra-field facebook-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"github\" class=\"extra-field github-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"instagram\" class=\"extra-field instagram-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"image_url\" class=\"extra-field image-field\"></div>");
+}}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
 };
 },{"jade/runtime":65}],25:[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -878,7 +883,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":28,"./layoutview":26,"backbone-routing":58,"shared/helprequests/collection":33,"shared/people/people":41,"shared/recordings/collection":45,"shared/utilities/faker":52,"underscore":69}],28:[function(require,module,exports){
+},{"../storage":28,"./layoutview":26,"backbone-routing":58,"shared/helprequests/collection":33,"shared/people/people":41,"shared/recordings/collection":45,"shared/utilities/faker":52,"underscore":70}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1338,7 +1343,7 @@ var DistributedForm = _form2['default'].extend({
 exports['default'] = DistributedForm;
 module.exports = exports['default'];
 
-},{"../utilities.js":51,"./form":31,"backbone":63,"underscore":69}],31:[function(require,module,exports){
+},{"../utilities.js":51,"./form":31,"backbone":63,"underscore":70}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1410,7 +1415,7 @@ _backboneFormsDistributionBackboneFormsJs2['default'].validators.state = functio
 exports['default'] = _backboneFormsDistributionBackboneFormsJs2['default'];
 module.exports = exports['default'];
 
-},{"./templates":32,"backbone-forms/distribution/backbone-forms.js":56,"underscore":69,"underscore.string/titleize":68}],32:[function(require,module,exports){
+},{"./templates":32,"backbone-forms/distribution/backbone-forms.js":56,"underscore":70,"underscore.string/titleize":68}],32:[function(require,module,exports){
 /**
  * This file is lifted almost entirely from backbone-forms, and modified to work with
  * our module system.
@@ -1496,7 +1501,7 @@ if (_backboneFormsDistributionBackboneFormsJs2['default'].editors.List) {
   ');
 }
 
-},{"backbone-forms/distribution/backbone-forms.js":56,"underscore":69}],33:[function(require,module,exports){
+},{"backbone-forms/distribution/backbone-forms.js":56,"underscore":70}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2049,7 +2054,7 @@ module.exports = {
   }
 };
 
-},{"underscore":69}],52:[function(require,module,exports){
+},{"underscore":70}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2112,7 +2117,7 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{"underscore":69}],53:[function(require,module,exports){
+},{"underscore":70}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2125,16 +2130,26 @@ var _colorsColorbrewer = require('../colors/colorbrewer');
 
 var _colorsColorbrewer2 = _interopRequireDefault(_colorsColorbrewer);
 
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _underscoreStringTruncate = require('underscore.string/truncate');
+
+var _underscoreStringTruncate2 = _interopRequireDefault(_underscoreStringTruncate);
+
 exports['default'] = {
   randomColor: function randomColor(cid, palette, tones) {
     var palette = _colorsColorbrewer2['default'][palette || 'Spectral'][tones || 9];
     var index = parseInt(cid.replace('c', ''), 10) % palette.length;
     return palette[index];
-  }
+  },
+  _: _underscore2['default'],
+  truncate: _underscoreStringTruncate2['default']
 };
 module.exports = exports['default'];
 
-},{"../colors/colorbrewer":29}],54:[function(require,module,exports){
+},{"../colors/colorbrewer":29,"underscore":70,"underscore.string/truncate":69}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2317,7 +2332,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":63,"backbone.marionette":59,"shared/forms/distributed":30,"underscore":69}],56:[function(require,module,exports){
+},{"backbone":63,"backbone.marionette":59,"shared/forms/distributed":30,"underscore":70}],56:[function(require,module,exports){
 (function (global){
 /**
  * Backbone Forms v0.14.0
@@ -4896,7 +4911,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 })(window || global || this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":63,"underscore":69}],57:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],57:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone')) :
   typeof define === 'function' && define.amd ? define(['underscore', 'backbone'], factory) :
@@ -5387,7 +5402,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":63,"underscore":69}],58:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],58:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('backbone'), require('backbone-metal')) : typeof define === 'function' && define.amd ? define(['backbone', 'backbone-metal'], factory) : global.Backbone.Routing = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -9075,7 +9090,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return Marionette;
 }));
 
-},{"backbone":63,"backbone.babysitter":60,"backbone.wreqr":61,"underscore":69}],60:[function(require,module,exports){
+},{"backbone":63,"backbone.babysitter":60,"backbone.wreqr":61,"underscore":70}],60:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.8
@@ -9267,7 +9282,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":63,"underscore":69}],61:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],61:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.3
@@ -9704,7 +9719,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":63,"underscore":69}],62:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],62:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory(require("backbone"), require("backbone-metal")) : typeof define === "function" && define.amd ? define(["backbone", "backbone-metal"], factory) : global.Backbone.Storage = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -11722,7 +11737,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":66,"underscore":69}],64:[function(require,module,exports){
+},{"jquery":66,"underscore":70}],64:[function(require,module,exports){
 
 },{}],65:[function(require,module,exports){
 (function (global){
@@ -21210,6 +21225,16 @@ module.exports = function titleize(str) {
 };
 
 },{"./helper/makeString":67}],69:[function(require,module,exports){
+var makeString = require('./helper/makeString');
+
+module.exports = function truncate(str, length, truncateStr) {
+  str = makeString(str);
+  truncateStr = truncateStr || '...';
+  length = ~~length;
+  return str.length > length ? str.slice(0, length) + truncateStr : str;
+};
+
+},{"./helper/makeString":67}],70:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
