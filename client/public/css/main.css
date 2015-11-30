@@ -6133,7 +6133,7 @@ aside > .table {
       -ms-transform: translateY(0);
           transform: translateY(0); }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .tile {
     width: 100%;
     display: block;
