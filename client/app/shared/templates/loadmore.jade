@@ -1,6 +1,11 @@
 mixin loadmore
-  .load-more-container
-    if !viewState.more
-      a.load-more Load more
-    else
-      a.load-less Less
+  if (viewState.hasMore)
+    .load-more-container
+      if !viewState.more
+        a.load-more
+          i.fa.fa-chevron-down
+          | &nbsp; Load more
+      else
+        a.load-less
+          i.fa.fa-chevron-up
+          | &nbsp; Less

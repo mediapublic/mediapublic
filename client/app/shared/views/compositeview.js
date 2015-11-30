@@ -29,6 +29,7 @@ export default CompositeView.extend({
       throw new Error('viewState is a reserved data keyword');
     }
     data.viewState = this.state.toJSON();
+    data.viewState.hasMore = this.collection.length > this.numModels;
     return data;
   },
 

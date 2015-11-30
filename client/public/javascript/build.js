@@ -1529,21 +1529,25 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-buf.push("<h2 class=\"tile-list-title\">Ways to help</h2><div class=\"help-requests-list tile-container\"></div>");;return buf.join("");
+;var locals_for_with = (locals || {});(function (viewState) {
+jade_mixins["loadmore"] = jade_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
+buf.push("<div class=\"load-more-container\">");
+if ( !viewState.more)
+{
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
+}
+else
+{
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
+}
+buf.push("</div>");
+}
+};
+buf.push("<h2 class=\"tile-list-title\">Ways to help</h2><div class=\"help-requests-list tile-container\"></div>");
+jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":65}],35:[function(require,module,exports){
 'use strict';
@@ -1654,16 +1658,19 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
 buf.push("<div class=\"load-more-container\">");
 if ( !viewState.more)
 {
-buf.push("<a class=\"load-more\">Load more</a>");
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
 }
 else
 {
-buf.push("<a class=\"load-less\">Less</a>");
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
 }
 buf.push("</div>");
+}
 };
 buf.push("<h2 class=\"tile-list-title\">People</h2><div class=\"people-list tile-container\"></div>");
 jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
@@ -1872,16 +1879,19 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
 buf.push("<div class=\"load-more-container\">");
 if ( !viewState.more)
 {
-buf.push("<a class=\"load-more\">Load more</a>");
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
 }
 else
 {
-buf.push("<a class=\"load-less\">Less</a>");
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
 }
 buf.push("</div>");
+}
 };
 buf.push("<h2 class=\"tile-list-title\">Recordings</h2><div class=\"recordings-list tile-container\"></div>");
 jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
@@ -2163,6 +2173,7 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
       throw new Error('viewState is a reserved data keyword');
     }
     data.viewState = this.state.toJSON();
+    data.viewState.hasMore = this.collection.length > this.numModels;
     return data;
   },
 
