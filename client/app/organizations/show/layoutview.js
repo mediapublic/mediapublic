@@ -21,7 +21,7 @@ export default LayoutView.extend({
     this.showChildView(
         'banner', new OrganizationBanner({ model: this.model }));
     this.showChildView(
-        'details', new OrganizationDetails({ model: this.model, expanded: true }));
+        'details', new OrganizationDetails({ model: this.model }));
     this.showChildView(
         'people', new PeopleView({ collection: this.peopleCollection }));
   },

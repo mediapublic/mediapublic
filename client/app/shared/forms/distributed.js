@@ -53,6 +53,10 @@ var DistributedForm = BackboneForm.extend({
       _.each(keys, function(key) {
         var field = fields[key];
 
+        if (!field || !field.editor) {
+          throw new Error('Missing field definition for ' + key);
+        }
+
         $container.append(field.editor.render().el);
       });
     });
@@ -75,6 +79,10 @@ var DistributedForm = BackboneForm.extend({
       //Add the fields
       _.each(keys, function(key) {
         var field = fields[key];
+
+        if (!field || !field.editor) {
+          throw new Error('Missing field definition for ' + key);
+        }
 
         $container.append(field.render().el);
       });

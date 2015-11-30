@@ -3,5 +3,5 @@ import template from './singletemplate.jade';
 
 export default ItemView.extend({
   template,
-  className: 'person',
+  className: 'person-container',
 });

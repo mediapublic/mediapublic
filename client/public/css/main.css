@@ -6072,6 +6072,13 @@ aside > .table {
 .action-icon.fa-times {
   color: #d9534f; }
 
+.load-more-container {
+  text-align: right; }
+
+.load-less,
+.load-more {
+  cursor: pointer; }
+
 .application {
   position: relative;
   width: 100%;
@@ -6116,13 +6123,24 @@ aside > .table {
   padding: 50px;
   position: relative; }
 
+.cover-photo::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1; }
+
 .organization-title,
 .organization-location {
   color: #fff;
   font-family: 'Raleway'; }
 
 .organization-title-container {
-  position: relative; }
+  position: relative;
+  z-index: 2; }
 
 .organization-social-media-container {
   position: absolute;
@@ -6146,24 +6164,43 @@ aside > .table {
 
 .organization-details-field-value {
   vertical-align: middle;
-  font-size: 18px; }
+  font-size: 18px;
+  text-align: left; }
 
 .organization-details-row {
-  padding: 10px 0; }
+  padding: 5px 0;
+  text-align: center; }
 
 .organization-details-box {
-  margin: 20px 0; }
+  margin-top: 10px; }
+
+@media (min-width: 768px) {
+  .organization-details-box {
+    margin: 20px 0;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top; } }
+
+.read-action-container {
+  text-align: right; }
 
 .people {
   margin-top: 40px; }
 
-.person {
-  display: inline-block;
-  border: 1px solid #999;
-  width: 200px;
+.person-container {
+  width: calc(20% - 10px);
+  margin: 5px;
+  padding-bottom: 20%;
   position: relative;
-  height: 200px;
-  margin: 10px 10px 0 0; }
+  box-sizing: content-box;
+  display: inline-block; }
+
+.person {
+  position: absolute;
+  border: 1px solid #999;
+  width: 100%;
+  top: 0;
+  bottom: 0; }
 
 .person-picture {
   position: absolute;
