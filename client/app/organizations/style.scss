@@ -1,30 +1,30 @@
 .region-container {
-  max-width: 992px;
   width: 100%;
+  max-width: 992px;
   margin: auto;
 }
 
 .cover-photo {
-  background-size: 100%;
-  height: 250px;
   position: relative;
+  height: 250px;
+  background-size: 100%;
 }
 
 .cover-photo::after {
   position: absolute;
-  content: '';
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(0,0,0,.5);
   z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background-color: rgba(0,0,0,.5);
 }
 
 .organization-title,
 .organization-location {
-  color: #fff;
   font-family: 'Raleway';
+  color: #fff;
 }
 
 .organization-title {
@@ -37,19 +37,18 @@
 
 .organization-title-container {
   position: relative;
-  padding: 50px;
   z-index: 2;
+  padding: 50px;
 }
 
 .organization-social-media-container {
   position: absolute;
-  right: 5px;
   top: 5px;
+  right: 5px;
   color: #fff;
-
   .fa {
-    font-size: 1.5em;
     padding: 5px;
+    font-size: 1.5em;
   }
 }
 
@@ -61,16 +60,16 @@
 }
 
 .fa.organization-details-field-icon {
-  vertical-align: middle;
+  margin-right: 20px;
   padding: 10px;
   font-size: 20px;
-  margin-right: 20px;
+  vertical-align: middle;
 }
 
 .organization-details-field-value {
-  vertical-align: middle;
   font-size: 18px;
   text-align: left;
+  vertical-align: middle;
 }
 
 .organization-details-row {
@@ -84,9 +83,9 @@
 
 @media (min-width: $screen-sm) {
   .organization-details-box {
-    margin: 20px 0;
-    width: 50%;
     display: inline-block;
+    width: 50%;
+    margin: 20px 0;
     vertical-align: top;
   }
 }
@@ -97,7 +96,6 @@
 
 .edit-buttons-container {
   text-align: right;
-
   .btn {
     margin-top: 10px;
   }

@@ -6056,9 +6056,9 @@ aside > .table {
 
 @media (min-width: 992px) {
   aside {
-    margin: 0;
     position: absolute;
-    right: -320px; } }
+    right: -320px;
+    margin: 0; } }
 
 .action-icon {
   cursor: pointer;
@@ -6080,33 +6080,31 @@ aside > .table {
   cursor: pointer; }
 
 .tile {
+  position: relative;
+  display: inline-block;
   width: calc(20% - 10px);
   margin: 5px;
   padding-bottom: 20%;
-  position: relative;
-  border: 1px solid #999;
-  display: inline-block;
-  overflow: hidden; }
+  overflow: hidden;
+  border: 1px solid #999; }
 
 .tile-image {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  background-size: cover;
-  background-color: #777; }
+  background-color: #777;
+  background-size: cover; }
 
 .tile-title {
   position: absolute;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   left: 0;
   padding: 10px;
-  background-color: rgba(35, 35, 35, 0.5);
-  -webkit-transition: all 0.2s linear;
-          transition: all 0.2s linear;
-  color: #ddd; }
+  color: #ddd;
+  background-color: rgba(35, 35, 35, 0.5); }
 
 .tile-edit {
   position: absolute;
@@ -6115,18 +6113,18 @@ aside > .table {
   color: #fff; }
 
 .tile-more {
-  -webkit-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
+  padding: 10px;
+  -webkit-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
   -webkit-transform: translateY(100%);
       -ms-transform: translateY(100%);
           transform: translateY(100%);
-  background-color: #232323;
   color: #fff;
-  padding: 10px; }
+  background-color: #232323; }
 
 .tile:hover .tile-more {
   -webkit-transform: translateY(0);
@@ -6135,16 +6133,16 @@ aside > .table {
 
 @media (max-width: 767px) {
   .tile {
-    width: 100%;
     display: block;
+    width: 100%;
     margin: 10px 0;
     padding-bottom: 20px;
     border: none; }
   .tile-image {
     position: static;
+    display: inline-block;
     width: 30%;
     padding-bottom: 30%;
-    display: inline-block;
     vertical-align: top; }
   .tile-text {
     display: inline-block;
@@ -6154,22 +6152,22 @@ aside > .table {
     vertical-align: top; }
   .tile-title {
     position: static;
-    background-color: #fff;
-    color: #000;
+    padding: 0;
     font-weight: bold;
-    padding: 0; }
+    color: #000;
+    background-color: #fff; }
   .tile-more {
-    -webkit-transition: none;
-            transition: none;
     position: static;
     width: 100%;
+    margin-top: 10px;
+    padding: 0;
+    -webkit-transition: none;
+            transition: none;
     -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
             transform: translateY(0);
-    background-color: #fff;
     color: #000;
-    padding: 0;
-    margin-top: 10px; }
+    background-color: #fff; }
   .tile:hover .tile-more {
     -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
@@ -6185,8 +6183,8 @@ aside > .table {
   margin-top: 40px; }
 
 .social-media-links {
-  text-align: right;
-  margin-top: 5px; }
+  margin-top: 5px;
+  text-align: right; }
   .social-media-links .fa {
     padding: 5px; }
 
@@ -6194,15 +6192,15 @@ aside > .table {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   padding: 20px;
-  padding-top: 50px; }
+  padding-top: 50px;
+  overflow-y: scroll; }
 
 .header-item {
   height: 50px;
+  padding: 0 10px;
   line-height: 50px;
-  text-align: center;
-  padding: 0 10px; }
+  text-align: center; }
 
 .header-menu {
   position: absolute;
@@ -6213,9 +6211,9 @@ aside > .table {
 
 .header-menu-item {
   font-size: 1.3em;
-  border-left: 1px solid #e7e7e7;
   -webkit-transition: background-color 0.2s ease-out;
-          transition: background-color 0.2s ease-out; }
+          transition: background-color 0.2s ease-out;
+  border-left: 1px solid #e7e7e7; }
   .header-menu-item:hover {
     background-color: #e6e6e6; }
 
@@ -6223,29 +6221,29 @@ aside > .table {
   margin-bottom: 0; }
 
 .region-container {
-  max-width: 992px;
   width: 100%;
+  max-width: 992px;
   margin: auto; }
 
 .cover-photo {
-  background-size: 100%;
+  position: relative;
   height: 250px;
-  position: relative; }
+  background-size: 100%; }
 
 .cover-photo::after {
   position: absolute;
-  content: '';
+  z-index: 1;
   top: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1; }
+  content: '';
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .organization-title,
 .organization-location {
-  color: #fff;
-  font-family: 'Raleway'; }
+  font-family: 'Raleway';
+  color: #fff; }
 
 .organization-title {
   font-size: 5em; }
@@ -6255,17 +6253,17 @@ aside > .table {
 
 .organization-title-container {
   position: relative;
-  padding: 50px;
-  z-index: 2; }
+  z-index: 2;
+  padding: 50px; }
 
 .organization-social-media-container {
   position: absolute;
-  right: 5px;
   top: 5px;
+  right: 5px;
   color: #fff; }
   .organization-social-media-container .fa {
-    font-size: 1.5em;
-    padding: 5px; }
+    padding: 5px;
+    font-size: 1.5em; }
 
 @media (max-width: 768px) {
   .organization-social-media-container {
@@ -6273,15 +6271,15 @@ aside > .table {
     margin-top: 10px; } }
 
 .fa.organization-details-field-icon {
-  vertical-align: middle;
+  margin-right: 20px;
   padding: 10px;
   font-size: 20px;
-  margin-right: 20px; }
+  vertical-align: middle; }
 
 .organization-details-field-value {
-  vertical-align: middle;
   font-size: 18px;
-  text-align: left; }
+  text-align: left;
+  vertical-align: middle; }
 
 .organization-details-row {
   padding: 5px 0;
@@ -6292,9 +6290,9 @@ aside > .table {
 
 @media (min-width: 768px) {
   .organization-details-box {
-    margin: 20px 0;
-    width: 50%;
     display: inline-block;
+    width: 50%;
+    margin: 20px 0;
     vertical-align: top; } }
 
 .read-action-container {
@@ -6307,5 +6305,5 @@ aside > .table {
 
 .person-container .social-media-links {
   position: absolute;
-  bottom: 5px;
-  right: 5px; }
+  right: 5px;
+  bottom: 5px; }

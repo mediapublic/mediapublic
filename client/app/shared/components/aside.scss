@@ -30,8 +30,8 @@ aside > .table {
 
 @media (min-width: $screen-md-min) {
   aside {
-    margin: 0;
     position: absolute;
     right: -$aside-width - 20px;
+    margin: 0;
   }
 }
