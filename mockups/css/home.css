@@ -1,0 +1,131 @@
+/* breakpoints will be tuned as we go; this is a rough pass */
+
+/* we can assume anything this small is mobile and therefore touch-first */
+@media (max-width: 600px) {
+	#header {
+
+	}
+}
+
+/* there's a good chance this a tablet so it should work well with touch */
+@media (min-width: 601px & max-width: 800px) {
+	#header {
+		background-color: gray;
+		height: 100px;
+	}
+}
+
+/* now we've got some real estate to play with */
+@media (min-width: 801px) {
+	body > div {
+		width: 100%;
+		min-height: 100px;
+		overflow: hidden;
+	}
+
+	#header {
+		position: relative;
+		
+		background-color: #112e51;
+	}
+
+	#header #login {
+		display: inline-block;
+
+		position: absolute;
+		top: .5em;
+		right: 1em;
+
+		background-color: #dce4ef;
+		padding: 2px 10px;
+		border-radius: 2px;
+	}
+
+	#header .title {
+		position: absolute;
+		bottom: 0.5em;
+		left: 1em;
+
+		color: white;
+	}
+
+	#search {
+	}
+
+	.query {
+		max-width: 65em;
+		margin: 2em auto;
+	}
+
+	.query input {
+		margin-top: 1em;
+
+		width: 35em;
+		height: 38px;
+
+		padding: 0;
+	}
+
+	.query select {
+		height: 40px;
+		padding: 0 10px;
+	}
+
+	.query button {
+		min-width: 20px;
+		height: 2em;
+		padding: 0 1em;
+	}
+
+	#discover {
+		background-color: #f1f1f1;
+	}
+
+	#discover > div {
+		max-width: 65em;
+		margin: 2em auto;
+	}
+
+	#discover .suggested > a {
+		display: inline-block;
+		overflow: hidden;
+
+		margin-right: 3em;
+		margin-bottom: 3em;
+	}
+
+	#discover .object {
+		display: inline-block;
+
+		width: 150px;
+		height: 150px;
+		padding: 25px;
+
+		background-color: #205493;
+		color: white;
+	}
+
+	#discover .object:hover {
+		background-color: #0071bc;
+	}
+
+	#footer {
+		max-height: 10px;
+		color: white;
+
+		text-align: center;
+
+		background-color: #323a45;
+	}
+
+	#footer p {
+		margin: 40px auto;
+	}
+}
+
+/* oh god your screen is large */
+@media (min-width: 1201px) {
+	#header {
+
+	}
+}
