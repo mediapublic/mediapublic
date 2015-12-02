@@ -2,16 +2,180 @@
 
 /* we can assume anything this small is mobile and therefore touch-first */
 @media (max-width: 600px) {
-	#header {
+	body > div {
+		padding: 1em 1.5em;
+	}
 
+	#header {
+		background-color: #112e51;
+		color: white;
+
+		text-align: right;
+	}
+
+	#header .title {
+		text-align: left;
+	}
+
+	#header #login {
+		display: inline-block;
+
+		font-size: 30px;
+
+		background-color: #dce4ef;
+		padding: 2px 10px;
+		border-radius: 2px;
+	}
+
+	#header #login a {
+		padding-right: 1em;
+		padding-left: 1em;
+	}
+
+	#header #login a:first-child {
+		border-right: 1px solid #212121;
+	}
+
+	.query input {
+		width: 90%;
+		height: 38px;
+		margin: 1em auto .5em auto;
+	}
+
+	.query select {
+		padding: 3px 20px;
+	}
+
+	.query button {
+		padding: 5px 20px;
+	}
+
+	#discover {
+		background-color: #f1f1f1;
+	}
+
+	#discover .suggested > a {
+		display: inline-block;
+		overflow: hidden;
+		
+		width: 100%;
+
+		margin-bottom: .5em;
+	}
+
+	#discover .object {
+		display: inline-block;
+
+		width: 100%;
+		padding: 1em 0;
+		text-indent: 2em;
+
+		background-color: #205493;
+		color: white;
+	}
+
+	#discover .object:hover, #discover .object:active {
+		background-color: #0071bc;
+	}
+
+	#footer {
+		color: white;
+
+		text-align: center;
+
+		background-color: #323a45;
 	}
 }
 
 /* there's a good chance this a tablet so it should work well with touch */
-@media (min-width: 601px & max-width: 800px) {
+@media (min-width: 601px) and (max-width: 800px) {
+	body > div {
+		padding: 1em 2em;
+	}
+
 	#header {
-		background-color: gray;
+		padding-top: 0;
+
+		background-color: #112e51;
+		color: white;
+
+		overflow: hidden;
+
+		text-align: right;
+	}
+
+	#header #login {
+		display: inline-block;
+
+		font-size: 30px;
+		padding: .25em 0;
+
+		background-color: #dce4ef;
+		padding: 2px 10px;
+		border-radius: 2px;
+
+		margin-top: .5em;
+	}
+
+	#header #login a {
+		padding-right: 1em;
+		padding-left: 1em;
+	}
+
+	#header #login a:first-child {
+		border-right: 1px solid #212121;
+	}
+
+	#header .title {
+		text-align: left;
+	}
+
+	.query input {
+		width: 60%;
+
+		height: 38px;
+
+		margin: .5em auto;
+	}
+
+	.query select, .query button {
+		width: 15%;
+		height: 2em;
+	}
+
+	#discover {
+		background-color: #f1f1f1;
+	}
+
+	#discover .suggested > a {
+		display: inline-block;
+		overflow: hidden;
+
+		margin-right: 1em;
+		margin-bottom: 1em;
+	}
+
+	#discover .object {
+		display: inline-block;
+
+		width: 100px;
 		height: 100px;
+		padding: 25px;
+
+		background-color: #205493;
+		color: white;
+	}
+
+	#discover .object:hover, #discover .object:active {
+		background-color: #0071bc;
+	}
+
+	#footer {
+		color: white;
+
+		text-align: center;
+
+		background-color: #323a45;
 	}
 }
 
@@ -41,6 +205,16 @@
 		border-radius: 2px;
 	}
 
+	#header #login a {
+		padding-left: .5em;
+	}
+
+	#header #login a:first-child {
+		padding-right: .5em;
+		padding-left: 0;
+		border-right: 1px solid #212121;
+	}
+
 	#header .title {
 		position: absolute;
 		bottom: 0.5em;
@@ -53,14 +227,14 @@
 	}
 
 	.query {
-		max-width: 65em;
+		width: 80%;
 		margin: 2em auto;
 	}
 
 	.query input {
 		margin-top: 1em;
 
-		width: 35em;
+		width: 60%;
 		height: 38px;
 
 		padding: 0;
@@ -69,10 +243,11 @@
 	.query select {
 		height: 40px;
 		padding: 0 10px;
+		width: 15%;
 	}
 
 	.query button {
-		min-width: 20px;
+		width: 15%;
 		height: 2em;
 		padding: 0 1em;
 	}
@@ -82,7 +257,7 @@
 	}
 
 	#discover > div {
-		max-width: 65em;
+		width: 80%;
 		margin: 2em auto;
 	}
 
@@ -124,8 +299,32 @@
 }
 
 /* oh god your screen is large */
-@media (min-width: 1201px) {
+@media (min-width: 1401px) {
 	#header {
+	}
 
+	#search {
+	}
+
+	.query {
+		max-width: 75em;
+	}
+
+	.query input {
+		width: 30em;
+	}
+
+	.query select {
+		width: 8em;
+		padding: inherit 0;
+	}
+
+	.query button {
+		width: 8em;
+		padding: inherit 0;
+	}
+
+	#discover > div {
+		max-width: 75em;
 	}
 }
