@@ -56,10 +56,13 @@ def main(global_config, **settings):
                     permission=security.NO_PERMISSION_REQUIRED)
 
     json_renderer = JSON()
+
     def uuid_adapter(obj, request):
-        return six.text_type(obj) if obj != None else None
+        return six.text_type(obj) if obj is not None else None
+
     def datetime_adapter(obj, request):
-        return six.text_type(obj) if obj != None else None
+        return six.text_type(obj) if obj is not None else None
+
     json_renderer.add_adapter(UUIDType, uuid_adapter)
     json_renderer.add_adapter(UUID, uuid_adapter)
     # json_renderer.add_adapter(DateTime, datetime_adapter)
