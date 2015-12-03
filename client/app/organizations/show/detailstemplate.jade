@@ -1,5 +1,6 @@
 // TODO: replace this with an absolute path, need to specify 'basedir'
 include ../../shared/address.jade
+include ../../shared/components/edit-buttons.jade
 
 mixin detailsRow(field, icon)
   .organization-details-row
@@ -8,11 +9,7 @@ mixin detailsRow(field, icon)
       yield block
 
 .edit-buttons-container
-  if viewState.editing
-    .btn.btn-primary.save Save
-    .btn.btn-default.cancel Cancel
-  else
-    .btn.btn-default.edit Edit
+  +editButtons
 if !viewState.expanded && !viewState.editing
   p.organization-description
     = app.templateHelpers.truncate(long_description, 300)

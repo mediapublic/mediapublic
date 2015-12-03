@@ -487,6 +487,7 @@ class People(Base, CreationMixin, TimeStampMixin):
     def _to_dict(self):
         return dict(
             first=self.first,
+            last=self.last,
             address_0=self.address_0,
             address_1=self.address_1,
             city=self.city,

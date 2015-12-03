@@ -1,8 +1,9 @@
-import Backbone from 'backbone';
+import Backbone from 'shared/backbone';
 
 import Application from './application/application';
 import IndexRouter from './index/router';
 import OrganizationRouter from './organizations/router';
+import UserRouter from './users/router';
 import config from './config.json';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
@@ -18,6 +19,10 @@ app.indexRouter = new IndexRouter({
 });
 
 app.organizationRouter = new OrganizationRouter({
+  container: app.layout.content
+});
+
+app.userRouter = new UserRouter({
   container: app.layout.content
 });
 
