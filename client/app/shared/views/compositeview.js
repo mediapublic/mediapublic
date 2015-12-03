@@ -1,5 +1,6 @@
 import {CompositeView} from 'backbone.marionette';
 import {Model} from 'backbone';
+import _ from 'underscore';
 
 export default CompositeView.extend({
   initialize(options) {
@@ -29,7 +30,11 @@ export default CompositeView.extend({
       throw new Error('viewState is a reserved data keyword');
     }
     data.viewState = this.state.toJSON();
-    data.viewState.hasMore = this.collection.length > this.numModels;
+
+    if (this.collection && this.numModels) {
+      data.viewState.hasMore = this.collection.length > this.numModels;
+    }
+
     return data;
   },
 

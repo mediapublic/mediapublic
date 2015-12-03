@@ -2156,9 +2156,15 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 var _backboneMarionette = require('backbone.marionette');
 
 var _backbone = require('backbone');
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
 
 exports['default'] = _backboneMarionette.CompositeView.extend({
   initialize: function initialize(options) {
@@ -2188,7 +2194,11 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
       throw new Error('viewState is a reserved data keyword');
     }
     data.viewState = this.state.toJSON();
-    data.viewState.hasMore = this.collection.length > this.numModels;
+
+    if (this.collection && this.numModels) {
+      data.viewState.hasMore = this.collection.length > this.numModels;
+    }
+
     return data;
   },
 
@@ -2198,7 +2208,7 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":63,"backbone.marionette":59}],55:[function(require,module,exports){
+},{"backbone":63,"backbone.marionette":59,"underscore":70}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
