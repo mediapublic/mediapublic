@@ -19,11 +19,24 @@ body {
 
 p {
   margin-top: 22px;
+  font-family: 'Times New Roman', serif;
   font-size: 18px;
   line-height: 22px;
-  font-family: "Times New Roman", serif;
 }
 
 a {
   cursor: pointer;
+}
+
+.view-container {
+  width: 100%;
+  max-width: $viewWidth;
+  margin: auto;
+  padding: 40px 0;
+}
+
+@media (max-width: $screen-sm-max) {
+  .view-container {
+    padding: 40px 20px;
+  }
 }

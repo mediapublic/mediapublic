@@ -46,6 +46,10 @@ export default Model.extend({
     periscope: 'Text'
   },
 
+  permalink() {
+    return '/users/' + this.get('id');
+  },
+
   urlRoot() {
     return '/people';
   }
