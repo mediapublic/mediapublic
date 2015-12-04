@@ -24,7 +24,7 @@ Getting Started
 
 - `initialize_mediapublic_db development.ini`
 
-- `pserve development.ini`
+- `pserve development.ini --reload`
 
 Running Tests
 -------------

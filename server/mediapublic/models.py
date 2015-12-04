@@ -108,7 +108,7 @@ class CreationMixin():
 
     def to_dict(self):
         return {
-            'id': six.text_type(self.id),
+            'id': self.id,
             'creation_datetime': six.text_type(self.creation_datetime),
         }
 
@@ -198,8 +198,8 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
             display_name=self.display_name,
             twitter_handle=self.twitter_handle,
             email=self.email,
-            user_type=six.text_type(self.user_type_id),
-            organization_id=six.text_type(self.organization_id),
+            user_type=self.user_type_id,
+            organization_id=self.organization_id,
         )
 
     def to_dict(self):
@@ -502,8 +502,8 @@ class People(Base, CreationMixin, TimeStampMixin):
             facebook=self.facebook,
             instagram=self.instagram,
             periscope=self.periscope,
-            user_id=six.text_type(self.user_id),
-            organization_id=six.text_type(self.organization_id),
+            user_id=self.user_id,
+            organization_id=self.organization_id,
         )
 
     def to_dict(self):
@@ -547,8 +547,8 @@ class Recordings(Base, CreationMixin, TimeStampMixin):
         resp.update(
             title=self.title,
             url=self.url,
-            recorded_datetime=six.text_type(self.recorded_datetime),
-            organization_id=six.text_type(self.organization_id),
+            recorded_datetime=self.recorded_datetime,
+            organization_id=self.organization_id,
         )
         return resp
 
