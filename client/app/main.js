@@ -4,6 +4,7 @@ import Application from './application/application';
 import IndexRouter from './index/router';
 import OrganizationRouter from './organizations/router';
 import UserRouter from './users/router';
+import HelpRequestRouter from './helprequests/router';
 import config from './config.json';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
@@ -23,6 +24,10 @@ app.organizationRouter = new OrganizationRouter({
 });
 
 app.userRouter = new UserRouter({
+  container: app.layout.content
+});
+
+app.helpRequestRouter = new HelpRequestRouter({
   container: app.layout.content
 });
 
