@@ -6009,6 +6009,30 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+* {
+  box-sizing: border-box; }
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+.inline-block {
+  display: inline-block; }
+
+.btn {
+  margin-right: 10px; }
+
+p {
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Times New Roman", serif; }
+
+a {
+  cursor: pointer; }
+
 /**
  *  Component to be used to display extra (often tabular) information alongside
  *  something else. At mobile widths it will be inline and full-width.
@@ -6032,9 +6056,9 @@ aside > .table {
 
 @media (min-width: 992px) {
   aside {
-    margin: 0;
     position: absolute;
-    right: -320px; } }
+    right: -320px;
+    margin: 0; } }
 
 .action-icon {
   cursor: pointer;
@@ -6048,19 +6072,135 @@ aside > .table {
 .action-icon.fa-times {
   color: #d9534f; }
 
+.load-more-container {
+  text-align: right; }
+
+.load-less,
+.load-more {
+  cursor: pointer; }
+
+.tile {
+  position: relative;
+  display: inline-block;
+  width: calc(20% - 10px);
+  margin: 5px;
+  padding-bottom: 20%;
+  overflow: hidden;
+  border: 1px solid #999; }
+
+.tile-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #777;
+  background-size: cover; }
+
+.tile-title {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  color: #ddd;
+  background-color: rgba(35, 35, 35, 0.5); }
+
+.tile-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff; }
+
+.tile-more {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  -webkit-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+  color: #fff;
+  background-color: #232323; }
+
+.tile:hover .tile-more {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0); }
+
+@media (max-width: 767px) {
+  .tile {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding-bottom: 20px;
+    border: none; }
+  .tile-image {
+    position: static;
+    display: inline-block;
+    width: 30%;
+    padding-bottom: 30%;
+    vertical-align: top; }
+  .tile-text {
+    display: inline-block;
+    width: 70%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    vertical-align: top; }
+  .tile-title {
+    position: static;
+    padding: 0;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff; }
+  .tile-more {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0;
+    -webkit-transition: none;
+            transition: none;
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+    color: #000;
+    background-color: #fff; }
+  .tile:hover .tile-more {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0); } }
+
+.tile-container {
+  border-top: 1px solid #999;
+  margin-top: 10px;
+  padding-top: 10px; }
+
+.tile-list-title {
+  padding-left: 5px;
+  margin-top: 40px; }
+
+.social-media-links {
+  margin-top: 5px;
+  text-align: right; }
+  .social-media-links .fa {
+    padding: 5px; }
+
 .application {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   padding: 20px;
-  padding-top: 70px; }
+  padding-top: 50px;
+  overflow-y: scroll; }
 
 .header-item {
   height: 50px;
+  padding: 0 10px;
   line-height: 50px;
-  text-align: center;
-  padding: 0 10px; }
+  text-align: center; }
 
 .header-menu {
   position: absolute;
@@ -6071,71 +6211,99 @@ aside > .table {
 
 .header-menu-item {
   font-size: 1.3em;
-  border-left: 1px solid #e7e7e7;
   -webkit-transition: background-color 0.2s ease-out;
-          transition: background-color 0.2s ease-out; }
+          transition: background-color 0.2s ease-out;
+  border-left: 1px solid #e7e7e7; }
   .header-menu-item:hover {
     background-color: #e6e6e6; }
 
-.organization-container,
-.people-container,
-.recordings-container {
+.navbar {
+  margin-bottom: 0; }
+
+.region-container {
+  width: 100%;
+  max-width: 992px;
+  margin: auto; }
+
+.cover-photo {
   position: relative;
-  max-width: 600px;
-  width: 100%; }
+  height: 250px;
+  background-size: 100%; }
 
-.people {
-  margin-top: 40px; }
-
-.person {
-  display: inline-block;
-  border: 1px solid #999;
-  width: 200px;
-  position: relative;
-  height: 200px;
-  margin: 10px 10px 0 0; }
-
-.person-picture {
+.cover-photo::after {
   position: absolute;
+  z-index: 1;
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  background-size: 100%;
-  background-color: #777; }
+  content: '';
+  background-color: rgba(0, 0, 0, 0.5); }
 
-.person-details {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 10px;
-  background-color: rgba(35, 35, 35, 0.5);
-  -webkit-transition: all 0.2s linear;
-          transition: all 0.2s linear;
-  color: #ddd; }
-
-.person:hover .person-details {
-  background-color: #232323;
+.organization-title,
+.organization-location {
+  font-family: 'Raleway';
   color: #fff; }
 
-.person-edit {
+.organization-title {
+  font-size: 5em; }
+
+.organization-location {
+  font-size: 1.5em; }
+
+.organization-title-container {
+  position: relative;
+  z-index: 2;
+  padding: 50px; }
+
+.organization-social-media-container {
   position: absolute;
   top: 5px;
   right: 5px;
   color: #fff; }
+  .organization-social-media-container .fa {
+    padding: 5px;
+    font-size: 1.5em; }
 
-* {
-  box-sizing: border-box; }
+@media (max-width: 768px) {
+  .organization-social-media-container {
+    position: static;
+    margin-top: 10px; } }
 
-html,
-body {
-  position: relative;
-  width: 100%;
-  height: 100%; }
+.fa.organization-details-field-icon {
+  margin-right: 20px;
+  padding: 10px;
+  font-size: 20px;
+  vertical-align: middle; }
 
-.inline-block {
-  display: inline-block; }
+.organization-details-field-value {
+  font-size: 18px;
+  text-align: left;
+  vertical-align: middle; }
 
-.btn {
-  margin-right: 10px; }
+.organization-details-row {
+  padding: 5px 0;
+  text-align: center; }
+
+.organization-details-box {
+  margin-top: 10px; }
+
+@media (min-width: 768px) {
+  .organization-details-box {
+    display: inline-block;
+    width: 50%;
+    margin: 20px 0;
+    vertical-align: top; } }
+
+.read-action-container {
+  text-align: right; }
+
+.edit-buttons-container {
+  text-align: right; }
+  .edit-buttons-container .btn {
+    margin-top: 10px; }
+
+.person-container .social-media-links {
+  position: absolute;
+  right: 5px;
+  bottom: 5px; }

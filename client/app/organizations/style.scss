@@ -1,9 +1,102 @@
-.organization-container,
-.people-container,
-.recordings-container {
-  position: relative;
-  max-width: 600px;
+.region-container {
   width: 100%;
+  max-width: 992px;
+  margin: auto;
 }
 
+.cover-photo {
+  position: relative;
+  height: 250px;
+  background-size: 100%;
+}
 
+.cover-photo::after {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background-color: rgba(0,0,0,.5);
+}
+
+.organization-title,
+.organization-location {
+  font-family: 'Raleway';
+  color: #fff;
+}
+
+.organization-title {
+  font-size: 5em;
+}
+
+.organization-location {
+  font-size: 1.5em;
+}
+
+.organization-title-container {
+  position: relative;
+  z-index: 2;
+  padding: 50px;
+}
+
+.organization-social-media-container {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff;
+  .fa {
+    padding: 5px;
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .organization-social-media-container {
+    position: static;
+    margin-top: 10px;
+  }
+}
+
+.fa.organization-details-field-icon {
+  margin-right: 20px;
+  padding: 10px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.organization-details-field-value {
+  font-size: 18px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.organization-details-row {
+  padding: 5px 0;
+  text-align: center;
+}
+
+.organization-details-box {
+  margin-top: 10px;
+}
+
+@media (min-width: $screen-sm) {
+  .organization-details-box {
+    display: inline-block;
+    width: 50%;
+    margin: 20px 0;
+    vertical-align: top;
+  }
+}
+
+.read-action-container {
+  text-align: right;
+}
+
+.edit-buttons-container {
+  text-align: right;
+  .btn {
+    margin-top: 10px;
+  }
+}

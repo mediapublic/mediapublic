@@ -1,7 +1,7 @@
 import ItemView from 'shared/views/itemview';
-import template from './singletemplate.jade';
+import template from './bannertemplate.jade';
 
 export default ItemView.extend({
   template,
-  className: 'person-container tile',
+  className: 'organization-banner',
 });

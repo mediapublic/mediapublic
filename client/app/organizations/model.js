@@ -16,6 +16,11 @@ export default Model.extend({
       validators: ['url'],
       title: 'Website'
     },
+    short_description: {
+      type: 'TextArea',
+      title: 'Short Description',
+      validators: ['required']
+    },
     long_description: {
       type: 'TextArea',
       title: 'Long Description',
@@ -41,7 +46,19 @@ export default Model.extend({
     state: {
       type: 'Text',
       validators: ['required', 'state']
-    }
+    },
+    image_url: {
+      title: 'Cover Photo Url',
+      type: 'Text'
+    },
+    facebook: 'Text',
+    twitter: 'Text',
+    github: 'Text',
+    instagram: 'Text'
+  },
+
+  permalink() {
+    return '/organizations/' + this.get('id');
   },
 
   urlRoot() {

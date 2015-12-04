@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+p {
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Times New Roman", serif;
+}
+
+a {
+  cursor: pointer;
+}

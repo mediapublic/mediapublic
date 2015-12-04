@@ -4,7 +4,7 @@ $application-padding: 20px;
   position: relative;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   padding: $application-padding;
-  padding-top: $navbar-height + $application-padding;
+  padding-top: $navbar-height;
+  overflow-y: scroll;
 }

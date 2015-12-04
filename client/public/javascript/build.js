@@ -23,7 +23,7 @@ exports['default'] = _backboneMarionette.Application.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout-view":2,"backbone.marionette":41}],2:[function(require,module,exports){
+},{"./layout-view":2,"backbone.marionette":59}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52,7 +52,7 @@ exports['default'] = _backboneMarionette.LayoutView.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout.jade":3,"backbone.marionette":41}],3:[function(require,module,exports){
+},{"./layout.jade":3,"backbone.marionette":59}],3:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -62,7 +62,7 @@ var jade_interp;
 
 buf.push("<div class=\"app-header\"></div><div class=\"app-notifications\"></div><div class=\"app-content\"></div><div class=\"app-overlay\"></div><div class=\"app-footer\"></div>");;return buf.join("");
 };
-},{"jade/runtime":47}],4:[function(require,module,exports){
+},{"jade/runtime":65}],4:[function(require,module,exports){
 module.exports={
   apiUrl: "http://0.0.0.0:6543"
 }
@@ -100,7 +100,7 @@ buf.push("<a" + (jade.attr("href", url, true, false)) + " class=\"header-item he
 
 buf.push("</span>");}.call(this,"menuItems" in locals_for_with?locals_for_with.menuItems:typeof menuItems!=="undefined"?menuItems:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 };
-},{"jade/runtime":47}],6:[function(require,module,exports){
+},{"jade/runtime":65}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -136,7 +136,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":5,"backbone.marionette":41}],7:[function(require,module,exports){
+},{"./template.jade":5,"backbone.marionette":59}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -169,7 +169,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"./view":10,"backbone-routing":40}],8:[function(require,module,exports){
+},{"./view":10,"backbone-routing":58}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -203,7 +203,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./route":7,"backbone-routing":40}],9:[function(require,module,exports){
+},{"./route":7,"backbone-routing":58}],9:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -213,7 +213,7 @@ var jade_interp;
 
 buf.push("this is the home page");;return buf.join("");
 };
-},{"jade/runtime":47}],10:[function(require,module,exports){
+},{"jade/runtime":65}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -234,7 +234,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":9,"backbone.marionette":41}],11:[function(require,module,exports){
+},{"./template.jade":9,"backbone.marionette":59}],11:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -261,13 +261,18 @@ var _configJson2 = _interopRequireDefault(_configJson);
 
 var _headerView = require('./header/view');
 
+var _headerView2 = _interopRequireDefault(_headerView);
+
+var _sharedUtilitiesTemplatehelpers = require('shared/utilities/templatehelpers');
+
 // Global namespace
 
-var _headerView2 = _interopRequireDefault(_headerView);
+var _sharedUtilitiesTemplatehelpers2 = _interopRequireDefault(_sharedUtilitiesTemplatehelpers);
 
 window.app = new _applicationApplication2['default']();
 
 app.config = _configJson2['default'];
+app.templateHelpers = _sharedUtilitiesTemplatehelpers2['default'];
 
 app.indexRouter = new _indexRouter2['default']({
   container: app.layout.content
@@ -282,7 +287,7 @@ app.layout.header.show(new _headerView2['default']());
 // Navigate to the current url
 _backbone2['default'].history.start();
 
-},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":20,"backbone":45}],12:[function(require,module,exports){
+},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":20,"backbone":63,"shared/utilities/templatehelpers":53}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -308,7 +313,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./model":18,"backbone":45}],13:[function(require,module,exports){
+},{"./model":18,"backbone":63}],13:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -318,7 +323,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (id, short_name) {
 buf.push("<a" + (jade.attr("href", '#/organizations/' + (id) + '', true, false)) + " class=\"organization-link\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</a>");}.call(this,"id" in locals_for_with?locals_for_with.id:typeof id!=="undefined"?id:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined));;return buf.join("");
 };
-},{"jade/runtime":47}],14:[function(require,module,exports){
+},{"jade/runtime":65}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -339,7 +344,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardtemplate.jade":13,"backbone.marionette":41}],15:[function(require,module,exports){
+},{"./cardtemplate.jade":13,"backbone.marionette":59}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -382,7 +387,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":26,"./view":17,"backbone-routing":40}],16:[function(require,module,exports){
+},{"../storage":28,"./view":17,"backbone-routing":58}],16:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -392,7 +397,7 @@ var jade_interp;
 
 buf.push("this is the organization index");;return buf.join("");
 };
-},{"jade/runtime":47}],17:[function(require,module,exports){
+},{"jade/runtime":65}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -417,7 +422,7 @@ exports['default'] = _backboneMarionette.CollectionView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardview":14,"./template.jade":16,"backbone.marionette":41}],18:[function(require,module,exports){
+},{"./cardview":14,"./template.jade":16,"backbone.marionette":59}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -441,6 +446,11 @@ exports['default'] = _backbone.Model.extend({
       type: 'Text',
       validators: ['url'],
       title: 'Website'
+    },
+    short_description: {
+      type: 'TextArea',
+      title: 'Short Description',
+      validators: ['required']
     },
     long_description: {
       type: 'TextArea',
@@ -467,7 +477,19 @@ exports['default'] = _backbone.Model.extend({
     state: {
       type: 'Text',
       validators: ['required', 'state']
-    }
+    },
+    image_url: {
+      title: 'Cover Photo Url',
+      type: 'Text'
+    },
+    facebook: 'Text',
+    twitter: 'Text',
+    github: 'Text',
+    instagram: 'Text'
+  },
+
+  permalink: function permalink() {
+    return '/organizations/' + this.get('id');
   },
 
   urlRoot: function urlRoot() {
@@ -476,7 +498,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":45}],19:[function(require,module,exports){
+},{"backbone":63}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -512,7 +534,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../model":18,"../show/layoutview":22,"backbone-routing":40}],20:[function(require,module,exports){
+},{"../model":18,"../show/layoutview":26,"backbone-routing":58}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -568,17 +590,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./index/route":15,"./new/route":19,"./show/route":23,"backbone-routing":40}],21:[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-
-buf.push("<div class=\"organization-container\"></div><div class=\"people-container\"></div><div class=\"recordings-container\"></div>");;return buf.join("");
-};
-},{"jade/runtime":47}],22:[function(require,module,exports){
+},{"./index/route":15,"./new/route":19,"./show/route":27,"backbone-routing":58}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -587,39 +599,215 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _sharedViewsItemview = require('shared/views/itemview');
+
+var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
+
+var _bannertemplateJade = require('./bannertemplate.jade');
+
+var _bannertemplateJade2 = _interopRequireDefault(_bannertemplateJade);
+
+exports['default'] = _sharedViewsItemview2['default'].extend({
+  template: _bannertemplateJade2['default'],
+  className: 'organization-banner'
+});
+module.exports = exports['default'];
+
+},{"./bannertemplate.jade":22,"shared/views/itemview":55}],22:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (cid, city, image_url, short_name, state) {
+buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div><div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div><div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],23:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsItemview = require('shared/views/itemview');
+
+var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
+
+var _detailstemplateJade = require('./detailstemplate.jade');
+
+var _detailstemplateJade2 = _interopRequireDefault(_detailstemplateJade);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+exports['default'] = _sharedViewsItemview2['default'].extend({
+  initialize: function initialize(options) {
+    _sharedViewsItemview2['default'].prototype.initialize.apply(this, arguments);
+    this.state.set('expanded', options.expanded || false);
+  },
+
+  events: _underscore2['default'].extend({}, _sharedViewsItemview2['default'].prototype.events, {
+    'click .read-more': function clickReadMore() {
+      this.state.set('expanded', true);
+    },
+    'click .read-less': function clickReadLess() {
+      this.state.set('expanded', false);
+    }
+  }),
+
+  template: _detailstemplateJade2['default'],
+  className: 'organization-details'
+});
+module.exports = exports['default'];
+
+},{"./detailstemplate.jade":24,"shared/views/itemview":55,"underscore":70}],24:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (address_0, address_1, app, cid, city, long_description, phone, primary_website, state, viewState, zipcode) {
+buf.push("<!-- TODO: replace this with an absolute path, need to specify 'basedir'-->");
+jade_mixins["address"] = jade_interp = function(line_1, line_2, city, state, zip){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+buf.push("<div class=\"address-container\"><div class=\"address-line-1\">" + (jade.escape(null == (jade_interp = line_1) ? "" : jade_interp)) + "</div>");
+if ( line_2)
+{
+buf.push("<div class=\"address-line-2\">" + (jade.escape(null == (jade_interp = line_2) ? "" : jade_interp)) + "</div>");
+}
+buf.push("<span class=\"address-city\">" + (jade.escape(null == (jade_interp = city) ? "" : jade_interp)) + "</span>,&nbsp;<span class=\"address-state\">" + (jade.escape(null == (jade_interp = state) ? "" : jade_interp)) + "</span>&nbsp;<span class=\"address-zip\">" + (jade.escape(null == (jade_interp = zip) ? "" : jade_interp)) + "</span></div>");
+};
+jade_mixins["detailsRow"] = jade_interp = function(field, icon){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+buf.push("<div class=\"organization-details-row\"><i" + (jade.cls(['organization-details-field-icon','fa',icon], [null,null,true])) + "></i><div" + (jade.attr("model", cid, true, false)) + (jade.attr("data-fields", field, true, false)) + " class=\"organization-details-field-value inline-block\">");
+block && block();
+buf.push("</div></div>");
+};
+buf.push("<div class=\"edit-buttons-container\">");
+if ( viewState.editing)
+{
+buf.push("<div class=\"btn btn-primary save\">Save</div><div class=\"btn btn-default cancel\">Cancel</div>");
+}
+else
+{
+buf.push("<div class=\"btn btn-default edit\">Edit</div>");
+}
+buf.push("</div>");
+if ( !viewState.expanded && !viewState.editing)
+{
+buf.push("<p class=\"organization-description\">" + (jade.escape(null == (jade_interp = app.templateHelpers.truncate(long_description, 300)) ? "" : jade_interp)) + "</p><div class=\"read-action-container\"><a class=\"action read-more\">Read more</a></div>");
+}
+else
+{
+buf.push("<p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p><div class=\"organization-details-box-container\"><div class=\"organization-details-box\">");
+if ( (address_0 && city) || viewState.editing)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+jade_mixins["address"](address_0, address_1, city, state, zipcode);
+}
+}, 'address_0,address_1,city,state,zipcode', 'fa-map-marker');
+}
+buf.push("</div><div class=\"organization-details-box\">");
+if ( primary_website || viewState.editing)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+buf.push("<a" + (jade.attr("href", primary_website, true, false)) + ">" + (jade.escape(null == (jade_interp = primary_website) ? "" : jade_interp)) + "</a>");
+}
+}, 'primary_website', 'fa-link');
+}
+if ( phone || viewState.editing)
+{
+jade_mixins["detailsRow"].call({
+block: function(){
+buf.push(jade.escape(null == (jade_interp = phone) ? "" : jade_interp));
+}
+}, 'phone', 'fa-phone');
+}
+buf.push("</div></div><div class=\"read-action-container\"><a class=\"action read-less\">Less</a></div>");
+}
+if ( viewState.editing)
+{
+buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"twitter\" class=\"extra-field twitter-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"facebook\" class=\"extra-field facebook-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"github\" class=\"extra-field github-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"instagram\" class=\"extra-field instagram-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"image_url\" class=\"extra-field image-field\"></div>");
+}}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],25:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+
+buf.push("<div class=\"region-container organization-banner-container\"></div><div class=\"region-container organization-details-container\"></div><div class=\"region-container help-requests-container\"></div><div class=\"region-container recordings-container\"></div><div class=\"region-container people-container\"></div>");;return buf.join("");
+};
+},{"jade/runtime":65}],26:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 var _backboneMarionette = require('backbone.marionette');
 
-var _view = require('./view');
+var _banner = require('./banner');
 
-var _view2 = _interopRequireDefault(_view);
+var _banner2 = _interopRequireDefault(_banner);
+
+var _details = require('./details');
+
+var _details2 = _interopRequireDefault(_details);
 
 var _sharedPeopleCollectionview = require('shared/people/collectionview');
 
 var _sharedPeopleCollectionview2 = _interopRequireDefault(_sharedPeopleCollectionview);
+
+var _sharedRecordingsCollectionview = require('shared/recordings/collectionview');
+
+var _sharedRecordingsCollectionview2 = _interopRequireDefault(_sharedRecordingsCollectionview);
+
+var _sharedHelprequestsCollectionview = require('shared/helprequests/collectionview');
+
+var _sharedHelprequestsCollectionview2 = _interopRequireDefault(_sharedHelprequestsCollectionview);
 
 var _layouttemplateJade = require('./layouttemplate.jade');
 
 var _layouttemplateJade2 = _interopRequireDefault(_layouttemplateJade);
 
 exports['default'] = _backboneMarionette.LayoutView.extend({
-  initialize: function initialize(options) {
-    this.peopleCollection = options.people;
-  },
-  template: _layouttemplateJade2['default'],
-  regions: {
-    organization: '.organization-container',
-    people: '.people-container',
-    recordings: '.recordings-container'
-  },
+    initialize: function initialize(options) {
+        this.peopleCollection = options.people;
+        this.recordingsCollection = options.recordings;
+        this.helpRequestsCollection = options.helpRequests;
+    },
+    template: _layouttemplateJade2['default'],
+    regions: {
+        banner: '.organization-banner-container',
+        details: '.organization-details-container',
+        people: '.people-container',
+        recordings: '.recordings-container',
+        helprequests: '.help-requests-container'
+    },
 
-  onBeforeShow: function onBeforeShow() {
-    this.showChildView('organization', new _view2['default']({ model: this.model }));
-    this.showChildView('people', new _sharedPeopleCollectionview2['default']({ collection: this.peopleCollection }));
-  }
+    onBeforeShow: function onBeforeShow() {
+        this.showChildView('banner', new _banner2['default']({ model: this.model }));
+        this.showChildView('details', new _details2['default']({ model: this.model }));
+        this.showChildView('people', new _sharedPeopleCollectionview2['default']({ collection: this.peopleCollection }));
+        this.showChildView('recordings', new _sharedRecordingsCollectionview2['default']({ collection: this.recordingsCollection }));
+        this.showChildView('helprequests', new _sharedHelprequestsCollectionview2['default']({ collection: this.helpRequestsCollection }));
+    }
 });
 module.exports = exports['default'];
 
-},{"./layouttemplate.jade":21,"./view":25,"backbone.marionette":41,"shared/people/collectionview":31}],23:[function(require,module,exports){
+},{"./banner":21,"./details":23,"./layouttemplate.jade":25,"backbone.marionette":59,"shared/helprequests/collectionview":35,"shared/people/collectionview":40,"shared/recordings/collectionview":47}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -642,6 +830,26 @@ var _sharedPeoplePeople = require('shared/people/people');
 
 var _sharedPeoplePeople2 = _interopRequireDefault(_sharedPeoplePeople);
 
+var _sharedRecordingsCollection = require('shared/recordings/collection');
+
+var _sharedRecordingsCollection2 = _interopRequireDefault(_sharedRecordingsCollection);
+
+var _sharedHelprequestsCollection = require('shared/helprequests/collection');
+
+var _sharedHelprequestsCollection2 = _interopRequireDefault(_sharedHelprequestsCollection);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _sharedUtilitiesFaker = require('shared/utilities/faker');
+
+var _sharedUtilitiesFaker2 = _interopRequireDefault(_sharedUtilitiesFaker);
+
+var fakePeople = _sharedUtilitiesFaker2['default'].replicate(_sharedUtilitiesFaker2['default'].fakePerson, 25);
+var fakeRecordings = _sharedUtilitiesFaker2['default'].replicate(_sharedUtilitiesFaker2['default'].fakeRecording, 13);
+var fakeRequests = _sharedUtilitiesFaker2['default'].replicate(_sharedUtilitiesFaker2['default'].fakeHelpRequest, 3);
+
 exports['default'] = _backboneRouting.Route.extend({
   initialize: function initialize() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -654,104 +862,28 @@ exports['default'] = _backboneRouting.Route.extend({
 
     return _storage2['default'].find(id).then(function (model) {
       _this.model = model;
-      _this.people = new _sharedPeoplePeople2['default']([], { organization: _this.model });
+      _this.people = new _sharedPeoplePeople2['default'](fakePeople, { organization: _this.model });
       _this.people.fetch();
+      _this.recordings = new _sharedRecordingsCollection2['default'](fakeRecordings, { organization: _this.model });
+      _this.recordings.fetch();
+      _this.helpRequests = new _sharedHelprequestsCollection2['default'](fakeRequests, { organization: _this.model });
+      _this.helpRequests.fetch();
     });
   },
 
   render: function render() {
     this.view = new _layoutview2['default']({
       model: this.model,
-      people: this.people
+      people: this.people,
+      recordings: this.recordings,
+      helpRequests: this.helpRequests
     });
     this.container.show(this.view);
   }
 });
 module.exports = exports['default'];
 
-},{"../storage":26,"./layoutview":22,"backbone-routing":40,"shared/people/people":32}],24:[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (address_0, address_1, cid, city, long_description, phone, primary_website, short_name, state, viewState, zipcode) {
-buf.push("<!-- TODO: replace this with an absolute path, need to specify 'basedir'-->");
-jade_mixins["address"] = jade_interp = function(line_1, line_2, city, state, zip){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-buf.push("<div class=\"address-container\"><div class=\"address-line-1\">" + (jade.escape(null == (jade_interp = line_1) ? "" : jade_interp)) + "</div>");
-if ( line_2)
-{
-buf.push("<div class=\"address-line-2\">" + (jade.escape(null == (jade_interp = line_2) ? "" : jade_interp)) + "</div>");
-}
-buf.push("<span class=\"address-city\">" + (jade.escape(null == (jade_interp = city) ? "" : jade_interp)) + "</span>,&nbsp;<span class=\"address-state\">" + (jade.escape(null == (jade_interp = state) ? "" : jade_interp)) + "</span>&nbsp;<span class=\"address-zip\">" + (jade.escape(null == (jade_interp = zip) ? "" : jade_interp)) + "</span></div>");
-};
-jade_mixins["detailsRow"] = jade_interp = function(field, title){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-buf.push("<tr class=\"organization-details-row\"><td class=\"organization-details-field-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</td><td" + (jade.attr("model", cid, true, false)) + (jade.attr("data-fields", field, true, false)) + " class=\"organization-details-field-value\">");
-block && block();
-buf.push("</td></tr>");
-};
-buf.push("<h1" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</h1><aside class=\"organization-aside\"><table class=\"organization-details table\">");
-if ( primary_website || viewState.editing)
-{
-jade_mixins["detailsRow"].call({
-block: function(){
-buf.push("<a" + (jade.attr("href", primary_website, true, false)) + ">" + (jade.escape(null == (jade_interp = primary_website) ? "" : jade_interp)) + "</a>");
-}
-}, 'primary_website', 'Website');
-}
-if ( (address_0 && city) || viewState.editing)
-{
-jade_mixins["detailsRow"].call({
-block: function(){
-jade_mixins["address"](address_0, address_1, city, state, zipcode);
-}
-}, 'address_0,address_1,city,state,zipcode', 'Location');
-}
-if ( phone || viewState.editing)
-{
-jade_mixins["detailsRow"].call({
-block: function(){
-buf.push(jade.escape(null == (jade_interp = phone) ? "" : jade_interp));
-}
-}, 'phone', 'Phone');
-}
-buf.push("</table></aside><p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p>");
-if ( viewState.editing)
-{
-buf.push("<div class=\"btn btn-primary save\">Save</div><div class=\"btn btn-default cancel\">Cancel</div>");
-}
-else
-{
-buf.push("<div class=\"btn btn-default edit\">Edit</div>");
-}}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
-};
-},{"jade/runtime":47}],25:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _sharedViewsItemview = require('shared/views/itemview');
-
-var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
-
-var _templateJade = require('./template.jade');
-
-var _templateJade2 = _interopRequireDefault(_templateJade);
-
-exports['default'] = _sharedViewsItemview2['default'].extend({
-  template: _templateJade2['default'],
-  className: 'organization'
-});
-module.exports = exports['default'];
-
-},{"./template.jade":24,"shared/views/itemview":37}],26:[function(require,module,exports){
+},{"../storage":28,"./layoutview":26,"backbone-routing":58,"shared/helprequests/collection":33,"shared/people/people":41,"shared/recordings/collection":45,"shared/utilities/faker":52,"underscore":70}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -780,7 +912,315 @@ var OrganizationsStorage = _backboneStorage2['default'].extend({
 exports['default'] = new OrganizationsStorage();
 module.exports = exports['default'];
 
-},{"./collection":12,"./model":18,"backbone.storage":44}],27:[function(require,module,exports){
+},{"./collection":12,"./model":18,"backbone.storage":62}],29:[function(require,module,exports){
+// This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
+"use strict";
+
+var colorbrewer = { YlGn: {
+    3: ["#f7fcb9", "#addd8e", "#31a354"],
+    4: ["#ffffcc", "#c2e699", "#78c679", "#238443"],
+    5: ["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"],
+    6: ["#ffffcc", "#d9f0a3", "#addd8e", "#78c679", "#31a354", "#006837"],
+    7: ["#ffffcc", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d", "#238443", "#005a32"],
+    8: ["#ffffe5", "#f7fcb9", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d", "#238443", "#005a32"],
+    9: ["#ffffe5", "#f7fcb9", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d", "#238443", "#006837", "#004529"]
+  }, YlGnBu: {
+    3: ["#edf8b1", "#7fcdbb", "#2c7fb8"],
+    4: ["#ffffcc", "#a1dab4", "#41b6c4", "#225ea8"],
+    5: ["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"],
+    6: ["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#2c7fb8", "#253494"],
+    7: ["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"],
+    8: ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"],
+    9: ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"]
+  }, GnBu: {
+    3: ["#e0f3db", "#a8ddb5", "#43a2ca"],
+    4: ["#f0f9e8", "#bae4bc", "#7bccc4", "#2b8cbe"],
+    5: ["#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac"],
+    6: ["#f0f9e8", "#ccebc5", "#a8ddb5", "#7bccc4", "#43a2ca", "#0868ac"],
+    7: ["#f0f9e8", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3", "#2b8cbe", "#08589e"],
+    8: ["#f7fcf0", "#e0f3db", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3", "#2b8cbe", "#08589e"],
+    9: ["#f7fcf0", "#e0f3db", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3", "#2b8cbe", "#0868ac", "#084081"]
+  }, BuGn: {
+    3: ["#e5f5f9", "#99d8c9", "#2ca25f"],
+    4: ["#edf8fb", "#b2e2e2", "#66c2a4", "#238b45"],
+    5: ["#edf8fb", "#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
+    6: ["#edf8fb", "#ccece6", "#99d8c9", "#66c2a4", "#2ca25f", "#006d2c"],
+    7: ["#edf8fb", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76", "#238b45", "#005824"],
+    8: ["#f7fcfd", "#e5f5f9", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76", "#238b45", "#005824"],
+    9: ["#f7fcfd", "#e5f5f9", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76", "#238b45", "#006d2c", "#00441b"]
+  }, PuBuGn: {
+    3: ["#ece2f0", "#a6bddb", "#1c9099"],
+    4: ["#f6eff7", "#bdc9e1", "#67a9cf", "#02818a"],
+    5: ["#f6eff7", "#bdc9e1", "#67a9cf", "#1c9099", "#016c59"],
+    6: ["#f6eff7", "#d0d1e6", "#a6bddb", "#67a9cf", "#1c9099", "#016c59"],
+    7: ["#f6eff7", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016450"],
+    8: ["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016450"],
+    9: ["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]
+  }, PuBu: {
+    3: ["#ece7f2", "#a6bddb", "#2b8cbe"],
+    4: ["#f1eef6", "#bdc9e1", "#74a9cf", "#0570b0"],
+    5: ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"],
+    6: ["#f1eef6", "#d0d1e6", "#a6bddb", "#74a9cf", "#2b8cbe", "#045a8d"],
+    7: ["#f1eef6", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0", "#0570b0", "#034e7b"],
+    8: ["#fff7fb", "#ece7f2", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0", "#0570b0", "#034e7b"],
+    9: ["#fff7fb", "#ece7f2", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0", "#0570b0", "#045a8d", "#023858"]
+  }, BuPu: {
+    3: ["#e0ecf4", "#9ebcda", "#8856a7"],
+    4: ["#edf8fb", "#b3cde3", "#8c96c6", "#88419d"],
+    5: ["#edf8fb", "#b3cde3", "#8c96c6", "#8856a7", "#810f7c"],
+    6: ["#edf8fb", "#bfd3e6", "#9ebcda", "#8c96c6", "#8856a7", "#810f7c"],
+    7: ["#edf8fb", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#6e016b"],
+    8: ["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#6e016b"],
+    9: ["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#810f7c", "#4d004b"]
+  }, RdPu: {
+    3: ["#fde0dd", "#fa9fb5", "#c51b8a"],
+    4: ["#feebe2", "#fbb4b9", "#f768a1", "#ae017e"],
+    5: ["#feebe2", "#fbb4b9", "#f768a1", "#c51b8a", "#7a0177"],
+    6: ["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#c51b8a", "#7a0177"],
+    7: ["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497", "#ae017e", "#7a0177"],
+    8: ["#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497", "#ae017e", "#7a0177"],
+    9: ["#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497", "#ae017e", "#7a0177", "#49006a"]
+  }, PuRd: {
+    3: ["#e7e1ef", "#c994c7", "#dd1c77"],
+    4: ["#f1eef6", "#d7b5d8", "#df65b0", "#ce1256"],
+    5: ["#f1eef6", "#d7b5d8", "#df65b0", "#dd1c77", "#980043"],
+    6: ["#f1eef6", "#d4b9da", "#c994c7", "#df65b0", "#dd1c77", "#980043"],
+    7: ["#f1eef6", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#91003f"],
+    8: ["#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#91003f"],
+    9: ["#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#980043", "#67001f"]
+  }, OrRd: {
+    3: ["#fee8c8", "#fdbb84", "#e34a33"],
+    4: ["#fef0d9", "#fdcc8a", "#fc8d59", "#d7301f"],
+    5: ["#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000"],
+    6: ["#fef0d9", "#fdd49e", "#fdbb84", "#fc8d59", "#e34a33", "#b30000"],
+    7: ["#fef0d9", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#990000"],
+    8: ["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#990000"],
+    9: ["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]
+  }, YlOrRd: {
+    3: ["#ffeda0", "#feb24c", "#f03b20"],
+    4: ["#ffffb2", "#fecc5c", "#fd8d3c", "#e31a1c"],
+    5: ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"],
+    6: ["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#bd0026"],
+    7: ["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026"],
+    8: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026"],
+    9: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"]
+  }, YlOrBr: {
+    3: ["#fff7bc", "#fec44f", "#d95f0e"],
+    4: ["#ffffd4", "#fed98e", "#fe9929", "#cc4c02"],
+    5: ["#ffffd4", "#fed98e", "#fe9929", "#d95f0e", "#993404"],
+    6: ["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#d95f0e", "#993404"],
+    7: ["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#8c2d04"],
+    8: ["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#8c2d04"],
+    9: ["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"]
+  }, Purples: {
+    3: ["#efedf5", "#bcbddc", "#756bb1"],
+    4: ["#f2f0f7", "#cbc9e2", "#9e9ac8", "#6a51a3"],
+    5: ["#f2f0f7", "#cbc9e2", "#9e9ac8", "#756bb1", "#54278f"],
+    6: ["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"],
+    7: ["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#4a1486"],
+    8: ["#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#4a1486"],
+    9: ["#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#54278f", "#3f007d"]
+  }, Blues: {
+    3: ["#deebf7", "#9ecae1", "#3182bd"],
+    4: ["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"],
+    5: ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"],
+    6: ["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"],
+    7: ["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"],
+    8: ["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"],
+    9: ["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]
+  }, Greens: {
+    3: ["#e5f5e0", "#a1d99b", "#31a354"],
+    4: ["#edf8e9", "#bae4b3", "#74c476", "#238b45"],
+    5: ["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"],
+    6: ["#edf8e9", "#c7e9c0", "#a1d99b", "#74c476", "#31a354", "#006d2c"],
+    7: ["#edf8e9", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#005a32"],
+    8: ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#005a32"],
+    9: ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b"]
+  }, Oranges: {
+    3: ["#fee6ce", "#fdae6b", "#e6550d"],
+    4: ["#feedde", "#fdbe85", "#fd8d3c", "#d94701"],
+    5: ["#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#a63603"],
+    6: ["#feedde", "#fdd0a2", "#fdae6b", "#fd8d3c", "#e6550d", "#a63603"],
+    7: ["#feedde", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#8c2d04"],
+    8: ["#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#8c2d04"],
+    9: ["#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603", "#7f2704"]
+  }, Reds: {
+    3: ["#fee0d2", "#fc9272", "#de2d26"],
+    4: ["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"],
+    5: ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"],
+    6: ["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"],
+    7: ["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"],
+    8: ["#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"],
+    9: ["#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d"]
+  }, Greys: {
+    3: ["#f0f0f0", "#bdbdbd", "#636363"],
+    4: ["#f7f7f7", "#cccccc", "#969696", "#525252"],
+    5: ["#f7f7f7", "#cccccc", "#969696", "#636363", "#252525"],
+    6: ["#f7f7f7", "#d9d9d9", "#bdbdbd", "#969696", "#636363", "#252525"],
+    7: ["#f7f7f7", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525"],
+    8: ["#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525"],
+    9: ["#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525", "#000000"]
+  }, PuOr: {
+    3: ["#f1a340", "#f7f7f7", "#998ec3"],
+    4: ["#e66101", "#fdb863", "#b2abd2", "#5e3c99"],
+    5: ["#e66101", "#fdb863", "#f7f7f7", "#b2abd2", "#5e3c99"],
+    6: ["#b35806", "#f1a340", "#fee0b6", "#d8daeb", "#998ec3", "#542788"],
+    7: ["#b35806", "#f1a340", "#fee0b6", "#f7f7f7", "#d8daeb", "#998ec3", "#542788"],
+    8: ["#b35806", "#e08214", "#fdb863", "#fee0b6", "#d8daeb", "#b2abd2", "#8073ac", "#542788"],
+    9: ["#b35806", "#e08214", "#fdb863", "#fee0b6", "#f7f7f7", "#d8daeb", "#b2abd2", "#8073ac", "#542788"],
+    10: ["#7f3b08", "#b35806", "#e08214", "#fdb863", "#fee0b6", "#d8daeb", "#b2abd2", "#8073ac", "#542788", "#2d004b"],
+    11: ["#7f3b08", "#b35806", "#e08214", "#fdb863", "#fee0b6", "#f7f7f7", "#d8daeb", "#b2abd2", "#8073ac", "#542788", "#2d004b"]
+  }, BrBG: {
+    3: ["#d8b365", "#f5f5f5", "#5ab4ac"],
+    4: ["#a6611a", "#dfc27d", "#80cdc1", "#018571"],
+    5: ["#a6611a", "#dfc27d", "#f5f5f5", "#80cdc1", "#018571"],
+    6: ["#8c510a", "#d8b365", "#f6e8c3", "#c7eae5", "#5ab4ac", "#01665e"],
+    7: ["#8c510a", "#d8b365", "#f6e8c3", "#f5f5f5", "#c7eae5", "#5ab4ac", "#01665e"],
+    8: ["#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#c7eae5", "#80cdc1", "#35978f", "#01665e"],
+    9: ["#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#f5f5f5", "#c7eae5", "#80cdc1", "#35978f", "#01665e"],
+    10: ["#543005", "#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#c7eae5", "#80cdc1", "#35978f", "#01665e", "#003c30"],
+    11: ["#543005", "#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#f5f5f5", "#c7eae5", "#80cdc1", "#35978f", "#01665e", "#003c30"]
+  }, PRGn: {
+    3: ["#af8dc3", "#f7f7f7", "#7fbf7b"],
+    4: ["#7b3294", "#c2a5cf", "#a6dba0", "#008837"],
+    5: ["#7b3294", "#c2a5cf", "#f7f7f7", "#a6dba0", "#008837"],
+    6: ["#762a83", "#af8dc3", "#e7d4e8", "#d9f0d3", "#7fbf7b", "#1b7837"],
+    7: ["#762a83", "#af8dc3", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#7fbf7b", "#1b7837"],
+    8: ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837"],
+    9: ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837"],
+    10: ["#40004b", "#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837", "#00441b"],
+    11: ["#40004b", "#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837", "#00441b"]
+  }, PiYG: {
+    3: ["#e9a3c9", "#f7f7f7", "#a1d76a"],
+    4: ["#d01c8b", "#f1b6da", "#b8e186", "#4dac26"],
+    5: ["#d01c8b", "#f1b6da", "#f7f7f7", "#b8e186", "#4dac26"],
+    6: ["#c51b7d", "#e9a3c9", "#fde0ef", "#e6f5d0", "#a1d76a", "#4d9221"],
+    7: ["#c51b7d", "#e9a3c9", "#fde0ef", "#f7f7f7", "#e6f5d0", "#a1d76a", "#4d9221"],
+    8: ["#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#e6f5d0", "#b8e186", "#7fbc41", "#4d9221"],
+    9: ["#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#f7f7f7", "#e6f5d0", "#b8e186", "#7fbc41", "#4d9221"],
+    10: ["#8e0152", "#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#e6f5d0", "#b8e186", "#7fbc41", "#4d9221", "#276419"],
+    11: ["#8e0152", "#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#f7f7f7", "#e6f5d0", "#b8e186", "#7fbc41", "#4d9221", "#276419"]
+  }, RdBu: {
+    3: ["#ef8a62", "#f7f7f7", "#67a9cf"],
+    4: ["#ca0020", "#f4a582", "#92c5de", "#0571b0"],
+    5: ["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"],
+    6: ["#b2182b", "#ef8a62", "#fddbc7", "#d1e5f0", "#67a9cf", "#2166ac"],
+    7: ["#b2182b", "#ef8a62", "#fddbc7", "#f7f7f7", "#d1e5f0", "#67a9cf", "#2166ac"],
+    8: ["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac"],
+    9: ["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac"],
+    10: ["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac", "#053061"],
+    11: ["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac", "#053061"]
+  }, RdGy: {
+    3: ["#ef8a62", "#ffffff", "#999999"],
+    4: ["#ca0020", "#f4a582", "#bababa", "#404040"],
+    5: ["#ca0020", "#f4a582", "#ffffff", "#bababa", "#404040"],
+    6: ["#b2182b", "#ef8a62", "#fddbc7", "#e0e0e0", "#999999", "#4d4d4d"],
+    7: ["#b2182b", "#ef8a62", "#fddbc7", "#ffffff", "#e0e0e0", "#999999", "#4d4d4d"],
+    8: ["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#e0e0e0", "#bababa", "#878787", "#4d4d4d"],
+    9: ["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#ffffff", "#e0e0e0", "#bababa", "#878787", "#4d4d4d"],
+    10: ["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#e0e0e0", "#bababa", "#878787", "#4d4d4d", "#1a1a1a"],
+    11: ["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#ffffff", "#e0e0e0", "#bababa", "#878787", "#4d4d4d", "#1a1a1a"]
+  }, RdYlBu: {
+    3: ["#fc8d59", "#ffffbf", "#91bfdb"],
+    4: ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"],
+    5: ["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"],
+    6: ["#d73027", "#fc8d59", "#fee090", "#e0f3f8", "#91bfdb", "#4575b4"],
+    7: ["#d73027", "#fc8d59", "#fee090", "#ffffbf", "#e0f3f8", "#91bfdb", "#4575b4"],
+    8: ["#d73027", "#f46d43", "#fdae61", "#fee090", "#e0f3f8", "#abd9e9", "#74add1", "#4575b4"],
+    9: ["#d73027", "#f46d43", "#fdae61", "#fee090", "#ffffbf", "#e0f3f8", "#abd9e9", "#74add1", "#4575b4"],
+    10: ["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee090", "#e0f3f8", "#abd9e9", "#74add1", "#4575b4", "#313695"],
+    11: ["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee090", "#ffffbf", "#e0f3f8", "#abd9e9", "#74add1", "#4575b4", "#313695"]
+  }, Spectral: {
+    3: ["#fc8d59", "#ffffbf", "#99d594"],
+    4: ["#d7191c", "#fdae61", "#abdda4", "#2b83ba"],
+    5: ["#d7191c", "#fdae61", "#ffffbf", "#abdda4", "#2b83ba"],
+    6: ["#d53e4f", "#fc8d59", "#fee08b", "#e6f598", "#99d594", "#3288bd"],
+    7: ["#d53e4f", "#fc8d59", "#fee08b", "#ffffbf", "#e6f598", "#99d594", "#3288bd"],
+    8: ["#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#e6f598", "#abdda4", "#66c2a5", "#3288bd"],
+    9: ["#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd"],
+    10: ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"],
+    11: ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"]
+  }, RdYlGn: {
+    3: ["#fc8d59", "#ffffbf", "#91cf60"],
+    4: ["#d7191c", "#fdae61", "#a6d96a", "#1a9641"],
+    5: ["#d7191c", "#fdae61", "#ffffbf", "#a6d96a", "#1a9641"],
+    6: ["#d73027", "#fc8d59", "#fee08b", "#d9ef8b", "#91cf60", "#1a9850"],
+    7: ["#d73027", "#fc8d59", "#fee08b", "#ffffbf", "#d9ef8b", "#91cf60", "#1a9850"],
+    8: ["#d73027", "#f46d43", "#fdae61", "#fee08b", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850"],
+    9: ["#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850"],
+    10: ["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"],
+    11: ["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"]
+  }, Accent: {
+    3: ["#7fc97f", "#beaed4", "#fdc086"],
+    4: ["#7fc97f", "#beaed4", "#fdc086", "#ffff99"],
+    5: ["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0"],
+    6: ["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"],
+    7: ["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f", "#bf5b17"],
+    8: ["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f", "#bf5b17", "#666666"]
+  }, Dark2: {
+    3: ["#1b9e77", "#d95f02", "#7570b3"],
+    4: ["#1b9e77", "#d95f02", "#7570b3", "#e7298a"],
+    5: ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"],
+    6: ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"],
+    7: ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d"],
+    8: ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666"]
+  }, Paired: {
+    3: ["#a6cee3", "#1f78b4", "#b2df8a"],
+    4: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c"],
+    5: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99"],
+    6: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c"],
+    7: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f"],
+    8: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00"],
+    9: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6"],
+    10: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a"],
+    11: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99"],
+    12: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"]
+  }, Pastel1: {
+    3: ["#fbb4ae", "#b3cde3", "#ccebc5"],
+    4: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4"],
+    5: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6"],
+    6: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc"],
+    7: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc", "#e5d8bd"],
+    8: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc", "#e5d8bd", "#fddaec"],
+    9: ["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc", "#e5d8bd", "#fddaec", "#f2f2f2"]
+  }, Pastel2: {
+    3: ["#b3e2cd", "#fdcdac", "#cbd5e8"],
+    4: ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4"],
+    5: ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9"],
+    6: ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae"],
+    7: ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae", "#f1e2cc"],
+    8: ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae", "#f1e2cc", "#cccccc"]
+  }, Set1: {
+    3: ["#e41a1c", "#377eb8", "#4daf4a"],
+    4: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"],
+    5: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00"],
+    6: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33"],
+    7: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628"],
+    8: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"],
+    9: ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf", "#999999"]
+  }, Set2: {
+    3: ["#66c2a5", "#fc8d62", "#8da0cb"],
+    4: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3"],
+    5: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
+    6: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f"],
+    7: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f", "#e5c494"],
+    8: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f", "#e5c494", "#b3b3b3"]
+  }, Set3: {
+    3: ["#8dd3c7", "#ffffb3", "#bebada"],
+    4: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072"],
+    5: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3"],
+    6: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462"],
+    7: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69"],
+    8: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5"],
+    9: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"],
+    10: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd"],
+    11: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5"],
+    12: ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f"]
+  } };
+
+module.exports = colorbrewer;
+
+},{}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -851,6 +1291,10 @@ var DistributedForm = _form2['default'].extend({
       _underscore2['default'].each(keys, function (key) {
         var field = fields[key];
 
+        if (!field || !field.editor) {
+          throw new Error('Missing field definition for ' + key);
+        }
+
         $container.append(field.editor.render().el);
       });
     });
@@ -871,6 +1315,10 @@ var DistributedForm = _form2['default'].extend({
       //Add the fields
       _underscore2['default'].each(keys, function (key) {
         var field = fields[key];
+
+        if (!field || !field.editor) {
+          throw new Error('Missing field definition for ' + key);
+        }
 
         $container.append(field.render().el);
       });
@@ -895,7 +1343,7 @@ var DistributedForm = _form2['default'].extend({
 exports['default'] = DistributedForm;
 module.exports = exports['default'];
 
-},{"../utilities.js":36,"./form":28,"backbone":45,"underscore":51}],28:[function(require,module,exports){
+},{"../utilities.js":51,"./form":31,"backbone":63,"underscore":70}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -967,7 +1415,7 @@ _backboneFormsDistributionBackboneFormsJs2['default'].validators.state = functio
 exports['default'] = _backboneFormsDistributionBackboneFormsJs2['default'];
 module.exports = exports['default'];
 
-},{"./templates":29,"backbone-forms/distribution/backbone-forms.js":38,"underscore":51,"underscore.string/titleize":50}],29:[function(require,module,exports){
+},{"./templates":32,"backbone-forms/distribution/backbone-forms.js":56,"underscore":70,"underscore.string/titleize":68}],32:[function(require,module,exports){
 /**
  * This file is lifted almost entirely from backbone-forms, and modified to work with
  * our module system.
@@ -1053,17 +1501,7 @@ if (_backboneFormsDistributionBackboneFormsJs2['default'].editors.List) {
   ');
 }
 
-},{"backbone-forms/distribution/backbone-forms.js":38,"underscore":51}],30:[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-
-buf.push("<div class=\"people-list\"></div><div class=\"new-person-container\"><div class=\"btn btn-default add\"><i class=\"fa fa-plus\"></i>&nbsp; Add person</div></div>");;return buf.join("");
-};
-},{"jade/runtime":47}],31:[function(require,module,exports){
+},{"backbone-forms/distribution/backbone-forms.js":56,"underscore":70}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1072,7 +1510,188 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _backboneMarionette = require('backbone.marionette');
+var _model = require('./model');
+
+var _model2 = _interopRequireDefault(_model);
+
+var _backbone = require('backbone');
+
+exports['default'] = _backbone.Collection.extend({
+  initialize: function initialize(models, attributes) {
+    this.organization = attributes.organization;
+  },
+  model: _model2['default'],
+  url: function url() {
+    return '/helprequests?organization_id=' + this.organization.get('id');
+  }
+});
+module.exports = exports['default'];
+
+},{"./model":36,"backbone":63}],34:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (viewState) {
+jade_mixins["loadmore"] = jade_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
+buf.push("<div class=\"load-more-container\">");
+if ( !viewState.more)
+{
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
+}
+else
+{
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
+}
+buf.push("</div>");
+}
+};
+buf.push("<h2 class=\"tile-list-title\">Ways to help</h2><div class=\"help-requests-list tile-container\"></div>");
+jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],35:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsCompositeview = require('shared/views/compositeview');
+
+var _sharedViewsCompositeview2 = _interopRequireDefault(_sharedViewsCompositeview);
+
+var _singleview = require('./singleview');
+
+var _singleview2 = _interopRequireDefault(_singleview);
+
+var _model = require('./model');
+
+var _model2 = _interopRequireDefault(_model);
+
+var _collectiontemplateJade = require('./collectiontemplate.jade');
+
+var _collectiontemplateJade2 = _interopRequireDefault(_collectiontemplateJade);
+
+exports['default'] = _sharedViewsCompositeview2['default'].extend({
+  template: _collectiontemplateJade2['default'],
+  className: 'help-requests',
+  childView: _singleview2['default'],
+  childViewContainer: '.help-requests-list'
+});
+module.exports = exports['default'];
+
+},{"./collectiontemplate.jade":34,"./model":36,"./singleview":38,"shared/views/compositeview":54}],36:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _backbone = require('backbone');
+
+exports['default'] = _backbone.Model.extend({
+  schema: {
+    title: {
+      type: 'Text',
+      validators: ['required']
+    },
+    text: {
+      type: 'Text',
+      validators: ['required']
+    },
+    contact_email: {
+      type: 'Text',
+      title: 'Contact Email',
+      validators: ['email', 'required']
+    }
+  },
+
+  urlRoot: function urlRoot() {
+    return app.config.apiUrl + '/recordings';
+  }
+});
+module.exports = exports['default'];
+
+},{"backbone":63}],37:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (app, cid, text, title) {
+var color = app.templateHelpers.randomColor(cid);
+buf.push("<div" + (jade.attr("style", "background-color: " + (color) + "", true, false)) + " class=\"tile-image\"></div><div class=\"tile-text\"><div class=\"tile-title\"><div class=\"title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</div></div><div class=\"tile-more\">" + (jade.escape(null == (jade_interp = text) ? "" : jade_interp)) + "</div></div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],38:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsItemview = require('shared/views/itemview');
+
+var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
+
+var _singletemplateJade = require('./singletemplate.jade');
+
+var _singletemplateJade2 = _interopRequireDefault(_singletemplateJade);
+
+exports['default'] = _sharedViewsItemview2['default'].extend({
+  template: _singletemplateJade2['default'],
+  className: 'help-request-container tile'
+});
+module.exports = exports['default'];
+
+},{"./singletemplate.jade":37,"shared/views/itemview":55}],39:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (viewState) {
+jade_mixins["loadmore"] = jade_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
+buf.push("<div class=\"load-more-container\">");
+if ( !viewState.more)
+{
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
+}
+else
+{
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
+}
+buf.push("</div>");
+}
+};
+buf.push("<h2 class=\"tile-list-title\">People</h2><div class=\"people-list tile-container\"></div>");
+jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],40:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsCompositeview = require('shared/views/compositeview');
+
+var _sharedViewsCompositeview2 = _interopRequireDefault(_sharedViewsCompositeview);
 
 var _singleview = require('./singleview');
 
@@ -1086,11 +1705,8 @@ var _collectiontemplateJade = require('./collectiontemplate.jade');
 
 var _collectiontemplateJade2 = _interopRequireDefault(_collectiontemplateJade);
 
-exports['default'] = _backboneMarionette.CompositeView.extend({
+exports['default'] = _sharedViewsCompositeview2['default'].extend({
   template: _collectiontemplateJade2['default'],
-  events: {
-    'click .add': 'addPerson'
-  },
   className: 'people',
   childView: _singleview2['default'],
   childViewContainer: '.people-list',
@@ -1100,7 +1716,7 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
 });
 module.exports = exports['default'];
 
-},{"./collectiontemplate.jade":30,"./person":33,"./singleview":35,"backbone.marionette":41}],32:[function(require,module,exports){
+},{"./collectiontemplate.jade":39,"./person":42,"./singleview":44,"shared/views/compositeview":54}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1126,7 +1742,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./person":33,"backbone":45}],33:[function(require,module,exports){
+},{"./person":42,"backbone":63}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1187,15 +1803,18 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":45}],34:[function(require,module,exports){
+},{"backbone":63}],43:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (cid, first, last, viewState) {
-buf.push("<div class=\"person-picture\"><div class=\"person-details\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"first,last\" class=\"name form-inline\">" + (jade.escape(null == (jade_interp = first + " " + last) ? "" : jade_interp)) + "</div></div></div><div class=\"person-edit\">");
+;var locals_for_with = (locals || {});(function (app, bio, cid, first, last, profile_picture, viewState) {
+var color = app.templateHelpers.randomColor(cid);
+var style = "background-color: " + color + ";";
+if (profile_picture) style = style + "background-image: url(" + profile_picture + ")";
+buf.push("<div" + (jade.attr("style", style, true, false)) + " class=\"tile-image\"></div><div class=\"tile-text\"><div class=\"tile-title\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"first,last\" class=\"name form-inline\">" + (jade.escape(null == (jade_interp = first + " " + last) ? "" : jade_interp)) + "</div></div><div class=\"tile-more\">" + (jade.escape(null == (jade_interp = bio) ? "" : jade_interp)) + "<div class=\"social-media-links\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div><div class=\"tile-edit\">");
 if ( viewState.editing)
 {
 buf.push("<i class=\"action-icon save fa fa-check\"></i><i class=\"action-icon cancel fa fa-times\"></i>");
@@ -1204,9 +1823,9 @@ else
 {
 buf.push("<i class=\"action-icon edit fa fa-pencil\"></i>");
 }
-buf.push("</div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+buf.push("</div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"bio" in locals_for_with?locals_for_with.bio:typeof bio!=="undefined"?bio:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined,"profile_picture" in locals_for_with?locals_for_with.profile_picture:typeof profile_picture!=="undefined"?profile_picture:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":47}],35:[function(require,module,exports){
+},{"jade/runtime":65}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1225,11 +1844,158 @@ var _singletemplateJade2 = _interopRequireDefault(_singletemplateJade);
 
 exports['default'] = _sharedViewsItemview2['default'].extend({
   template: _singletemplateJade2['default'],
-  className: 'person'
+  className: 'person-container tile'
 });
 module.exports = exports['default'];
 
-},{"./singletemplate.jade":34,"shared/views/itemview":37}],36:[function(require,module,exports){
+},{"./singletemplate.jade":43,"shared/views/itemview":55}],45:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _model = require('./model');
+
+var _model2 = _interopRequireDefault(_model);
+
+var _backbone = require('backbone');
+
+exports['default'] = _backbone.Collection.extend({
+  initialize: function initialize(models, attributes) {
+    this.organization = attributes.organization;
+  },
+  model: _model2['default'],
+  url: function url() {
+    return '/recordings?organization_id=' + this.organization.get('id');
+  }
+});
+module.exports = exports['default'];
+
+},{"./model":48,"backbone":63}],46:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (viewState) {
+jade_mixins["loadmore"] = jade_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+if ( (viewState.hasMore))
+{
+buf.push("<div class=\"load-more-container\">");
+if ( !viewState.more)
+{
+buf.push("<a class=\"load-more\"><i class=\"fa fa-chevron-down\"></i>&nbsp; Load more</a>");
+}
+else
+{
+buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</a>");
+}
+buf.push("</div>");
+}
+};
+buf.push("<h2 class=\"tile-list-title\">Recordings</h2><div class=\"recordings-list tile-container\"></div>");
+jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],47:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsCompositeview = require('shared/views/compositeview');
+
+var _sharedViewsCompositeview2 = _interopRequireDefault(_sharedViewsCompositeview);
+
+var _singleview = require('./singleview');
+
+var _singleview2 = _interopRequireDefault(_singleview);
+
+var _model = require('./model');
+
+var _model2 = _interopRequireDefault(_model);
+
+var _collectiontemplateJade = require('./collectiontemplate.jade');
+
+var _collectiontemplateJade2 = _interopRequireDefault(_collectiontemplateJade);
+
+exports['default'] = _sharedViewsCompositeview2['default'].extend({
+  template: _collectiontemplateJade2['default'],
+  className: 'recordings',
+  childView: _singleview2['default'],
+  childViewContainer: '.recordings-list'
+});
+module.exports = exports['default'];
+
+},{"./collectiontemplate.jade":46,"./model":48,"./singleview":50,"shared/views/compositeview":54}],48:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _backbone = require('backbone');
+
+exports['default'] = _backbone.Model.extend({
+  schema: {
+    title: {
+      type: 'Text',
+      validators: ['required']
+    },
+    url: {
+      type: 'Text',
+      validators: ['url', 'required']
+    }
+  },
+
+  urlRoot: function urlRoot() {
+    return app.config.apiUrl + '/recordings';
+  }
+});
+module.exports = exports['default'];
+
+},{"backbone":63}],49:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (app, cid, description, title) {
+var color = app.templateHelpers.randomColor(cid);
+buf.push("<div" + (jade.attr("style", "background-color: " + (color) + "", true, false)) + " class=\"tile-image\"></div><div class=\"tile-text\"><div class=\"tile-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</div><div class=\"tile-more\">" + (jade.escape(null == (jade_interp = description) ? "" : jade_interp)) + "</div></div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"description" in locals_for_with?locals_for_with.description:typeof description!=="undefined"?description:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
+};
+},{"jade/runtime":65}],50:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _sharedViewsItemview = require('shared/views/itemview');
+
+var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
+
+var _singletemplateJade = require('./singletemplate.jade');
+
+var _singletemplateJade2 = _interopRequireDefault(_singletemplateJade);
+
+exports['default'] = _sharedViewsItemview2['default'].extend({
+  template: _singletemplateJade2['default'],
+  className: 'recording-container tile'
+});
+module.exports = exports['default'];
+
+},{"./singletemplate.jade":49,"shared/views/itemview":55}],51:[function(require,module,exports){
 /**
  * Small library of useful functions.
  */
@@ -1288,7 +2054,102 @@ module.exports = {
   }
 };
 
-},{"underscore":51}],37:[function(require,module,exports){
+},{"underscore":70}],52:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+exports['default'] = {
+  fakePerson: {
+    first: 'Gabe',
+    last: 'Isman',
+    phone: '(413) 559-0176',
+    primary_website: 'http://gabe.link',
+    address_0: '71 29th St.',
+    address_1: 'Apt. 2',
+    city: 'San Francisco',
+    zipcode: '94110',
+    state: 'CA',
+    twitter: '@gabeisman',
+    facebook: 'https://www.facebook.com/gabeisman',
+    instagram: '@gabeisman',
+    bio: 'I tell computers to do things and sometimes they listen to me.'
+  },
+
+  fakeRecording: {
+    title: 'Amid A Violent Religious Rift, Pope Preaches Harmony In CAR',
+    url: 'http://www.npr.org/2015/11/29/457795088/amid-a-violent-religious-rift-pope-preaches-harmony-in-car',
+    description: 'Pope Francis is calling for communal and religious harmony during a visit to the Central African Republic, the final stop of his first African tour. The country has been racked by a deadly conflict driven by Christian and Muslim militias.'
+  },
+
+  fakeHelpRequest: {
+    title: 'Help us tag audio',
+    text: 'We need help going through our audio archives and tagging content so we can surface it.',
+    contact_email: 'gabe.isman@fake.com'
+  },
+
+  replicate: function replicate(fake, times, opt_new) {
+    var fakes = [];
+    for (var i = 0; i < times; i++) {
+      if (opt_new) {
+        fakes.push(fake);
+      } else {
+        fakes.push(_underscore2['default'].extend({ id: guid() }, fake));
+      }
+    }
+    return fakes;
+  }
+};
+module.exports = exports['default'];
+
+},{"underscore":70}],53:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _colorsColorbrewer = require('../colors/colorbrewer');
+
+var _colorsColorbrewer2 = _interopRequireDefault(_colorsColorbrewer);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _underscoreStringTruncate = require('underscore.string/truncate');
+
+var _underscoreStringTruncate2 = _interopRequireDefault(_underscoreStringTruncate);
+
+exports['default'] = {
+  randomColor: function randomColor(cid, palette, tones) {
+    var palette = _colorsColorbrewer2['default'][palette || 'Spectral'][tones || 9];
+    var index = parseInt(cid.replace('c', ''), 10) % palette.length;
+    return palette[index];
+  },
+  _: _underscore2['default'],
+  truncate: _underscoreStringTruncate2['default']
+};
+module.exports = exports['default'];
+
+},{"../colors/colorbrewer":29,"underscore":70,"underscore.string/truncate":69}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1300,6 +2161,67 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 var _backboneMarionette = require('backbone.marionette');
 
 var _backbone = require('backbone');
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+exports['default'] = _backboneMarionette.CompositeView.extend({
+  initialize: function initialize(options) {
+    this.state = new _backbone.Model({
+      more: options.more || false
+    });
+    this.listenTo(this.state, 'change', this.render);
+  },
+  numModels: 10,
+
+  events: {
+    'click .load-more': 'loadMore',
+    'click .load-less': 'loadLess'
+  },
+
+  loadMore: function loadMore() {
+    this.state.set('more', true);
+  },
+
+  loadLess: function loadLess() {
+    this.state.set('more', false);
+  },
+
+  serializeData: function serializeData() {
+    var data = _backboneMarionette.CompositeView.prototype.serializeData.apply(this, arguments);
+    if (data.viewState) {
+      throw new Error('viewState is a reserved data keyword');
+    }
+    data.viewState = this.state.toJSON();
+
+    if (this.collection && this.numModels) {
+      data.viewState.hasMore = this.collection.length > this.numModels;
+    }
+
+    return data;
+  },
+
+  filter: function filter(child, index, collection) {
+    return this.state.get('more') || index < this.numModels;
+  }
+});
+module.exports = exports['default'];
+
+},{"backbone":63,"backbone.marionette":59,"underscore":70}],55:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backboneMarionette = require('backbone.marionette');
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
 
 var _underscore = require('underscore');
 
@@ -1324,6 +2246,11 @@ exports['default'] = _backboneMarionette.ItemView.extend({
     });
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
+
+    if (this.model.isNew()) {
+      this.listenToOnce(this.model, 'sync', this.navigateToModel);
+    }
+
     return _backboneMarionette.ItemView.prototype.initialize.apply(this, arguments);
   },
 
@@ -1396,11 +2323,26 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 
   cancelEditing: function cancelEditing() {
     this.state.set('editing', false);
+  },
+
+  navigateToModel: function navigateToModel(model, options) {
+    model = model || this.model;
+    if (!model) {
+      throw new Error('No model specified to navigate to.');
+    }
+
+    var fragment = _underscore2['default'].result(model, 'permalink');
+
+    if (_underscore2['default'].isUndefined(fragment)) {
+      throw new Error('No permalink specified on the model');
+    }
+
+    _backbone2['default'].history.navigate(fragment, options);
   }
 });
 module.exports = exports['default'];
 
-},{"backbone":45,"backbone.marionette":41,"shared/forms/distributed":27,"underscore":51}],38:[function(require,module,exports){
+},{"backbone":63,"backbone.marionette":59,"shared/forms/distributed":30,"underscore":70}],56:[function(require,module,exports){
 (function (global){
 /**
  * Backbone Forms v0.14.0
@@ -3979,7 +4921,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 })(window || global || this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":45,"underscore":51}],39:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],57:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone')) :
   typeof define === 'function' && define.amd ? define(['underscore', 'backbone'], factory) :
@@ -4470,7 +5412,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":45,"underscore":51}],40:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],58:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('backbone'), require('backbone-metal')) : typeof define === 'function' && define.amd ? define(['backbone', 'backbone-metal'], factory) : global.Backbone.Routing = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -4719,7 +5661,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return backbone_routing;
 });
 
-},{"backbone":45,"backbone-metal":39}],41:[function(require,module,exports){
+},{"backbone":63,"backbone-metal":57}],59:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.4.2
@@ -8158,7 +9100,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return Marionette;
 }));
 
-},{"backbone":45,"backbone.babysitter":42,"backbone.wreqr":43,"underscore":51}],42:[function(require,module,exports){
+},{"backbone":63,"backbone.babysitter":60,"backbone.wreqr":61,"underscore":70}],60:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.8
@@ -8350,7 +9292,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":45,"underscore":51}],43:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],61:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.3
@@ -8787,7 +9729,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":45,"underscore":51}],44:[function(require,module,exports){
+},{"backbone":63,"underscore":70}],62:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory(require("backbone"), require("backbone-metal")) : typeof define === "function" && define.amd ? define(["backbone", "backbone-metal"], factory) : global.Backbone.Storage = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -8928,7 +9870,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return backbone_storage;
 });
 
-},{"backbone":45,"backbone-metal":39}],45:[function(require,module,exports){
+},{"backbone":63,"backbone-metal":57}],63:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.1
 
@@ -10805,9 +11747,9 @@ Form.editors.DateTime = Form.editors.Base.extend({
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":48,"underscore":51}],46:[function(require,module,exports){
+},{"jquery":66,"underscore":70}],64:[function(require,module,exports){
 
-},{}],47:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.jade = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
@@ -11062,7 +12004,7 @@ exports.DebugItem = function DebugItem(lineno, filename) {
 },{}]},{},[1])(1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"fs":46}],48:[function(require,module,exports){
+},{"fs":64}],66:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -20274,7 +21216,7 @@ return jQuery;
 
 }));
 
-},{}],49:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 /**
  * Ensure some object is a coerced to a string
  **/
@@ -20283,7 +21225,7 @@ module.exports = function makeString(object) {
   return '' + object;
 };
 
-},{}],50:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 var makeString = require('./helper/makeString');
 
 module.exports = function titleize(str) {
@@ -20292,7 +21234,17 @@ module.exports = function titleize(str) {
   });
 };
 
-},{"./helper/makeString":49}],51:[function(require,module,exports){
+},{"./helper/makeString":67}],69:[function(require,module,exports){
+var makeString = require('./helper/makeString');
+
+module.exports = function truncate(str, length, truncateStr) {
+  str = makeString(str);
+  truncateStr = truncateStr || '...';
+  length = ~~length;
+  return str.length > length ? str.slice(0, length) + truncateStr : str;
+};
+
+},{"./helper/makeString":67}],70:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

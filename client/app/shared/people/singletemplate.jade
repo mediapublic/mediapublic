@@ -1,9 +1,19 @@
-.person-picture
-  .person-details
+- var color = app.templateHelpers.randomColor(cid);
+- var style = "background-color: " + color + ";";
+- if (profile_picture) style = style + "background-image: url(" + profile_picture + ")";
+.tile-image(style=style)
+.tile-text
+  .tile-title
     .name.form-inline(model=cid, data-fields="first,last")
       = first + " " + last
-
-.person-edit
+  .tile-more
+    = bio
+    .social-media-links
+      i.fa.fa-twitter
+      i.fa.fa-facebook
+      i.fa.fa-github
+      i.fa.fa-instagram
+.tile-edit
   if viewState.editing
     i.action-icon.save.fa.fa-check
     i.action-icon.cancel.fa.fa-times
