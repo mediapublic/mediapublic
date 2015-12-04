@@ -16,11 +16,6 @@ export default Model.extend({
       validators: ['url'],
       title: 'Website'
     },
-    short_description: {
-      type: 'TextArea',
-      title: 'Short Description',
-      validators: ['required']
-    },
     long_description: {
       type: 'TextArea',
       title: 'Long Description',

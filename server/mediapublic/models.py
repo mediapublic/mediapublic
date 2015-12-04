@@ -305,7 +305,6 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
     id = Column(UUIDType(binary=False), primary_key=True)
     short_name = Column(UnicodeText, nullable=False)
     long_name = Column(UnicodeText)
-    short_description = Column(UnicodeText)
     long_description = Column(UnicodeText)
 
     address_0 = Column(UnicodeText)
@@ -324,7 +323,6 @@ class Organizations(Base, CreationMixin, TimeStampMixin):
         return dict(
             short_name=self.short_name,
             long_name=self.long_name,
-            short_description=self.short_description,
             long_description=self.long_description,
             address_0=self.address_0,
             address_1=self.address_1,
