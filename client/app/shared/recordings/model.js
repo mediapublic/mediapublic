@@ -6,10 +6,15 @@ export default Model.extend({
       type: 'Text',
       validators: ['required'],
     },
+    description: 'TextArea',
     url: {
       type: 'Text',
       validators: ['url', 'required'],
     }
+  },
+
+  permalink() {
+    return '/recordings/' + this.get('id');
   },
 
   urlRoot() {
