@@ -8,7 +8,6 @@ export default Collection.extend({
     }
   },
   model: Recording,
-  parse: (data) => data.recordings,
   url() {
     if (this.organization) {
       return '/recordings?organization_id=' + this.organization.get('id');

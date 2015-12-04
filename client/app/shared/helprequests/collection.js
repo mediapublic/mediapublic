@@ -6,7 +6,6 @@ export default Collection.extend({
     this.organization = attributes.organization;
   },
   model: HelpRequest,
-  parse: (data) => data.helpRequests,
   url() {
     return '/helprequests?organization_id=' + this.organization.get('id');
   }
