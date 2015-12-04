@@ -8,7 +8,7 @@ tests:
   - name: Get Recordings
     url: /recordings
     response_json_paths:
-      $.recordings: []
+      $.data: []
 
   - name: Create a recording incorrectly
     status: 400
@@ -30,4 +30,4 @@ tests:
   - name: Get Recordings
     url: /recordings
     response_json_paths:
-      $.recordings.`len`: 1
+      $.data.`len`: 1

@@ -8,7 +8,7 @@ tests:
   - name: Get Howtos
     url: /howtos
     response_json_paths:
-      $.howtos: []
+      $.data: []
 
   - name: Create a howto incorrectly
     status: 400
@@ -29,4 +29,4 @@ tests:
   - name: Get Howtos
     url: /howtos
     response_json_paths:
-      $.howtos.`len`: 1
+      $.data.`len`: 1

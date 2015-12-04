@@ -49,7 +49,7 @@ class ResourceMixin(object):
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
-            self.rsrc: [i.to_dict() for i in self.cls.get_all()]
+            'data': [i.to_dict() for i in self.cls.get_all()]
         }
 
     @view(validators=('validate_req', ), permission='create')

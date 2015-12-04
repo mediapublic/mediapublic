@@ -1,4 +1,4 @@
-import Backbone from 'shared/backbone';
+import Backbone from 'shared/backbone/backbone';
 
 import Application from './application/application';
 import IndexRouter from './index/router';
