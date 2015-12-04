@@ -8,7 +8,7 @@ tests:
   - name: Get Organizations
     url: /organizations
     response_json_paths:
-      $.organizations: []
+      $.data: []
 
   - name: Create a organization incorrectly
     status: 400
@@ -47,4 +47,4 @@ tests:
   - name: Get Organizations
     url: /organizations
     response_json_paths:
-      $.organizations.`len`: 1
+      $.data.`len`: 1

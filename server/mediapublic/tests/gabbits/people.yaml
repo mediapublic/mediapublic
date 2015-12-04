@@ -8,7 +8,7 @@ tests:
   - name: Get Peoples
     url: /people
     response_json_paths:
-      $.people: []
+      $.data: []
 
   - name: Create a person incorrectly
     status: 400
@@ -44,4 +44,4 @@ tests:
   - name: Get People
     url: /people
     response_json_paths:
-      $.people.`len`: 1
+      $.data.`len`: 1
