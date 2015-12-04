@@ -6026,12 +6026,22 @@ body {
 
 p {
   margin-top: 22px;
+  font-family: 'Times New Roman', serif;
   font-size: 18px;
-  line-height: 22px;
-  font-family: "Times New Roman", serif; }
+  line-height: 22px; }
 
 a {
   cursor: pointer; }
+
+.view-container {
+  width: 100%;
+  max-width: 992px;
+  margin: auto;
+  padding: 40px 0; }
+
+@media (max-width: 991px) {
+  .view-container {
+    padding: 40px 20px; } }
 
 /**
  *  Component to be used to display extra (often tabular) information alongside
@@ -6219,11 +6229,6 @@ aside > .table {
 
 .navbar {
   margin-bottom: 0; }
-
-.region-container {
-  width: 100%;
-  max-width: 992px;
-  margin: auto; }
 
 .cover-photo {
   position: relative;

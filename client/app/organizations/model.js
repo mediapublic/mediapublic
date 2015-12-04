@@ -57,6 +57,6 @@ export default Model.extend({
   },
 
   urlRoot() {
-    return app.config.apiUrl + '/organizations';
+    return '/organizations';
   }
 });

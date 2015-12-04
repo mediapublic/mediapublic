@@ -3,6 +3,6 @@ import Organization from './model';
 
 export default Collection.extend({
   model: Organization,
-  url: () => app.config.apiUrl + '/organizations',
+  url: () => '/organizations',
   parse: (data) => data.organizations
 });
