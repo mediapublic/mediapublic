@@ -1578,20 +1578,46 @@ var _text = require('./text');
 
 var _text2 = _interopRequireDefault(_text);
 
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var numTinyMceRetries = 20;
+var tinyMCELoaded = false;
+
 exports['default'] = _text2['default'].extend({
   tagname: 'div',
   overlaid: true,
   render: function render() {
+    if (!tinyMCELoaded) {
+      loadTinyMCE().done(_underscore2['default'].bind(this.render, this));
+      return this;
+    }
+
+    // If the variable isn't loaded, give it a tenth of a second and try again.
+    // Per http://api.jquery.com/jQuery.getScript/ the success callback can
+    // be fired before the script has finished executing.
+    if (!window.tinyMCE && numTinyMceRetries) {
+      numTinyMceRetries--;
+      _underscore2['default'].delay(_underscore2['default'].bind(this.render, this), 100);
+      return this;
+    }
+
     this.$el.attr('id', this.id);
     window.tinyMCE.init({
       selector: '#' + this.id
     });
+    // TODO(gabeisman): investigate this further. Seemed to cause some strange and
+    // hard to predict bugs. Definitely a little bit nicer experience, but
+    // risky at this point IMO.
+    // inline: true
+    return this;
   },
 
-  // TODO(gabeisman): investigate this further. Seemed to cause some strange and
-  // hard to predict bugs. Definitely a little bit nicer experience, but
-  // risky at this point IMO.
-  // inline: true
   getValue: function getValue() {
     return window.tinyMCE.get(this.id).getContent();
   },
@@ -1601,9 +1627,16 @@ exports['default'] = _text2['default'].extend({
     window.tinyMCE.get(this.id).setContent(value);
   }
 });
+
+function loadTinyMCE() {
+  tinyMCELoaded = true;
+  return _jquery2['default'].getScript('//cdn.tinymce.com/4/tinymce.min.js').fail(function () {
+    tinyMCELoaded = false;
+  });
+}
 module.exports = exports['default'];
 
-},{"./text":33}],35:[function(require,module,exports){
+},{"./text":33,"jquery":79,"underscore":83}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
