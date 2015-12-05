@@ -230,7 +230,7 @@ var _templateJade2 = _interopRequireDefault(_templateJade);
 
 exports['default'] = _backboneMarionette.ItemView.extend({
   template: _templateJade2['default'],
-  className: 'index'
+  className: 'home-page'
 });
 module.exports = exports['default'];
 
@@ -745,7 +745,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"view-container organization-banner-container\"></div><div class=\"view-container organization-details-container\"></div><div class=\"view-container help-requests-container\"></div><div class=\"view-container recordings-container\"></div><div class=\"view-container people-container\"></div>");;return buf.join("");
+buf.push("<div class=\"organization-banner-container\"></div><div class=\"view-container\"><div class=\"organization-details-container\"></div><div class=\"help-requests-container\"></div><div class=\"recordings-container\"></div><div class=\"people-container\"></div></div>");;return buf.join("");
 };
 },{"jade/runtime":86}],25:[function(require,module,exports){
 'use strict';
@@ -2556,7 +2556,9 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
     this.state = new _backbone.Model({
       more: options.more || false
     });
+    this.updateHasMore();
     this.listenTo(this.state, 'change', this.render);
+    this.listenTo(this.collection, 'sync', this.updateHasMore);
   },
   numModels: 10,
 
@@ -2580,15 +2582,15 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
     }
     data.viewState = this.state.toJSON();
 
-    if (this.collection && this.numModels) {
-      data.viewState.hasMore = this.collection.length > this.numModels;
-    }
-
     return data;
   },
 
   filter: function filter(child, index, collection) {
     return this.state.get('more') || index < this.numModels;
+  },
+
+  updateHasMore: function updateHasMore() {
+    this.state.set('hasMore', this.collection.length > this.numModels);
   }
 });
 module.exports = exports['default'];
