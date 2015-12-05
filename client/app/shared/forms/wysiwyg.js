@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 var numTinyMceRetries = 20;
 var tinyMCELoaded = false;
+var renderedMap = {};
 
 export default TextEditor.extend({
   tagname: 'div',
@@ -24,13 +25,27 @@ export default TextEditor.extend({
     }
 
     this.$el.attr('id', this.id);
-    window.tinyMCE.init({
-      selector: '#' + this.id,
-      // TODO(gabeisman): investigate this further. Seemed to cause some strange and
-      // hard to predict bugs. Definitely a little bit nicer experience, but
-      // risky at this point IMO.
-      // inline: true
+    var self = this;
+
+    // Defer so that this element gets added to the dom before tinyMCE goes
+    // looking for it.
+    _.defer(function() {
+      if (renderedMap[self.id]) {
+        window.tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, self.id);
+        window.tinyMCE.EditorManager.execCommand('mceAddEditor', true, self.id);
+      } else {
+        window.tinyMCE.init({
+          selector: '#' + self.id,
+          // TODO(gabeisman): investigate this further. Seemed to cause some strange and
+          // hard to predict bugs. Definitely a little bit nicer experience, but
+          // risky at this point IMO.
+          // inline: true
+        });
+      }
+
+      renderedMap[self.id] = true;
     });
+
     return this;
   },
 
