@@ -17,7 +17,7 @@ export default Model.extend({
       title: 'Website'
     },
     long_description: {
-      type: 'TextArea',
+      type: 'WYSIWYG',
       title: 'Long Description',
       validators: ['required']
     },
