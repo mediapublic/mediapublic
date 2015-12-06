@@ -678,6 +678,18 @@ class HowtoCategoryAssignments(Base, CreationMixin, TimeStampMixin):
         return resp
 
 
+class HelpRequests(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
+    __tablename__ = 'help_requests'
+
+    id = Column(UUIDType(binary=False), primary_key=True)
+    organization_id = Column(ForeignKey('organizations.id'))
+    primary_contact_id = ForeignKey('users.id')
+    title = Column(UnicodeText, nullable=False)
+    description = Column(UnicodeText, nullable=False)
+    tags = Column(UnicodeText)
+    due_datetime = Column(DateTime)
+
+
 class Blogs(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'blogs'
 

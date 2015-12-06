@@ -15,6 +15,7 @@ from .models import (
     Blogs,
     Comments,
     DBSession,
+    HelpRequests,
     Howtos,
     Organizations,
     People,
@@ -197,6 +198,18 @@ class HowtosResource(ResourceMixin):
     [GET,       PUT, DELETE] /howtos/{id}
     """
     cls = Howtos
+
+
+@resource(collection_path='/help-requests',
+          path='/help-requests/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class HelpRequests(ResourceMixin):
+    """
+    [GET, POST             ] /help-requests
+    [GET,       PUT, DELETE] /help-requests/{id}
+    """
+    cls = HelpRequests
 
 
 @resource(collection_path='/blogs', path='/blogs/{id}',
