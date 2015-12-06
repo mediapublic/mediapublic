@@ -794,10 +794,26 @@ exports['default'] = _sharedBackboneModel2['default'].extend({
       title: 'Cover Photo Url',
       type: 'Text'
     },
-    'facebook': 'Text',
-    'twitter': 'Text',
-    'github': 'Text',
-    'instagram': 'Text'
+    'facebook': {
+      type: 'Text',
+      help: 'This should be the URL of your profile page.',
+      validators: ['url']
+    },
+    'twitter': {
+      type: 'Text',
+      help: 'This should be the URL of your profile page.',
+      validators: ['url']
+    },
+    'github': {
+      type: 'Text',
+      help: 'This should be the URL of your profile page.',
+      validators: ['url']
+    },
+    'instagram': {
+      type: 'Text',
+      help: 'This should be the URL of your profile page.',
+      validators: ['url']
+    }
   },
 
   extraFields: ['facebook', 'twitter', 'github', 'instagram'],
@@ -934,13 +950,30 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (cid, city, image_url, short_name, state) {
+;var locals_for_with = (locals || {});(function (cid, city, facebook, github, image_url, instagram, short_name, state, twitter) {
 buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div>");
 if ( city || state)
 {
 buf.push("<div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div>");
 }
-buf.push("<div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
+buf.push("<div class=\"organization-social-media-container\">");
+if ( (twitter))
+{
+buf.push("<a" + (jade.attr("href", twitter, true, false)) + " target=\"_blank\"><i class=\"fa fa-twitter\"></i></a>");
+}
+if ( (facebook))
+{
+buf.push("<a" + (jade.attr("href", facebook, true, false)) + " target=\"_blank\"><i class=\"fa fa-facebook\"></i></a>");
+}
+if ( (github))
+{
+buf.push("<a" + (jade.attr("href", github, true, false)) + " target=\"_blank\"><i class=\"fa fa-github\"></i></a>");
+}
+if ( (instagram))
+{
+buf.push("<a" + (jade.attr("href", instagram, true, false)) + " target=\"_blank\"><i class=\"fa fa-instagram\"></i></a>");
+}
+buf.push("</div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"facebook" in locals_for_with?locals_for_with.facebook:typeof facebook!=="undefined"?facebook:undefined,"github" in locals_for_with?locals_for_with.github:typeof github!=="undefined"?github:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"instagram" in locals_for_with?locals_for_with.instagram:typeof instagram!=="undefined"?instagram:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"twitter" in locals_for_with?locals_for_with.twitter:typeof twitter!=="undefined"?twitter:undefined));;return buf.join("");
 };
 },{"jade/runtime":106}],32:[function(require,module,exports){
 'use strict';
