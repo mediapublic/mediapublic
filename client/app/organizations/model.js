@@ -1,4 +1,4 @@
-import {Model} from 'backbone';
+import Model from 'shared/backbone/model';
 
 export default Model.extend({
   schema: {
@@ -46,11 +46,13 @@ export default Model.extend({
       title: 'Cover Photo Url',
       type: 'Text'
     },
-    facebook: 'Text',
-    twitter: 'Text',
-    github: 'Text',
-    instagram: 'Text'
+    'facebook': 'Text',
+    'twitter': 'Text',
+    'github': 'Text',
+    'instagram': 'Text',
   },
+
+  extraFields: ['facebook', 'twitter', 'github', 'instagram'],
 
   permalink() {
     return '/organizations/' + this.get('id');
