@@ -7,8 +7,9 @@ export default Model.extend({
       validators: ['required'],
     },
     text: {
-      type: 'Text',
+      type: 'TextArea',
       validators: ['required'],
+      help: 'Keep it short and descriptive.'
     },
     contact_email: {
       type: 'Text',
@@ -17,7 +18,11 @@ export default Model.extend({
     }
   },
 
+  permalink() {
+    return '/help-requests/' + this.get('id');
+  },
+
   urlRoot() {
-    return '/recordings';
+    return '/helprequests';
   }
 });
