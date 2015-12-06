@@ -1,6 +1,7 @@
 import colorbrewer from '../colors/colorbrewer';
 import _ from 'underscore';
 import truncate from 'underscore.string/truncate';
+import htmlTruncate from 'html-truncate';
 
 export default {
   randomColor(cid, palette, tones) {
@@ -9,5 +10,6 @@ export default {
     return palette[index];
   },
   _,
-  truncate
+  truncate,
+  htmlTruncate
 };

@@ -35,3 +35,4 @@ app.layout.header.show(new Header());
 
 // Navigate to the current url
 Backbone.history.start();
+

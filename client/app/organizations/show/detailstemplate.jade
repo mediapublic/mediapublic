@@ -12,11 +12,12 @@ mixin detailsRow(field, icon)
   +editButtons
 if !viewState.expanded && !viewState.editing
   p.organization-description
-    = app.templateHelpers.truncate(long_description, 300)
+    div!=app.templateHelpers.htmlTruncate(long_description, 300)
   .read-action-container
     a.action.read-more Read more
 else
-  p.organization-description(model=cid, data-fields='long_description')= long_description
+  p.organization-description
+    div(model=cid, data-editors='long_description')!= long_description
   .organization-details-box-container
     .organization-details-box
       if (address_0 && city) || viewState.editing

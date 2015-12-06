@@ -46,8 +46,7 @@ var DistributedForm = BackboneForm.extend({
         ? self.selectedFields || _.keys(fields)
         : selection.split(',');
 
-      // Clear the current contents of the container
-      $container.empty();
+      var emptied = false;
 
       //Add the editors
       _.each(keys, function(key) {
@@ -57,7 +56,16 @@ var DistributedForm = BackboneForm.extend({
           throw new Error('Missing field definition for ' + key);
         }
 
-        $container.append(field.editor.render().el);
+        if (field.editor.overlaid) {
+          field.editor.setElement($container);
+          field.editor.render();
+        } else {
+          if (!emptied) {
+            $container.empty();
+            emptied = true;
+          }
+          $container.append(field.editor.render().el);
+        }
       });
     });
 

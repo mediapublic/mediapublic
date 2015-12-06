@@ -3,10 +3,16 @@ import {Collection} from 'backbone';
 
 export default Collection.extend({
   initialize(models, attributes) {
-    this.organization = attributes.organization;
+    if (attributes && attributes.organization) {
+      this.organization = attributes.organization;
+    }
   },
   model: HelpRequest,
   url() {
-    return '/helprequests?organization_id=' + this.organization.get('id');
+    if (this.organization) {
+      return '/helprequests?organization_id=' + this.organization.get('id');
+    } else {
+      return '/helprequests';
+    }
   }
 });
