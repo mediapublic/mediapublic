@@ -1,5 +1,6 @@
 include ../templates/loadmore.jade
 
-h2.tile-list-title People
-.people-list.tile-container
-+loadmore
+if items.length > 0
+  h2.tile-list-title People
+  .people-list.tile-container
+  +loadmore

@@ -33,6 +33,8 @@ export default CompositeView.extend({
     }
     data.viewState = this.state.toJSON();
 
+    data.items = this.collection ? this.collection.toJSON() : [];
+
     return data;
   },
 
@@ -41,6 +43,6 @@ export default CompositeView.extend({
   },
 
   updateHasMore() {
-    this.state.set('hasMore', this.collection.length > this.numModels);
+    this.state.set('hasMore', this.collection && this.collection.length > this.numModels);
   }
 });

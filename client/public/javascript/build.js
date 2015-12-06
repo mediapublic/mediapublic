@@ -929,7 +929,12 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (cid, city, image_url, short_name, state) {
-buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div><div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div><div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
+buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div>");
+if ( city || state)
+{
+buf.push("<div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div>");
+}
+buf.push("<div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
 };
 },{"jade/runtime":105}],32:[function(require,module,exports){
 'use strict';
@@ -2240,7 +2245,7 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var numTinyMceRetries = 20;
+var numTinyMceRetries = 100;
 var tinyMCELoaded = false;
 var renderedMap = {};
 
@@ -2253,10 +2258,15 @@ exports['default'] = _text2['default'].extend({
       return this;
     }
 
+    // Failure.
+    if (numTinyMceRetries == 0) {
+      return this;
+    }
+
     // If the variable isn't loaded, give it a tenth of a second and try again.
     // Per http://api.jquery.com/jQuery.getScript/ the success callback can
     // be fired before the script has finished executing.
-    if (!window.tinyMCE && numTinyMceRetries) {
+    if (!window.tinyMCE) {
       numTinyMceRetries--;
       _underscore2['default'].delay(_underscore2['default'].bind(this.render, this), 100);
       return this;
@@ -2338,7 +2348,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (viewState) {
+;var locals_for_with = (locals || {});(function (items, viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 if ( (viewState.hasMore))
@@ -2355,8 +2365,11 @@ buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</
 buf.push("</div>");
 }
 };
+if ( items.length > 0)
+{
 buf.push("<h2 class=\"tile-list-title\">Ways to help</h2><div class=\"help-requests-list tile-container\"></div>");
-jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+jade_mixins["loadmore"]();
+}}.call(this,"items" in locals_for_with?locals_for_with.items:typeof items!=="undefined"?items:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":105}],58:[function(require,module,exports){
 'use strict';
@@ -2498,7 +2511,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (viewState) {
+;var locals_for_with = (locals || {});(function (items, viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 if ( (viewState.hasMore))
@@ -2515,8 +2528,11 @@ buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</
 buf.push("</div>");
 }
 };
+if ( items.length > 0)
+{
 buf.push("<h2 class=\"tile-list-title\">Things we've shared</h2><div class=\"howtos-list tile-container\"></div>");
-jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+jade_mixins["loadmore"]();
+}}.call(this,"items" in locals_for_with?locals_for_with.items:typeof items!=="undefined"?items:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":105}],64:[function(require,module,exports){
 'use strict';
@@ -2654,7 +2670,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (viewState) {
+;var locals_for_with = (locals || {});(function (items, viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 if ( (viewState.hasMore))
@@ -2671,8 +2687,11 @@ buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</
 buf.push("</div>");
 }
 };
+if ( items.length > 0)
+{
 buf.push("<h2 class=\"tile-list-title\">People</h2><div class=\"people-list tile-container\"></div>");
-jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+jade_mixins["loadmore"]();
+}}.call(this,"items" in locals_for_with?locals_for_with.items:typeof items!=="undefined"?items:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":105}],70:[function(require,module,exports){
 'use strict';
@@ -2861,7 +2880,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (viewState) {
+;var locals_for_with = (locals || {});(function (items, viewState) {
 jade_mixins["loadmore"] = jade_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 if ( (viewState.hasMore))
@@ -2878,8 +2897,11 @@ buf.push("<a class=\"load-less\"><i class=\"fa fa-chevron-up\"></i>&nbsp; Less</
 buf.push("</div>");
 }
 };
+if ( items.length > 0)
+{
 buf.push("<h2 class=\"tile-list-title\">Recordings</h2><div class=\"recordings-list tile-container\"></div>");
-jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+jade_mixins["loadmore"]();
+}}.call(this,"items" in locals_for_with?locals_for_with.items:typeof items!=="undefined"?items:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":105}],76:[function(require,module,exports){
 'use strict';
@@ -3178,6 +3200,8 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
     }
     data.viewState = this.state.toJSON();
 
+    data.items = this.collection ? this.collection.toJSON() : [];
+
     return data;
   },
 
@@ -3186,7 +3210,7 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
   },
 
   updateHasMore: function updateHasMore() {
-    this.state.set('hasMore', this.collection.length > this.numModels);
+    this.state.set('hasMore', this.collection && this.collection.length > this.numModels);
   }
 });
 module.exports = exports['default'];
