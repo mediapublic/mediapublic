@@ -385,7 +385,7 @@ else
 buf.push("<div class=\"btn btn-default edit\">Edit</div>");
 }
 };
-buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"*\"><a" + (jade.attr("href", url, true, false)) + " class=\"h1\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</a><p class=\"contents\">" + (null == (jade_interp = contents) ? "" : jade_interp) + "</p></div>");
+buf.push("<a" + (jade.attr("href", url, true, false)) + (jade.attr("model", cid, true, false)) + " data-fields=\"title\" class=\"h1\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</a><p class=\"contents\"><div" + (jade.attr("model", cid, true, false)) + " data-editors=\"contents\">" + (null == (jade_interp = contents) ? "" : jade_interp) + "</div></p>");
 jade_mixins["editButtons"]();}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"contents" in locals_for_with?locals_for_with.contents:typeof contents!=="undefined"?contents:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined,"url" in locals_for_with?locals_for_with.url:typeof url!=="undefined"?url:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
 },{"jade/runtime":106}],15:[function(require,module,exports){
@@ -1639,6 +1639,7 @@ exports['default'] = _backbone.Model.extend({
     attributes = _underscore2['default'].omit(attributes, this.extraFields);
     attributes.extra = extra;
 
+    options.contentType = 'application/json';
     options.data = JSON.stringify(attributes);
 
     return _backbone.Model.prototype.save.call(this, attributes, options);
@@ -2615,9 +2616,13 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _backbone = require('backbone');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-exports['default'] = _backbone.Model.extend({
+var _sharedBackboneModel = require('shared/backbone/model');
+
+var _sharedBackboneModel2 = _interopRequireDefault(_sharedBackboneModel);
+
+exports['default'] = _sharedBackboneModel2['default'].extend({
   schema: {
     title: {
       type: 'Text',
@@ -2636,7 +2641,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":103}],67:[function(require,module,exports){
+},{"shared/backbone/model":50}],67:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {

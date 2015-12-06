@@ -299,7 +299,7 @@ class Comments(Base, CreationMixin, TimeStampMixin):
         return comments
 
 
-class Organizations(Base, CreationMixin, TimeStampMixin):
+class Organizations(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'organizations'
 
     id = Column(UUIDType(binary=False), primary_key=True)

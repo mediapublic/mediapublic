@@ -14,6 +14,7 @@ export default Model.extend({
     attributes = _.omit(attributes, this.extraFields);
     attributes.extra = extra;
 
+    options.contentType = 'application/json';
     options.data = JSON.stringify(attributes);
 
     return Model.prototype.save.call(this, attributes, options);
