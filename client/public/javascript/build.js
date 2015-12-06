@@ -2228,6 +2228,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var numTinyMceRetries = 20;
 var tinyMCELoaded = false;
+var renderedMap = {};
 
 exports['default'] = _text2['default'].extend({
   tagname: 'div',
@@ -2248,13 +2249,27 @@ exports['default'] = _text2['default'].extend({
     }
 
     this.$el.attr('id', this.id);
-    window.tinyMCE.init({
-      selector: '#' + this.id
+    var self = this;
+
+    // Defer so that this element gets added to the dom before tinyMCE goes
+    // looking for it.
+    _underscore2['default'].defer(function () {
+      if (renderedMap[self.id]) {
+        window.tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, self.id);
+        window.tinyMCE.EditorManager.execCommand('mceAddEditor', true, self.id);
+      } else {
+        window.tinyMCE.init({
+          selector: '#' + self.id
+        });
+      }
+
+      // TODO(gabeisman): investigate this further. Seemed to cause some strange and
+      // hard to predict bugs. Definitely a little bit nicer experience, but
+      // risky at this point IMO.
+      // inline: true
+      renderedMap[self.id] = true;
     });
-    // TODO(gabeisman): investigate this further. Seemed to cause some strange and
-    // hard to predict bugs. Definitely a little bit nicer experience, but
-    // risky at this point IMO.
-    // inline: true
+
     return this;
   },
 
@@ -2293,11 +2308,17 @@ var _backbone = require('backbone');
 
 exports['default'] = _backbone.Collection.extend({
   initialize: function initialize(models, attributes) {
-    this.organization = attributes.organization;
+    if (attributes && attributes.organization) {
+      this.organization = attributes.organization;
+    }
   },
   model: _model2['default'],
   url: function url() {
-    return '/helprequests?organization_id=' + this.organization.get('id');
+    if (this.organization) {
+      return '/helprequests?organization_id=' + this.organization.get('id');
+    } else {
+      return '/helprequests';
+    }
   }
 });
 module.exports = exports['default'];
@@ -2378,8 +2399,9 @@ exports['default'] = _backbone.Model.extend({
       validators: ['required']
     },
     text: {
-      type: 'Text',
-      validators: ['required']
+      type: 'TextArea',
+      validators: ['required'],
+      help: 'Keep it short and descriptive.'
     },
     contact_email: {
       type: 'Text',
@@ -2388,8 +2410,12 @@ exports['default'] = _backbone.Model.extend({
     }
   },
 
+  permalink: function permalink() {
+    return '/help-requests/' + this.get('id');
+  },
+
   urlRoot: function urlRoot() {
-    return '/recordings';
+    return '/helprequests';
   }
 });
 module.exports = exports['default'];
