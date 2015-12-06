@@ -12,7 +12,9 @@
     "backbone.marionette": "^2.4.2",
     "backbone.storage": "^0.1.0",
     "bootstrap-sass": "^3.3.5",
+    "html-truncate": "^1.2.1",
     "jquery": "^2.1.4",
+    "tinymce": "^4.3.1",
     "underscore": "^1.8.3",
     "underscore.string": "^3.2.2"
   },

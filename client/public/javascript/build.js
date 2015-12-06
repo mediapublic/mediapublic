@@ -23,7 +23,7 @@ exports['default'] = _backboneMarionette.Application.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout-view":2,"backbone.marionette":69}],2:[function(require,module,exports){
+},{"./layout-view":2,"backbone.marionette":71}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52,7 +52,7 @@ exports['default'] = _backboneMarionette.LayoutView.extend({
 });
 module.exports = exports['default'];
 
-},{"./layout.jade":3,"backbone.marionette":69}],3:[function(require,module,exports){
+},{"./layout.jade":3,"backbone.marionette":71}],3:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -62,7 +62,7 @@ var jade_interp;
 
 buf.push("<div class=\"app-header\"></div><div class=\"app-notifications\"></div><div class=\"app-content\"></div><div class=\"app-overlay\"></div><div class=\"app-footer\"></div>");;return buf.join("");
 };
-},{"jade/runtime":75}],4:[function(require,module,exports){
+},{"jade/runtime":78}],4:[function(require,module,exports){
 module.exports={
   apiUrl: "http://0.0.0.0:6543"
 }
@@ -100,7 +100,7 @@ buf.push("<a" + (jade.attr("href", url, true, false)) + " class=\"header-item he
 
 buf.push("</span>");}.call(this,"menuItems" in locals_for_with?locals_for_with.menuItems:typeof menuItems!=="undefined"?menuItems:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],6:[function(require,module,exports){
+},{"jade/runtime":78}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -136,7 +136,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":5,"backbone.marionette":69}],7:[function(require,module,exports){
+},{"./template.jade":5,"backbone.marionette":71}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -169,7 +169,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"./view":10,"backbone-routing":68}],8:[function(require,module,exports){
+},{"./view":10,"backbone-routing":70}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -203,7 +203,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./route":7,"backbone-routing":68}],9:[function(require,module,exports){
+},{"./route":7,"backbone-routing":70}],9:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -213,7 +213,7 @@ var jade_interp;
 
 buf.push("this is the home page");;return buf.join("");
 };
-},{"jade/runtime":75}],10:[function(require,module,exports){
+},{"jade/runtime":78}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -234,7 +234,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":9,"backbone.marionette":69}],11:[function(require,module,exports){
+},{"./template.jade":9,"backbone.marionette":71}],11:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -295,7 +295,7 @@ app.layout.header.show(new _headerView2['default']());
 // Navigate to the current url
 _sharedBackbone2['default'].history.start();
 
-},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":19,"./users/router":61,"shared/backbone":28,"shared/utilities/templatehelpers":53}],12:[function(require,module,exports){
+},{"./application/application":1,"./config.json":4,"./header/view":6,"./index/router":8,"./organizations/router":19,"./users/router":63,"shared/backbone":28,"shared/utilities/templatehelpers":55}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -321,7 +321,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./model":17,"backbone":73}],13:[function(require,module,exports){
+},{"./model":17,"backbone":75}],13:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -331,7 +331,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (id, short_name) {
 buf.push("<a" + (jade.attr("href", '#/organizations/' + (id) + '', true, false)) + " class=\"organization-link\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</a>");}.call(this,"id" in locals_for_with?locals_for_with.id:typeof id!=="undefined"?id:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],14:[function(require,module,exports){
+},{"jade/runtime":78}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -352,7 +352,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardtemplate.jade":13,"backbone.marionette":69}],15:[function(require,module,exports){
+},{"./cardtemplate.jade":13,"backbone.marionette":71}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -395,7 +395,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":27,"./view":16,"backbone-routing":68}],16:[function(require,module,exports){
+},{"../storage":27,"./view":16,"backbone-routing":70}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -416,7 +416,7 @@ exports['default'] = _backboneMarionette.CollectionView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardview":14,"backbone.marionette":69}],17:[function(require,module,exports){
+},{"./cardview":14,"backbone.marionette":71}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -441,13 +441,8 @@ exports['default'] = _backbone.Model.extend({
       validators: ['url'],
       title: 'Website'
     },
-    short_description: {
-      type: 'TextArea',
-      title: 'Short Description',
-      validators: ['required']
-    },
     long_description: {
-      type: 'TextArea',
+      type: 'WYSIWYG',
       title: 'Long Description',
       validators: ['required']
     },
@@ -492,7 +487,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73}],18:[function(require,module,exports){
+},{"backbone":75}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -528,7 +523,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../model":17,"../show/layoutview":25,"backbone-routing":68}],19:[function(require,module,exports){
+},{"../model":17,"../show/layoutview":25,"backbone-routing":70}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -584,7 +579,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./index/route":15,"./new/route":18,"./show/route":26,"backbone-routing":68}],20:[function(require,module,exports){
+},{"./index/route":15,"./new/route":18,"./show/route":26,"backbone-routing":70}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -607,7 +602,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./bannertemplate.jade":21,"shared/views/itemview":55}],21:[function(require,module,exports){
+},{"./bannertemplate.jade":21,"shared/views/itemview":57}],21:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -617,7 +612,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (cid, city, image_url, short_name, state) {
 buf.push("<div" + (jade.attr("style", "background-image: url(" + (image_url) + ");", true, false)) + " class=\"cover-photo\"><div class=\"organization-title-container\"><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"short_name\" class=\"organization-title\">" + (jade.escape(null == (jade_interp = short_name) ? "" : jade_interp)) + "</div><div class=\"organization-location\">" + (jade.escape(null == (jade_interp = city + ', ' + state) ? "" : jade_interp)) + "</div><div class=\"organization-social-media-container\"><i class=\"fa fa-twitter\"></i><i class=\"fa fa-facebook\"></i><i class=\"fa fa-github\"></i><i class=\"fa fa-instagram\"></i></div></div></div>");}.call(this,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"image_url" in locals_for_with?locals_for_with.image_url:typeof image_url!=="undefined"?image_url:undefined,"short_name" in locals_for_with?locals_for_with.short_name:typeof short_name!=="undefined"?short_name:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],22:[function(require,module,exports){
+},{"jade/runtime":78}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -658,7 +653,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./detailstemplate.jade":23,"shared/views/itemview":55,"underscore":80}],23:[function(require,module,exports){
+},{"./detailstemplate.jade":23,"shared/views/itemview":57,"underscore":83}],23:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -698,11 +693,11 @@ jade_mixins["editButtons"]();
 buf.push("</div>");
 if ( !viewState.expanded && !viewState.editing)
 {
-buf.push("<p class=\"organization-description\">" + (jade.escape(null == (jade_interp = app.templateHelpers.truncate(long_description, 300)) ? "" : jade_interp)) + "</p><div class=\"read-action-container\"><a class=\"action read-more\">Read more</a></div>");
+buf.push("<p class=\"organization-description\"><div>" + (null == (jade_interp = app.templateHelpers.htmlTruncate(long_description, 300)) ? "" : jade_interp) + "</div></p><div class=\"read-action-container\"><a class=\"action read-more\">Read more</a></div>");
 }
 else
 {
-buf.push("<p" + (jade.attr("model", cid, true, false)) + " data-fields=\"long_description\" class=\"organization-description\">" + (jade.escape(null == (jade_interp = long_description) ? "" : jade_interp)) + "</p><div class=\"organization-details-box-container\"><div class=\"organization-details-box\">");
+buf.push("<p class=\"organization-description\"><div" + (jade.attr("model", cid, true, false)) + " data-editors=\"long_description\">" + (null == (jade_interp = long_description) ? "" : jade_interp) + "</div></p><div class=\"organization-details-box-container\"><div class=\"organization-details-box\">");
 if ( (address_0 && city) || viewState.editing)
 {
 jade_mixins["detailsRow"].call({
@@ -735,7 +730,7 @@ if ( viewState.editing)
 buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"twitter\" class=\"extra-field twitter-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"facebook\" class=\"extra-field facebook-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"github\" class=\"extra-field github-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"instagram\" class=\"extra-field instagram-field\"></div><div" + (jade.attr("model", cid, true, false)) + " data-fields=\"image_url\" class=\"extra-field image-field\"></div>");
 }}.call(this,"address_0" in locals_for_with?locals_for_with.address_0:typeof address_0!=="undefined"?address_0:undefined,"address_1" in locals_for_with?locals_for_with.address_1:typeof address_1!=="undefined"?address_1:undefined,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"city" in locals_for_with?locals_for_with.city:typeof city!=="undefined"?city:undefined,"long_description" in locals_for_with?locals_for_with.long_description:typeof long_description!=="undefined"?long_description:undefined,"phone" in locals_for_with?locals_for_with.phone:typeof phone!=="undefined"?phone:undefined,"primary_website" in locals_for_with?locals_for_with.primary_website:typeof primary_website!=="undefined"?primary_website:undefined,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined,"zipcode" in locals_for_with?locals_for_with.zipcode:typeof zipcode!=="undefined"?zipcode:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],24:[function(require,module,exports){
+},{"jade/runtime":78}],24:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -745,7 +740,7 @@ var jade_interp;
 
 buf.push("<div class=\"view-container organization-banner-container\"></div><div class=\"view-container organization-details-container\"></div><div class=\"view-container help-requests-container\"></div><div class=\"view-container recordings-container\"></div><div class=\"view-container people-container\"></div>");;return buf.join("");
 };
-},{"jade/runtime":75}],25:[function(require,module,exports){
+},{"jade/runtime":78}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -805,7 +800,7 @@ exports['default'] = _backboneMarionette.LayoutView.extend({
 });
 module.exports = exports['default'];
 
-},{"./banner":20,"./details":22,"./layouttemplate.jade":24,"backbone.marionette":69,"shared/helprequests/collectionview":35,"shared/people/collectionview":40,"shared/recordings/collectionview":47}],26:[function(require,module,exports){
+},{"./banner":20,"./details":22,"./layouttemplate.jade":24,"backbone.marionette":71,"shared/helprequests/collectionview":37,"shared/people/collectionview":42,"shared/recordings/collectionview":49}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -881,7 +876,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":27,"./layoutview":25,"backbone-routing":68,"shared/helprequests/collection":33,"shared/people/people":41,"shared/recordings/collection":45,"shared/utilities/faker":52,"underscore":80}],27:[function(require,module,exports){
+},{"../storage":27,"./layoutview":25,"backbone-routing":70,"shared/helprequests/collection":35,"shared/people/people":43,"shared/recordings/collection":47,"shared/utilities/faker":54,"underscore":83}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -910,7 +905,7 @@ var OrganizationsStorage = _backboneStorage2['default'].extend({
 exports['default'] = new OrganizationsStorage();
 module.exports = exports['default'];
 
-},{"./collection":12,"./model":17,"backbone.storage":72}],28:[function(require,module,exports){
+},{"./collection":12,"./model":17,"backbone.storage":74}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -951,7 +946,7 @@ _backbone2['default'].sync = function (method, model, options) {
 exports['default'] = _backbone2['default'];
 module.exports = exports['default'];
 
-},{"../config.json":4,"backbone":73,"underscore":80}],29:[function(require,module,exports){
+},{"../config.json":4,"backbone":75,"underscore":83}],29:[function(require,module,exports){
 // This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
 "use strict";
 
@@ -1323,8 +1318,7 @@ var DistributedForm = _form2['default'].extend({
       //Work out which fields to include
       var keys = selection == '*' ? self.selectedFields || _underscore2['default'].keys(fields) : selection.split(',');
 
-      // Clear the current contents of the container
-      $container.empty();
+      var emptied = false;
 
       //Add the editors
       _underscore2['default'].each(keys, function (key) {
@@ -1334,7 +1328,16 @@ var DistributedForm = _form2['default'].extend({
           throw new Error('Missing field definition for ' + key);
         }
 
-        $container.append(field.editor.render().el);
+        if (field.editor.overlaid) {
+          field.editor.setElement($container);
+          field.editor.render();
+        } else {
+          if (!emptied) {
+            $container.empty();
+            emptied = true;
+          }
+          $container.append(field.editor.render().el);
+        }
       });
     });
 
@@ -1382,7 +1385,7 @@ var DistributedForm = _form2['default'].extend({
 exports['default'] = DistributedForm;
 module.exports = exports['default'];
 
-},{"../utilities.js":51,"./form":31,"backbone":73,"underscore":80}],31:[function(require,module,exports){
+},{"../utilities.js":53,"./form":31,"backbone":75,"underscore":83}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1394,6 +1397,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 var _backboneFormsDistributionBackboneFormsJs = require('backbone-forms/distribution/backbone-forms.js');
 
 var _backboneFormsDistributionBackboneFormsJs2 = _interopRequireDefault(_backboneFormsDistributionBackboneFormsJs);
+
+var _text = require('./text');
+
+var _text2 = _interopRequireDefault(_text);
+
+var _wysiwyg = require('./wysiwyg');
+
+var _wysiwyg2 = _interopRequireDefault(_wysiwyg);
 
 var _templates = require('./templates');
 
@@ -1407,17 +1418,8 @@ var _underscoreStringTitleize = require('underscore.string/titleize');
 
 var _underscoreStringTitleize2 = _interopRequireDefault(_underscoreStringTitleize);
 
-var OriginalText = _backboneFormsDistributionBackboneFormsJs2['default'].editors.Text;
-_backboneFormsDistributionBackboneFormsJs2['default'].editors.Text = _backboneFormsDistributionBackboneFormsJs2['default'].editors.Text.extend({
-  // Add a placeholder attribute
-  initialize: function initialize(options) {
-    options.schema = options.schema || {};
-    options.schema.editorAttrs = options.schema.editorAttrs || {};
-    options.schema.editorAttrs.placeholder = options.schema.placeholder || options.schema.title || (0, _underscoreStringTitleize2['default'])(options.key);
-    options.schema.editorAttrs['aria-label'] = options.schema.editorAttrs['aria-label'] || options.schema.editorAttrs.placeholder;
-    return OriginalText.prototype.initialize.apply(this, arguments);
-  }
-});
+_backboneFormsDistributionBackboneFormsJs2['default'].editors.Text = _text2['default'];
+_backboneFormsDistributionBackboneFormsJs2['default'].editors.WYSIWYG = _wysiwyg2['default'];
 
 _backboneFormsDistributionBackboneFormsJs2['default'].validators.phone = function (options) {
   options = _underscore2['default'].extend({
@@ -1454,7 +1456,7 @@ _backboneFormsDistributionBackboneFormsJs2['default'].validators.state = functio
 exports['default'] = _backboneFormsDistributionBackboneFormsJs2['default'];
 module.exports = exports['default'];
 
-},{"./templates":32,"backbone-forms/distribution/backbone-forms.js":66,"underscore":80,"underscore.string/titleize":78}],32:[function(require,module,exports){
+},{"./templates":32,"./text":33,"./wysiwyg":34,"backbone-forms/distribution/backbone-forms.js":68,"underscore":83,"underscore.string/titleize":81}],32:[function(require,module,exports){
 /**
  * This file is lifted almost entirely from backbone-forms, and modified to work with
  * our module system.
@@ -1540,7 +1542,116 @@ if (_backboneFormsDistributionBackboneFormsJs2['default'].editors.List) {
   ');
 }
 
-},{"backbone-forms/distribution/backbone-forms.js":66,"underscore":80}],33:[function(require,module,exports){
+},{"backbone-forms/distribution/backbone-forms.js":68,"underscore":83}],33:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backboneFormsDistributionBackboneFormsJs = require('backbone-forms/distribution/backbone-forms.js');
+
+var _backboneFormsDistributionBackboneFormsJs2 = _interopRequireDefault(_backboneFormsDistributionBackboneFormsJs);
+
+var OriginalText = _backboneFormsDistributionBackboneFormsJs2['default'].editors.Text;
+var Text = _backboneFormsDistributionBackboneFormsJs2['default'].editors.Text.extend({
+  // Add a placeholder attribute
+  initialize: function initialize(options) {
+    options.schema = options.schema || {};
+    options.schema.editorAttrs = options.schema.editorAttrs || {};
+    options.schema.editorAttrs.placeholder = options.schema.placeholder || options.schema.title || titleize(options.key);
+    options.schema.editorAttrs['aria-label'] = options.schema.editorAttrs['aria-label'] || options.schema.editorAttrs.placeholder;
+    return OriginalText.prototype.initialize.apply(this, arguments);
+  }
+});
+
+module.exports = Text;
+
+},{"backbone-forms/distribution/backbone-forms.js":68}],34:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _text = require('./text');
+
+var _text2 = _interopRequireDefault(_text);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var numTinyMceRetries = 20;
+var tinyMCELoaded = false;
+var renderedMap = {};
+
+exports['default'] = _text2['default'].extend({
+  tagname: 'div',
+  overlaid: true,
+  render: function render() {
+    if (!tinyMCELoaded) {
+      loadTinyMCE().done(_underscore2['default'].bind(this.render, this));
+      return this;
+    }
+
+    // If the variable isn't loaded, give it a tenth of a second and try again.
+    // Per http://api.jquery.com/jQuery.getScript/ the success callback can
+    // be fired before the script has finished executing.
+    if (!window.tinyMCE && numTinyMceRetries) {
+      numTinyMceRetries--;
+      _underscore2['default'].delay(_underscore2['default'].bind(this.render, this), 100);
+      return this;
+    }
+
+    this.$el.attr('id', this.id);
+    var self = this;
+
+    // Defer so that this element gets added to the dom before tinyMCE goes
+    // looking for it.
+    _underscore2['default'].defer(function () {
+      if (renderedMap[self.id]) {
+        window.tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, self.id);
+        window.tinyMCE.EditorManager.execCommand('mceAddEditor', true, self.id);
+      } else {
+        window.tinyMCE.init({
+          selector: '#' + self.id
+        });
+      }
+
+      // TODO(gabeisman): investigate this further. Seemed to cause some strange and
+      // hard to predict bugs. Definitely a little bit nicer experience, but
+      // risky at this point IMO.
+      // inline: true
+      renderedMap[self.id] = true;
+    });
+
+    return this;
+  },
+
+  getValue: function getValue() {
+    return window.tinyMCE.get(this.id).getContent();
+  },
+
+  setValue: function setValue(value) {
+    this.value = value;
+    window.tinyMCE.get(this.id).setContent(value);
+  }
+});
+
+function loadTinyMCE() {
+  tinyMCELoaded = true;
+  return _jquery2['default'].getScript('//cdn.tinymce.com/4/tinymce.min.js').fail(function () {
+    tinyMCELoaded = false;
+  });
+}
+module.exports = exports['default'];
+
+},{"./text":33,"jquery":79,"underscore":83}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1566,7 +1677,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./model":36,"backbone":73}],34:[function(require,module,exports){
+},{"./model":38,"backbone":75}],36:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1593,7 +1704,7 @@ buf.push("</div>");
 buf.push("<h2 class=\"tile-list-title\">Ways to help</h2><div class=\"help-requests-list tile-container\"></div>");
 jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],35:[function(require,module,exports){
+},{"jade/runtime":78}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1626,7 +1737,7 @@ exports['default'] = _sharedViewsCompositeview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./collectiontemplate.jade":34,"./model":36,"./singleview":38,"shared/views/compositeview":54}],36:[function(require,module,exports){
+},{"./collectiontemplate.jade":36,"./model":38,"./singleview":40,"shared/views/compositeview":56}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1658,7 +1769,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73}],37:[function(require,module,exports){
+},{"backbone":75}],39:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1669,7 +1780,7 @@ var jade_interp;
 var color = app.templateHelpers.randomColor(cid);
 buf.push("<div" + (jade.attr("style", "background-color: " + (color) + "", true, false)) + " class=\"tile-image\"></div><div class=\"tile-text\"><div class=\"tile-title\"><div class=\"title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</div></div><div class=\"tile-more\">" + (jade.escape(null == (jade_interp = text) ? "" : jade_interp)) + "</div></div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],38:[function(require,module,exports){
+},{"jade/runtime":78}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1692,7 +1803,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./singletemplate.jade":37,"shared/views/itemview":55}],39:[function(require,module,exports){
+},{"./singletemplate.jade":39,"shared/views/itemview":57}],41:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1719,7 +1830,7 @@ buf.push("</div>");
 buf.push("<h2 class=\"tile-list-title\">People</h2><div class=\"people-list tile-container\"></div>");
 jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],40:[function(require,module,exports){
+},{"jade/runtime":78}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1755,7 +1866,7 @@ exports['default'] = _sharedViewsCompositeview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./collectiontemplate.jade":39,"./person":42,"./singleview":44,"shared/views/compositeview":54}],41:[function(require,module,exports){
+},{"./collectiontemplate.jade":41,"./person":44,"./singleview":46,"shared/views/compositeview":56}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1790,7 +1901,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./person":42,"backbone":73}],42:[function(require,module,exports){
+},{"./person":44,"backbone":75}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1855,7 +1966,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73}],43:[function(require,module,exports){
+},{"backbone":75}],45:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1877,7 +1988,7 @@ buf.push("<i class=\"action-icon edit fa fa-pencil\"></i>");
 }
 buf.push("</div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"bio" in locals_for_with?locals_for_with.bio:typeof bio!=="undefined"?bio:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined,"profile_picture" in locals_for_with?locals_for_with.profile_picture:typeof profile_picture!=="undefined"?profile_picture:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],44:[function(require,module,exports){
+},{"jade/runtime":78}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1900,7 +2011,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./singletemplate.jade":43,"shared/views/itemview":55}],45:[function(require,module,exports){
+},{"./singletemplate.jade":45,"shared/views/itemview":57}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1926,7 +2037,7 @@ exports['default'] = _backbone.Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"./model":48,"backbone":73}],46:[function(require,module,exports){
+},{"./model":50,"backbone":75}],48:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1953,7 +2064,7 @@ buf.push("</div>");
 buf.push("<h2 class=\"tile-list-title\">Recordings</h2><div class=\"recordings-list tile-container\"></div>");
 jade_mixins["loadmore"]();}.call(this,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],47:[function(require,module,exports){
+},{"jade/runtime":78}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1986,7 +2097,7 @@ exports['default'] = _sharedViewsCompositeview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./collectiontemplate.jade":46,"./model":48,"./singleview":50,"shared/views/compositeview":54}],48:[function(require,module,exports){
+},{"./collectiontemplate.jade":48,"./model":50,"./singleview":52,"shared/views/compositeview":56}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2013,7 +2124,7 @@ exports['default'] = _backbone.Model.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73}],49:[function(require,module,exports){
+},{"backbone":75}],51:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -2024,7 +2135,7 @@ var jade_interp;
 var color = app.templateHelpers.randomColor(cid);
 buf.push("<div" + (jade.attr("style", "background-color: " + (color) + "", true, false)) + " class=\"tile-image\"></div><div class=\"tile-text\"><div class=\"tile-title\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</div><div class=\"tile-more\">" + (jade.escape(null == (jade_interp = description) ? "" : jade_interp)) + "</div></div>");}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"description" in locals_for_with?locals_for_with.description:typeof description!=="undefined"?description:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],50:[function(require,module,exports){
+},{"jade/runtime":78}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2047,7 +2158,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./singletemplate.jade":49,"shared/views/itemview":55}],51:[function(require,module,exports){
+},{"./singletemplate.jade":51,"shared/views/itemview":57}],53:[function(require,module,exports){
 /**
  * Small library of useful functions.
  */
@@ -2106,7 +2217,7 @@ module.exports = {
   }
 };
 
-},{"underscore":80}],52:[function(require,module,exports){
+},{"underscore":83}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2169,7 +2280,7 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{"underscore":80}],53:[function(require,module,exports){
+},{"underscore":83}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2190,6 +2301,10 @@ var _underscoreStringTruncate = require('underscore.string/truncate');
 
 var _underscoreStringTruncate2 = _interopRequireDefault(_underscoreStringTruncate);
 
+var _htmlTruncate = require('html-truncate');
+
+var _htmlTruncate2 = _interopRequireDefault(_htmlTruncate);
+
 exports['default'] = {
   randomColor: function randomColor(cid, palette, tones) {
     var palette = _colorsColorbrewer2['default'][palette || 'Spectral'][tones || 9];
@@ -2197,11 +2312,12 @@ exports['default'] = {
     return palette[index];
   },
   _: _underscore2['default'],
-  truncate: _underscoreStringTruncate2['default']
+  truncate: _underscoreStringTruncate2['default'],
+  htmlTruncate: _htmlTruncate2['default']
 };
 module.exports = exports['default'];
 
-},{"../colors/colorbrewer":29,"underscore":80,"underscore.string/truncate":79}],54:[function(require,module,exports){
+},{"../colors/colorbrewer":29,"html-truncate":77,"underscore":83,"underscore.string/truncate":82}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2260,7 +2376,7 @@ exports['default'] = _backboneMarionette.CompositeView.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73,"backbone.marionette":69,"underscore":80}],55:[function(require,module,exports){
+},{"backbone":75,"backbone.marionette":71,"underscore":83}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2394,7 +2510,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"backbone":73,"backbone.marionette":69,"shared/forms/distributed":30,"underscore":80}],56:[function(require,module,exports){
+},{"backbone":75,"backbone.marionette":71,"shared/forms/distributed":30,"underscore":83}],58:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -2404,7 +2520,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (first, id, last) {
 buf.push("<a" + (jade.attr("href", '#/people/' + (id) + '', true, false)) + " class=\"user-link\">" + (jade.escape(null == (jade_interp = first + ' ' + last) ? "" : jade_interp)) + "</a>");}.call(this,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"id" in locals_for_with?locals_for_with.id:typeof id!=="undefined"?id:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],57:[function(require,module,exports){
+},{"jade/runtime":78}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2425,7 +2541,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardtemplate.jade":56,"backbone.marionette":69}],58:[function(require,module,exports){
+},{"./cardtemplate.jade":58,"backbone.marionette":71}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2468,7 +2584,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":65,"./view":59,"backbone-routing":68}],59:[function(require,module,exports){
+},{"../storage":67,"./view":61,"backbone-routing":70}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2489,7 +2605,7 @@ exports['default'] = _backboneMarionette.CollectionView.extend({
 });
 module.exports = exports['default'];
 
-},{"./cardview":57,"backbone.marionette":69}],60:[function(require,module,exports){
+},{"./cardview":59,"backbone.marionette":71}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2525,7 +2641,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../show/view":64,"backbone-routing":68,"shared/people/person":42}],61:[function(require,module,exports){
+},{"../show/view":66,"backbone-routing":70,"shared/people/person":44}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2584,7 +2700,7 @@ exports['default'] = _backboneRouting.Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./index/route":58,"./new/route":60,"./show/route":62,"backbone-routing":68}],62:[function(require,module,exports){
+},{"./index/route":60,"./new/route":62,"./show/route":64,"backbone-routing":70}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2627,7 +2743,7 @@ exports['default'] = _backboneRouting.Route.extend({
 });
 module.exports = exports['default'];
 
-},{"../storage":65,"./view":64,"backbone-routing":68}],63:[function(require,module,exports){
+},{"../storage":67,"./view":66,"backbone-routing":70}],65:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -2649,7 +2765,7 @@ buf.push("<div class=\"btn btn-default edit\">Edit</div>");
 buf.push("<div" + (jade.attr("model", cid, true, false)) + " data-fields=\"*\"><div class=\"h1\">" + (jade.escape(null == (jade_interp = first + ' ' + last) ? "" : jade_interp)) + "</div><p class=\"user-bio\">" + (jade.escape(null == (jade_interp = bio) ? "" : jade_interp)) + "</p></div>");
 jade_mixins["editButtons"]();}.call(this,"bio" in locals_for_with?locals_for_with.bio:typeof bio!=="undefined"?bio:undefined,"cid" in locals_for_with?locals_for_with.cid:typeof cid!=="undefined"?cid:undefined,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
 };
-},{"jade/runtime":75}],64:[function(require,module,exports){
+},{"jade/runtime":78}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2672,7 +2788,7 @@ exports['default'] = _sharedViewsItemview2['default'].extend({
 });
 module.exports = exports['default'];
 
-},{"./template.jade":63,"shared/views/itemview":55}],65:[function(require,module,exports){
+},{"./template.jade":65,"shared/views/itemview":57}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2701,7 +2817,7 @@ var PeopleStorage = _backboneStorage2['default'].extend({
 exports['default'] = new PeopleStorage();
 module.exports = exports['default'];
 
-},{"backbone.storage":72,"shared/people/people":41,"shared/people/person":42}],66:[function(require,module,exports){
+},{"backbone.storage":74,"shared/people/people":43,"shared/people/person":44}],68:[function(require,module,exports){
 (function (global){
 /**
  * Backbone Forms v0.14.0
@@ -5280,7 +5396,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 })(window || global || this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":73,"underscore":80}],67:[function(require,module,exports){
+},{"backbone":75,"underscore":83}],69:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone')) :
   typeof define === 'function' && define.amd ? define(['underscore', 'backbone'], factory) :
@@ -5771,7 +5887,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":73,"underscore":80}],68:[function(require,module,exports){
+},{"backbone":75,"underscore":83}],70:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('backbone'), require('backbone-metal')) : typeof define === 'function' && define.amd ? define(['backbone', 'backbone-metal'], factory) : global.Backbone.Routing = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -6020,7 +6136,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return backbone_routing;
 });
 
-},{"backbone":73,"backbone-metal":67}],69:[function(require,module,exports){
+},{"backbone":75,"backbone-metal":69}],71:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.4.2
@@ -9459,7 +9575,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return Marionette;
 }));
 
-},{"backbone":73,"backbone.babysitter":70,"backbone.wreqr":71,"underscore":80}],70:[function(require,module,exports){
+},{"backbone":75,"backbone.babysitter":72,"backbone.wreqr":73,"underscore":83}],72:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.8
@@ -9651,7 +9767,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":73,"underscore":80}],71:[function(require,module,exports){
+},{"backbone":75,"underscore":83}],73:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.3
@@ -10088,7 +10204,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 
 }));
 
-},{"backbone":73,"underscore":80}],72:[function(require,module,exports){
+},{"backbone":75,"underscore":83}],74:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory(require("backbone"), require("backbone-metal")) : typeof define === "function" && define.amd ? define(["backbone", "backbone-metal"], factory) : global.Backbone.Storage = factory(global.Backbone, global.Metal);
 })(this, function (Backbone, Metal) {
@@ -10229,7 +10345,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
   return backbone_storage;
 });
 
-},{"backbone":73,"backbone-metal":67}],73:[function(require,module,exports){
+},{"backbone":75,"backbone-metal":69}],75:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.1
 
@@ -12106,9 +12222,244 @@ Form.editors.DateTime = Form.editors.Base.extend({
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":76,"underscore":80}],74:[function(require,module,exports){
+},{"jquery":79,"underscore":83}],76:[function(require,module,exports){
 
-},{}],75:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
+/**
+ * Truncate HTML string and keep tag safe.
+ *
+ * @method truncate
+ * @param {String} string string needs to be truncated
+ * @param {Number} maxLength length of truncated string
+ * @param {Object} options (optional)
+ * @param {Boolean} [options.keepImageTag] flag to specify if keep image tag, false by default
+ * @param {Boolean} [options.truncateLastWord] truncates last word, true by default
+ * @param {Number} [options.slop] tolerance when options.truncateLastWord is false before we give up and just truncate at the maxLength position, 10 by default (but not greater than maxLength)
+ * @param {Boolean|String} [options.ellipsis] omission symbol for truncated string, '...' by default
+ * @return {String} truncated string
+ */
+function truncate(string, maxLength, options) {
+    var EMPTY_OBJECT = {},
+        EMPTY_STRING = '',
+        DEFAULT_TRUNCATE_SYMBOL = '...',
+        DEFAULT_SLOP = 10 > maxLength ? maxLength : 10,
+        EXCLUDE_TAGS = ['img'],         // non-closed tags
+        items = [],                     // stack for saving tags
+        total = 0,                      // record how many characters we traced so far
+        content = EMPTY_STRING,         // truncated text storage
+        KEY_VALUE_REGEX = '([\\w|-]+\\s*=\\s*"[^"]*"\\s*)*',
+        IS_CLOSE_REGEX = '\\s*\\/?\\s*',
+        CLOSE_REGEX = '\\s*\\/\\s*',
+        SELF_CLOSE_REGEX = new RegExp('<\\/?\\w+\\s*' + KEY_VALUE_REGEX + CLOSE_REGEX + '>'),
+        HTML_TAG_REGEX = new RegExp('<\\/?\\w+\\s*' + KEY_VALUE_REGEX + IS_CLOSE_REGEX + '>'),
+        URL_REGEX = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w\-]+@([\w][\w\-]+\.)+[a-zA-Z]{2,3})/g, // Simple regexp
+        IMAGE_TAG_REGEX = new RegExp('<img\\s*' + KEY_VALUE_REGEX + IS_CLOSE_REGEX + '>'),
+        WORD_BREAK_REGEX = new RegExp('\\W+', 'g'),
+        matches = true,
+        result,
+        index,
+        tail,
+        tag,
+        selfClose;
+
+    /**
+     * Remove image tag
+     *
+     * @private
+     * @method _removeImageTag
+     * @param {String} string not-yet-processed string
+     * @return {String} string without image tags
+     */
+    function _removeImageTag(string) {
+        var match = IMAGE_TAG_REGEX.exec(string),
+            index,
+            len;
+
+        if (!match) {
+            return string;
+        }
+
+        index = match.index;
+        len = match[0].length;
+
+        return string.substring(0, index) + string.substring(index + len);
+    }
+
+    /**
+     * Dump all close tags and append to truncated content while reaching upperbound
+     *
+     * @private
+     * @method _dumpCloseTag
+     * @param {String[]} tags a list of tags which should be closed
+     * @return {String} well-formatted html
+     */
+    function _dumpCloseTag(tags) {
+        var html = '';
+
+        tags.reverse().forEach(function (tag, index) {
+            // dump non-excluded tags only
+            if (-1 === EXCLUDE_TAGS.indexOf(tag)) {
+                html += '</' + tag + '>';
+            }
+        });
+
+        return html;
+    }
+
+    /**
+     * Process tag string to get pure tag name
+     *
+     * @private
+     * @method _getTag
+     * @param {String} string original html
+     * @return {String} tag name
+     */
+    function _getTag(string) {
+        var tail = string.indexOf(' ');
+
+        // TODO:
+        // we have to figure out how to handle non-well-formatted HTML case
+        if (-1 === tail) {
+            tail = string.indexOf('>');
+            if (-1 === tail) {
+                throw new Error('HTML tag is not well-formed : ' + string);
+            }
+        }
+
+        return string.substring(1, tail);
+    }
+
+
+    /**
+     * Get the end position for String#substring()
+     *
+     * If options.truncateLastWord is FALSE, we try to the end position up to
+     * options.slop characters to avoid breaking in the middle of a word.
+     *
+     * @private
+     * @method _getEndPosition
+     * @param {String} string original html
+     * @param {Number} tailPos (optional) provided to avoid extending the slop into trailing HTML tag
+     * @return {Number} maxLength
+     */
+    function _getEndPosition (string, tailPos) {
+        var defaultPos = maxLength - total,
+            position = defaultPos,
+            isShort = defaultPos < options.slop,
+            slopPos = isShort ? defaultPos : options.slop - 1,
+            substr,
+            startSlice = isShort ? 0 : defaultPos - options.slop,
+            endSlice = tailPos || (defaultPos + options.slop),
+            result;
+
+        if (!options.truncateLastWord) {
+
+            substr = string.slice(startSlice, endSlice);
+
+            if (tailPos && substr.length <= tailPos) {
+                position = substr.length;
+            }
+            else {
+                while ((result = WORD_BREAK_REGEX.exec(substr)) !== null) {
+                    // a natural break position before the hard break position
+                    if (result.index < slopPos) {
+                        position = defaultPos - (slopPos - result.index);
+                        // keep seeking closer to the hard break position
+                        // unless a natural break is at position 0
+                        if (result.index === 0 && defaultPos <= 1) break;
+                    }
+                    // a natural break position exactly at the hard break position
+                    else if (result.index === slopPos) {
+                        position = defaultPos;
+                        break; // seek no more
+                    }
+                    // a natural break position after the hard break position
+                    else {
+                        position = defaultPos + (result.index - slopPos);
+                        break;  // seek no more
+                    }
+                }
+            }
+            if (string.charAt(position - 1).match(/\s$/)) position--;
+        }
+        return position;
+    }
+
+    options = options || EMPTY_OBJECT;
+    options.ellipsis = (undefined !== options.ellipsis) ? options.ellipsis : DEFAULT_TRUNCATE_SYMBOL;
+    options.truncateLastWord = (undefined !== options.truncateLastWord) ? options.truncateLastWord : true;
+    options.slop = (undefined !== options.slop) ? options.slop : DEFAULT_SLOP;
+
+    while (matches) {
+        matches = HTML_TAG_REGEX.exec(string);
+
+        if (!matches) {
+            if (total >= maxLength) { break; }
+
+            matches = URL_REGEX.exec(string);
+            if (!matches || matches.index >= maxLength) {
+                content += string.substring(0, _getEndPosition(string));
+                break;
+            }
+
+            while (matches) {
+                result = matches[0];
+                index = matches.index;
+                content += string.substring(0, (index + result.length) - total);
+                string = string.substring(index + result.length);
+                matches = URL_REGEX.exec(string);
+            }
+            break;
+        }
+
+        result = matches[0];
+        index = matches.index;
+
+        if (total + index > maxLength) {
+            // exceed given `maxLength`, dump everything to clear stack
+            content += string.substring(0, _getEndPosition(string, index));
+            break;
+        } else {
+            total += index;
+            content += string.substring(0, index);
+        }
+
+        if ('/' === result[1]) {
+            // move out open tag
+            items.pop();
+            selfClose=null;
+        } else {
+            selfClose = SELF_CLOSE_REGEX.exec(result);
+            if (!selfClose) {
+                tag = _getTag(result);
+
+                items.push(tag);
+            }
+        }
+
+        if (selfClose) {
+            content += selfClose[0];
+        } else {
+            content += result;
+        }
+        string = string.substring(index + result.length);
+    }
+
+    if (string.length > maxLength - total && options.ellipsis) {
+        content += options.ellipsis;
+    }
+    content += _dumpCloseTag(items);
+
+    if (!options.keepImageTag) {
+        content = _removeImageTag(content);
+    }
+
+    return content;
+}
+
+module.exports = truncate;
+
+},{}],78:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.jade = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
@@ -12363,7 +12714,7 @@ exports.DebugItem = function DebugItem(lineno, filename) {
 },{}]},{},[1])(1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"fs":74}],76:[function(require,module,exports){
+},{"fs":76}],79:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -21575,7 +21926,7 @@ return jQuery;
 
 }));
 
-},{}],77:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 /**
  * Ensure some object is a coerced to a string
  **/
@@ -21584,7 +21935,7 @@ module.exports = function makeString(object) {
   return '' + object;
 };
 
-},{}],78:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 var makeString = require('./helper/makeString');
 
 module.exports = function titleize(str) {
@@ -21593,7 +21944,7 @@ module.exports = function titleize(str) {
   });
 };
 
-},{"./helper/makeString":77}],79:[function(require,module,exports){
+},{"./helper/makeString":80}],82:[function(require,module,exports){
 var makeString = require('./helper/makeString');
 
 module.exports = function truncate(str, length, truncateStr) {
@@ -21603,7 +21954,7 @@ module.exports = function truncate(str, length, truncateStr) {
   return str.length > length ? str.slice(0, length) + truncateStr : str;
 };
 
-},{"./helper/makeString":77}],80:[function(require,module,exports){
+},{"./helper/makeString":80}],83:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
