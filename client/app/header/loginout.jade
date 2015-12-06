@@ -1,0 +1,9 @@
+if viewState.loggedIn
+  .logged-in
+    .user-name
+      = first + ' ' + last
+    a.log-out Log out
+else
+  .logged-out
+    form(action=app.config.apiUrl + '/auth/login/twitter', name='twitterLogin')
+    a(href='javascript:document.twitterLogin.submit()').log-in Log in

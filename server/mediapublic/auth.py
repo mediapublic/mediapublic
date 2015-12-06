@@ -7,6 +7,7 @@ from pyramid import (
     authorization,
     security,
 )
+from pyramid.httpexceptions import HTTPFound
 
 import requests
 
@@ -87,7 +88,7 @@ def login_form(request):
     return {"foo": "bar"}
 
 
-@login.post(renderer="mediapublic:templates/logged_in.jinja2")
+@login.post()
 def logged_in(request):
     log.debug("Received auth, token ID %s" % request.params['token'])
     resp = requests.get(request.host_url + '/auth/auth_info', params={
@@ -106,12 +107,16 @@ def logged_in(request):
     log.debug("Succesfully authenticated @%s with twitter, exists:%s" %
               (twitter_handle, already_exists))
 
+
     principals = security.remember(request, str(uid))
     request.response.headerlist.extend(principals)
+    log.debug(request.response.headerlist);
     log.debug("User authenticated, sending back %s" %
               request.response.headers)
 
-    return {'exists': already_exists, 'handle': twitter_handle}
+    log.debug(request.params)
+
+    return HTTPFound(location=request.registry.settings['mediapublic.client_url'])
 
 
 @login.delete()
