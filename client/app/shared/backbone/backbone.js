@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import config from '../config.json';
+import config from '../../config.json';
 
 // Override root url for API requests
 var orginalSync = Backbone.sync;

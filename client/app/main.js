@@ -1,10 +1,10 @@
-import Backbone from 'shared/backbone';
+import Backbone from 'shared/backbone/backbone';
 
 import Application from './application/application';
 import IndexRouter from './index/router';
 import OrganizationRouter from './organizations/router';
 import UserRouter from './users/router';
-import HelpRequestRouter from './helprequests/router';
+import RecordingsRouter from './recordings/router';
 import config from './config.json';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
@@ -27,7 +27,7 @@ app.userRouter = new UserRouter({
   container: app.layout.content
 });
 
-app.helpRequestRouter = new HelpRequestRouter({
+app.recordingsRouter = new RecordingsRouter({
   container: app.layout.content
 });
 
@@ -35,3 +35,4 @@ app.layout.header.show(new Header());
 
 // Navigate to the current url
 Backbone.history.start();
+

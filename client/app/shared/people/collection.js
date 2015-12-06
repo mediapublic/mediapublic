@@ -1,5 +1,5 @@
 import Person from './person';
-import {Collection} from 'backbone';
+import Collection from 'shared/backbone/collection';
 
 export default Collection.extend({
   initialize(models, attributes) {
@@ -14,6 +14,5 @@ export default Collection.extend({
     } else {
       return '/people';
     }
-  },
-  parse: (data) => data.people
+  }
 });
