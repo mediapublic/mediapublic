@@ -1,4 +1,4 @@
-import {Model} from 'backbone';
+import Model from 'shared/backbone/model';
 
 export default Model.extend({
   schema: {

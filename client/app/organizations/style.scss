@@ -44,7 +44,11 @@
   color: #fff;
   .fa {
     padding: 5px;
+    color: #fff;
     font-size: 1.5em;
+    &:hover {
+      color: #ddd;
+    }
   }
 }
 
