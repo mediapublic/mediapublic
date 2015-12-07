@@ -6,15 +6,24 @@ import OrganizationRouter from './organizations/router';
 import UserRouter from './users/router';
 import RecordingsRouter from './recordings/router';
 import HowtosRouter from './howtos/router';
+import UserService from './services/userservice';
 import config from './config.json';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
+import _ from 'underscore';
 
 // Global namespace
 window.app = new Application();
 
 app.config = config;
 app.templateHelpers = templateHelpers;
+
+app.services = {
+  user: UserService
+};
+_.each(app.services, function(service) {
+  service.start();
+});
 
 app.indexRouter = new IndexRouter({
   container: app.layout.content

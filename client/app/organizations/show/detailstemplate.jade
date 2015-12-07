@@ -1,6 +1,7 @@
 // TODO: replace this with an absolute path, need to specify 'basedir'
 include ../../shared/address.jade
 include ../../shared/components/edit-buttons.jade
+include ../../shared/components/flash.jade
 
 mixin detailsRow(field, icon)
   .organization-details-row
@@ -8,6 +9,7 @@ mixin detailsRow(field, icon)
     .organization-details-field-value.inline-block(model=cid, data-fields=field)
       yield block
 
++flash
 .edit-buttons-container
   +editButtons
 if !viewState.expanded && !viewState.editing

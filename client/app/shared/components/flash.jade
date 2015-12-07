@@ -1,0 +1,10 @@
+mixin flash
+  .alerts-container
+    if viewState.flashSuccess
+      .alert.alert-success(role=alert)= viewState.flashSuccess
+    if viewState.flashInfo
+      .alert.alert-info(role=alert)= viewState.flashInfo
+    if viewState.flashWarning
+      .alert.alert-warning(role=alert)= viewState.flashWarning
+    if viewState.flashError
+      .alert.alert-danger(role=alert)= viewState.flashError

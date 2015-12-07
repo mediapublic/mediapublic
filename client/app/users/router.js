@@ -2,6 +2,7 @@ import {Router} from 'backbone-routing';
 import IndexRoute from './index/route';
 import ShowRoute from './show/route';
 import NewRoute from './new/route';
+import SignupRoute from './signup/route';
 
 export default Router.extend({
   initialize(options = {}) {
@@ -15,6 +16,7 @@ export default Router.extend({
     'people': 'index',
     'people/new': 'new',
     'people/:id': 'show',
+    'signup': 'signup',
   },
 
   index() {
@@ -31,6 +33,12 @@ export default Router.extend({
 
   new() {
     return new NewRoute({
+      container: this.container
+    });
+  },
+
+  signup() {
+    return new SignupRoute({
       container: this.container
     });
   }
