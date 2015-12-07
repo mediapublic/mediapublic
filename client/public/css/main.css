@@ -6265,7 +6265,10 @@ aside > .table {
   color: #fff; }
   .organization-social-media-container .fa {
     padding: 5px;
+    color: #fff;
     font-size: 1.5em; }
+    .organization-social-media-container .fa:hover {
+      color: #ddd; }
 
 @media (max-width: 768px) {
   .organization-social-media-container {

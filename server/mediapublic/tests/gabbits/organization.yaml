@@ -43,6 +43,10 @@ tests:
       fax: ' '
       primary_website: 'http://www.wxxi.org/'
       secondary_website: ' '
+      extra:
+        twitter: '@wxxi'
+    response_json_paths:
+      $.extra.twitter: '@wxxi'
 
   - name: Get Organizations
     url: /organizations
