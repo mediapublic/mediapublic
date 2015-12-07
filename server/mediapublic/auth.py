@@ -107,16 +107,15 @@ def logged_in(request):
     log.debug("Succesfully authenticated @%s with twitter, exists:%s" %
               (twitter_handle, already_exists))
 
-
     principals = security.remember(request, str(uid))
     request.response.headerlist.extend(principals)
-    log.debug(request.response.headerlist);
     log.debug("User authenticated, sending back %s" %
               request.response.headers)
 
     log.debug(request.params)
 
-    return HTTPFound(location=request.registry.settings['mediapublic.client_url'])
+    return HTTPFound(
+        location=request.registry.settings['mediapublic.client_url'])
 
 
 @login.delete()
