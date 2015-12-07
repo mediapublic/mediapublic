@@ -95,6 +95,7 @@ export default ItemView.extend({
       this.model.save().done(function() {
         self.state.set('editing', false);
         self.trigger('saving:done', self);
+        self.model.trigger('editing:done');
       });
     } else {
       console.log(errors);
@@ -104,6 +105,7 @@ export default ItemView.extend({
 
   cancelEditing: function() {
     this.state.set('editing', false);
+    this.model.trigger('editing:cancel');
   },
 
 

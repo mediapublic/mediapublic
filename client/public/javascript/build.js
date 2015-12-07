@@ -938,6 +938,10 @@ var _bannertemplateJade = require('./bannertemplate.jade');
 var _bannertemplateJade2 = _interopRequireDefault(_bannertemplateJade);
 
 exports['default'] = _sharedViewsItemview2['default'].extend({
+  initialize: function initialize(options) {
+    this.listenTo(this.model, 'editing:cancel editing:done', this.render);
+    return _sharedViewsItemview2['default'].prototype.initialize.apply(this, arguments);
+  },
   template: _bannertemplateJade2['default'],
   className: 'organization-banner'
 });
@@ -3412,6 +3416,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
       this.model.save().done(function () {
         self.state.set('editing', false);
         self.trigger('saving:done', self);
+        self.model.trigger('editing:done');
       });
     } else {
       console.log(errors);
@@ -3420,6 +3425,7 @@ exports['default'] = _backboneMarionette.ItemView.extend({
 
   cancelEditing: function cancelEditing() {
     this.state.set('editing', false);
+    this.model.trigger('editing:cancel');
   },
 
   navigateToModel: function navigateToModel(model, options) {
