@@ -1,7 +1,9 @@
 .cover-photo {
   position: relative;
   height: 250px;
-  background-size: 100%;
+  background-size: cover;
+  max-width: $viewWidth;
+  margin: auto;
 }
 
 .cover-photo::after {

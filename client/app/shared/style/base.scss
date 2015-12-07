@@ -32,11 +32,11 @@ a {
   width: 100%;
   max-width: $viewWidth;
   margin: auto;
-  padding: 40px 0;
+  padding: $viewPadding 0;
 }
 
 @media (max-width: $screen-sm-max) {
   .view-container {
-    padding: 40px 20px;
+    padding: $viewPadding $viewPadding / 2;
   }
 }

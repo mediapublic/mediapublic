@@ -5,9 +5,11 @@ import _ from 'underscore';
 export default CompositeView.extend({
   initialize(options) {
     this.state = new Model({
-      more: options.more || false
+      more: options.more || false,
     });
+    this.updateHasMore();
     this.listenTo(this.state, 'change', this.render);
+    this.listenTo(this.collection, 'sync', this.updateHasMore);
   },
   numModels: 10,
 
@@ -31,14 +33,14 @@ export default CompositeView.extend({
     }
     data.viewState = this.state.toJSON();
 
-    if (this.collection && this.numModels) {
-      data.viewState.hasMore = this.collection.length > this.numModels;
-    }
-
     return data;
   },
 
   filter(child, index, collection) {
     return this.state.get('more') || index < this.numModels;
   },
+
+  updateHasMore() {
+    this.state.set('hasMore', this.collection.length > this.numModels);
+  }
 });
