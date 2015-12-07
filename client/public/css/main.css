@@ -6198,13 +6198,8 @@ aside > .table {
   .social-media-links .fa {
     padding: 5px; }
 
-.application {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  padding-top: 50px;
-  overflow-y: scroll; }
+.app-content {
+  padding-top: 50px; }
 
 .header-item {
   height: 50px;
@@ -6233,7 +6228,9 @@ aside > .table {
 .cover-photo {
   position: relative;
   height: 250px;
-  background-size: 100%; }
+  background-size: cover;
+  max-width: 992px;
+  margin: auto; }
 
 .cover-photo::after {
   position: absolute;
@@ -6312,3 +6309,8 @@ aside > .table {
   position: absolute;
   right: 5px;
   bottom: 5px; }
+
+@media (max-width: 991px) {
+  .person-container .social-media-links {
+    position: static;
+    text-align: left; } }

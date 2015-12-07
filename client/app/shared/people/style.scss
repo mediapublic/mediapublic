@@ -5,3 +5,12 @@
     bottom: 5px;
   }
 }
+
+@media (max-width: $screen-sm-max) {
+  .person-container {
+    .social-media-links {
+      position: static;
+      text-align: left;
+    }
+  }
+}

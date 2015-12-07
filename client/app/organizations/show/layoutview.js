@@ -4,6 +4,7 @@ import OrganizationDetails from './details';
 import PeopleView from 'shared/people/collectionview';
 import RecordingsView from 'shared/recordings/collectionview';
 import HelpRequestsView from 'shared/helprequests/collectionview';
+import HowtosView from 'shared/howtos/collectionview';
 import template from './layouttemplate.jade';
 
 export default LayoutView.extend({
@@ -11,6 +12,7 @@ export default LayoutView.extend({
     this.peopleCollection = options.people;
     this.recordingsCollection = options.recordings;
     this.helpRequestsCollection = options.helpRequests;
+    this.howtosCollection = options.howtos;
   },
   template,
   regions: {
@@ -18,7 +20,8 @@ export default LayoutView.extend({
     details: '.organization-details-container',
     people: '.people-container',
     recordings: '.recordings-container',
-    helprequests: '.help-requests-container'
+    helprequests: '.help-requests-container',
+    howtos: '.howtos-container'
   },
 
   onBeforeShow() {
@@ -34,5 +37,7 @@ export default LayoutView.extend({
     this.showChildView(
         'helprequests',
         new HelpRequestsView({ collection: this.helpRequestsCollection}));
+    this.showChildView(
+        'howtos', new HowtosView({ collection: this.howtosCollection }));
   },
 });

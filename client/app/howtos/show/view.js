@@ -1,7 +1,7 @@
-import {ItemView} from 'backbone.marionette';
+import ItemView from 'shared/views/itemview';
 import template from './template.jade';
 
 export default ItemView.extend({
   template,
-  className: 'home-page'
+  className: 'view-container howtos-view',
 });

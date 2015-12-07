@@ -1,4 +1,4 @@
-import Recording from './model';
+import Howto from './model';
 import Collection from 'shared/backbone/collection';
 
 export default Collection.extend({
@@ -7,12 +7,12 @@ export default Collection.extend({
       this.organization = attributes.organization;
     }
   },
-  model: Recording,
+  model: Howto,
   url() {
     if (this.organization) {
-      return '/recordings?organization_id=' + this.organization.get('id');
+      return '/howtos?organization_id=' + this.organization.get('id');
     } else {
-      return '/recordings';
+      return '/howtos';
     }
   }
 });

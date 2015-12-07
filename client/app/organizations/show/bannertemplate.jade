@@ -1,7 +1,8 @@
 .cover-photo(style="background-image: url(#{image_url});")
   .organization-title-container
     .organization-title(model=cid, data-fields='short_name')= short_name
-    .organization-location= city + ', ' + state
+    if city || state
+      .organization-location= city + ', ' + state
     .organization-social-media-container
       i.fa.fa-twitter
       i.fa.fa-facebook

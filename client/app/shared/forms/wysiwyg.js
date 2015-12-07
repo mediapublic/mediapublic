@@ -2,7 +2,7 @@ import TextEditor from './text';
 import _ from 'underscore';
 import $ from 'jquery';
 
-var numTinyMceRetries = 20;
+var numTinyMceRetries = 100;
 var tinyMCELoaded = false;
 var renderedMap = {};
 
@@ -15,10 +15,15 @@ export default TextEditor.extend({
       return this;
     }
 
+    // Failure.
+    if (numTinyMceRetries == 0) {
+      return this;
+    }
+
     // If the variable isn't loaded, give it a tenth of a second and try again.
     // Per http://api.jquery.com/jQuery.getScript/ the success callback can
     // be fired before the script has finished executing.
-    if (!window.tinyMCE && numTinyMceRetries) {
+    if (!window.tinyMCE) {
       numTinyMceRetries--;
       _.delay(_.bind(this.render, this), 100);
       return this;

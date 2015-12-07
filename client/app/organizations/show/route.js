@@ -4,6 +4,7 @@ import storage from '../storage';
 import People from 'shared/people/collection';
 import Recordings from 'shared/recordings/collection';
 import HelpRequests from 'shared/helprequests/collection';
+import Howtos from 'shared/howtos/collection';
 import _ from 'underscore';
 import faker from 'shared/utilities/faker';
 
@@ -27,6 +28,8 @@ export default Route.extend({
       this.helpRequests =
           new HelpRequests(fakeRequests, { organization: this.model });
       this.helpRequests.fetch();
+      this.howtos = new Howtos({ organization: this.model });
+      this.howtos.fetch();
     });
   },
 
@@ -35,7 +38,8 @@ export default Route.extend({
       model: this.model,
       people: this.people,
       recordings: this.recordings,
-      helpRequests: this.helpRequests
+      helpRequests: this.helpRequests,
+      howtos: this.howtos
     });
     this.container.show(this.view);
   }
