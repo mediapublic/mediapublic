@@ -112,10 +112,12 @@ def logged_in(request):
     log.debug("User authenticated, sending back %s" %
               request.response.headers)
 
-    log.debug(request.params)
-
-    return HTTPFound(
-        location=request.registry.settings['mediapublic.client_url'])
+    if already_exists:
+        return HTTPFound(
+            location=request.registry.settings['mediapublic.login_url'])
+    else:
+        return HTTPFound(
+            location=request.registry.settings['mediapublic.signup_url'])
 
 
 @login.delete()
