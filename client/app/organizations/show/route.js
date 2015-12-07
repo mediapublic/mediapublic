@@ -28,7 +28,7 @@ export default Route.extend({
       this.helpRequests =
           new HelpRequests(fakeRequests, { organization: this.model });
       this.helpRequests.fetch();
-      this.howtos = new Howtos({ organization: this.model });
+      this.howtos = new Howtos([], { organization: this.model });
       this.howtos.fetch();
     });
   },

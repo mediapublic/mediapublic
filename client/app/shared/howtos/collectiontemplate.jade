@@ -1,6 +1,6 @@
 include ../templates/loadmore.jade
 
-if items.length > 0
+if !viewState.isEmpty
   h2.tile-list-title Things we've shared
   .howtos-list.tile-container
   +loadmore
