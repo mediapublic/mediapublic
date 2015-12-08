@@ -15,6 +15,12 @@ Backbone.sync = function(method, model, options) {
   if (url && url.indexOf('http') != 0) {
     options.url = config.apiUrl + url;
   }
+
+  // Specify that we want to send cookies along for the ride
+  options.xhrFields = {
+    withCredentials: true
+  };
+
   return orginalSync.call(Backbone, method, model, options);
 };
 

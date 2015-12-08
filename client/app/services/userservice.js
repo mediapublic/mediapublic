@@ -4,7 +4,13 @@
 import User from 'shared/people/person';
 
 var CurrentUser = User.extend({
-  url: '/users/logged-in'
+  url: '/login',
+  logout() {
+    var self = this;
+    return this.destroy().then(function() {
+      self.clear();
+    });
+  }
 });
 
 

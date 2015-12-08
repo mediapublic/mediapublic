@@ -74,15 +74,15 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (app, first, last, viewState) {
-if ( viewState.loggedIn)
+;var locals_for_with = (locals || {});(function (app, display_name, id) {
+if ( id)
 {
-buf.push("<div class=\"logged-in\"><div class=\"user-name\">" + (jade.escape(null == (jade_interp = first + ' ' + last) ? "" : jade_interp)) + "</div><a class=\"log-out\">Log out</a></div>");
+buf.push("<div class=\"logged-in\"><span class=\"user-name\">" + (jade.escape(null == (jade_interp = display_name) ? "" : jade_interp)) + "</span>&nbsp; | &nbsp;<a class=\"log-out\">Log out</a></div>");
 }
 else
 {
 buf.push("<div class=\"logged-out\"><form" + (jade.attr("action", app.config.apiUrl + '/auth/login/twitter', true, false)) + " name=\"twitterLogin\"></form><a href=\"javascript:document.twitterLogin.submit()\" class=\"log-in\">Log in</a></div>");
-}}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"first" in locals_for_with?locals_for_with.first:typeof first!=="undefined"?first:undefined,"last" in locals_for_with?locals_for_with.last:typeof last!=="undefined"?last:undefined,"viewState" in locals_for_with?locals_for_with.viewState:typeof viewState!=="undefined"?viewState:undefined));;return buf.join("");
+}}.call(this,"app" in locals_for_with?locals_for_with.app:typeof app!=="undefined"?app:undefined,"display_name" in locals_for_with?locals_for_with.display_name:typeof display_name!=="undefined"?display_name:undefined,"id" in locals_for_with?locals_for_with.id:typeof id!=="undefined"?id:undefined));;return buf.join("");
 };
 },{"jade/runtime":120}],6:[function(require,module,exports){
 'use strict';
@@ -93,9 +93,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _sharedViewsItemview = require('shared/views/itemview');
-
-var _sharedViewsItemview2 = _interopRequireDefault(_sharedViewsItemview);
+var _backboneMarionette = require('backbone.marionette');
 
 var _sharedPeoplePerson = require('shared/people/person');
 
@@ -105,17 +103,27 @@ var _loginoutJade = require('./loginout.jade');
 
 var _loginoutJade2 = _interopRequireDefault(_loginoutJade);
 
-exports['default'] = _sharedViewsItemview2['default'].extend({
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+exports['default'] = _backboneMarionette.ItemView.extend({
   initialize: function initialize(options) {
-    this.model = new _sharedPeoplePerson2['default']();
-    return _sharedViewsItemview2['default'].prototype.initialize.apply(this, arguments);
+    this.model = app.currentUser;
+    this.listenTo(this.model, 'change', this.render);
+    _underscore2['default'].bindAll(this, 'render');
+    return _backboneMarionette.ItemView.prototype.initialize.apply(this, arguments);
   },
   template: _loginoutJade2['default'],
-  events: {}
+  events: {
+    'click .log-out': function clickLogOut() {
+      app.currentUser.logout();
+    }
+  }
 });
 module.exports = exports['default'];
 
-},{"./loginout.jade":5,"shared/people/person":85,"shared/views/itemview":98}],7:[function(require,module,exports){
+},{"./loginout.jade":5,"backbone.marionette":113,"shared/people/person":85,"underscore":125}],7:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -2020,7 +2028,13 @@ var _sharedPeoplePerson = require('shared/people/person');
 var _sharedPeoplePerson2 = _interopRequireDefault(_sharedPeoplePerson);
 
 var CurrentUser = _sharedPeoplePerson2['default'].extend({
-  url: '/users/logged-in'
+  url: '/login',
+  logout: function logout() {
+    var self = this;
+    return this.destroy().then(function () {
+      self.clear();
+    });
+  }
 });
 
 var UserService = function UserService() {};
@@ -2069,6 +2083,12 @@ _backbone2['default'].sync = function (method, model, options) {
   if (url && url.indexOf('http') != 0) {
     options.url = _configJson2['default'].apiUrl + url;
   }
+
+  // Specify that we want to send cookies along for the ride
+  options.xhrFields = {
+    withCredentials: true
+  };
+
   return orginalSync.call(_backbone2['default'], method, model, options);
 };
 

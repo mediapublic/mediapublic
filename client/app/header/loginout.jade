@@ -1,7 +1,8 @@
-if viewState.loggedIn
+if id
   .logged-in
-    .user-name
-      = first + ' ' + last
+    span.user-name
+      = display_name
+    | &nbsp; | &nbsp;
     a.log-out Log out
 else
   .logged-out
