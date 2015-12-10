@@ -6,7 +6,7 @@ import OrganizationRouter from './organizations/router';
 import UserRouter from './users/router';
 import RecordingsRouter from './recordings/router';
 import HowtosRouter from './howtos/router';
-import config from './config.json';
+import config from './config';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
 
