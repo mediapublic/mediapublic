@@ -9,7 +9,7 @@ the REST API and storage to the JS frontend application.
 
 Pre-Getting Started
 
-- Install virtualenv and virtualenv-wrapper ( http://docs.python-guide.org/en/latest/dev/virtualenvs/ )
+- Install virtualenv and virtualenvwrapper ( http://docs.python-guide.org/en/latest/dev/virtualenvs/ )
 
 - Create virtual env with python3 ( `mkvirtualenv --python $(which python3) mediapublic` )
 
