@@ -13,6 +13,7 @@ import TypeaheadService from './services/typeaheadservice';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
 import _ from 'underscore';
+import 'bootstrapjs';
 
 // Global namespace
 window.app = new Application();

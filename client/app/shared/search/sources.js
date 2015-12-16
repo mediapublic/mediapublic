@@ -23,6 +23,27 @@ sources.organizations = new Bloodhound(_.extend({}, sharedOptions, {
 }));
 
 
+sources.recordings = new Bloodhound(_.extend({}, sharedOptions, {
+  remote: _.extend({}, remote, {
+    url: config.apiUrl + '/recordings?q=query'
+  })
+}));
+
+
+sources.people = new Bloodhound(_.extend({}, sharedOptions, {
+  remote: _.extend({}, remote, {
+    url: config.apiUrl + '/people?q=query'
+  })
+}));
+
+
+sources.howtos = new Bloodhound(_.extend({}, sharedOptions, {
+  remote: _.extend({}, remote, {
+    url: config.apiUrl + '/howtos?q=query'
+  })
+}));
+
+
 var getSources = function(names) {
   return _.compact(_.map(names, function(name) {
     if (!sources[name]) {
