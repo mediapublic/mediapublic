@@ -11,10 +11,10 @@ var sharedOptions = {
 
 var remote = function(source) {
   return {
-    wildcard: 'query',
     transform: (response) => response.data,
     url: config.apiUrl + '/' + source + '?q=query',
     prepare: function(query, settings) {
+      settings.url = settings.url.replace('query', encodeURIComponent(query));
       var originalSuccess = settings.success;
       settings.success = function(response) {
         app.services.search.cache(source, query, response.data);
