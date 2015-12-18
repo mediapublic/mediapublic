@@ -1,5 +1,5 @@
 import ItemView from 'shared/views/itemview';
-import template from './singletemplate.jade';
+import template from 'shared/components/tile.jade';
 
 export default ItemView.extend({
   template,

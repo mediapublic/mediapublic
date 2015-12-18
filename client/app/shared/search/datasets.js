@@ -29,7 +29,7 @@ var datasets = {
       header: '<div class="suggestion-header">People</div>',
       suggestion: _.template('<div class="suggestion"><%= first + last %></div>')
     },
-    display: (suggestion) => suggestion.first + last,
+    display: (suggestion) => suggestion.first + ' ' + suggestion.last,
     limit: 3
   },
   howtos: {

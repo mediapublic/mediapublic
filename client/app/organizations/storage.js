@@ -1,6 +1,6 @@
 import Storage from 'backbone.storage';
-import Organization from './model';
-import Organizations from './collection';
+import Organization from 'shared/organizations/model';
+import Organizations from 'shared/organizations/collection';
 
 let OrganizationsStorage = Storage.extend({
   model: Organization,

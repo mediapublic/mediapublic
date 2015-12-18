@@ -63,7 +63,8 @@ export default ItemView.extend({
 
   serializeModel: function(model) {
     return _.extend({}, this.model.toJSON.apply(model, _.rest(arguments)), {
-      cid: model.cid
+      cid: model.cid,
+      permalink: model.permalink()
     });
   },
 

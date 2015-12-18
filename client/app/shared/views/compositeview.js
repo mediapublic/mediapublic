@@ -11,6 +11,7 @@ export default CompositeView.extend({
     this.listenTo(this.state, 'change', this.render);
     this.listenTo(this.collection, 'sync', this.updateState);
   },
+
   numModels: 10,
 
   events: {

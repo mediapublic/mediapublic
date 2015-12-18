@@ -3,7 +3,7 @@
  * complete and provides the capability to turn cached results into collections.
  */
 import Cache from 'shared/utilities/cache';
-import Organizations from '../organizations/collection';
+import Organizations from 'shared/organizations/collection';
 import People from 'shared/people/collection';
 import Recordings from 'shared/recordings/collection';
 import Howtos from 'shared/howtos/collection';
