@@ -10,9 +10,9 @@
           i.fa.fa-chevron-down
         ul.dropdown-menu
           li(data-dataset="all")
-            a.filter-option(href="#") All
+            a.filter-option All
           li.divider(role="separator")
           each item in availableDatasets
             li(data-dataset=item.name)
-              a.filter-option(href="#")= item.name
+              a.filter-option= item.name
 button.btn.btn-primary.search.search-button Search

@@ -7,9 +7,11 @@ import UserRouter from './users/router';
 import RecordingsRouter from './recordings/router';
 import HowtosRouter from './howtos/router';
 import HelpRequestsRouter from './helprequests/router';
+import SearchResultsRouter from './searchresults/router';
 import UserService from './services/userservice';
-import config from './config';
 import TypeaheadService from './services/typeaheadservice';
+import SearchService from './services/searchservice';
+import config from './config';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
 import _ from 'underscore';
@@ -23,7 +25,8 @@ app.templateHelpers = templateHelpers;
 
 app.services = {
   user: UserService,
-  typeahead: TypeaheadService
+  typeahead: TypeaheadService,
+  search: SearchService
 };
 _.each(app.services, function(service) {
   service.start();
@@ -50,6 +53,10 @@ app.howtosRouter = new HowtosRouter({
 });
 
 app.helpRequestsRouter = new HelpRequestsRouter({
+  container: app.layout.content
+});
+
+app.searchResultsRouter = new SearchResultsRouter({
   container: app.layout.content
 });
 

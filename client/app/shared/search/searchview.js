@@ -2,6 +2,7 @@ import {ItemView} from 'backbone.marionette';
 import datasets from 'shared/search/datasets';
 import {sources} from './sources';
 import template from './searchtemplate.jade';
+import util from 'shared/utilities';
 import _ from 'underscore';
 
 export default ItemView.extend({
@@ -19,6 +20,7 @@ export default ItemView.extend({
     if (options.active) {
       this.active = this._getDataset(options.active);
     }
+    this.initialQuery = options.query || '';
   },
 
   template,
@@ -38,6 +40,7 @@ export default ItemView.extend({
   },
 
   onAttach() {
+    this.ui.input.val(this.initialQuery);
     this.initializeTypeahead();
   },
 
@@ -49,6 +52,8 @@ export default ItemView.extend({
 
   initializeTypeahead() {
     var activeDatasets = this.active ? [this.active] : this.availableDatasets;
+    var activeName = this.active ? this.active.name : 'All';
+    this.ui.filterName.text(activeName);
     this.ui.input.typeahead({}, ...activeDatasets);
   },
 
@@ -64,18 +69,20 @@ export default ItemView.extend({
     if (this.active && this.active.name == filter) {
       return;
     }
-    this.ui.filterName.text(filter);
     this.setActiveDataset(filter);
   },
 
   handleKeyup(event) {
-    if(event.keyCode == 13){
+    if (event.keyCode == 13) {
       this.handleSearch(event);
     }
   },
 
   handleSearch(event) {
-    console.log(this.ui.input.val());
+    var query = this.ui.input.val();
+    var type = this._getActiveName();
+    util.updateQueryParams({ q: query, type: type });
+    this.trigger('search:updated', { query, type });
   },
 
   _getDataset(name) {
@@ -86,5 +93,9 @@ export default ItemView.extend({
       console.log('WARNING: dataset with name', name, 'not available');
     }
     return dataset;
+  },
+
+  _getActiveName() {
+    return this.active ? this.active.name : 'all';
   }
 });

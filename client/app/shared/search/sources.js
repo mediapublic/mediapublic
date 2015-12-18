@@ -9,38 +9,43 @@ var sharedOptions = {
   identify: (datum) => datum.id
 };
 
-var remote = {
-  wildcard: 'query',
-  transform: (response) => response.data
+var remote = function(source) {
+  return {
+    wildcard: 'query',
+    transform: (response) => response.data,
+    url: config.apiUrl + '/' + source + '?q=query',
+    prepare: function(query, settings) {
+      var originalSuccess = settings.success;
+      settings.success = function(response) {
+        app.services.search.cache(source, query, response.data);
+        if (originalSuccess) {
+          return originalSuccess.apply(this, arguments);
+        }
+      };
+      return settings;
+    }
+  };
 };
 
 var sources = {};
 
 sources.organizations = new Bloodhound(_.extend({}, sharedOptions, {
-  remote: _.extend({}, remote, {
-    url: config.apiUrl + '/organizations?q=query'
-  })
+  remote: remote('organizations')
 }));
 
 
 sources.recordings = new Bloodhound(_.extend({}, sharedOptions, {
-  remote: _.extend({}, remote, {
-    url: config.apiUrl + '/recordings?q=query'
-  })
+  remote: remote('recordings')
 }));
 
 
 sources.people = new Bloodhound(_.extend({}, sharedOptions, {
-  remote: _.extend({}, remote, {
-    url: config.apiUrl + '/people?q=query'
-  })
+  remote: remote('/people')
 }));
 
 
 sources.howtos = new Bloodhound(_.extend({}, sharedOptions, {
-  remote: _.extend({}, remote, {
-    url: config.apiUrl + '/howtos?q=query'
-  })
+  remote: remote('howtos')
 }));
 
 

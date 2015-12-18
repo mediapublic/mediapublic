@@ -1,7 +1,9 @@
 /**
  * Small library of useful functions.
  */
-var _ = require('underscore');
+import _ from 'underscore';
+import deparam from 'jquery-deparam';
+import Backbone from 'backbone';
 
 
 module.exports = {
@@ -55,5 +57,30 @@ module.exports = {
     }
 
     return url;
+  },
+
+
+  getQueryParams: function() {
+    var params = {};
+    var queryString = window.location.search;
+    if (queryString.length > 1) {
+      params = deparam(queryString.slice(1));
+    }
+
+    var hashParts = window.location.hash.split('?')
+    if (hashParts.length > 1) {
+      _.extend(params, deparam(hashParts[1]));
+    }
+
+    return params;
+  },
+
+
+  updateQueryParams: function(params) {
+    var href = window.location.hash;
+    _.each(params, function(value, key) {
+      href = href.replace(new RegExp(key + '=[^&]*(&)?'), key + '=' + value + '$1');
+    });
+    Backbone.history.navigate(href, {replace: true});
   }
 };
