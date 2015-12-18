@@ -15,6 +15,7 @@ export default LayoutView.extend({
       query: this.query,
       active: this.activeType
     });
+    this.listenTo(this.searchView, 'search:updated', this.handleSearchUpdated);
   },
   template,
   regions: {
@@ -26,8 +27,28 @@ export default LayoutView.extend({
   },
   onBeforeShow() {
     this.showChildView('search', this.searchView);
-    this.showChildView('howtos', new HowtosView({ collection: this.sections.howtos }));
-    this.showChildView('people', new PeopleView({ collection: this.sections.people }));
-    this.showChildView('recordings', new RecordingsView({ collection: this.sections.recordings }));
+    this.setCollections(this.collections);
+  },
+
+  setCollections(collections) {
+    this.collections = collections;
+
+    this._createOrEmptyRegionView('howtos', HowtosView);
+    this._createOrEmptyRegionView('people', PeopleView);
+    this._createOrEmptyRegionView('recordings', RecordingsView);
+  },
+
+  handleSearchUpdated(event) {
+    this.setCollections(
+        app.services.search.getCollectionsForQuery(event.query, event.type));
+  },
+
+  _createOrEmptyRegionView(region, collectionView) {
+    if (this.collections[region]) {
+      this.showChildView(region, new collectionView({ collection: this.collections[region] }));
+    } else {
+      this.getRegion(region).empty();
+    }
   }
+
 });

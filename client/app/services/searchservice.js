@@ -42,6 +42,14 @@ SearchService.prototype.getAllCollections = function(query) {
   });
 };
 
+SearchService.prototype.getCollectionsForQuery = function(query, type) {
+  if (type.toLowerCase() == 'all') {
+    return this.getAllCollections(query);
+  } else {
+    return _.object([[type, this.getCollection(type, query)]]);
+  }
+}
+
 
 SearchService.prototype._getCacheKey = function(type, query) {
   return type + '_' + query;
