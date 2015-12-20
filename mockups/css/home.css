@@ -1,5 +1,41 @@
 /* breakpoints will be tuned as we go; this is a rough pass */
 
+#discover .howto {
+	background-color: #205493;
+	color: white;
+}
+
+#discover .howto:hover, #discover .howto:active {
+	background-color: #0071bc;
+}
+
+#discover .story {
+	background-color: #cc0000; 
+	color: white;
+}
+
+#discover .story:hover, #discover .story:active {
+	background-color: #ff0000;
+}
+
+#discover .help {
+	background-color: #00cc00;
+	color: white;
+}
+
+#discover .help:hover, #discover .help:active {
+	background-color: #00ff00;
+}
+
+#discover .info {
+	background-color: #444;
+	color: white;
+}
+
+#discover .info:hover, #discover .info:active {
+	background-color: #666;
+}
+
 /* we can assume anything this small is mobile and therefore touch-first */
 @media (max-width: 600px) {
 	body > div {
@@ -68,14 +104,10 @@
 
 		width: 100%;
 		padding: 1em 0;
-		text-indent: 2em;
-
-		background-color: #205493;
-		color: white;
 	}
 
-	#discover .object:hover, #discover .object:active {
-		background-color: #0071bc;
+	#discover .object p {
+		margin: 0 2em;
 	}
 
 	#footer {
@@ -161,9 +193,6 @@
 		width: 100px;
 		height: 100px;
 		padding: 25px;
-
-		background-color: #205493;
-		color: white;
 	}
 
 	#discover .object:hover, #discover .object:active {
@@ -275,14 +304,9 @@
 		width: 150px;
 		height: 150px;
 		padding: 25px;
-
-		background-color: #205493;
-		color: white;
 	}
 
-	#discover .object:hover {
-		background-color: #0071bc;
-	}
+	#discover .object:hover {}
 
 	#footer {
 		max-height: 10px;
