@@ -1,0 +1,32 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Howtos
+    url: /howtos
+    response_json_paths:
+      $.howtos: []
+
+  - name: Create a howto incorrectly
+    status: 400
+    method: POST
+    url: /howtos
+    data:
+      dummy: bad data
+
+  - name: Create a howto correctly
+    status: 201
+    method: POST
+    url: /howtos
+    data:
+      title: 'How to make breakfast'
+      contents: 'BREAK SOME EGGS!'
+      tags: 'breakfast, eggs, yelling'
+
+  - name: Get Howtos
+    url: /howtos
+    response_json_paths:
+      $.howtos.`len`: 1

@@ -47,6 +47,7 @@ type_mapping = {
     'UUIDType': colander.String(),
     'UnicodeText': colander.String('utf-8'),
     'DateTime': colander.DateTime(),
+    'JSONType': colander.Mapping(unknown='preserve')
 }
 
 

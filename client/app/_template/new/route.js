@@ -1,6 +1,7 @@
+// This is the route for creating a new resource.
 import {Route} from 'backbone-routing';
-import View from '../show/layoutview';
-import Organization from '../model';
+import View from '../show/view';
+import YourResource from '../model';
 
 export default Route.extend({
   initialize(options = {}) {
@@ -9,7 +10,7 @@ export default Route.extend({
 
   render() {
     this.view = new View({
-      model: new Organization(),
+      model: new YourResource(),
       editing: true
     });
     this.container.show(this.view);

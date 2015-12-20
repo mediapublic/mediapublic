@@ -1,3 +1,5 @@
+// This is the router that hooks everything up! You'll need to import and
+// instantiate this file in main.js for your route to be connected.
 import {Router} from 'backbone-routing';
 import IndexRoute from './index/route';
 import ShowRoute from './show/route';
@@ -9,9 +11,9 @@ export default Router.extend({
   },
 
   routes: {
-    'organizations': 'index',
-    'organizations/new': 'new',
-    'organizations/:id': 'show',
+    'your-resource': 'index',
+    'your-resource/new': 'new',
+    'your-resource/:id': 'show',
   },
 
   index() {

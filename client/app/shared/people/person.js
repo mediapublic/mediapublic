@@ -2,9 +2,14 @@ import {Model} from 'backbone';
 
 export default Model.extend({
   schema: {
-    short_name: {
+    first: {
       type: 'Text',
-      title: 'Short Name',
+      title: 'First Name',
+      validators: ['required'],
+    },
+    last: {
+      type: 'Text',
+      title: 'Last Name',
       validators: ['required']
     },
     phone: {
@@ -16,14 +21,8 @@ export default Model.extend({
       validators: ['url'],
       title: 'Website'
     },
-    long_description: {
-      type: 'TextArea',
-      title: 'Long Description',
-      validators: ['required']
-    },
     address_0: {
       type: 'Text',
-      validators: ['required'],
       title: 'Address line 1'
     },
     address_1: {
@@ -32,19 +31,22 @@ export default Model.extend({
     },
     city: {
       type: 'Text',
-      validators: ['required']
     },
     zipcode: {
       type: 'Text',
-      validators: ['required', 'zip']
+      validators: ['zip']
     },
     state: {
       type: 'Text',
-      validators: ['required', 'state']
-    }
+      validators: ['state']
+    },
+    twitter: 'Text',
+    facebook: 'Text',
+    instagram: 'Text',
+    periscope: 'Text'
   },
 
   urlRoot() {
-    return app.config.apiUrl + '/organizations';
+    return app.config.apiUrl + '/people';
   }
 });
