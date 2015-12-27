@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Bookmarklet stuff
+bookmarklet/bookmarklet.min.js
+bookmarklet/mock_response.rb

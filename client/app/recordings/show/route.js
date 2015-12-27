@@ -14,6 +14,7 @@ export default Route.extend({
   },
 
   render() {
+    console.log(this.model);
     this.view = new View({
       model: this.model
     });

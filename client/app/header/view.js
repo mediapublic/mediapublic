@@ -18,5 +18,7 @@ export default ItemView.extend({
   menuItems: {
     'home': '#',
     'organizations': '#organizations',
+    'recordings': '#recordings',
+    'podcasts': '#podcasts',
   }
 });
