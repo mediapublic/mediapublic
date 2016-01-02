@@ -4288,7 +4288,8 @@ exports['default'] = _backboneRouting.Route.extend({
 
   render: function render() {
     this.view = new _showView2['default']({
-      model: app.currentUser,
+      // Fix this when people and users have been unified on the server
+      model: new _sharedPeoplePerson2['default'](app.currentUser.attributes),
       editing: true,
       flashSuccess: 'Thanks for signing up! Please complete your profile.'
     });
