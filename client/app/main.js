@@ -8,7 +8,7 @@ import RecordingsRouter from './recordings/router';
 import HowtosRouter from './howtos/router';
 import HelpRequestsRouter from './helprequests/router';
 import UserService from './services/userservice';
-import config from './config.json';
+import config from './config';
 import Header from './header/view';
 import templateHelpers from 'shared/utilities/templatehelpers';
 import _ from 'underscore';
