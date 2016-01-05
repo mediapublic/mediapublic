@@ -2,6 +2,7 @@ AUTHORS
 ChangeLog
 mediapublic.sqlite
 .python-version
+local.ini
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

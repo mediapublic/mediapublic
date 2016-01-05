@@ -2,11 +2,13 @@ import json
 import logging
 
 from cornice import Service
+from .models import Users
 from pyramid import (
     authentication,
     authorization,
     security,
 )
+from pyramid.httpexceptions import HTTPFound
 
 import requests
 
@@ -81,13 +83,18 @@ login = Service(name='login', path='/login',
                 cors_policy=cors_policy)
 
 
-@login.get(renderer="mediapublic:templates/login.jinja2")
-def login_form(request):
-    print(request.params)
-    return {"foo": "bar"}
+@login.get()
+def login_info(request):
+    if (request.authenticated_userid is None):
+        return {}
+    user = Users.get_by_id(request.authenticated_userid)
+    if user is None:
+        self.request.response.status = 404
+        return {'error': 'Not found'}
+    return user.to_dict()
 
 
-@login.post(renderer="mediapublic:templates/logged_in.jinja2")
+@login.post()
 def logged_in(request):
     log.debug("Received auth, token ID %s" % request.params['token'])
     resp = requests.get(request.host_url + '/auth/auth_info', params={
@@ -107,11 +114,18 @@ def logged_in(request):
               (twitter_handle, already_exists))
 
     principals = security.remember(request, str(uid))
-    request.response.headerlist.extend(principals)
-    log.debug("User authenticated, sending back %s" %
-              request.response.headers)
+    headers = request.response.headerlist
+    headers.extend(principals)
+    log.debug("User authenticated, sending back %s" % headers)
 
-    return {'exists': already_exists, 'handle': twitter_handle}
+    if already_exists:
+        return HTTPFound(
+            location=request.registry.settings['mediapublic.login_url'],
+            headers=headers)
+    else:
+        return HTTPFound(
+            location=request.registry.settings['mediapublic.signup_url'],
+            headers=headers)
 
 
 @login.delete()
