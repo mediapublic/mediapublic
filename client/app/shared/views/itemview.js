@@ -14,13 +14,19 @@ export default ItemView.extend({
     if (_.isUndefined(options.editing)) {
       options.editing = options.model && options.model.isNew();
     }
+
     this.state = new Model({
-      editing: options.editing || false
+      editing: options.editing || false,
+      flashSuccess: options.flashSuccess || undefined,
+      flashError: options.flashError || undefined,
+      flashInfo: options.flashInfo || undefined,
+      flashWarning: options.flashWarning || undefined
     });
+
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
 
-    if (this.model.isNew()) {
+    if (this.model && this.model.isNew()) {
       this.listenToOnce(this.model, 'sync', this.navigateToModel);
     }
 
@@ -83,6 +89,7 @@ export default ItemView.extend({
 
 
   renderEditor: function() {
+    this.clearFlash({ silent: true });
     this.state.set('editing', true);
   },
 
@@ -93,7 +100,10 @@ export default ItemView.extend({
     if (!errors) {
       this.trigger('saving:started', self);
       this.model.save().done(function() {
-        self.state.set('editing', false);
+        self.state.set({
+          editing: false,
+          flashSuccess: 'Your changes have been saved!'
+        });
         self.trigger('saving:done', self);
         self.model.trigger('editing:done');
       });
@@ -122,5 +132,15 @@ export default ItemView.extend({
     }
 
     Backbone.history.navigate(fragment, options);
+  },
+
+
+  clearFlash(options) {
+    this.state.set({
+      flashSuccess: undefined,
+      flashError: undefined,
+      flashInfo: undefined,
+      flashWarning: undefined,
+    }, options);
   }
 });

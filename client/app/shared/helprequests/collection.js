@@ -1,5 +1,5 @@
 import HelpRequest from './model';
-import {Collection} from 'backbone';
+import Collection from 'shared/backbone/collection';
 
 export default Collection.extend({
   initialize(models, attributes) {
@@ -10,9 +10,9 @@ export default Collection.extend({
   model: HelpRequest,
   url() {
     if (this.organization) {
-      return '/helprequests?organization_id=' + this.organization.get('id');
+      return '/help-requests?organization_id=' + this.organization.get('id');
     } else {
-      return '/helprequests';
+      return '/help-requests';
     }
   }
 });

@@ -6,7 +6,7 @@ export default Model.extend({
       type: 'Text',
       validators: ['required'],
     },
-    text: {
+    description: {
       type: 'TextArea',
       validators: ['required'],
       help: 'Keep it short and descriptive.'
@@ -23,6 +23,6 @@ export default Model.extend({
   },
 
   urlRoot() {
-    return '/helprequests';
+    return '/help-requests';
   }
 });

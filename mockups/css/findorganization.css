@@ -1,0 +1,102 @@
+/* we can assume anything this small is mobile and therefore touch-first */
+@media (max-width: 600px) {
+	#search {
+	}
+
+	#search input {
+		width: 60%;
+		margin-bottom: 5px;
+	}
+
+	#search button {
+		width: 5em;
+		height: 28px;
+	}
+
+	#stations {
+		padding-top: 0;
+	}
+
+	#stations .state {
+		margin-bottom: 1em;
+	}
+
+	#stations ul li {
+		list-style-type: none;
+	}
+}
+
+/* there's a good chance this a tablet so it should work well with touch */
+@media (min-width: 401px) and (max-width: 800px) {
+	.wrapper {
+		max-width: 610px;
+		margin: auto;
+	}
+
+	#search {
+		margin-bottom: 1em;
+	}
+
+	#search input {
+		width: 40%;
+		margin-bottom: 5px;
+	}
+
+	#search button {
+		width: 5em;
+		height: 28px;
+	}
+
+	#stations {
+		padding-top: 0;
+	}
+
+	#stations .state {
+		width: 200px;
+		display: inline-block;
+		vertical-align: top;
+		margin-bottom: 1em;
+	}
+
+	#stations ul li {
+		list-style-type: none;
+	}
+}
+
+/* now we've got some real estate to play with */
+@media (min-width: 801px) {
+	.wrapper {
+		width: 80%;
+		margin: auto;
+	}
+
+	#search {
+		margin: 1em;
+	}
+
+	#search input {
+		width: 10em;
+	}
+
+	#search button {
+		width: 5em;
+		height: 27px;
+	}
+
+	#stations {}
+
+	#stations .state {
+		width: 200px;
+		display: inline-block;
+		vertical-align: top;
+		margin: 1em;
+	}
+
+	#stations ul li {
+		list-style-type: none;
+	}
+}
+
+/* oh god your screen is large */
+@media (min-width: 1401px) {
+}

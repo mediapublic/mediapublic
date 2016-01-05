@@ -7,9 +7,9 @@ export default CompositeView.extend({
     this.state = new Model({
       more: options.more || false,
     });
-    this.updateHasMore();
+    this.updateState();
     this.listenTo(this.state, 'change', this.render);
-    this.listenTo(this.collection, 'sync', this.updateHasMore);
+    this.listenTo(this.collection, 'sync', this.updateState);
   },
   numModels: 10,
 
@@ -42,7 +42,10 @@ export default CompositeView.extend({
     return this.state.get('more') || index < this.numModels;
   },
 
-  updateHasMore() {
-    this.state.set('hasMore', this.collection && this.collection.length > this.numModels);
+  updateState() {
+    this.state.set({
+      hasMore: this.collection && this.collection.length > this.numModels,
+      isEmpty: this.collection && !this.collection.fetchInProgress && this.collection.length == 0
+    });
   }
 });
