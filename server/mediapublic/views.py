@@ -18,13 +18,13 @@ from .models import (
     HelpRequests,
     Howtos,
     Organizations,
-    People,
     PlaylistAssignments,
     Playlists,
     RecordingCategories,
     Recordings,
     UserTypes,
     Users,
+    SocialMedias,
 )
 from .validators import validator_from_model
 
@@ -130,6 +130,16 @@ class UsersResource(ResourceMixin):
     cls = Users
 
 
+@resource(collection_path='/social_medias', path='/social_medias/{id}',
+          factory=choose_context, cors_policy=cors_policy)
+class SocialMediasResource(ResourceMixin):
+    """
+    [GET, POST             ] /social_medias
+    [GET,       PUT, DELETE] /social_medias/{id}
+    """
+    cls = SocialMedias
+
+
 @resource(collection_path='/user_types', path='/user_types/{id}',
           factory=choose_context, cors_policy=cors_policy)
 class UserTypesResource(ResourceMixin):
@@ -162,18 +172,6 @@ class OrganizationsResource(ResourceMixin):
     [GET,       PUT, DELETE] /organizations/{id}
     """
     cls = Organizations
-
-
-@resource(collection_path='/people',
-          path='/people/{id}',
-          factory=choose_context,
-          cors_policy=cors_policy)
-class PeopleResource(ResourceMixin):
-    """
-    [GET, POST             ] /people
-    [GET,       PUT, DELETE] /people/{id}
-    """
-    cls = People
 
 
 @resource(collection_path='/recordings',
