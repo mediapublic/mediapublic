@@ -24,7 +24,9 @@ from sqlalchemy.orm import (
 from zope.sqlalchemy import ZopeTransactionExtension
 import transaction
 
-DBSession = scoped_session(sessionmaker(expire_on_commit=False))
+DBSession = scoped_session(sessionmaker(
+    extension=ZopeTransactionExtension(),
+    expire_on_commit=False))
 Base = declarative_base()
 
 
@@ -137,34 +139,6 @@ class UserTypes(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
         return resp
 
 
-class SocialMedias(Base, CreationMixin, TimeStampMixin):
-    __tablename__ = 'social_medias'
-
-    id = Column(UUIDType(binary=False), primary_key=True)
-    provider = Column(UnicodeText, nullable=False)
-    username = Column(UnicodeText, nullable=False)
-    addons = Column(UnicodeText)
-
-    user_id = Column(ForeignKey('users.id'), nullable=False)
-
-    def _to_dict(self):
-        return dict(
-            provider=self.provider,
-            username=self.username,
-            addons=self.addons,
-        )
-
-    def to_dict(self):
-        resp = {}
-        for klass in reversed(self.__class__.__mro__[1:]):
-            try:
-                resp.update(klass.to_dict(self))
-            except AttributeError:
-                pass
-        resp.update(self._to_dict())
-        return resp
-
-
 class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'users'
 
@@ -180,8 +154,6 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     twitter_auth_token = Column(UnicodeText)
     twitter_auth_secret = Column(UnicodeText)
     profile_photo_url = Column(UnicodeText)
-
-    social_medias = relationship(SocialMedias, backref='user', lazy='subquery')
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))
@@ -228,7 +200,6 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
             email=self.email,
             user_type=self.user_type_id,
             organization_id=self.organization_id,
-            social_medias=[s.to_dict() for s in self.social_medias],
         )
 
     def to_dict(self):
@@ -254,7 +225,7 @@ class Comments(Base, CreationMixin, TimeStampMixin):
     author_id = Column(ForeignKey('users.id'), nullable=False)
 
     organization_id = Column(ForeignKey('organizations.id'))
-    user_id = Column(ForeignKey('users.id'))
+    people_id = Column(ForeignKey('people.id'))
     recording_id = Column(ForeignKey('recordings.id'))
     howto_id = Column(ForeignKey('howtos.id'))
     blog_id = Column(ForeignKey('blogs.id'))
@@ -288,12 +259,12 @@ class Comments(Base, CreationMixin, TimeStampMixin):
         return comments
 
     @classmethod
-    def get_by_user_id(cls, id):
+    def get_by_people_id(cls, id):
         with transaction.manager:
             comments = DBSession.query(
                 Comments,
             ).filter(
-                Comments.user_id == id,
+                Comments.people_id == id,
             ).all()
         return comments
 
@@ -417,7 +388,7 @@ class Playlists(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'playlists'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    author_id = Column(ForeignKey('users.id'))
+    author_id = Column(ForeignKey('people.id'))
     title = Column(UnicodeText, nullable=False)
     description = Column(UnicodeText)
 
@@ -482,6 +453,77 @@ class Playlists(Base, CreationMixin, TimeStampMixin):
                         Playlists.get_recordings_by_playlist_id(self.id)],
         )
         return resp
+
+
+class People(Base, CreationMixin, TimeStampMixin):
+    __tablename__ = 'people'
+
+    id = Column(UUIDType(binary=False), primary_key=True)
+    first = Column(UnicodeText, nullable=False)
+    last = Column(UnicodeText, nullable=False)
+    address_0 = Column(UnicodeText)
+    address_1 = Column(UnicodeText)
+    city = Column(UnicodeText)
+    state = Column(UnicodeText)
+    zipcode = Column(UnicodeText)
+    phone = Column(UnicodeText)
+    fax = Column(UnicodeText)
+    primary_website = Column(UnicodeText)
+    secondary_website = Column(UnicodeText)
+
+    # these should probably be brough out into a seperate table as
+    # many to one so we don't have to keep adding columns ...
+    twitter = Column(UnicodeText)
+    facebook = Column(UnicodeText)
+    instagram = Column(UnicodeText)
+    periscope = Column(UnicodeText)
+
+    user_id = Column(ForeignKey('users.id'))
+
+    organization_id = Column(ForeignKey('organizations.id'))
+
+    def _to_dict(self):
+        return dict(
+            first=self.first,
+            last=self.last,
+            address_0=self.address_0,
+            address_1=self.address_1,
+            city=self.city,
+            state=self.state,
+            zipcode=self.zipcode,
+            phone=self.phone,
+            fax=self.fax,
+            primary_website=self.primary_website,
+            secondary_website=self.secondary_website,
+
+            # see note on definitions
+            twitter=self.twitter,
+            facebook=self.facebook,
+            instagram=self.instagram,
+            periscope=self.periscope,
+            user_id=self.user_id,
+            organization_id=self.organization_id,
+        )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
+        resp.update(self._to_dict())
+        return resp
+
+    @classmethod
+    def get_by_organization_id(cls, id):
+        with transaction.manager:
+            people = DBSession.query(
+                People,
+            ).filter(
+                People.organization_id == id,
+            ).all()
+        return people
 
 
 class Recordings(Base, CreationMixin, TimeStampMixin):
