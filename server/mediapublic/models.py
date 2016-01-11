@@ -24,7 +24,10 @@ from sqlalchemy.orm import (
 from zope.sqlalchemy import ZopeTransactionExtension
 import transaction
 
-DBSession = scoped_session(sessionmaker(expire_on_commit=False))
+#DBSession = scoped_session(sessionmaker(expire_on_commit=False))
+DBSession = scoped_session(sessionmaker(
+    extension=ZopeTransactionExtension(),
+    expire_on_commit=False))
 Base = declarative_base()
 
 
@@ -181,7 +184,7 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     twitter_auth_secret = Column(UnicodeText)
     profile_photo_url = Column(UnicodeText)
 
-    social_medias = relationship(SocialMedias, backref='user', lazy='subquery')
+    #social_medias = relationship(SocialMedias, backref='user', lazy='subquery')
 
     user_type_id = Column(ForeignKey('user_types.id'))
     organization_id = Column(ForeignKey('organizations.id'))
@@ -228,7 +231,7 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
             email=self.email,
             user_type=self.user_type_id,
             organization_id=self.organization_id,
-            social_medias=[s.to_dict() for s in self.social_medias],
+            #social_medias=[s.to_dict() for s in self.social_medias],
         )
 
     def to_dict(self):
