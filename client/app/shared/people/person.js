@@ -10,6 +10,12 @@ export default Model.extend({
     email: {
       type: 'Text',
       validators: ['email', 'required']
+    },
+    organization_id: {
+      type: 'Organization',
+      title: 'Organization',
+      help: 'Are you associated with a public media organization? Note: may require authorization from organization administrator.',
+      placeholder: 'Search for your organization...'
     }
   },
 
