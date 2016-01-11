@@ -11,6 +11,7 @@ export default CompositeView.extend({
     this.listenTo(this.state, 'change', this.render);
     this.listenTo(this.collection, 'sync', this.updateState);
   },
+
   numModels: 10,
 
   events: {
@@ -45,7 +46,7 @@ export default CompositeView.extend({
   updateState() {
     this.state.set({
       hasMore: this.collection && this.collection.length > this.numModels,
-      isEmpty: this.collection && !this.collection.fetchInProgress && this.collection.length == 0
+      isEmpty: !this.collection || (!this.collection.fetchInProgress && this.collection.length == 0)
     });
   }
 });

@@ -647,6 +647,25 @@ class HelpRequests(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     tags = Column(UnicodeText)
     due_datetime = Column(DateTime)
 
+    def _to_dict(self):
+        return dict(
+            title=self.title,
+            description=self.description,
+            organization_id=self.organization_id,
+            due_datetime=self.due_datetime,
+            tags=self.tags,
+        )
+
+    def to_dict(self):
+        resp = {}
+        for klass in reversed(self.__class__.__mro__[1:]):
+            try:
+                resp.update(klass.to_dict(self))
+            except AttributeError:
+                pass
+        resp.update(self._to_dict())
+        return resp
+
 
 class Blogs(Base, CreationMixin, TimeStampMixin):
     __tablename__ = 'blogs'

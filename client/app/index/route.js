@@ -1,5 +1,5 @@
 import {Route} from 'backbone-routing';
-import View from './view';
+import View from './layoutview';
 
 export default Route.extend({
   initialize(options = {}) {

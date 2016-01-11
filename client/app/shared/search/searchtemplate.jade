@@ -1,0 +1,18 @@
+.search-group
+  .input-group
+    input.form-control(type="text", aria-label="Search")
+    if availableDatasets.length > 1
+      .input-group-btn
+        button.btn.btn-default.dropdown-toggle(
+            type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+          span.active-filter-name Filter
+          |&nbsp;
+          i.fa.fa-chevron-down
+        ul.dropdown-menu
+          li(data-dataset="all")
+            a.filter-option All
+          li.divider(role="separator")
+          each item in availableDatasets
+            li(data-dataset=item.name)
+              a.filter-option= item.name
+button.btn.btn-primary.search.search-button Search
