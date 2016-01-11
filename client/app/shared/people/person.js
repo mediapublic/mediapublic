@@ -1,49 +1,16 @@
-import {Model} from 'backbone';
+import Model from 'shared/backbone/model';
 
 export default Model.extend({
   schema: {
-    first: {
+    display_name: {
       type: 'Text',
-      title: 'First Name',
-      validators: ['required'],
-    },
-    last: {
-      type: 'Text',
-      title: 'Last Name',
+      title: 'Name',
       validators: ['required']
     },
-    phone: {
+    email: {
       type: 'Text',
-      validators: ['phone']
-    },
-    primary_website: {
-      type: 'Text',
-      validators: ['url'],
-      title: 'Website'
-    },
-    address_0: {
-      type: 'Text',
-      title: 'Address line 1'
-    },
-    address_1: {
-      type: 'Text',
-      title: 'Address line 2',
-    },
-    city: {
-      type: 'Text',
-    },
-    zipcode: {
-      type: 'Text',
-      validators: ['zip']
-    },
-    state: {
-      type: 'Text',
-      validators: ['state']
-    },
-    twitter: 'Text',
-    facebook: 'Text',
-    instagram: 'Text',
-    periscope: 'Text'
+      validators: ['email', 'required']
+    }
   },
 
   permalink() {
@@ -51,6 +18,6 @@ export default Model.extend({
   },
 
   urlRoot() {
-    return '/people';
+    return '/users';
   }
 });
