@@ -3,6 +3,7 @@ import os
 import subprocess
 import uuid
 
+
 def pop_db(sql):
     with open('temp.sql', 'w') as f:
         f.write(sql)
@@ -12,14 +13,14 @@ def pop_db(sql):
         '<',
         'temp.sql',
     ]
-    #print(' '.join(cli))
     os.system(' '.join(cli))
-    #os.remove('temp.sql')
+
 
 def read_orgs():
     with open('orgs.json', 'r') as f:
         orgs = json.loads(f.read())
     return orgs
+
 
 def create_sql(orgs):
     sql = ''
@@ -55,8 +56,8 @@ def create_sql(orgs):
             '',
         ]
         fields = 'id, '
-        values = '"%s", ' % str(uuid.uuid4()).replace('-','')
-        for index in range(0,len(_fields)):
+        values = '"%s", ' % str(uuid.uuid4()).replace('-', '')
+        for index in range(0, len(_fields)):
             fields += '%s, ' % _fields[index]
             values += '"%s", ' % _values[index]
         fields = fields[:-2]
