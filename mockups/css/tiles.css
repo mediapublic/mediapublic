@@ -1,11 +1,3 @@
-body {
-	padding: 1em;
-}
-
-body p:not(:first-of-type) {
-	margin-top: 1em;
-}
-
 .tile {
 	display: inline-block;
 	width: 100px;
@@ -21,6 +13,31 @@ body p:not(:first-of-type) {
 	color: white;
 
 	font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media (max-width: 600px) {
+	.tile {
+		display: inline-block;
+		width: 80%;
+		height: 100%;
+
+		margin: 5px 5%;
+	}
+
+	.people .tile .overlay {
+		height: 130px;
+	}
+
+	.people .tile p, .people .tile h4 {
+		display: inline-block;
+	}
+
+	.people .tile .social {
+		display: block;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
 }
 
 .tile:hover {
