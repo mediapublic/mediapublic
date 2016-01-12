@@ -1,0 +1,152 @@
+.hero {
+	background-color: #0071bc;
+	position: relative;
+}
+
+.links > a {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.links .twitter {
+	background-image: url('../img/twitter.png');
+}
+
+.links .twitter:hover {
+	background-image: url('../img/twitter active.png');
+}
+
+.links .medium {
+	background-image: url('../img/medium.png');
+}
+
+.links .medium:hover {
+	background-image: url('../img/medium active.png');
+}
+
+.desc p {
+	margin: 1em auto;
+}
+
+.wrapper h2 {
+	margin-top: 1em;
+}
+
+.contact .address {
+	background-image: url('../img/map.png');
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+
+.contact .link {
+	background-image: url('../img/link.png');
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+
+.contact .phone {
+	background-image: url('../img/call.png');
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+
+@media (max-width: 600px) {
+	.wrapper h2 {
+		margin-left: 15px;
+	}
+
+	.hero {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.hero .links {
+		display: none;
+	}
+
+	.hero p {
+		padding: 0 5px;
+
+		margin-top: 5px;
+		margin-left: 10px;
+
+		display: inline-block;
+
+		background-color: rgba(25,25,25,.6);
+		color: white;
+	}
+
+	.desc p {
+		margin: 1em;
+	}
+
+	.desc .contact {
+		width: 70%;
+		margin: auto;
+	}
+
+	.desc .contact > div {
+		margin: 1em;
+		padding-left: 30px;
+	}
+}
+
+@media (min-width: 401px) and (max-width: 800px) {
+	.hero {
+		margin-top: -1em;
+	}
+}
+
+@media (min-width: 801px) {
+	.wrapper {
+		max-width: 992px;
+		margin: auto;
+	}
+
+	.hero {
+		height: 120px;
+		padding-top: 20px;
+		padding-bottom: 10px;
+	}
+
+	.hero .links {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+
+	.hero p {
+		margin-top: 10px;
+		margin-left: 20px;
+		padding: 0 5px;
+
+		display: inline-block;
+
+		background-color: rgba(25,25,25,.6);
+		color: white;
+	}
+
+	.desc .contact {
+		width: 80%;
+
+		margin: 1em 10%;
+
+		display: inline-block;
+	}
+
+	.desc .contact > div {
+		font-size: 20px;
+
+		width: 200px;
+		padding-left: 35px;
+		float: left;
+		margin: 0em 3em .5em 3em;
+	}
+}
+
+@media (min-width: 1401px) {
+}
