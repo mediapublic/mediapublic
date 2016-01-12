@@ -1,6 +1,7 @@
+import six
 from uuid import uuid4
 
-from sqlalchemy.exc import IntegrityError
+import sqlalchemy.exc as sql_exc
 from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType
 from sqlalchemy import (
@@ -55,11 +56,16 @@ class CreationMixin():
     @classmethod
     def get_by_id(cls, id):
         with transaction.manager:
-            thing = DBSession.query(
-                cls,
-            ).filter(
-                cls.id == id,
-            ).first()
+            try:
+                thing = DBSession.query(
+                    cls,
+                ).filter(
+                    cls.id == id,
+                ).first()
+            except sql_exc.StatementError as e:
+                if isinstance(e.orig, (ValueError,)):
+                    raise e.orig
+                six.reraise(*sys.exc_info())
         return thing
 
     @classmethod
@@ -150,7 +156,7 @@ class Users(Base, CreationMixin, TimeStampMixin):
                     "credentials"]["oauthAccessToken"],
                 twitter_user_id=auth_info["profile"]["accounts"][0]['userid'],
             )
-        except IntegrityError:
+        except sql_exc.IntegrityError:
             with transaction.manager:
                 DBSession.query(cls).filter(
                     cls.twitter_handle == str(social_uname),
