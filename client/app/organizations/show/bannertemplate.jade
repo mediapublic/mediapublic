@@ -1,0 +1,18 @@
+.cover-photo(style="background-image: url(#{image_url});")
+  .organization-title-container
+    .organization-title(model=cid, data-fields='short_name')= short_name
+    if city || state
+      .organization-location= city + ', ' + state
+    .organization-social-media-container
+      if (twitter)
+        a(href=twitter, target='_blank')
+          i.fa.fa-twitter
+      if (facebook)
+        a(href=facebook, target='_blank')
+          i.fa.fa-facebook
+      if (github)
+        a(href=github, target='_blank')
+          i.fa.fa-github
+      if (instagram)
+        a(href=instagram, target='_blank')
+          i.fa.fa-instagram

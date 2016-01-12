@@ -15,15 +15,16 @@ from .models import (
     Blogs,
     Comments,
     DBSession,
+    HelpRequests,
     Howtos,
     Organizations,
-    People,
     PlaylistAssignments,
     Playlists,
     RecordingCategories,
     Recordings,
     UserTypes,
     Users,
+    SocialMedias,
 )
 from .validators import validator_from_model
 
@@ -49,7 +50,7 @@ class ResourceMixin(object):
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
         return {
-            self.rsrc: [i.to_dict() for i in self.cls.get_all()]
+            'data': [i.to_dict() for i in self.cls.get_all()]
         }
 
     @view(validators=('validate_req', ), permission='create')
@@ -129,6 +130,16 @@ class UsersResource(ResourceMixin):
     cls = Users
 
 
+@resource(collection_path='/social_medias', path='/social_medias/{id}',
+          factory=choose_context, cors_policy=cors_policy)
+class SocialMediasResource(ResourceMixin):
+    """
+    [GET, POST             ] /social_medias
+    [GET,       PUT, DELETE] /social_medias/{id}
+    """
+    cls = SocialMedias
+
+
 @resource(collection_path='/user_types', path='/user_types/{id}',
           factory=choose_context, cors_policy=cors_policy)
 class UserTypesResource(ResourceMixin):
@@ -162,15 +173,41 @@ class OrganizationsResource(ResourceMixin):
     """
     cls = Organizations
 
-# --------- PEOPLE
-# [GET, POST             ] /people
-# [GET,       PUT, DELETE] /people/{id}
-# --------- RECORDINGS
-# [GET, POST             ] /recordings
-# [GET,       PUT, DELETE] /recordings/{id}
-# --------- HOWTOS
-# [GET, POST             ] /howtos
-# [GET,       PUT, DELETE] /howtos/{id}
+
+@resource(collection_path='/recordings',
+          path='/recordings/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class RecordingsResource(ResourceMixin):
+    """
+    [GET, POST             ] /recordings
+    [GET,       PUT, DELETE] /recordings/{id}
+    """
+    cls = Recordings
+
+
+@resource(collection_path='/howtos',
+          path='/howtos/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class HowtosResource(ResourceMixin):
+    """
+    [GET, POST             ] /howtos
+    [GET,       PUT, DELETE] /howtos/{id}
+    """
+    cls = Howtos
+
+
+@resource(collection_path='/help-requests',
+          path='/help-requests/{id}',
+          factory=choose_context,
+          cors_policy=cors_policy)
+class HelpRequests(ResourceMixin):
+    """
+    [GET, POST             ] /help-requests
+    [GET,       PUT, DELETE] /help-requests/{id}
+    """
+    cls = HelpRequests
 
 
 @resource(collection_path='/blogs', path='/blogs/{id}',
@@ -183,8 +220,11 @@ class BlogsResource(ResourceMixin):
     cls = Blogs
 
 
-# --------- PLAYLISTS
-# [GET, POST             ] /playlists
-# [GET,       PUT, DELETE] /playlists/{id}
-# [           PUT,       ] /playlists/{id}/assign
-# [           PUT,       ] /playlists/{id}/remove
+@resource(collection_path='/playlists', path='/playlists/{id}',
+          factory=choose_context, cors_policy=cors_policy)
+class Playlists(ResourceMixin):
+    """
+    [GET, POST             ] /playlists
+    [GET,       PUT, DELETE] /playlists/{id}
+    """
+    cls = Playlists

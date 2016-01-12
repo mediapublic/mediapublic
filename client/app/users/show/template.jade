@@ -1,0 +1,11 @@
+include ../../shared/components/edit-buttons
+include ../../shared/components/flash
+
++flash
+div(model=cid, data-fields='*')
+  .h1= first + ' ' + last
+  p.user-bio= bio
++editButtons
+
+
+

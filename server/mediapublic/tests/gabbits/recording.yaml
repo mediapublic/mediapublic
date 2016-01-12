@@ -1,0 +1,33 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Recordings
+    url: /recordings
+    response_json_paths:
+      $.data: []
+
+  - name: Create a recording incorrectly
+    status: 400
+    method: POST
+    url: /recordings
+    data:
+      dummy: bad data
+
+  - name: Create a recording correctly
+    status: 201
+    method: POST
+    url: /recordings
+    data:
+      title: >
+        Connections With Evan Dawson - James Fallon, Neuroscientist
+        and Psychopath
+      url: http://wxxinews.org/post/connections-james-fallon-neuroscientist-and-psychopath
+
+  - name: Get Recordings
+    url: /recordings
+    response_json_paths:
+      $.data.`len`: 1

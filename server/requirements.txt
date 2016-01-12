@@ -4,7 +4,6 @@ SQLAlchemy
 colander
 cornice
 pyramid
-pyramid_jinja2
 pyramid_tm
 requests
 sqlalchemy_utils

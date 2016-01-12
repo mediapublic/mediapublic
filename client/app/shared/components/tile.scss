@@ -1,0 +1,102 @@
+.tile {
+  position: relative;
+  display: inline-block;
+  width: calc(20% - 10px);
+  margin: 5px;
+  padding-bottom: 20%;
+  overflow: hidden;
+  border: 1px solid $borderGray;
+}
+
+.tile-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #777;
+  background-size: cover;
+}
+
+.tile-title {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  color: #ddd;
+  background-color: rgba(35, 35, 35, .5);
+}
+
+.tile-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff;
+}
+
+.tile-more {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  transition: all .2s ease-out;
+  transform: translateY(100%);
+  color: #fff;
+  background-color: rgba(35, 35, 35, 1);
+}
+
+.tile:hover .tile-more {
+  transform: translateY(0);
+}
+
+
+@media (max-width: $screen-xs-max) {
+  .tile {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding-bottom: 20px;
+    border: none;
+  }
+
+  .tile-image {
+    position: static;
+    display: inline-block;
+    width: 30%;
+    padding-bottom: 30%;
+    vertical-align: top;
+  }
+
+  .tile-text {
+    display: inline-block;
+    width: 70%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    vertical-align: top;
+  }
+
+  .tile-title {
+    position: static;
+    padding: 0;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+  }
+
+  .tile-more {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0;
+    transition: none;
+    transform: translateY(0);
+    color: #000;
+    background-color: #fff;
+  }
+
+  .tile:hover .tile-more {
+    transform: translateY(0);
+  }
+}

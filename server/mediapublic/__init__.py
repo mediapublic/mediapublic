@@ -1,9 +1,11 @@
 import cornice.pyramidhook as hooks
-from pyramid import authentication
+from pyramid import authentication, httpexceptions, security
 from pyramid.config import Configurator
-from pyramid import security
-from sqlalchemy import engine_from_config
-from pyramid import httpexceptions
+from pyramid.renderers import JSON
+import six
+from sqlalchemy import engine_from_config, DateTime
+from sqlalchemy_utils import UUIDType
+from uuid import UUID
 
 from mediapublic import auth
 from mediapublic import exceptions as mp_exc
@@ -52,5 +54,18 @@ def main(global_config, **settings):
     config.add_view(hooks.handle_exceptions,
                     context=httpexceptions.HTTPForbidden,
                     permission=security.NO_PERMISSION_REQUIRED)
+
+    json_renderer = JSON()
+
+    def uuid_adapter(obj, request):
+        return six.text_type(obj) if obj is not None else None
+
+    def datetime_adapter(obj, request):
+        return six.text_type(obj) if obj is not None else None
+
+    json_renderer.add_adapter(UUIDType, uuid_adapter)
+    json_renderer.add_adapter(UUID, uuid_adapter)
+    # json_renderer.add_adapter(DateTime, datetime_adapter)
+    config.add_renderer('json', json_renderer)
 
     return config.make_wsgi_app()

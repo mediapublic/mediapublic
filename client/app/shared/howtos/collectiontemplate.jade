@@ -1,0 +1,6 @@
+include ../templates/loadmore.jade
+
+if !viewState.isEmpty
+  h2.tile-list-title Howtos
+  .howtos-list.tile-container
+  +loadmore

@@ -1,0 +1,6 @@
+include ../templates/loadmore.jade
+
+if !viewState.isEmpty
+  h2.tile-list-title Ways to help
+  .help-requests-list.tile-container
+  +loadmore

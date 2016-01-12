@@ -1,0 +1,10 @@
+include ../../shared/components/edit-buttons
+
+
+a(href=url, model=cid, data-fields='title').h1= title
+p.contents
+  div(model=cid, data-editors='contents')!= contents
++editButtons
+
+
+

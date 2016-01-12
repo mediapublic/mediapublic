@@ -1,20 +1,11 @@
-@import "bootstrap-custom";
-@import "shared/components";
-@import "application/style";
-@import "header/style";
-@import "organizations/style";
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.inline-block {
-  display: inline-block;
-}
+@import 'bootstrap-custom';
+@import 'shared/style/variables';
+@import 'shared/style/base';
+@import 'shared/components';
+@import 'application/style';
+@import 'header/style';
+@import 'organizations/style';
+@import 'shared/people/style';
+@import 'users/style';
+@import 'shared/search/style';
+@import 'index/style';
