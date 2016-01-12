@@ -102,7 +102,7 @@ class ResourceMixin(object):
                         )
                     ]}
                 else:
-                    self.request.reesponse.status = 501
+                    self.request.response.status = 501
             else:
                 self.request.response.status = 400
         else:
