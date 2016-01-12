@@ -8,9 +8,10 @@ export default Route.extend({
   },
 
   render() {
+    this.model = new Person(app.currentUser.attributes);
+    app.currentUser.on('sync', () => this.model.set(app.currentUser.attributes))
     this.view = new View({
-      // Fix this when people and users have been unified on the server
-      model: new Person(app.currentUser.attributes),
+      model: this.model,
       editing: true,
       flashSuccess: 'Thanks for signing up! Please complete your profile.'
     });

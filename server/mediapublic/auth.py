@@ -89,7 +89,7 @@ def login_info(request):
         return {}
     user = Users.get_by_id(request.authenticated_userid)
     if user is None:
-        self.request.response.status = 404
+        request.response.status = 404
         return {'error': 'Not found'}
     return user.to_dict()
 
