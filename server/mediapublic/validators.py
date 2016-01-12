@@ -27,6 +27,19 @@ def validator_from_model(model):
     return CorniceSchema.from_colander(validator)
 
 
+def method_exists(cls, name):
+    return hasattr(cls, name) and callable(getattr(cls, name))
+
+
+def valid_uuid(uuid_string):
+    from uuid import UUID
+    try:
+        val = UUID(uuid_string, version=4)
+    except:
+        return False
+    return val.hex == uuid_string
+
+
 validator_mapping = {
     'UUIDType': colander.Regex(
         # giant gross UUID4 regex

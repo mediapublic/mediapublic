@@ -26,7 +26,11 @@ from .models import (
     Users,
     SocialMedias,
 )
-from .validators import validator_from_model
+from .validators import (
+    method_exists,
+    valid_uuid,
+    validator_from_model,
+)
 
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
@@ -46,12 +50,66 @@ class ResourceMixin(object):
     def validate_req(self, request):
         validate_colander_schema(validator_from_model(self.cls), request)
 
+    def build_pagination(self):
+        start = 0
+        count = 25
+        if 'start' in self.request.GET:
+            if self.request.GET['start'].isdigit():
+                start = int(float(self.request.GET['start']))
+        if 'count' in self.request.GET:
+            if self.request.GET['count'].isdigit():
+                count = int(float(self.request.GET['count']))
+        return start, count
+
     @view(permission='get')
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
-        return {
-            'data': [i.to_dict() for i in self.cls.get_all()]
-        }
+        start, count = self.build_pagination()
+        resp = {'data': []}
+        if 'org_id' in self.request.GET:
+            if valid_uuid(self.request.GET['org_id']):
+                if method_exists(self.cls, 'get_by_org_id'):
+                    oid = self.request.GET['org_id']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_org_id(
+                            oid, start, count
+                        )
+                    ]}
+                else:
+                    self.request.response.status = 501
+            else:
+                self.request.response.status = 400
+        elif 'user_id' in self.request.GET:
+            if valid_uuid(self.request.GET['user_id']):
+                if method_exists(self.cls, 'get_by_user_id'):
+                    uid = self.request.GET['user_id']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_user_id(
+                          uid, start, count
+                        )
+                    ]}
+                else:
+                    self.request.response.status = 501
+            else:
+                self.request.response.status = 400
+        elif 'q' in self.request.GET:
+            if len(self.request.GET['q']) >= 1:
+                if method_exists(self.cls, 'get_by_search_term'):
+                    q = self.request.GET['q']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_search_term(
+                            q, start, count
+                        )
+                    ]}
+                else:
+                    self.request.response.status = 501
+            else:
+                self.request.response.status = 400
+        else:
+            resp = {'data': [i.to_dict() for i in self.cls.get_all(
+                start, count
+            )]}
+        return resp
 
     @view(validators=('validate_req', ), permission='create')
     def collection_post(self):

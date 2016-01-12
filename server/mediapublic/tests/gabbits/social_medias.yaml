@@ -1,0 +1,32 @@
+defaults:
+    ssl: False
+    request_headers:
+      # JSON ALL DAY
+      content-type: application/json
+
+tests:
+  - name: Get Social Medias
+    url: /social_medias
+    response_json_paths:
+      $.data: []
+
+  - name: Create a Social Media incorrectly
+    status: 400
+    method: POST
+    url: /social_medias
+    data:
+      dummy: 'dummy'
+
+  - name: Create a Social Medias correctly
+    status: 201
+    method: POST
+    url: /social_medias
+    data:
+      provider: 'twitter' 
+      username: '@mah_dummy_user'
+      user_id: '67b2630a-9180-47a7-a661-6b3e12109b3a'
+
+  - name: Get Social Medias
+    url: /social_medias
+    response_json_paths:
+      $.data.`len`: 1
