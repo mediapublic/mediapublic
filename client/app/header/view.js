@@ -21,7 +21,6 @@ export default LayoutView.extend({
   },
 
   menuItems: {
-    'home': '#',
     'organizations': '#organizations',
   },
 

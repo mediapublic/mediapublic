@@ -1,3 +1,29 @@
-.homepage-search {
+.homepage-banner {
+  background-image: url(/images/mixer.jpg);
+  background-size: 100%;
+  padding-bottom: 40%;
+  margin-top: -$navbar-height;
+  position: relative;
+}
 
+.homepage-banner::after {
+  content: ' ';
+  position: absolute;
+  background-color: #222;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+.homepage-banner-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  max-width: 640px;
+  width: 100%;
+  padding: 0 20px;
+  transform: translateY(-50%) translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 1;
 }

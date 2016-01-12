@@ -1,3 +1,7 @@
+.navbar {
+  transition: all 0.2s ease-out;
+}
+
 .header-item {
   height: $navbar-height;
   padding: 0 10px;
@@ -12,17 +16,32 @@
 
 .logo {
   font-size: 1.5em;
+  color: #fff;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .header-menu-item {
-  font-size: 1.3em;
-  transition: background-color .2s ease-out;
+  color: #fff;
+  font-size: 1em;
+  transition: all .2s ease-out;
   border-left: 1px solid $navbar-default-border;
   &:hover {
-    background-color: darken($navbar-default-bg, 7%);
+    background-color: $navbar-default-bg;
+    color: #fff;
   }
 }
 
 .navbar {
   margin-bottom: 0;
+}
+
+.loginout {
+  color: #000;
+  line-height: 30px;
+  display: inline-block;
+  background-color: $lighter-blue;
+  padding: 2px 10px;
+  border-radius: 2px;
 }
