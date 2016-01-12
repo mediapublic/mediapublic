@@ -10,7 +10,7 @@ export default Collection.extend({
   model: HelpRequest,
   url() {
     if (this.organization) {
-      return '/help-requests?organization_id=' + this.organization.get('id');
+      return '/help-requests?org_id=' + this.organization.get('id');
     } else {
       return '/help-requests';
     }

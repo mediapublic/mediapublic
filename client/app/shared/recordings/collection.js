@@ -10,7 +10,7 @@ export default Collection.extend({
   model: Recording,
   url() {
     if (this.organization) {
-      return '/recordings?organization_id=' + this.organization.get('id');
+      return '/recordings?org_id=' + this.organization.get('id');
     } else {
       return '/recordings';
     }
