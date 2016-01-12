@@ -26,7 +26,11 @@ from .models import (
     Users,
     SocialMedias,
 )
-from .validators import validator_from_model
+from .validators import (
+    method_exists,
+    valid_uuid,
+    validator_from_model,
+)
 
 
 log = logging.getLogger(name="mediapublic.{}".format(__name__))
@@ -49,9 +53,43 @@ class ResourceMixin(object):
     @view(permission='get')
     def collection_get(self):
         log.debug("collection_get on {}".format(self.rsrc))
-        return {
-            'data': [i.to_dict() for i in self.cls.get_all()]
-        }
+        resp = {'data': []}
+        if 'org_id' in self.request.GET:
+            if valid_uuid(self.request.GET['org_id']):
+                if method_exists(self.cls, 'get_by_org_id'):
+                    oid = self.request.GET['org_id']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_org_id(oid)
+                    ]}
+                else:
+                    self.request.response.status = 501
+            else:
+                self.request.response.status = 400
+        elif 'user_id' in self.request.GET:
+            if valid_uuid(self.request.GET['user_id']):
+                if method_exists(self.cls, 'get_by_user_id'):
+                    uid = self.request.GET['user_id']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_user_id(uid)
+                    ]}
+                else:
+                    self.request.response.status = 501
+            else:
+                self.request.response.status = 400
+        elif 'q' in self.request.GET:
+            if len(self.request.GET['q']) >= 4:
+                if method_exists(self.cls, 'get_by_search_term'):
+                    q = self.request.GET['q']
+                    resp = {'data': [
+                        i.to_dict() for i in self.cls.get_by_search_term(q)
+                    ]}
+                else:
+                    self.request.reesponse.status = 501
+            else:
+                self.request.response.status = 400
+        else:
+            resp = {'data': [i.to_dict() for i in self.cls.get_all()]}
+        return resp
 
     @view(validators=('validate_req', ), permission='create')
     def collection_post(self):

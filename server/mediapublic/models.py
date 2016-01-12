@@ -6,6 +6,7 @@ import sqlalchemy.exc as sql_exc
 from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType, JSONType
 from sqlalchemy import (
+    or_,
     Column,
     ForeignKey,
     Integer,
@@ -221,6 +222,32 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
 
         return False, user.id
 
+    @classmethod
+    def get_by_org_id(cls, org_id):
+        with transaction.manager:
+            users = DBSession.query(cls).filter(
+                cls.organization_id == org_id,
+            ).all()
+        return users
+
+    @classmethod
+    def get_by_search_term(cls, term):
+        with transaction.manager:
+            users = DBSession.query(
+                cls
+            ).filter(
+                # make sure we're only returning people that
+                # are apart of an org, and not just all users
+                Users.organization_id is not None,
+            ).filter(
+                or_(
+                    Users.display_name.like('%%%s%%' % term),
+                    Users.email.like('%%%s%%' % term),
+                    Users.twitter_handle.like('%%%s%%' % term),
+                )
+            ).all()
+        return users
+
     def _to_dict(self):
         return dict(
             display_name=self.display_name,
@@ -346,6 +373,23 @@ class Organizations(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     primary_website = Column(UnicodeText)
     secondary_website = Column(UnicodeText)
     image_url = Column(UnicodeText)
+
+    @classmethod
+    def get_by_search_term(cls, term):
+        with transaction.manager:
+            orgs = DBSession.query(
+                cls
+            ).filter(
+                or_(
+                    Organizations.short_name.like('%%%s%%' % term),
+                    Organizations.long_name.like('%%%s%%' % term),
+                    Organizations.long_description.like('%%%s%%' % term),
+                    Organizations.city.like('%%%s%%' % term),
+                    Organizations.state.like('%%%s%%' % term),
+                    Organizations.zipcode.like('%%%s%%' % term),
+                )
+            ).all()
+        return orgs
 
     def _to_dict(self):
         return dict(
@@ -493,6 +537,14 @@ class Recordings(Base, CreationMixin, TimeStampMixin):
 
     organization_id = Column(ForeignKey('organizations.id'))
 
+    @classmethod
+    def get_by_org_id(cls, org_id):
+        with transaction.manager:
+            recordings = DBSession.query(cls).filter(
+                cls.organization_id == org_id,
+            ).all()
+        return recordings
+
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
@@ -574,6 +626,39 @@ class Howtos(Base, CreationMixin, TimeStampMixin):
     edit_datetime = Column(DateTime)
     tags = Column(UnicodeText)
 
+    organization_id = Column(ForeignKey('organizations.id'))
+    author_id = Column(ForeignKey('users.id'))
+
+    @classmethod
+    def get_by_org_id(cls, org_id):
+        with transaction.manager:
+            howtos = DBSession.query(cls).filter(
+                cls.organization_id == org_id,
+            ).all()
+        return howtos
+
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        with transaction.manager:
+            howtos = DBSession.query(cls).filter(
+                cls.author_id == author_id,
+            ).all()
+        return howtos
+
+    @classmethod
+    def get_by_search_term(cls, term):
+        with transaction.manager:
+            howtos = DBSession.query(
+                cls
+            ).filter(
+                or_(
+                    Howtos.title.like('%%%s%%' % term),
+                    Howtos.contents.like('%%%s%%' % term),
+                    Howtos.tags.like('%%%s%%' % term),
+                )
+            ).all()
+        return howtos
+
     def to_dict(self):
         resp = {}
         for klass in reversed(self.__class__.__mro__[1:]):
@@ -586,6 +671,8 @@ class Howtos(Base, CreationMixin, TimeStampMixin):
             contents=self.contents,
             edit_datetime=self.edit_datetime,
             tags=self.tags,
+            organization_id=self.organization_id,
+            author_id=self.author_id,
         )
         return resp
 
@@ -639,12 +726,43 @@ class HelpRequests(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'help_requests'
 
     id = Column(UUIDType(binary=False), primary_key=True)
-    organization_id = Column(ForeignKey('organizations.id'))
-    primary_contact_id = ForeignKey('users.id')
     title = Column(UnicodeText, nullable=False)
     description = Column(UnicodeText, nullable=False)
     tags = Column(UnicodeText)
     due_datetime = Column(DateTime)
+
+    organization_id = Column(ForeignKey('organizations.id'))
+    primary_contact_id = ForeignKey('users.id')
+
+    @classmethod
+    def get_by_org_id(cls, org_id):
+        with transaction.manager:
+            help_requests = DBSession.query(cls).filter(
+                cls.organization_id == org_id,
+            ).all()
+        return help_requests
+
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        with transaction.manager:
+            help_requests = DBSession.query(cls).filter(
+                cls.primary_contact_id == user_id,
+            ).all()
+        return help_requests
+
+    @classmethod
+    def get_by_search_term(cls, term):
+        with transaction.manager:
+            help_requests = DBSession.query(
+                cls
+            ).filter(
+                or_(
+                    HelpRequests.title.like('%%%s%%' % term),
+                    HelpRequests.description.like('%%%s%%' % term),
+                    HelpRequests.tags.like('%%%s%%' % term),
+                )
+            ).all()
+        return help_requests
 
     def _to_dict(self):
         return dict(
@@ -676,6 +794,27 @@ class Blogs(Base, CreationMixin, TimeStampMixin):
     tags = Column(UnicodeText)
 
     author_id = Column(ForeignKey('users.id'))
+
+    @classmethod
+    def get_by_search_term(cls, term):
+        with transaction.manager:
+            blogs = DBSession.query(
+                cls
+            ).filter(
+                or_(
+                    Blogs.title.like('%%%s%%' % term),
+                    Blogs.contents.like('%%%s%%' % term),
+                )
+            ).all()
+        return blogs
+
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        with transaction.manager:
+            blogs = DBSession.query(cls).filter(
+                cls.author_id == user_id,
+            ).all()
+        return blogs
 
     def to_dict(self):
         resp = {}
