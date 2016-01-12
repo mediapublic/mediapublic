@@ -93,7 +93,7 @@ class ResourceMixin(object):
             else:
                 self.request.response.status = 400
         elif 'q' in self.request.GET:
-            if len(self.request.GET['q']) >= 4:
+            if len(self.request.GET['q']) >= 1:
                 if method_exists(self.cls, 'get_by_search_term'):
                     q = self.request.GET['q']
                     resp = {'data': [
