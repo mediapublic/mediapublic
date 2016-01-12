@@ -1,6 +1,6 @@
 import {Route} from 'backbone-routing';
 import View from './view';
-import storage from '../storage';
+import storage from 'shared/organizations/storage';
 
 export default Route.extend({
   initialize(options = {}) {

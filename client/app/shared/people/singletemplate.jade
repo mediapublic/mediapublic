@@ -6,7 +6,7 @@ block image
   - if (profile_picture) style = style + "background-image: url(" + profile_picture + ")";
   .tile-image(style=style)
 block title
-  = first + " " + last
+  = display_name
 block more
   = bio
   .social-media-links

@@ -1,6 +1,6 @@
 import {Route} from 'backbone-routing';
 import View from './layoutview';
-import storage from '../storage';
+import storage from 'shared/organizations/storage';
 import People from 'shared/people/collection';
 import Recordings from 'shared/recordings/collection';
 import HelpRequests from 'shared/helprequests/collection';

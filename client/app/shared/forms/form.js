@@ -1,12 +1,14 @@
 import BackboneForm from 'backbone-forms/distribution/backbone-forms.js';
 import TextEditor from './text';
 import WYSIWYGEditor from './wysiwyg';
+import OrganizationSelector from './organizationselector';
 import templates from './templates';
 import _ from 'underscore';
 import titleize from 'underscore.string/titleize';
 
 BackboneForm.editors.Text = TextEditor;
 BackboneForm.editors.WYSIWYG = WYSIWYGEditor;
+BackboneForm.editors.Organization = OrganizationSelector;
 
 BackboneForm.validators.phone = function(options) {
   options = _.extend({
