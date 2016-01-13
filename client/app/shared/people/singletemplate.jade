@@ -1,9 +1,7 @@
 extends ../components/tile.jade
 
 block image
-  - var color = app.templateHelpers.randomColor(cid);
-  - var style = "background-color: " + color + ";";
-  - if (profile_picture) style = style + "background-image: url(" + profile_picture + ")";
+  - if (profile_picture) var style = style + "background-image: url(" + profile_picture + ")";
   .tile-image(style=style)
 block title
   = display_name

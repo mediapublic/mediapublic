@@ -10,6 +10,7 @@ export default ItemView.extend({
     _.bindAll(this, 'render');
     return ItemView.prototype.initialize.apply(this, arguments);
   },
+  className: 'loginout',
   template: template,
   events: {
     'click .log-out': function() {
