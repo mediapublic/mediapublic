@@ -9,6 +9,7 @@ from sqlalchemy import (
     or_,
     Column,
     ForeignKey,
+    Boolean,
     Integer,
     UnicodeText,
     DateTime,
@@ -172,6 +173,10 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     __tablename__ = 'users'
 
     id = Column(UUIDType(binary=False), primary_key=True)
+
+    is_site_admin = Column(Boolean)
+    is_org_admin = Column(Boolean)
+
     display_name = Column(UnicodeText, nullable=False)
     email = Column(UnicodeText, nullable=False)
     last_longin_datetime = Column(DateTime, server_default=func.now())
@@ -185,6 +190,8 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
     profile_photo_url = Column(UnicodeText)
 
     user_type_id = Column(ForeignKey('user_types.id'))
+
+    org_approved = Column(Boolean)
     organization_id = Column(ForeignKey('organizations.id'))
 
     @classmethod
@@ -250,10 +257,13 @@ class Users(Base, CreationMixin, TimeStampMixin, ExtraFieldMixin):
 
     def _to_dict(self):
         return dict(
+            is_site_admin=bool(self.is_site_admin),
+            is_org_admin=bool(self.is_org_admin),
             display_name=self.display_name,
             twitter_handle=self.twitter_handle,
             email=self.email,
             user_type=self.user_type_id,
+            org_approved=bool(self.org_approved),
             organization_id=self.organization_id,
         )
 
