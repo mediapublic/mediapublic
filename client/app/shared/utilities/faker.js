@@ -12,8 +12,7 @@ function guid() {
 
 export default {
   fakePerson: {
-    first: 'Gabe',
-    last: 'Isman',
+    display_name: 'Gabe Isman',
     phone: '(413) 559-0176',
     primary_website: 'http://gabe.link',
     address_0: '71 29th St.',
