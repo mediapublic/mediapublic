@@ -1,10 +1,10 @@
 a(href="\##{permalink}")
   block image
-    .tile-image
-  .tile-text
-    .tile-title
-      block title
-        = title
-    .tile-more
-      block more
-        = description
+    .tile-contents
+      .tile-text
+        .tile-title
+          block title
+            = app.templateHelpers.truncate(title, 100)
+        .tile-more
+          block more
+            = app.templateHelpers.truncate(description, 120)

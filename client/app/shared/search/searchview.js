@@ -21,6 +21,7 @@ export default ItemView.extend({
       this.active = this._getDataset(options.active);
     }
     this.initialQuery = options.query || '';
+    this.placeholder = options.placeholder || '';
   },
 
   template,
@@ -41,6 +42,7 @@ export default ItemView.extend({
 
   onAttach() {
     this.ui.input.val(this.initialQuery);
+    this.ui.input.attr('placeholder', this.placeholder);
     this.initializeTypeahead();
   },
 

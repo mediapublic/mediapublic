@@ -3,7 +3,7 @@ import template from './singletemplate.jade';
 
 export default ItemView.extend({
   template,
-  className: 'person-container tile',
+  className: 'person-container user-tile',
   serializeData() {
     let data = ItemView.prototype.serializeData.apply(this, arguments);
     data.viewState.needsApproval = this.model.needsApproval() &&
@@ -13,7 +13,9 @@ export default ItemView.extend({
   events: {
     'click .approve': function(event) {
       this.model.set('org_approved', true);
-      this.model.save();
+      this.model.save().then(() => {
+        this.render();
+      });
       event.stopImmediatePropagation();
       event.stopPropagation();
       event.preventDefault();

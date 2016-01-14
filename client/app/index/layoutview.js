@@ -6,7 +6,7 @@ import Backbone from 'backbone';
 
 export default LayoutView.extend({
   initialize(options) {
-    this.searchView = new SearchView();
+    this.searchView = new SearchView({ placeholder: 'Search for your local station...' });
     this.tilesView = new HomepageTiles({ collection: this.collection });
     this.listenTo(this.searchView, 'search:updated', this.handleSearch);
   },

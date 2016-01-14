@@ -1,18 +1,18 @@
-extends ../components/tile.jade
+- if (profile_picture) var style = style + "background-image: url(" + profile_picture + ")";
 
-block image
-  - if (profile_picture) var style = style + "background-image: url(" + profile_picture + ")";
-  .tile-image(style=style)
-block title
-  = display_name
-block more
-  = bio
-  if viewState.needsApproval
-    .user-approval-controls
-      i.fa.fa-check.approve(title='Approve this user\'s request to be associated with your organization.')
-      i.fa.fa-times.reject(title='Reject this user\'s request to be associated with your organization.')
-  .social-media-links
-    i.fa.fa-twitter
-    i.fa.fa-facebook
-    i.fa.fa-github
-    i.fa.fa-instagram
+a(href="\##{permalink}")
+  .user-tile-image(style=style)
+  .user-tile-text
+    .user-tile-title
+      = display_name
+    .user-tile-more
+      = app.templateHelpers.truncate(bio, 250)
+      if viewState.needsApproval
+        .user-approval-controls
+          i.fa.fa-check.approve(title='Approve this user\'s request to be associated with your organization.')
+          i.fa.fa-times.reject(title='Reject this user\'s request to be associated with your organization.')
+      .social-media-links
+        i.fa.fa-twitter
+        i.fa.fa-facebook
+        i.fa.fa-github
+        i.fa.fa-instagram
