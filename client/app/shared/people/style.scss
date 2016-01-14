@@ -14,3 +14,15 @@
     }
   }
 }
+
+.approve {
+  color: $brand-success;
+}
+
+.reject {
+  color: $brand-danger;
+}
+
+.approve, .reject {
+  padding: 5px;
+}
