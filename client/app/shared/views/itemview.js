@@ -152,7 +152,5 @@ export default ItemView.extend({
     this.state.set('canUserEdit',
         app.currentUser && this.model &&
         (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()));
-    console.log(app.currentUser && this.model &&
-        (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()));
   }
 });

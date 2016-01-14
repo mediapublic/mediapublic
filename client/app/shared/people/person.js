@@ -45,5 +45,9 @@ export default Model.extend({
 
   canUserEdit(user) {
     return user.isOrgAdmin(this.get('organization_id')) || user.get('id') === this.get('id');
+  },
+
+  needsApproval() {
+    return this.get('organization_id') && !this.get('org_approved');
   }
 });
