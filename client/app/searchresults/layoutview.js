@@ -56,7 +56,7 @@ export default LayoutView.extend({
       return;
     }
 
-    this.showChildView(region, new collectionView({ collection: this.collections[region] }));
+    this.showChildView(region, new collectionView({collection: this.collections[region]}));
   }
 
 });

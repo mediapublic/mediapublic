@@ -5,7 +5,7 @@ import htmlTruncate from 'html-truncate';
 
 export default {
   randomColor(cid, palette, tones) {
-    var palette = colorbrewer[palette || 'Spectral'][tones || 9];
+    palette = colorbrewer[palette || 'Spectral'][tones || 9];
     var index = parseInt(cid.replace('c', ''), 10) % palette.length;
     return palette[index];
   },

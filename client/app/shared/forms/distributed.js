@@ -30,19 +30,19 @@ var DistributedForm = BackboneForm.extend({
    */
   render: function() {
     var self = this,
-        fields = this.fields,
-        $ = Backbone.$,
-        editableElements = $('[model=' + this.modelCid + ']');
+      fields = this.fields,
+      $ = Backbone.$,
+      editableElements = $('[model=' + this.modelCid + ']');
 
     //Render standalone editors
     editableElements.each(function(i, el) {
       var $container = $(el),
-          selection = $container.attr('data-editors');
+        selection = $container.attr('data-editors');
 
       if (_.isUndefined(selection)) return;
 
       //Work out which fields to include
-      var keys = (selection == '*')
+      var keys = (selection === '*')
         ? self.selectedFields || _.keys(fields)
         : selection.split(',');
 
@@ -72,12 +72,12 @@ var DistributedForm = BackboneForm.extend({
     //Render standalone fields
     editableElements.each(function(i, el) {
       var $container = $(el),
-          selection = $container.attr('data-fields');
+        selection = $container.attr('data-fields');
 
       if (_.isUndefined(selection)) return;
 
       //Work out which fields to include
-      var keys = (selection == '*')
+      var keys = (selection === '*')
         ? self.selectedFields || _.keys(fields)
         : selection.split(',');
 
@@ -99,7 +99,7 @@ var DistributedForm = BackboneForm.extend({
     //Render fieldsets
     editableElements.each(function(i, el) {
       var $container = $(el),
-          selection = $container.attr('data-fieldsets');
+        selection = $container.attr('data-fieldsets');
 
       if (_.isUndefined(selection)) return;
 

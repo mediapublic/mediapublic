@@ -11,7 +11,7 @@ Backbone.sync = function(method, model, options) {
   }
 
   // If a url was specified, and it's not absolute, we prepend the api root.
-  if (url && url.indexOf('http') != 0) {
+  if (url && url.indexOf('http') !== 0) {
     options.url = app.config.apiUrl + url;
   }
 

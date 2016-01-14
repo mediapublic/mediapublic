@@ -22,6 +22,6 @@ export default Model.extend({
   },
 
   canUserEdit(user) {
-    return user.get('id') == this.get('user_id') || user.isOrgAdmin(this.get('organization_id'));
+    return user.get('id') === this.get('user_id') || user.isOrgAdmin(this.get('organization_id'));
   }
 });

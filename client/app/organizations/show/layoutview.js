@@ -26,18 +26,18 @@ export default LayoutView.extend({
 
   onBeforeShow() {
     this.showChildView(
-        'banner', new OrganizationBanner({ model: this.model }));
+        'banner', new OrganizationBanner({model: this.model}));
     this.showChildView(
-        'details', new OrganizationDetails({ model: this.model }));
+        'details', new OrganizationDetails({model: this.model}));
     this.showChildView(
-        'people', new PeopleView({ collection: this.peopleCollection }));
+        'people', new PeopleView({collection: this.peopleCollection}));
     this.showChildView(
         'recordings',
-        new RecordingsView({ collection: this.recordingsCollection }));
+        new RecordingsView({collection: this.recordingsCollection}));
     this.showChildView(
         'helprequests',
-        new HelpRequestsView({ collection: this.helpRequestsCollection}));
+        new HelpRequestsView({collection: this.helpRequestsCollection}));
     this.showChildView(
-        'howtos', new HowtosView({ collection: this.howtosCollection }));
+        'howtos', new HowtosView({collection: this.howtosCollection}));
   },
 });
