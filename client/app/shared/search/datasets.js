@@ -1,5 +1,6 @@
-import {sources} from './sources';
 import _ from 'underscore';
+
+import {sources} from './sources';
 
 var datasets = {
   organizations: {
@@ -36,7 +37,17 @@ var datasets = {
     name: 'howtos',
     source: sources.howtos,
     templates: {
-      header: '<div class="suggestion-header"howtos>Howtos</div>',
+      header: '<div class="suggestion-header">Howtos</div>',
+      suggestion: _.template('<div class="suggestion"><%= title %></div>')
+    },
+    display: (suggestion) => suggestion.title,
+    limit: 3
+  },
+  helprequests: {
+    name: 'helprequests',
+    source: sources.helprequests,
+    templates: {
+      header: '<div class="suggestion-header">Help Requests</div>',
       suggestion: _.template('<div class="suggestion"><%= title %></div>')
     },
     display: (suggestion) => suggestion.title,

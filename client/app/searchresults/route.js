@@ -1,7 +1,7 @@
-import {Route} from 'backbone-routing';
-import View from './layoutview';
 import util from 'shared/utilities';
-import _ from 'underscore';
+import {Route} from 'backbone-routing';
+
+import View from './layoutview';
 
 export default Route.extend({
   initialize(options = {}) {
@@ -11,7 +11,6 @@ export default Route.extend({
   },
 
   fetch() {
-    var self = this;
     var params = util.getQueryParams();
     this.type = params.type || 'all';
     this.query = params.q || '';

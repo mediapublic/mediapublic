@@ -1,10 +1,10 @@
-import {LayoutView} from 'backbone.marionette';
-import SearchView from 'shared/search/searchview';
-import HowtosView from 'shared/howtos/collectionview';
-import PeopleView from 'shared/people/collectionview';
-import RecordingsView from 'shared/recordings/collectionview';
 import HelpRequestsView from 'shared/helprequests/collectionview';
+import HowtosView from 'shared/howtos/collectionview';
 import OrganizationsView from 'shared/organizations/collectionview';
+import PeopleView from 'shared/people/collectionview';
+import SearchView from 'shared/search/searchview';
+import {LayoutView} from 'backbone.marionette';
+
 import template from './layouttemplate.jade';
 
 export default LayoutView.extend({
@@ -26,7 +26,7 @@ export default LayoutView.extend({
     organizations: '.organizations-container',
     howtos: '.howtos-container',
     people: '.people-container',
-    recordings: '.recordings-container'
+    helprequests: '.helprequests-container'
   },
 
   onBeforeShow() {
@@ -39,7 +39,7 @@ export default LayoutView.extend({
 
     this._createOrEmptyRegionView('howtos', HowtosView);
     this._createOrEmptyRegionView('people', PeopleView);
-    this._createOrEmptyRegionView('recordings', RecordingsView);
+    this._createOrEmptyRegionView('helprequests', HelpRequestsView);
     this._createOrEmptyRegionView('organizations', OrganizationsView);
   },
 
@@ -50,13 +50,13 @@ export default LayoutView.extend({
 
   // There are a ton of possible optimizations around this functionality, but
   // I'm deferring them all for now.
-  _createOrEmptyRegionView(region, collectionView) {
+  _createOrEmptyRegionView(region, CollectionView) {
     if (!this.collections[region]) {
       this.getRegion(region).empty();
       return;
     }
 
-    this.showChildView(region, new collectionView({collection: this.collections[region]}));
+    this.showChildView(region, new CollectionView({collection: this.collections[region]}));
   }
 
 });

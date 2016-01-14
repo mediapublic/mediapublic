@@ -2,22 +2,23 @@
  * This is a service that caches search results as they are fetched for auto-
  * complete and provides the capability to turn cached results into collections.
  */
+
+import _ from 'underscore';
 import Cache from 'shared/utilities/cache';
+import HelpRequests from 'shared/helprequests/collection';
+import Howtos from 'shared/howtos/collection';
 import Organizations from 'shared/organizations/collection';
 import People from 'shared/people/collection';
-import Recordings from 'shared/recordings/collection';
-import Howtos from 'shared/howtos/collection';
-import _ from 'underscore';
 
-var SearchService = function() {
+function SearchService() {
   this._cache = new Cache();
-};
+}
 
 var collections = {
   organizations: Organizations,
   people: People,
-  recordings: Recordings,
-  howtos: Howtos
+  howtos: Howtos,
+  helprequests: HelpRequests
 };
 
 
@@ -45,9 +46,8 @@ SearchService.prototype.getAllCollections = function(query) {
 SearchService.prototype.getCollectionsForQuery = function(query, type) {
   if (type.toLowerCase() === 'all') {
     return this.getAllCollections(query);
-  } else {
-    return _.object([[type, this.getCollection(type, query)]]);
   }
+  return _.object([[type, this.getCollection(type, query)]]);
 };
 
 

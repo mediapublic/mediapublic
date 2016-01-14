@@ -1,9 +1,11 @@
-import {ItemView} from 'backbone.marionette';
-import datasets from 'shared/search/datasets';
-import {sources} from './sources';
-import template from './searchtemplate.jade';
-import util from 'shared/utilities';
 import _ from 'underscore';
+import datasets from 'shared/search/datasets';
+import util from 'shared/utilities';
+import {ItemView} from 'backbone.marionette';
+
+import template from './searchtemplate.jade';
+
+const defaultDatasets = ['organizations', 'howtos', 'helprequests', 'people'];
 
 export default ItemView.extend({
   initialize(options) {
@@ -15,7 +17,7 @@ export default ItemView.extend({
         return datasets[name];
       }));
     } else {
-      this.availableDatasets = _.values(datasets);
+      this.availableDatasets = _.values(_.pick(datasets, defaultDatasets));
     }
     if (options.active) {
       this.active = this._getDataset(options.active);
@@ -80,7 +82,7 @@ export default ItemView.extend({
     }
   },
 
-  handleSearch(event) {
+  handleSearch() {
     var query = this.ui.input.val();
     var type = this._getActiveName();
     util.updateQueryParams({q: query, type: type});
