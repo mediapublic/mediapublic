@@ -23,7 +23,9 @@ export default {
     twitter: '@gabeisman',
     facebook: 'https://www.facebook.com/gabeisman',
     instagram: '@gabeisman',
-    bio: 'I tell computers to do things and sometimes they listen to me.'
+    bio: 'I tell computers to do things and sometimes they listen to me.',
+    organization_id: '2be666af-e446-4ba2-8d9d-6719da9deedd',
+    org_approved: false
   },
 
   fakeRecording: {
