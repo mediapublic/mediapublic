@@ -1,0 +1,5 @@
+for group, state in groups
+  h3= state
+  for org in group
+    .org-list-item
+      a(href="#/organizations/#{org.id}")= org.short_name

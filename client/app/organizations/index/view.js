@@ -1,7 +1,13 @@
-import {CollectionView} from 'backbone.marionette';
-import CardView from './cardview';
+import {ItemView} from 'backbone.marionette';
+import template from './orglist.jade';
+import _ from 'underscore';
 
-export default CollectionView.extend({
+export default ItemView.extend({
   className: 'view-container index',
-  childView: CardView
+  template,
+  serializeData() {
+    var data = ItemView.prototype.serializeData.apply(this, arguments);
+    data.groups = _.groupBy(data.items, 'state');
+    return data;
+  }
 });
