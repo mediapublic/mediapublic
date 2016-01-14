@@ -19,5 +19,9 @@ export default Model.extend({
 
   urlRoot() {
     return '/recordings';
+  },
+
+  canUserEdit(user) {
+    return user.get('id') == this.get('user_id') || user.isOrgAdmin(this.get('organization_id'));
   }
 });

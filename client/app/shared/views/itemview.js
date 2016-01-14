@@ -20,8 +20,10 @@ export default ItemView.extend({
       flashSuccess: options.flashSuccess || undefined,
       flashError: options.flashError || undefined,
       flashInfo: options.flashInfo || undefined,
-      flashWarning: options.flashWarning || undefined
+      flashWarning: options.flashWarning || undefined,
     });
+    this.updatePermissions();
+    this.listenTo(app.currentUser, 'change', this.updatePermissions);
 
     this.listenTo(this.state, 'change', this.render);
     this.editor = null;
@@ -143,5 +145,14 @@ export default ItemView.extend({
       flashInfo: undefined,
       flashWarning: undefined,
     }, options);
+  },
+
+
+  updatePermissions() {
+    this.state.set('canUserEdit',
+        app.currentUser && this.model &&
+        (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()));
+    console.log(app.currentUser && this.model &&
+        (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()));
   }
 });

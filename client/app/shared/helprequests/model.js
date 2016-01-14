@@ -1,4 +1,4 @@
-import {Model} from 'backbone';
+import Model from 'shared/backbone/model';
 
 export default Model.extend({
   schema: {
@@ -24,5 +24,9 @@ export default Model.extend({
 
   urlRoot() {
     return '/help-requests';
+  },
+
+  canUserEdit(user) {
+    return user.isOrgAdmin(this.get('organization_id'));
   }
 });

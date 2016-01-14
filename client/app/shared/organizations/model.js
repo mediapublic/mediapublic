@@ -76,5 +76,9 @@ export default Model.extend({
 
   urlRoot() {
     return '/organizations';
+  },
+
+  canUserEdit(user) {
+    return user.isAdmin() || user.isOrgAdmin(this);
   }
 });

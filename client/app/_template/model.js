@@ -1,6 +1,6 @@
 // This is the model, it should specify a schema--so the model can be edited--
 // and a urlRoot--so the model can be saved.
-import {Model} from 'backbone';
+import Model from 'shared/backbone/model';
 
 export default Model.extend({
   schema: {

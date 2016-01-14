@@ -15,5 +15,9 @@ export default Model.extend({
 
   urlRoot() {
     return '/howtos';
+  },
+
+  canUserEdit(user) {
+    return this.get('author_id') == user.get('id') || user.isOrgAdmin(this.get('organization_id'));
   }
 });
