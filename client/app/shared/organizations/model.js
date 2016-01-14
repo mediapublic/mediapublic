@@ -46,22 +46,22 @@ export default Model.extend({
       title: 'Cover Photo Url',
       type: 'Text'
     },
-    'facebook': {
+    facebook: {
       type: 'Text',
       help: 'This should be the URL of your profile page.',
       validators: ['url']
     },
-    'twitter': {
+    twitter: {
       type: 'Text',
       help: 'This should be the URL of your profile page.',
       validators: ['url']
     },
-    'github': {
+    github: {
       type: 'Text',
       help: 'This should be the URL of your profile page.',
       validators: ['url']
     },
-    'instagram': {
+    instagram: {
       type: 'Text',
       help: 'This should be the URL of your profile page.',
       validators: ['url']

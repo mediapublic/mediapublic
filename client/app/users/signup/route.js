@@ -9,7 +9,7 @@ export default Route.extend({
 
   render() {
     this.model = new Person(app.currentUser.attributes);
-    app.currentUser.on('sync', () => this.model.set(app.currentUser.attributes))
+    app.currentUser.on('sync', () => this.model.set(app.currentUser.attributes));
     this.view = new View({
       model: this.model,
       editing: true,

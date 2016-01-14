@@ -4,101 +4,92 @@
  * Copyright 2013-2014 Twitter, Inc. and other contributors; Licensed MIT
  */
 import _ from 'underscore';
+import $ from 'jquery';
 
 // inspired by https://github.com/jharding/lru-cache
+function LruCache(maxSize) {
+  this.maxSize = _.isNumber(maxSize) ? maxSize : 100;
+  this.reset();
 
-var LruCache = (function() {
-  'use strict';
-
-  function LruCache(maxSize) {
-    this.maxSize = _.isNumber(maxSize) ? maxSize : 100;
-    this.reset();
-
-    // if max size is less than 0, provide a noop cache
-    if (this.maxSize <= 0) {
-      this.set = this.get = $.noop;
-    }
+  // if max size is less than 0, provide a noop cache
+  if (this.maxSize <= 0) {
+    this.set = this.get = $.noop;
   }
+}
 
-  _.extend(LruCache.prototype, {
-    set: function set(key, val) {
-      var tailItem = this.list.tail, node;
+_.extend(LruCache.prototype, {
+  set: function set(key, val) {
+    var tailItem = this.list.tail, node;
 
-      // at capacity
-      if (this.size >= this.maxSize) {
-        this.list.remove(tailItem);
-        delete this.hash[tailItem.key];
+    // at capacity
+    if (this.size >= this.maxSize) {
+      this.list.remove(tailItem);
+      delete this.hash[tailItem.key];
 
-        this.size--;
-      }
-
-      // writing over existing key
-      if (node = this.hash[key]) {
-        node.val = val;
-        this.list.moveToFront(node);
-      }
-
-      // new key
-      else {
-        node = new Node(key, val);
-
-        this.list.add(node);
-        this.hash[key] = node;
-
-        this.size++;
-      }
-    },
-
-    get: function get(key) {
-      var node = this.hash[key];
-
-      if (node) {
-        this.list.moveToFront(node);
-        return node.val;
-      }
-    },
-
-    reset: function reset() {
-      this.size = 0;
-      this.hash = {};
-      this.list = new List();
+      this.size = this.size - 1;
     }
-  });
 
-  function List() {
-    this.head = this.tail = null;
-  }
+    // writing over existing key
+    node = this.hash[key];
+    if (node) {
+      node.val = val;
+      this.list.moveToFront(node);
+    } else {
+      node = new Node(key, val);
 
-  _.extend(List.prototype, {
-    add: function add(node) {
-      if (this.head) {
-        node.next = this.head;
-        this.head.prev = node;
-      }
+      this.list.add(node);
+      this.hash[key] = node;
 
-      this.head = node;
-      this.tail = this.tail || node;
-    },
-
-    remove: function remove(node) {
-      node.prev ? node.prev.next = node.next : this.head = node.next;
-      node.next ? node.next.prev = node.prev : this.tail = node.prev;
-    },
-
-    moveToFront: function(node) {
-      this.remove(node);
-      this.add(node);
+      this.size = this.size + 1;
     }
-  });
+  },
 
-  function Node(key, val) {
-    this.key = key;
-    this.val = val;
-    this.prev = this.next = null;
+  get: function get(key) {
+    var node = this.hash[key];
+
+    if (node) {
+      this.list.moveToFront(node);
+      return node.val;
+    }
+  },
+
+  reset: function reset() {
+    this.size = 0;
+    this.hash = {};
+    this.list = new List();
   }
+});
 
-  return LruCache;
+function List() {
+  this.head = this.tail = null;
+}
 
-})();
+_.extend(List.prototype, {
+  add: function add(node) {
+    if (this.head) {
+      node.next = this.head;
+      this.head.prev = node;
+    }
+
+    this.head = node;
+    this.tail = this.tail || node;
+  },
+
+  remove: function remove(node) {
+    node.prev ? node.prev.next = node.next : this.head = node.next;
+    node.next ? node.next.prev = node.prev : this.tail = node.prev;
+  },
+
+  moveToFront: function(node) {
+    this.remove(node);
+    this.add(node);
+  }
+});
+
+function Node(key, val) {
+  this.key = key;
+  this.val = val;
+  this.prev = this.next = null;
+}
 
 module.exports = LruCache;

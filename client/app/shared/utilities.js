@@ -52,7 +52,7 @@ module.exports = {
    * @return {string}
    */
   ensureTrailingSlash: function(url) {
-    if (url.charAt(url.length - 1) != '/') {
+    if (url.charAt(url.length - 1) !== '/') {
       url += '/';
     }
 
@@ -67,7 +67,7 @@ module.exports = {
       params = deparam(queryString.slice(1));
     }
 
-    var hashParts = window.location.hash.split('?')
+    var hashParts = window.location.hash.split('?');
     if (hashParts.length > 1) {
       _.extend(params, deparam(hashParts[1]));
     }

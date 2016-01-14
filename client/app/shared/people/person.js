@@ -40,10 +40,10 @@ export default Model.extend({
       organization = organization.get('id');
     }
 
-    return this.get('is_org_admin') && organization == this.get('organization_id');
+    return this.get('is_org_admin') && organization === this.get('organization_id');
   },
 
   canUserEdit(user) {
-    return user.isOrgAdmin(this.get('organization_id')) || user.get('id') == this.get('id');
+    return user.isOrgAdmin(this.get('organization_id')) || user.get('id') === this.get('id');
   }
 });

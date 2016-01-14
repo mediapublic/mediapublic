@@ -18,6 +18,6 @@ export default Model.extend({
   },
 
   canUserEdit(user) {
-    return this.get('author_id') == user.get('id') || user.isOrgAdmin(this.get('organization_id'));
+    return this.get('author_id') === user.get('id') || user.isOrgAdmin(this.get('organization_id'));
   }
 });

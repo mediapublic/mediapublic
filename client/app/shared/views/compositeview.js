@@ -1,6 +1,5 @@
 import {CompositeView} from 'backbone.marionette';
 import {Model} from 'backbone';
-import _ from 'underscore';
 
 export default CompositeView.extend({
   initialize(options) {
@@ -39,14 +38,15 @@ export default CompositeView.extend({
     return data;
   },
 
-  filter(child, index, collection) {
+  filter(child, index) {
     return this.state.get('more') || index < this.numModels;
   },
 
   updateState() {
     this.state.set({
       hasMore: this.collection && this.collection.length > this.numModels,
-      isEmpty: !this.collection || (!this.collection.fetchInProgress && this.collection.length == 0)
+      isEmpty: !this.collection ||
+          (!this.collection.fetchInProgress && this.collection.length === 0)
     });
   }
 });

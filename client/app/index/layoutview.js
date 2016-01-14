@@ -6,8 +6,8 @@ import Backbone from 'backbone';
 
 export default LayoutView.extend({
   initialize(options) {
-    this.searchView = new SearchView({ placeholder: 'Search for your local station...' });
-    this.tilesView = new HomepageTiles({ collection: this.collection });
+    this.searchView = new SearchView({placeholder: 'Search for your local station...'});
+    this.tilesView = new HomepageTiles({collection: this.collection});
     this.listenTo(this.searchView, 'search:updated', this.handleSearch);
   },
   template,
@@ -21,6 +21,6 @@ export default LayoutView.extend({
   },
   handleSearch(event) {
     var url = '#search?q=' + encodeURIComponent(event.query) + '&type=' + event.type;
-    Backbone.history.navigate(url, { trigger: true });
+    Backbone.history.navigate(url, {trigger: true});
   }
 });
