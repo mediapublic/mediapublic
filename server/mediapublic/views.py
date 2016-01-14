@@ -67,12 +67,12 @@ class ResourceMixin(object):
         start, count = self.build_pagination()
         resp = {'data': []}
         if 'org_id' in self.request.GET:
-            if valid_uuid(self.request.GET['org_id']):
+            org_id = self.request.GET['org_id'].replace('-', '')
+            if valid_uuid(org_id):
                 if method_exists(self.cls, 'get_by_org_id'):
-                    oid = self.request.GET['org_id']
                     resp = {'data': [
                         i.to_dict() for i in self.cls.get_by_org_id(
-                            oid, start, count
+                            org_id, start, count
                         )
                     ]}
                 else:
@@ -80,12 +80,12 @@ class ResourceMixin(object):
             else:
                 self.request.response.status = 400
         elif 'user_id' in self.request.GET:
-            if valid_uuid(self.request.GET['user_id']):
+            user_id = self.request.GET['user_id'].replace('-', '')
+            if valid_uuid(user_id):
                 if method_exists(self.cls, 'get_by_user_id'):
-                    uid = self.request.GET['user_id']
                     resp = {'data': [
                         i.to_dict() for i in self.cls.get_by_user_id(
-                          uid, start, count
+                          user_id, start, count
                         )
                     ]}
                 else:
