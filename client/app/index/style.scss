@@ -6,16 +6,22 @@
   position: relative;
 }
 
+@media (max-width: $screen-sm-min) {
+  .homepage-banner {
+    padding-bottom: 80%;
+  }
+}
+
 .homepage-banner::after {
   content: ' ';
   position: absolute;
   background-color: #222;
-  opacity: 0.5;
+  opacity: 0.3;
   width: 100%;
   height: 100%;
 }
 
-.homepage-banner-title {
+.homepage-banner-contents {
   position: absolute;
   left: 50%;
   top: 50%;

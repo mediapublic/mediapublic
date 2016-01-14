@@ -25,7 +25,7 @@ export default Route.extend({
 
   fetch() {
     var models = HomepageData.map((data) => {
-      let model = new modelMap[data.type]({ id: data.id });
+      let model = new modelMap[data.type](data);
       model.fetch();
       return model;
     });
