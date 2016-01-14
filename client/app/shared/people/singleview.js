@@ -14,7 +14,9 @@ export default ItemView.extend({
   events: {
     'click .approve': function(event) {
       this.model.set('org_approved', true);
-      this.model.save();
+      this.model.save().then(() => {
+        this.render();
+      });
       event.stopImmediatePropagation();
       event.stopPropagation();
       event.preventDefault();
