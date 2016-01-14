@@ -135,9 +135,6 @@
         "consistent-this": [2, "self"],                     // Enforce capturing the current execution context using the that variable (e.g var that = this;) - consider changing to self
         "eol-last": 2,                                      // Enforce trailing space at the end of every non-empty file
         // "func-style": [2, "declaration"],                    // Need to discuss with team
-        "id-length": [2, {                                  // Enforce a mininmum id length of 2 characters, except i for iterating over loops
-            "exceptions": ["i", "_", "$"]
-        }],
         "indent": [2, 2],                               // Enforce tabs equivalent to two spaces
         "jsx-quotes": [2, "prefer-double"],                 // Enforce double quotes for JSX attribute values unless a set of single quotes contains a double quote
         "key-spacing": [2, {                                // Enforce one space after key in object

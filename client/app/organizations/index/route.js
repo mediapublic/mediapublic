@@ -1,6 +1,7 @@
+import Organizations from 'shared/organizations/collection';
 import {Route} from 'backbone-routing';
+
 import View from './view';
-import Organizations from 'shared/organizations/organizations';
 
 export default Route.extend({
   initialize(options = {}) {
