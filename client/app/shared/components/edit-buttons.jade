@@ -1,6 +1,7 @@
 mixin editButtons
-  if viewState.editing
-    .btn.btn-primary.save Save
-    .btn.btn-default.cancel Cancel
-  else
-    .btn.btn-default.edit Edit
+  if viewState.canUserEdit
+    if viewState.editing
+      .btn.btn-primary.save Save
+      .btn.btn-default.cancel Cancel
+    else
+      .btn.btn-default.edit Edit

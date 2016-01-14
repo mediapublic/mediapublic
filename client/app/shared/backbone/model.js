@@ -19,4 +19,7 @@ export default Model.extend({
 
     return Model.prototype.save.call(this, attributes, options);
   },
+  canUserEdit(user) {
+    throw new Error('CanUserEdit not implemented for ' + this.urlRoot());
+  }
 });

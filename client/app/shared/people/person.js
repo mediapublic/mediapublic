@@ -25,5 +25,25 @@ export default Model.extend({
 
   urlRoot() {
     return '/users';
+  },
+
+  isAdmin() {
+    return this.get('is_site_admin');
+  },
+
+  isOrgAdmin(organization) {
+    if (!organization) {
+      return false;
+    }
+
+    if (typeof organization !== 'string') {
+      organization = organization.get('id');
+    }
+
+    return this.get('is_org_admin') && organization == this.get('organization_id');
+  },
+
+  canUserEdit(user) {
+    return user.isOrgAdmin(this.get('organization_id')) || user.get('id') == this.get('id');
   }
 });
