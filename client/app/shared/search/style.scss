@@ -34,12 +34,14 @@ $searchButtonWidth: 100px;
   border: 1px solid $dropdown-border;
   border-radius: $border-radius-small;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  text-align: left;
 }
 
 .tt-suggestion {
   padding: 3px 25px;
   font-size: 18px;
   line-height: 24px;
+  color: #222;
 }
 
 .suggestion-header {
