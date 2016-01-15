@@ -1,6 +1,7 @@
+import Organizations from 'shared/organizations/collection';
 import {Route} from 'backbone-routing';
+
 import View from './view';
-import storage from 'shared/organizations/storage';
 
 export default Route.extend({
   initialize(options = {}) {
@@ -8,9 +9,8 @@ export default Route.extend({
   },
 
   fetch() {
-    return storage.findAll().then(collection => {
-      this.collection = collection;
-    });
+    this.collection = new Organizations([], {count: 10000});
+    return this.collection.fetch();
   },
 
   render() {

@@ -92,14 +92,14 @@ export default ItemView.extend({
 
 
   renderEditor: function() {
-    this.clearFlash({ silent: true });
+    this.clearFlash({silent: true});
     this.state.set('editing', true);
   },
 
 
   saveChanges: function() {
     var self = this;
-    var errors = this.editor.commit({ validate: true });
+    var errors = this.editor.commit({validate: true});
     if (!errors) {
       this.trigger('saving:started', self);
       this.model.save().done(function() {

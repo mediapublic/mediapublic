@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
@@ -101,7 +101,7 @@ gulp.task('js:production', ['js:clean'], function() {
     .pipe(source('main.min.js'))
     .pipe(streamify(uglify()))
     .pipe(gulp.dest(DEST + '/javascript/'))
-    .on("error", notify.onError("JS error: <%= error.message %>"))
+    .on('error', notify.onError('JS error: <%= error.message %>'))
     .on('end', function() {
       gulpUtil.log('production js built');
     });
@@ -157,17 +157,18 @@ function compileHtml(locals) {
       locals: locals
     }))
     .pipe(gulp.dest(DEST))
-    .on("error", notify.onError("HTML error: <%= error.message %>"));
+    .on('error', notify.onError('HTML error: <%= error.message %>'));
 }
 
 // Lint all the javascript
 gulp.task('lint', function() {
-  gulp.src(['./app/**/*.js', 'gulpfile.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default', { verbose: true }));
+  return gulp.src(['./app/**/*.js', 'gulpfile.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
-function checksum (str) {
+function checksum(str) {
   return crypto
     .createHash('md5')
     .update(str, 'utf8')

@@ -7,7 +7,8 @@ export default ItemView.extend({
   serializeData() {
     let data = ItemView.prototype.serializeData.apply(this, arguments);
     data.viewState.needsApproval = this.model.needsApproval() &&
-        (app.currentUser.isOrgAdmin(this.model.get('organization_id')) || app.currentUser.isAdmin());
+        (app.currentUser.isOrgAdmin(this.model.get('organization_id'))
+            || app.currentUser.isAdmin());
     return data;
   },
   events: {

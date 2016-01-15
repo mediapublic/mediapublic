@@ -16,7 +16,7 @@ export default TextEditor.extend({
     }
 
     // Failure.
-    if (numTinyMceRetries == 0) {
+    if (numTinyMceRetries === 0) {
       return this;
     }
 

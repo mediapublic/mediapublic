@@ -5,7 +5,7 @@ import _ from 'underscore';
 
 
 export default Text.extend({
-  dataset: _.extend({}, organizations, { limit: 5 }),
+  dataset: _.extend({}, organizations, {limit: 5}),
 
   storage,
 
@@ -46,7 +46,7 @@ export default Text.extend({
   validate() {
     var ret = Text.prototype.validate.apply(this, arguments);
     if (this.$el.val() && !this.value) {
-      return "Please select one of the options from the drop down."
+      return 'Please select one of the options from the drop down.';
     }
     return ret;
   }

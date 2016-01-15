@@ -1,9 +1,11 @@
-import {ItemView} from 'backbone.marionette';
-import datasets from 'shared/search/datasets';
-import {sources} from './sources';
-import template from './searchtemplate.jade';
-import util from 'shared/utilities';
 import _ from 'underscore';
+import datasets from 'shared/search/datasets';
+import util from 'shared/utilities';
+import {ItemView} from 'backbone.marionette';
+
+import template from './searchtemplate.jade';
+
+const defaultDatasets = ['organizations', 'howtos', 'helprequests', 'people'];
 
 export default ItemView.extend({
   initialize(options) {
@@ -15,7 +17,7 @@ export default ItemView.extend({
         return datasets[name];
       }));
     } else {
-      this.availableDatasets = _.values(datasets);
+      this.availableDatasets = _.values(_.pick(datasets, defaultDatasets));
     }
     if (options.active) {
       this.active = this._getDataset(options.active);
@@ -49,7 +51,7 @@ export default ItemView.extend({
   templateHelpers() {
     return {
       availableDatasets: this.availableDatasets
-    }
+    };
   },
 
   initializeTypeahead() {
@@ -68,28 +70,28 @@ export default ItemView.extend({
 
   handleFilterChosen(event) {
     var filter = this.$(event.currentTarget).data('dataset');
-    if (this.active && this.active.name == filter) {
+    if (this.active && this.active.name === filter) {
       return;
     }
     this.setActiveDataset(filter);
   },
 
   handleKeyup(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.handleSearch(event);
     }
   },
 
-  handleSearch(event) {
+  handleSearch() {
     var query = this.ui.input.val();
     var type = this._getActiveName();
-    util.updateQueryParams({ q: query, type: type });
-    this.trigger('search:updated', { query, type });
+    util.updateQueryParams({q: query, type: type});
+    this.trigger('search:updated', {query, type});
   },
 
   _getDataset(name) {
     var dataset = _.find(this.availableDatasets, function(ds) {
-      return ds.name == name;
+      return ds.name === name;
     });
     if (!dataset && name !== 'all') {
       console.log('WARNING: dataset with name', name, 'not available');

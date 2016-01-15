@@ -1,6 +1,7 @@
-import {Bloodhound} from 'typeahead.js-browserify';
-import config from '../../config.js';
 import _ from 'underscore';
+import {Bloodhound} from 'typeahead.js-browserify';
+
+import config from '../../config.js';
 
 var sharedOptions = {
   local: [],
@@ -40,7 +41,7 @@ sources.recordings = new Bloodhound(_.extend({}, sharedOptions, {
 
 
 sources.people = new Bloodhound(_.extend({}, sharedOptions, {
-  remote: remote('/people')
+  remote: remote('users')
 }));
 
 
@@ -48,6 +49,9 @@ sources.howtos = new Bloodhound(_.extend({}, sharedOptions, {
   remote: remote('howtos')
 }));
 
+sources.helprequests = new Bloodhound(_.extend({}, sharedOptions, {
+  remote: remote('help-requests')
+}));
 
 var getSources = function(names) {
   return _.compact(_.map(names, function(name) {

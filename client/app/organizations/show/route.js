@@ -20,15 +20,15 @@ export default Route.extend({
   fetch(id) {
     return storage.find(id).then(model => {
       this.model = model;
-      this.people = new People(fakePeople, { organization: this.model });
+      this.people = new People(fakePeople, {organization: this.model});
       this.people.fetch();
       this.recordings =
-          new Recordings(fakeRecordings, { organization: this.model });
+          new Recordings(fakeRecordings, {organization: this.model});
       this.recordings.fetch();
       this.helpRequests =
-          new HelpRequests(fakeRequests, { organization: this.model });
+          new HelpRequests(fakeRequests, {organization: this.model});
       this.helpRequests.fetch();
-      this.howtos = new Howtos([], { organization: this.model });
+      this.howtos = new Howtos([], {organization: this.model});
       this.howtos.fetch();
     });
   },
