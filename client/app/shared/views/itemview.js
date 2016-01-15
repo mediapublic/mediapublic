@@ -1,9 +1,8 @@
-import {ItemView} from 'backbone.marionette';
-import Backbone from 'backbone';
-import {Model} from 'backbone';
 import _ from 'underscore';
+import Backbone from 'backbone';
 import Form from 'shared/forms/distributed';
-
+import {Model} from 'backbone';
+import {ItemView} from 'backbone.marionette';
 
 /**
  * Standard ItemView, extended to include the model cid in all serialized data.
@@ -150,7 +149,11 @@ export default ItemView.extend({
 
   updatePermissions() {
     this.state.set('canUserEdit',
+        // If you're not logged in or there's nothing to edit, then no.
         app.currentUser && this.model &&
-        (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()));
+        // If you're an admin, or the model says it's ok, then yes.
+        (this.model.canUserEdit(app.currentUser) || app.currentUser.isAdmin()) ||
+        // If this is a new page, and you're some kinda admin, then yes.
+        this.model.isNew() && app.currentUser.get('is_org_admin'));
   }
 });

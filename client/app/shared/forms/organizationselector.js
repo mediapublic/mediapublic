@@ -1,8 +1,8 @@
-import Text from './text';
-import {organizations} from 'shared/search/datasets';
-import storage from 'shared/organizations/storage';
 import _ from 'underscore';
+import storage from 'shared/organizations/storage';
+import {organizations} from 'shared/search/datasets';
 
+import Text from './text';
 
 export default Text.extend({
   dataset: _.extend({}, organizations, {limit: 5}),
@@ -18,7 +18,7 @@ export default Text.extend({
         this.value = suggestion.id;
         this.preview = this.$el.val();
       });
-      this.$el.on('typeahead:change', (event) => {
+      this.$el.on('typeahead:change', () => {
         if (this.$el.val() !== this.preview) {
           this.value = '';
           this.$el.val('');

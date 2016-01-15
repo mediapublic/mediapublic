@@ -1,6 +1,9 @@
 include ../templates/loadmore.jade
 
-if !viewState.isEmpty
-  h2.tile-list-title Howtos
+if (!viewState.isEmpty || viewState.isOrgAdmin)
+  h2.tile-list-title
+   | Howtos &nbsp;
+   if (viewState.isOrgAdmin)
+     a.fa.fa-plus(href="#/howtos/new", title="Write a howto to share your institutional knowledge.")
   .howtos-list.tile-container
   +loadmore
