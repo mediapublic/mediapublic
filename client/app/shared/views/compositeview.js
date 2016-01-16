@@ -1,11 +1,13 @@
-import {CompositeView} from 'backbone.marionette';
 import {Model} from 'backbone';
+import {CompositeView} from 'backbone.marionette';
 
 export default CompositeView.extend({
   initialize(options) {
     this.state = new Model({
       more: options.more || false,
     });
+    this.updatePermissions();
+    this.listenTo(app.currentUser, 'change', this.updatePermissions);
     this.updateState();
     this.listenTo(this.state, 'change', this.render);
     this.listenTo(this.collection, 'sync', this.updateState);
@@ -48,5 +50,11 @@ export default CompositeView.extend({
       isEmpty: !this.collection ||
           (!this.collection.fetchInProgress && this.collection.length === 0)
     });
+  },
+
+  updatePermissions() {
+    this.state.set(
+      'isOrgAdmin',
+      app.currentUser.isOrgAdmin(this.collection.organization));
   }
 });
