@@ -1,6 +1,6 @@
 if id
   .logged-in
-    span.user-name
+    a.user-name(href='#' + app.currentUser.permalink())
       = display_name
     | &nbsp; | &nbsp;
     a.log-out Log out

@@ -24,30 +24,29 @@ export default Text.extend({
           this.$el.val('');
         }
       });
+      this.$el.on('change', () => {
+        if (this.$el.val() === '') {
+          this.value = '';
+        }
+      });
     });
 
     return this;
   },
 
   getValue() {
+    console.log('getting ', this.value);
     return this.value;
   },
 
   setValue(value) {
     this.value = value;
+    console.log('setting ', value);
     if (this.value) {
       this.storage.find(this.value).then((model) => {
         this.$el.val(model.get('short_name'));
         this.preview = model.get('short_name');
       });
     }
-  },
-
-  validate() {
-    var ret = Text.prototype.validate.apply(this, arguments);
-    if (this.$el.val() && !this.value) {
-      return 'Please select one of the options from the drop down.';
-    }
-    return ret;
   }
 });
