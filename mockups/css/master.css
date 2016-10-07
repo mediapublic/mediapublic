@@ -4,7 +4,6 @@
 }
 
 body {
-	min-height: 100vh; /* make sure our page is always the height of the browser */
 	position: relative; /* so we can position stuff relative to the body if we need to */
 }
 
@@ -124,7 +123,8 @@ input:focus, select:focus, button:focus {
 
 	#header {
 		height: 40px;
-		background-color: #112e51;
+		background-color: #007AD1
+		;
 		color: white;
 	}
 
@@ -153,12 +153,10 @@ input:focus, select:focus, button:focus {
 	#header {
 		padding-top: 0;
 
-		background-color: #112e51;
+		background-color: #007AD1;
 		color: white;
 
 		overflow: hidden;
-
-		margin-bottom: 1em;
 	}
 
 	#header #login {
@@ -200,7 +198,7 @@ input:focus, select:focus, button:focus {
 
 		min-height: 50px;
 		
-		background-color: #112e51;
+		background-color: #007AD1;
 	}
 
 	#header #login {
@@ -266,8 +264,6 @@ input:focus, select:focus, button:focus {
 
 @media (min-width: 801px) {
 	#footer {
-		margin-top: 1em;
-
 		color: white;
 
 		text-align: center;

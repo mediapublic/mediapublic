@@ -15,6 +15,42 @@
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+.howto .tile {
+	background-color: #007AD1;
+	color: white;
+}
+
+.howto .tile:hover, .howto .tile:active {
+	background-color: #0071C2;
+}
+
+.recordings .tile {
+	background-color: #0B628E; 
+	color: white;
+}
+
+.recordings .tile:hover, .recordings .tile:active {
+	background-color: #0A5980;
+}
+
+.help .tile {
+	background-color: #008094;
+	color: white;
+}
+
+.help .tile:hover, .help .tile:active {
+	background-color: #006F80;
+}
+
+.info .tile, .orgs .tile {
+	background-color: #0B2C8E;
+	color: white;
+}
+
+.info .tile:hover, .info .tile:active, .orgs .tile:hover, .orgs .tile:active {
+	background-color: #0A2780;
+}
+
 @media (max-width: 600px) {
 	.tile {
 		display: inline-block;
@@ -68,6 +104,15 @@
 
 	font-size: 13px;
 	bottom: 1em;
+}
+
+/* ORGANIZATIONS */
+.orgs .one p {
+	font-size: 30px;
+}
+
+.orgs .one p.more {
+	font-size: 13px;
 }
 
 /* PEOPLE */
